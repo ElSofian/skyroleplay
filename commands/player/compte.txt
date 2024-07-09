@@ -1,0 +1,171 @@
+const { EmbedBuilder, AttachmentBuilder, ApplicationCommandOptionType, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle } = require("discord.js");
+
+module.exports = {
+    category: { "en": "player", "fr": "joueur" },
+    name: "compte",
+    nameLocalizations: {
+        "fr": "compte",
+        "en-GB": "account",
+        "en-US": "account",
+    },
+    description: "Affiche votre compte sur le réseau social choisi.",
+    descriptionLocalizations: {
+        "fr": "Affiche votre compte sur le réseau social choisi.",
+        "en-GB": "Display your social account.",
+        "en-US": "Display your social account."
+    },
+    options: [{
+        name: "réseau",
+        nameLocalizations: {
+            "fr": "réseau"
+        },
+        description: "Choisissez le réseau sur lequel vous souhaitez aller.",
+        descriptionLocalizations: {
+            "fr": "Choisissez le réseau sur lequel vous souhaitez aller.",
+            "en-GB": "Choose the social media to display",
+            "en-US": "Choose the social media to display",
+        },
+        type: ApplicationCommandOptionType.String,
+        required: true,
+        choices: [
+            {
+                name: "Twitter",
+                value: "twitter"
+            },
+            {
+                name: "Instagram",
+                value: "instagram"
+            },
+            {
+                name: "Telegram",
+                value: "telegram"
+            }
+        ]
+    }],
+    run: async(client, interaction, { t, errorEmbed, lang }) => {
+
+        try {
+
+        const type = interaction.options.getString("réseau");
+        let color, thumbnail;
+        switch(type) {
+            case "twitter": color = "Blue"; break;
+            case "instagram": color = "LividPink"; break;
+            case "telegram": color = "Blue"; break;
+        }
+
+        const account = await client.db.getSocialAccount(interaction.guildId, interaction.member.id, type);
+        if(!account || account.connected == 0) {
+
+            const code = Math.floor(Math.random() * 9000000000) + 1000000000
+            const modal = new ModalBuilder()
+            .setCustomId(`${code}_modal`)
+
+
+        } else {
+
+            const render = async(path = "account", options = { account: account }) => {
+                const account = await client.db.getSocialAccount(interaction.guildId, interaction.member.id, type);
+                if(!account) return { embeds: [errorEmbed(t("no_longer_exists"), true)], components: [], files: [] }
+
+                const canvas = await client.functions.canvas.get(`/social_media/${path}`, { locale: lang, ...options })
+                const attachment = new AttachmentBuilder(canvas, { name: "account.png" })
+                const embed = new EmbedBuilder().setColor(color).setThumbnail(thumbnail).setImage("attachment://account.png")
+
+                return {
+                    embeds: [embed],
+                    components: [rows],
+                    files: [attachment]
+                }
+            }
+
+            const rows = new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId("manage").setLabel(t("buttons.manage")).setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder().setCustomId("following").setLabel(t("buttons.following")).setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder().setCustomId("followers").setLabel(t("buttons.followers")).setStyle(ButtonStyle.Secondary),
+            )
+
+            const manageRows = new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId("back").setLabel(t("buttons.back")).setStyle(ButtonStyle.Primary),
+                new ButtonBuilder().setCustomId("change_nickname").setLabel(t("buttons.change_nickname")).setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder().setCustomId("change_pp").setLabel(t("buttons.change_pp")).setStyle(ButtonStyle.Secondary),
+            )
+
+            const message = await interaction.reply(await render()).catch(() => {});
+            if(!message) return
+
+            const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id == interaction.member.id, time: 180000 });
+            if(!collector) return
+
+            collector.on("collect", async(i) => {
+
+                switch(i.customId) {
+
+                    case "back": i.update(await render()).catch(() => {}); break;
+
+                    case "manage": {
+
+                        const account = await client.db.getSocialAccount(interaction.guildId, interaction.member.id, type);
+                        if(!account) return i.update({ embeds: [errorEmbed(t("no_longer_exists"), true)] })
+
+                        const canvas = await client.functions.canvas.get("/social_media/manage", { locale: lang, account: account })
+                        const attachment = new AttachmentBuilder(canvas, { name: "account.png" })
+                        const embed = new EmbedBuilder().setColor(color).setThumbnail(thumbnail).setImage("attachment://account.png")
+
+                        return i.update({ embeds: [embed], components: [manageRows], files: [attachment] })
+
+                    }
+
+                    case "change_nickname": {
+
+                        const code = Math.floor(Math.random() * 9000000000) + 1000000000
+                        const modal = new ModalBuilder()
+                        .setCustomId(`${code}_modal_change_pp`)
+                        .setTitle(t(type))
+                        .setComponents(
+                            new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId("nickname").setLabel(t(`modal.${i.customId}`)).setPlaceholder(t(`modal.placeholder_${i.customId}`)).setMinLength(4).setMaxLength(50).setStyle(TextInputStyle.Short))
+                        )
+
+                        await i.showModal(modal).catch(() => {});
+
+                        const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id == i.user.id && ii.customId == `${code}_modal_change_pp`, time: 45000 })
+                        if(!modalCollector) return
+
+                        const nickname = modalCollector.fields.getTextInputValue("nickname")
+
+                        await client.db.setNickname(interaction.guildId, interaction.member.id, type, nickname)
+                        return modalCollector.update({ embeds: [successEmbed(t("changed_nickname", { nickname: nickname }))], components: [], files: [] }).catch(() => {});
+
+                    }
+
+                    case "change_pp": {
+
+                        // See with S3 and how to do it with discord.js (maybe with sending the attachment in message with SkyRoleplay ping)
+                        errorEmbed(t("not_yet_available", false, "errors"), true, true, "update", i)
+                        break;
+                    }
+
+                    case "followers":
+                    case "following": {
+
+                        const follow = await client.db[`getSocial${i.customId.replace(/^\w/, (c) => c.toUpperCase())}`](interaction.guildId, interaction.member.id, type);
+                        i.update(await render(i.customId, { follow: follow })).catch(() => {})
+
+                    }
+
+
+                }
+
+            })
+
+        }
+        
+
+        } catch (err) {
+            console.error(err);
+            client.bugsnag.notify(err);
+            return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        }
+
+    }
+};

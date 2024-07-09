@@ -1,0 +1,300 @@
+{
+    "interactionCreate": {
+        "blacklist": {
+            "en": "You are blacklisted from <@712314610459345038>.",
+            "fr": "Vous êtes blacklisté(e) de <@712314610459345038>."
+        },
+        "channel": {
+            "en": "I cannot be used outside of a Discord server channel.",
+            "fr": "Je ne peux pas être utilisé en dehors d'un salon de serveur Discord."
+        },
+        "perms_send": {
+            "en": "I didn't have needed perms to execute your command in {{channel}} !\n\nAn administrator of your server should verify that my rôle has the permissions `View Channel`, `Send Messages` and `Embed Links` in this channel",
+            "fr": "Je n'ai pas les permissions requises pour réagir à votre commande dans {{channel}} !\n\nUn administrateur de votre serveur devrait vérifier que mon rôle ait bien les permissions `Voir le salon`, `Envoyer des messages` et `Intégrer des liens` dans ce salon."
+        },
+        "command_not_found": {
+            "en": "The command `/{{cmd}}` cannot be found. The list of commands may not be up to date...",
+            "fr": "La commande `/{{cmd}}` est introuvable. La liste des commandes n'est peut-être pas à jour..."
+        },
+        "perms": {
+            "en": "You don't have enough permissions to run this command",
+            "fr": "Vous n'avez pas assez de permissions pour exécuter cette commande"
+        },
+        "private_cmd": {
+            "en": "This command is reserved for the SkyRoleplay team",
+            "fr": "Cette commande est réservée à l'équipe de SkyRoleplay"
+        },
+        "premium_cmd": {
+            "en": "This feature is only available with our [Premium]({{url}}) subscription.\n➜ *Do you want more information?* `/premium informations`",
+            "fr": "Cette fonctionnalité n'est disponible qu'avec notre abonnement [Premium]({{url}}).\n➜ *Vous souhaitez plus d'informations ?*\n`/premium informations`"
+        },
+        "beta_test_cmd": {
+            "en": "This feature is currently being tested on our **Beta Testers** servers. It will be available as soon as possible on all servers.\n➜ *Do you want to stay informed of its progress?* Join our [support server]({{link}})!",
+            "fr": "Cette fonctionnalité est actuellement en cours de test sur nos serveurs **Bêta Testeurs**. Elle sera disponible le plus rapidement possible sur tous les serveurs.\n➜ *Vous souhaitez resté informé de son avancé ?* Rejoignez notre [serveur support]({{link}}) !"
+        },
+        "cooldown": {
+            "en": "Please wait another {{time}} second(s) before using this command again.\n`/{{cmd}}`",
+            "fr": "Merci d'attendre encore {{time}} seconde(s) avant de ré-utiliser cette commande.\n`/{{cmd}}`"
+        },
+        "created_idcard": {
+            "en": "ID card created !",
+            "fr": "Carte d'identité créée !"
+        },
+        "edited_idcard": {
+            "en": "ID card edited !",
+            "fr": "Carte d'identité modifiée !"
+        },
+        "refused_idcard": {
+            "en": "ID card refused !",
+            "fr": "Carte d'identité refusée !"
+        },
+        "company_not_found": {
+            "en": "The company `{{company}}` cannot be found.",
+            "fr": "L'entreprise `{{company}}` est introuvable."
+        },
+        "multiple_companies": {
+            "en": "Multiple companies have been found. Only one company is required.",
+            "fr": "Plusieurs entreprises ont été trouvées avec le même nom. Il ne faut qu'une seule entreprise."
+        },
+        "not_enough_money_company": {
+            "en": "The company does not have enough money to pay the salary.",
+            "fr": "L'entreprise n'a pas assez d'argent pour payer le salaire."
+        },
+        "salary": {
+            "en": "Salary request",
+            "fr": "Demande de salaire"
+        },
+        "salary_error1": {
+            "en": "You do not have permissions to accept or deny salaries. \nOnly <@&{{role}}> and `Administrators` can accept or deny requests.",
+            "fr": "Tu n'as pas les permissions d'accepter ou refuser les salaires.\nSeuls les <@&{{role}}> et les `Administrateurs` peuvent accepter ou refuser les demandes."
+        },
+        "salary_error2": {
+            "en": "You do not have permissions to accept or reject salaries. \nOnly `Administrators` can accept or reject requests.",
+            "fr": "Tu n'as pas les permissions d'accepter ou refuser les salaires.\nSeuls les `Administrateurs` peuvent accepter ou refuser les demandes."
+        },
+        "accept_salary": {
+            "description": {
+                "en": "<@{{id}}> got a salary of **{{money}}** !",
+                "fr": "<@{{id}}> a obtenu un salaire de **{{money}}** !"
+            },
+            "who": {
+                "en": "❓ Who agreed ?",
+                "fr": "❓ Qui a accepté ?"
+            },
+            "title": {
+                "en": "Salary",
+                "fr": "Salaire"
+            },
+            "by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "for": {
+                "en": "For :",
+                "fr": "Pour :"
+            },
+            "amount": {
+                "en": "Amount :",
+                "fr": "Montant :"
+            }
+        },
+        "deny_salary": {
+            "description": {
+                "en": "<@{{id}}> did not get a salary of **{{money}}** !",
+                "fr": "<@{{id}}> n'a pas obtenu un salaire de **{{money}}** !"
+            },
+            "who": {
+                "en": "❓ Who refused ?",
+                "fr": "❓ Qui a refusé ?"
+            }
+        },
+        "session_ended": {
+            "en": "The session has ended.",
+            "fr": "La session est terminée."
+        },
+        "already_in_session": {
+            "en": "You already are in this session.",
+            "fr": "Vous êtes déjà dans cette session."
+        },
+        "already_in_another_session": {
+            "en": "You already are in another [session]({{link}}).",
+            "fr": "Vous êtes déjà dans une autre [session]({{link}})."
+        },
+        "not_in_session": {
+            "en": "You are not in this session.",
+            "fr": "Vous n'êtes pas dans cette session."
+        },
+        "full_session": {
+            "en": "This session is full.",
+            "fr": "Cette session est pleine."
+        },
+        "no_ems_role": {
+            "en": "The role `EMS` does not exist and no company with the specialty `EMS` has been found. One of the two EMS representatives is required to use the coma system. You can configure this role on the [dashboard]({{link}})",
+            "fr": "Le rôle `EMS` n'existe pas et aucune entreprise avec la spécialité `EMS` n'a été trouvée. Un des deux représentants des EMS est obligatoire pour utiliser le système de coma. Vous pouvez configurer ce rôle sur le [dashboard]({{link}})"
+        },
+        "not_ems": {
+            "en": "You are not an EMS.",
+            "fr": "Vous n'êtes pas un EMS."
+        },
+        "in_coma": {
+            "en": "You are in a coma.\nYou must wait to be revived before you can do a command.",
+            "fr": "Vous êtes dans le coma.\nVous devez attendre d'être réanimer avant de pouvoir faire une commande."
+        },
+        "not_in_coma": {
+            "en": "{{member}} is not in a coma.",
+            "fr": "{{member}} n'est pas dans le coma."
+        },
+        "hungry": {
+            "en": "You are starting to get hungry.",
+            "fr": "Vous commencez à avoir faim."
+        },
+        "thirsty": {
+            "en": "You are thirsty.",
+            "fr": "Vous avez soif."
+        },
+        "very_hungry": {
+            "en": "You are very hungry.",
+            "fr": "Vous avez très faim."
+        },
+        "very_thirsty": {
+            "en": "You are very thirsty.",
+            "fr": "Vous avez très soif."
+        },
+        "coma": {
+            "en": "{{member}}, you fell into a coma, you have been too {{state}}.",
+            "fr": "{{member}}, vous êtes tombé dans le coma, vous avez eu trop {{state}}."
+        },
+        "both": {
+            "en": "hungry and thirsty",
+            "fr": "faim et soif"
+        },
+        "hunger": {
+            "en": "hungry",
+            "fr": "faim"
+        },
+        "thirst": {
+            "en": "thirsty",
+            "fr": "soif"
+        },
+        "revive": {
+            "en": "Revive",
+            "fr": "Réanimer"
+        },
+        "revived": {
+            "en": "{{member}}, you have been revived par {{author}}.",
+            "fr": "{{member}}, vous avez été réanimé par {{author}}."
+        },
+        "selled": {
+            "en": "You have sold __{{quantity}}__ of **{{name}}** for *{{amount}}{{symbol}}* !",
+            "fr": "Vous avez vendu __{{quantity}}__ de **{{name}}** pour *{{amount}}{{symbol}}* !"
+        },
+        "cancel_crypto_sell": {
+            "en": "{{member}}, the sale of __{{quantity}}__ of **{{name}}** for *{{amount}}{{symbol}}* has been cancelled.",
+            "fr": "{{member}}, la vente de __{{quantity}}__ de **{{name}}** pour *{{amount}}{{symbol}}* a été refusée."
+        },
+        "not_enough_crypto": {
+            "en": "{{member}} doesn't have __{{quantity}}__ of **{{name}}** to sell.",
+            "fr": "{{member}} n'a pas __{{quantity}}__ de **{{name}}** à vendre."
+        },
+        "permissions": {
+            "role": {
+                "en": "You do not have the required role to use this command.\nRequired role :",
+                "fr": "Vous n'avez pas le rôle nécéssaire pour utiliser cette commande.\nRôle requis :"
+            },
+            "or": {
+                "en": "or",
+                "fr": "ou"
+            },
+            "configuration_error1": {
+                "en": "The command `/{{cmd}}` has not been [configured]({{url}}).\nOnly `Administrators` have access to this command.",
+                "fr": "La commande `/{{cmd}}` n'a pas été [configurée]({{url}}).\nSeuls les `Administrateurs` ont accès à cette commande."                
+            },
+            "configuration_error2": {
+                "en": "The `/{{cmd}}` command has not been [configured]({{url}}).\nOnly {{role}} and `Administrators` have access to this command.",
+                "fr": "La commande `/{{cmd}}` n'a pas été [configurée]({{url}}).\nSeuls les {{role}} et `Administrateurs` ont accès à cette commande."
+            }
+        },
+        "validation": {
+            "buttons": {
+                "validate": {
+                    "en": "Validate",
+                    "fr": "Valider"
+                },
+                "cancel": {
+                    "en": "Cancel",
+                    "fr": "Annuler"
+                }
+            },
+            "cancelled": {
+                "en": "The action has been cancelled",
+                "fr": "L'action a bien été annulée"
+            }
+        },
+        "payement_method": {
+            "cancelled": {
+                "en": "The payment has been cancelled.",
+                "fr": "L'achat a été annulé."
+            },
+            "wrong_code": {
+                "en": "The card code is incorrect.",
+                "fr": "Le code de carte est incorrect."
+            },
+            "text": {
+                "cash": {
+                    "en": "You do not have enough money on you, do you want to pay by bank card ?",
+                    "fr": "Vous n'avez pas assez d'argent sur vous, souhaitez vous payer par carte bancaire ?"
+                },
+                "bank": {
+                    "en": "You do not have enough money on your bank account, do you want to pay by cash ?",
+                    "fr": "Vous n'avez pas assez d'argent sur votre compte bancaire, souhaitez vous payer en espèce ?"
+                }
+            }
+        }
+    },
+    "guildMemberAdd": {
+        "bank_account_creation": {
+            "en": "Creation of your bank account",
+            "fr": "Création de votre compte bancaire"
+        },
+        "logs_embed": {
+            "title": {
+                "en": "Bank account created",
+                "fr": "Compte bancaire créé"
+            },
+            "banker": {
+                "en": "Banker :",
+                "fr": "Banquier :"
+            },
+            "client": {
+                "en": "Customer :",
+                "fr": "Client :"
+            }
+        },
+        "embed_account": {
+            "title": {
+                "en": "Opening a bank account",
+                "fr": "Ouverture de Compte Bancaire"
+            },
+            "description": {
+                "en": "Ms./Mr. {{member}},\n{{emoji}}・We welcome you to the bank of `{{city}}`!\n\n:information_source:・All your transactions will now be done through our bank.\n\n:moneybag:・Your account balance has been credited with **{{startamount}}{{symbol}}**.\n\n:label: ・Your ABA is **{{iban}}**. Your fellow citizens will be able to transfer money to you via this identifier.\n\n:mobile_phone:・Here is your secret code to access your account, do not share it with anyone: **{{secretCode}}**\n\n:credit_card:・Here is also the code of your credit card: __{{cardCode}}__.",
+                "fr": "Mme/M. {{member}},\n\n{{emoji}}・Nous vous souhaitons la bienvenue dans la banque de `{{city}}` !\n\n:information_source:・Toutes vos transactions se feront désormais par le biais de notre banque.\n\n:moneybag:・Le solde de votre compte a été crédité de **{{startamount}}{{symbol}}**.\n\n:label:・ Votre IBAN est **{{iban}}**. Vos concitoyens pourront vous transférer de l'argent via cet identifiant.\n\n:mobile_phone:・Voici votre code secret pour accéder à votre compte, ne le partagez à personne : **{{secretCode}}**\n\n:credit_card:・Voici également le code de votre carte bleue : __{{cardCode}}__."
+            },
+            "footer": {
+                "en": "See you soon in our bank !",
+                "fr": "À bientôt dans notre banque !"
+            }
+        }
+    },
+    "messageCreate": {
+        "no_bot_mention": {
+            "en": "You must mention me in the message so that I can access the content",
+            "fr": "Vous devez me mentionner dans le message pour que je puisse avoir accès au contenu"
+        }
+    },
+    "messageDelete": {
+        "session_delete": {
+            "en": "The session message has been deleted.",
+            "fr": "Le message de la session a été supprimé."
+        }
+    }
+}

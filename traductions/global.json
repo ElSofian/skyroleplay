@@ -1,0 +1,194 @@
+{
+    "duration_to_text": {
+        "day": {
+            "en": "day(s)",
+            "fr": "jour(s)"
+        },
+        "month": {
+            "en": "month(s)",
+            "fr": "mois"
+        },
+        "year": {
+            "en": "year(s)",
+            "fr": "an(s)"
+        }
+    },
+    "premium_status": {
+        "status": {
+            "en": "Status",
+            "fr": "Statut"
+        },
+        "inactive": {
+            "en": "Inactive",
+            "fr": "Non activé"
+        },
+        "enabled": {
+            "en": "Enabled",
+            "fr": "Activé"
+        },
+        "pause": {
+            "en": "On pause",
+            "fr": "En pause"
+        },
+        "expired": {
+            "en": "Expired",
+            "fr": "Expiré"
+        },
+        "unknown": {
+            "en": "Unknown",
+            "fr": "Inconnu"
+        }
+    },
+    "drugs": {
+        "treated": {
+            "en": "Treated {{drugName}}",
+            "fr": "{{drugName}} traité(e)"
+        },
+        "untreated": {
+            "en": "Untreated {{drugName}}",
+            "fr": "{{drugName}} non traité(e)"
+        }
+    },
+    "all": {
+        "en": "all",
+        "fr": "tout"
+    },
+    "session": {
+        "enter": {
+            "en": "Enter",
+            "fr": "Entrer"
+        },
+        "quit": {
+            "en": "Quit",
+            "fr": "Quitter"
+        },
+        "end": {
+            "en": "End",
+            "fr": "Fin"
+        }
+    },
+    "words": {
+        "true": {
+            "en": "Yes",
+            "fr": "Oui"
+        },
+        "false": {
+            "en": "No",
+            "fr": "Non"
+        },
+        "yes": {
+            "en": "Yes",
+            "fr": "Oui"
+        },
+        "no": {
+            "en": "No",
+            "fr": "Non"
+        },
+        "accept": {
+            "en": "Accept",
+            "fr": "Accepter"
+        },
+        "refuse": {
+            "en": "Refuse",
+            "fr": "Refuser"
+        },
+        "next": {
+            "en": "Next page",
+            "fr": "Page suivante"
+        },
+        "previous": {
+            "en": "Previous page",
+            "fr": "Page précédente"
+        },
+        "hide": {
+            "en": "hidding place",
+            "fr": "cachette"
+        },
+        "inventory": {
+            "en": "inventory",
+            "fr": "inventaire"
+        },
+        "unknown": {
+            "en": "Unkown",
+            "fr": "Inconnu"
+        },
+        "name": {
+            "en": "Name",
+            "fr": "Nom"
+        },
+        "plate": {
+            "en": "Plate",
+            "fr": "Plaque"
+        },
+        "account": {
+            "en": "Account",
+            "fr": "Compte"
+        },
+        "bank_account": {
+            "en": "Bank account",
+            "fr": "Compte en banque"
+        },
+        "your_bank_account": {
+            "en": "your bank account",
+            "fr": "votre compte bancaire"
+        },
+        "none": {
+            "en": "None",
+            "fr": "Aucun"
+        },
+        "fnone": {
+            "en": "None",
+            "fr": "Aucune"
+        },
+        "from": {
+            "en": "from",
+            "fr": "de"
+        },
+        "at": {
+            "en": "at",
+            "fr": "à"
+        },
+        "cash_money": {
+            "en": "cash money",
+            "fr": "argent liquide"
+        },
+        "dirty_money": {
+            "en": "dirty money",
+            "fr": "argent sale"
+        },
+        "retry": {
+            "en": "Retry",
+            "fr": "Réessayer"
+        },
+        "man": {
+            "en": "Man",
+            "fr": "Homme"
+        },
+        "woman": {
+            "en": "Woman",
+            "fr": "Femme"
+        },
+        "key": {
+            "en": "Key",
+            "fr": "Clé"
+        },
+        "safe": {
+            "en": "Safe",
+            "fr": "Coffre"
+        }
+    },
+    "pronouns": {
+        "men": {
+            "en": "Mr",
+            "fr": "Mr"
+        },
+        "women": {
+            "en": "Mrs",
+            "fr": "Mme"
+        },
+        "default": {
+            "en": "Mr/Mrs",
+            "fr": "Mr/Mme"
+        }
+    }
+}

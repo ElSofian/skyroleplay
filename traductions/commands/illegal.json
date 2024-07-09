@@ -1,0 +1,451 @@
+{
+    "blanchiment": {
+        "dirty_money": {
+            "user": {
+                "en": "You don't have enough dirty money, you are missing **{{money}}**",
+                "fr": "Vous n'avez pas assez d'argent sale, il vous manque **{{money}}**"
+            },
+            "member": {
+                "en": "{{member}} don't have enough dirty money, he is missing **{{money}}**",
+                "fr": "{{member}} n'a pas assez d'argent sale, il lui manque **{{money}}**"
+            }
+        },
+        "laundering_success": {
+            "user": {
+                "en": "You have laundered **{{money}}** in cash.\n\n__Information__ :\nYou receive **90%** ({{money2}}) of the laundered sum",
+                "fr": "Vous avez bien blanchi **{{money}}** en liquide.\n\n__Information__ :\nVous recevez **90%** ({{money2}}) de la somme blanchie."
+            },
+            "member": {
+                "en": "You have laundered **{{money}}** in cash to {{member}}.\n\n__Information__ :\nYou receive **{{percent}}%** ({{money2}}) of the laundered sum and {{member}} receive **{{percent2}}%** ({{money3}})",
+                "fr": "Vous avez bien blanchi **{{money}}** en liquide à {{member}}.\n\n__Information__ :\nVous recevez **{{percent}}%** ({{money2}}) de la somme blanchie et {{member}} en reçoit **{{percent2}}%** ({{money3}})"
+            }
+        }
+    },
+    "braquage": {
+        "main_embed": {
+            "title": {
+                "en": "Robbery",
+                "fr": "Braquage"
+            },
+            "description": {
+                "en": "{{user}}, choose the robbery that you want to realize",
+                "fr": "{{user}}, sélectionnez le braquage que vous souhaitez réaliser"
+            }
+        },
+        "main_buttons": {
+            "atm": {
+                "en": "ATM",
+                "fr": "ATM"
+            },
+            "burglary": {
+                "en": "Burglary",
+                "fr": "Cambriolage"
+            },
+            "minimarket": {
+                "en": "Minimarket",
+                "fr": "Supérette"
+            },
+            "jewelery": {
+                "en": "Jewelery",
+                "fr": "Bijouterie"
+            },
+            "jewelry": {
+                "en": "Jewelry",
+                "fr": "Bijouterie"
+            },
+            "bank": {
+                "en": "Bank",
+                "fr": "Banque"
+            }
+        },
+        "buttons": {
+            "claim": {
+                "en": "Claim",
+                "fr": "Récupérer"
+            },
+            "failed": {
+                "en": "Failed",
+                "fr": "Raté"
+            }
+        },
+        "start_embed": {
+            "title": {
+                "en": "Robbery of {{robbery}} in progress",
+                "fr": "Braquage de {{robbery}} en cours"
+            },
+            "title_burglary": {
+                "en": "Burglary in progress",
+                "fr": "Cambriolage en cours"
+            },
+            "description": {
+                "en": "{{user}}, you are robbing the following place : {{location}}\n\nPlease wait before retrieve your loot.\n\n**💸 Total money :** {{money}}{{items}}",
+                "fr": "{{user}}, vous êtes en train de braquer le lieu suivant : {{location}}\n\nVeuillez patienter avant de pouvoir récupérer votre butin.\n\n**💸 Argent total :** {{money}}{{items}}"
+            },
+            "burglary_items": {
+                "en": "\n**📦 Items :** {{items}}",
+                "fr": "\n**📦 Objets :** {{items}}"    
+            }
+        },
+        "start_message": {
+            "en": "Your robbery has started. [See the message]({{link}})",
+            "fr": "Votre braquage a bien commencé. [Voir le message]({{link}})"
+        },
+        "end_embed": {
+            "title": {
+                "success": {
+                    "en": "Robbery of {{robbery}} finished",
+                    "fr": "Braquage de {{robbery}} terminé"
+                },
+                "failure": {
+                    "en": "Robbery of {{robbery}} failed",
+                    "fr": "Braquage de {{robbery}} échoué"
+                }
+            },
+            "title_burglary": {
+                "success": {
+                    "en": "Burglary finished",
+                    "fr": "Cambriolage terminé"
+                },
+                "failure": {
+                    "en": "Burglary failed",
+                    "fr": "Cambriolage échoué"
+                }   
+            },
+            "description": {
+                "success": {
+                    "en": "{{user}}, you have retrieve **{{money}}** of dirty money !\n\n❗ You can now leave the following place : **{{location}}**.",
+                    "fr": "{{user}}, vous avez récupéré **{{money}}** d'argent sale{{items}} !\n\n❗ Vous pouvez désormais quitter le lieu suivant : **{{location}}**."
+                },
+                "failure": {
+                    "en": "{{user}}, you only got **{{money}}** of dirty money !\n\n❗ The police is after you !",
+                    "fr": "{{user}}, vous n'avez eu que **{{money}}** d'argent sale{{items}} !\n\n❗ La police est à vos trousses !"
+                },
+                "nothing": {
+                    "en": "{{user}},  you couldn't get anything back!\n\n❗ The police is after you !",
+                    "fr": "{{user}}, vous n'avez rien pu récupérer !\n\n❗ La police est à vos trousses !"
+                }
+            },
+            "burglary_items": {
+                "en": " and **{{amount}}** item{{s}} ({{items}})",
+                "fr": " et **{{amount}}** objet{{s}} ({{items}})"
+            }
+        }
+    },
+    "contrat": {
+        "self": {
+            "en": "You can't put a contract on yourself",
+            "fr": "Vous ne pouvez pas poser un contrat sur vous-même"
+        },
+        "embed": {
+            "title": {
+                "en": "New contract",
+                "fr": "Nouveau contrat"
+            },
+            "description": {
+                "en": "Target : {{member}}\nPricing : **{{price}}**\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n**Contractor :** {{user}}\n{{motif}}",
+                "fr": "Cible : {{member}}\nMise à prix : **{{price}}**\n\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n**Contractant :** {{user}}\n{{motif}}"
+            }
+        },
+        "sended": {
+            "en": "Your contract has been sent. [View message]({{link}})",
+            "fr": "Votre contrat a été envoyé. [Voir le message]({{link}})"
+        }
+    },
+    "crochetage": {
+        "start_hook_embed": {
+            "title": {
+                "en": "Hook in progress",
+                "fr": "Crochetage en cours"
+            },
+            "description": {
+                "en": "{{user}}, you just started a **vehicule hooking**.\n\n⌚ **End :** {{time}}",
+                "fr": "{{user}}, vous venez de débuter un **crochetage de véhicule**.\n\n⌚ **Fin :** {{time}}"
+            }
+        },
+        "end_hook_embed": {
+            "title": {
+                "en": "Hook finished",
+                "fr": "Crochetage terminé"
+            },
+            "description": {
+                "en": "{{user}}, you just finished the **vehicule hooking**.",
+                "fr": "{{user}}, vous venez de finir le **crochetage du véhicule**."
+            }
+        }
+    },
+    "drogues": {
+        "no_setup": {
+            "en": "No drugs have been configured on our [dashboard]({{dashboard}}), please contact an Administrator",
+            "fr": "Aucune drogue n'a été configurée sur notre [dashboard]({{dashboard}}), veuillez contacter un Administrateur"
+        },
+        "wrong_drug": {
+            "en": "The specified drug does not exist or was not found.",
+            "fr": "La drogue spécifiée n'existe pas ou n'a pas été trouvée."
+        },
+        "ask_quantity": {
+            "en": "Send the quantity of drugs you want to sell.",
+            "fr": "Envoyez la quantité de drogues que vous souhaitez vendre."
+        },
+        "choice_embed": {
+            "title": {
+                "en": "💠  Drugs panel",
+                "fr": "💠  Panneau des drogues"
+            },
+            "description": {
+                "en": "Select the drug you wish {{action}}",
+                "fr": "Sélectionnez la drogue que vous souhaitez {{action}}"
+            },
+            "action": {
+                "afficher": {
+                    "en": "to display",
+                    "fr": "afficher"
+                },
+                "ajouter": {
+                    "en": "to add",
+                    "fr": "ajouter"
+                },
+                "donner": {
+                    "en": "to give",
+                    "fr": "donner"
+                },
+                "jeter": {
+                    "en": "to discard",
+                    "fr": "jeter"
+                },
+                "retirer": {
+                    "en": "to remove",
+                    "fr": "retirer"
+                },
+                "consommer": {
+                    "en": "to consume",
+                    "fr": "consommer"
+                },
+                "dépister": {
+                    "en": "to detect",
+                    "fr": "dépister"
+                }
+            }
+        },
+        "choice_placeholder": {
+            "en": "Drug selection",
+            "fr": "Sélection de la drogue"
+        },
+        "gram_price": {
+            "en": "Price per gram",
+            "fr": "Prix du gramme"
+        },
+        "total_quantity": {
+            "en": "Total quantity",
+            "fr": "Quantité totale"
+        },
+        "treated_quantity": {
+            "en": "Treated quantity",
+            "fr": "Quantité traitée"
+        },
+        "member_no_drugs": {
+            "en": "You have no drugs in your inventory",
+            "fr": "Vous n'avez pas de drogue dans votre inventaire"
+        },
+        "main_embed": {
+            "title": {
+                "en": "Drugs management : {{drugName}}",
+                "fr": "Gestion des drogues : {{drugName}}"
+            },
+            "description": {
+                "en": "{{user}}, choose the action that u wish to realize",
+                "fr": "{{user}}, sélectionnez l'action que vous souhaitez réaliser"
+            }
+        },
+        "buttons": {
+            "harvesting": {
+                "en": "Harvesting",
+                "fr": "Récolte"
+            },
+            "treatment": {
+                "en": "Treatment",
+                "fr": "Traitement"
+            },
+            "selling": {
+                "en": "Selling",
+                "fr": "Vente"
+            }
+        },
+        "modal": {
+            "title": {
+                "en": "Drugs Managment",
+                "fr": "Gestion des Drogues"
+            },
+            "textinput": {
+                "en": "Quantity",
+                "fr": "Quantité"
+            },
+            "placeholder": {
+                "en": "Enter the quantity of {{drugName}}",
+                "fr": "Entrez la quantité de {{drugName}}"
+            }
+        },
+        "no_drug_founded": {
+            "en": "The drug you selected could not be found... Please try again",
+            "fr": "La drogue que vous avez sélectionné est introuvable... Veuillez réessayer"
+        },
+        "harvesting_embed": {
+            "title": {
+                "en": "🌿 {{drugName}} harvest in progress",
+                "fr": "🌿 Récolte de {{drugName}} en cours"
+            },
+            "description": {
+                "en": "{{user}}, you are actually harvesting !\n\nPlease wait at the {{drugName}} harvest point before be able to treat.\n\n**⏰ End of the harvesting : ** {{time}}",
+                "fr": "{{user}}, vous êtes en train de récolter !\n\nVeuillez patienter au point de récolte de {{drugName}} avant de pouvoir traiter.\n\n**⏰ Fin de la récolte :** {{time}}"
+            }
+        },
+        "harvest_started": {
+            "en": "Your {{drugName}} harvest has started. [See the message]({{link}})",
+            "fr": "Votre récolte de {{drugName}} a bien commencé. [Voir le message]({{link}})"
+        },
+        "end_harvesting_embed": {
+            "title": {
+                "en": "🌿 {{drugName}} harvest finished",
+                "fr": "🌿 Récolte de {{drugName}} terminée"
+            },
+            "description": {
+                "en": "{{user}}, you've harvested **{{result}}g** of {{drugName}} !\n\n⚗️ You can now treat your drug.",
+                "fr": "{{user}}, vous avez récolté **{{result}}g** de {{drugName}} !\n\n⚗️ Vous pouvez à présent traiter votre drogue."
+            }
+        },
+        "no_drug_to_treat": {
+            "en": "{{member}} doesn't have {{drugName}} to treat",
+            "fr": "{{member}} n'a pas de {{drugName}} à traiter"
+        },
+        "treatment_embed": {
+            "title": {
+                "en": "⚗️ {{drugName}} treatment in progress",
+                "fr": "⚗️ Traitement de {{drugName}} en cours"
+            },
+            "description": {
+                "en": "{{user}}, you are actually treating !\n\nPlease wait at the {{drugName}} treatment point before be able to sell.\n\n**⏰ End of the treatment :** {{time}}",
+                "fr": "{{user}}, vous êtes en train de traiter !\n\nVeuillez patienter au point de traitement de {{drugName}} avant de pouvoir vendre.\n\n**⏰ Fin du traitement :** {{time}}"
+            }
+        },
+        "treatment_started": {
+            "en": "Your {{drugName}} treatment has started. [See the message]({{link}})",
+            "fr": "Votre traitement de {{drugName}} a bien commencé. [Voir le message]({{link}})"
+        },
+        "end_treatment_embed": {
+            "title": {
+                "en": "⚗️ {{drugName}} treatment finished",
+                "fr": "⚗️ Traitement de {{drugName}} terminé"
+            },
+            "description": {
+                "en": "{{user}}, you've treated **{{result}}g** of {{drugName}} !\n\n💰 You can now sell your drug.",
+                "fr": "{{user}}, vous avez traité **{{result}}g** de {{drugName}} !\n\n💰 Vous pouvez à présent vendre votre drogue."
+            }
+        },
+        "not_enough_treated": {
+            "en": "You don't have enough **{{modalQuantity}}** of **treated {{drugName}}** but **{{quantity}}g**",
+            "fr": "Vous n'avez pas **{{modalQuantity}}g** de **{{drugName}} traitée** mais **{{quantity}}g**"
+        },
+        "not_enough_untreated": {
+            "en": "You don't have enough **{{modalQuantity}}** of **untreated {{drugName}}** but **{{quantity}}g**",
+            "fr": "Vous n'avez pas **{{modalQuantity}}g** de **{{drugName}} non traitée** mais **{{quantity}}g**"
+        },
+        "no_drug_to_sell": {
+            "en": "{{member}} doesn't have {{drugName}} to sell",
+            "fr": "{{member}} n'a pas de {{drugName}} à vendre"
+        },
+        "selling_embed": {
+            "title": {
+                "en": "💰 {{drugName}} selling in progress",
+                "fr": "💰 Vente de {{drugName}} en cours"
+            },
+            "description": {
+                "en": "{{user}}, you are actually selling !\n\nPlease wait at the {{drugName}} selling point before be able to leave.\n\n**⏰ End of the selling :** {{time}}",
+                "fr": "{{user}}, vous êtes en train de vendre !\n\nVeuillez patienter au point de vente de {{drugName}} avant de pouvoir partir.\n\n**⏰ Fin de la vente :** {{time}}"
+            }
+        },
+        "selling_started": {
+            "en": "Your {{drugName}} sell has started. [See the message]({{link}})",
+            "fr": "Votre vente de {{drugName}} a bien commencé. [Voir le message]({{link}})"
+        },
+        "end_selling_embed": {
+            "title": {
+                "en": "💰 {{drugName}} selling finished",
+                "fr": "💰 Vente de {{drugName}} terminée"
+            },
+            "description": {
+                "en": "{{user}}, you've selled **{{result}}g** of {{drugName}} for **{{money}}** !",
+                "fr": "{{user}}, vous avez vendu **{{result}}g** de {{drugName}} pour **{{money}}** !"
+            }
+        },
+        "self_no_drug_to_remove": {
+            "en": "You have no {{drug}} in your inventory",
+            "fr": "Vous n'avez pas de {{drug}} dans votre inventaire"
+        },
+        "member_no_drug_to_remove": {
+            "en": "{{member}} has no {{drug}} in his inventory",
+            "fr": "{{member}} n'a pas de {{drug}} dans son inventaire"
+        },
+        "not_give_yourself": {
+            "en": "You can't give yourself drugs",
+            "fr": "Vous ne pouvez pas vous donner de la drogue"
+        },
+        "all": {
+            "en": "{{drugName}}",
+            "fr": "{{drugName}}"
+        },
+        "type_all_no_quantity": {
+            "en": "You cannot enter a quantity if you select 'Treated and untreated drug'",
+            "fr": "Vous ne pouvez pas entrer de quantité si vous sélectionnez 'Drogue traitée et non traitée'"
+        },
+        "removed": {
+            "en": "You removed **{{quantity}}g** of {{fullname}} to {{member}} !",
+            "fr": "Vous avez retiré **{{quantity}}g** de {{fullname}} à {{member}} !"
+        },
+        "added": {
+            "en": "You added **{{quantity}}g** of {{fullname}} to {{member}} !",
+            "fr": "Vous avez ajouté **{{quantity}}g** de {{fullname}} à {{member}} !"
+        },
+        "consumed": {
+            "en": "consumed",
+            "fr": "consommé{{s}}"
+        },
+        "consumption_self_negative": {
+            "en": "You are negative on the drug test!",
+            "fr": "Vous êtes négatif au test de drogue !"
+        },
+        "consumption_other_negative": {
+            "en": "{{member}} is negative on the drug test!",
+            "fr": "{{member}} est négatif au test de drogue !"
+        },
+        "consumption_self_positive": {
+            "en": "You are positive on the {{fullname}} test!",
+            "fr": "Vous êtes positif au test de {{fullname}} !"
+        },
+        "consumption_other_positive": {
+            "en": "{{member}} is positive on the {{fullname}} test!",
+            "fr": "{{member}} est positif au test de {{fullname}} !"
+        }
+    },
+    "gang": {
+        "war": {
+            "en": "{{member}} and the **{{gang}}** declared war on the **{{ennemies}}**.",
+            "fr": "{{member}} et les **{{gang}}** ont déclaré la guerre aux **{{ennemies}}**."
+        },
+        "peace": {
+            "en": "{{member}} and the **{{gang}}** made peace with the **{{ennemies}}**.",
+            "fr": "{{member}} et les **{{gang}}** ont fait la paix avec les **{{ennemies}}**."
+        },
+        "already_war": {
+            "en": "You are already at war with the **{{gang}}** and the **{{ennemies}}**.",
+            "fr": "Il y a déjà une guerre entre les **{{gang}}** et les **{{ennemies}}**.."
+        }
+    },
+    "guerres": {
+        "no_wars": {
+            "en": "There is no war in this server.",
+            "fr": "Il n'y aucune guerre dans ce serveur."
+        },
+        "war": {
+            "fr": "Les **{{gang}}** est en guerre contre les **{{ennemies}}** depuis {{date}}."
+        }
+    }
+}

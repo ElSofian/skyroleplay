@@ -1,0 +1,673 @@
+{
+    "démissionner": {
+        "its_boss": {
+            "en": "You can't resign from your company since you are its boss: `/changer-patron`",
+            "fr": "Vous ne pouvez pas démissionner de votre entreprise puisque vous êtes son patron : `/changer-patron`"
+        },
+        "valid_demission": {
+            "en": "{{user}} has resigned from **{{name}}**",
+            "fr": "{{user}} a démissionné de **{{name}}**"
+        }
+    },
+    "entreprise": {
+        "company_already_exists": {
+            "en": "Company **{{name}}** already exists.",
+            "fr": "L'entreprise **{{name}}** existe déjà."
+        },
+        "cash_money": {
+            "en": "Cash",
+            "fr": "Argent liquide"
+        },
+        "dirty_money": {
+            "en": "Dirty money",
+            "fr": "Argent sale"
+        },
+        "no_dot_in_name": {
+            "en": "The company name cannot contain a '.' in its name.",
+            "fr": "Le nom de l'entreprise ne peut pas contenir de '.' dans som nom."
+        },
+        "name_limit": {
+            "en": "Your company name cannot exceed 50 characters",
+            "fr": "Le nom de votre entreprise ne peut excéder 50 caractères"
+        },
+        "no_zero_employees": {
+            "en": "The maximum number of employees must be greater than or equal to 0.",
+            "fr": "Le nombre d'employés maximale doit être supérieur ou égal à 0."
+        },
+        "invalid_logo_link": {
+            "en": "Le lien du logo n'est pas valide.",
+            "fr": "Le lien du logo n'est pas valide."
+        },
+        "item_not_found": {
+            "en": "The item `{{item}}` does not exist or you do not have it in your inventory",
+            "fr": "L'item `{{item}}` n'existe pas ou vous ne le possédez pas dans votre inventaire"
+        },
+        "no_item": {
+            "en": "You or the company don't have this item in your inventory",
+            "fr": "Vous ou l'entreprise n'avez pas cet item dans votre inventaire"
+        },
+        "only_one_realestate_company": {
+            "en": "You can only have one real estate company on your server.",
+            "fr": "Vous ne pouvez avoir qu'une seule entreprise immobilière sur votre serveur."
+        },
+        "no_one": {
+            "en": "Nobody has the keys to the {{place}}.",
+            "fr": "Aucune personne n'a les clés du {{place}}."
+        },
+        "cant_remove_access_for_boss": {
+            "en": "You can't remove the access of the boss.",
+            "fr": "Vous ne pouvez pas retirer l'accès du patron."
+        },
+        "no_access": {
+            "en": "You don't have access to this place.",
+            "fr": "Vous n'avez pas accès à ce lieu."
+        },
+        "buttons": {
+            "out": {
+                "en": "Go Out",
+                "fr": "Sortir"
+            },
+            "panel": {
+                "en": "Home",
+                "fr": "Accueil"
+            },
+            "back": {
+                "en": "Back",
+                "fr": "Retour"
+            },
+            "account": {
+                "en": "Account",
+                "fr": "Compte"
+            },
+            "safe": {
+                "en": "Safe",
+                "fr": "Coffre"
+            },
+            "desk": {
+                "en": "Desk",
+                "fr": "Bureau"
+            },
+            "deposit": {
+                "en": "Deposit",
+                "fr": "Déposer"
+            },
+            "withdraw": {
+                "en": "Withdraw",
+                "fr": "Retirer"
+            },
+            "recruit": {
+                "en": "Recruit",
+                "fr": "Recruter"
+            },
+            "fire": {
+                "en": "Fire",
+                "fr": "Virer"
+            },
+            "access": {
+                "en": "Access",
+                "fr": "Accès"
+            },
+            "add": {
+                "en": "Add",
+                "fr": "Ajouter"
+            },
+            "remove": {
+                "en": "Remove",
+                "fr": "Retirer"
+            }
+        },
+        "not_employee": {
+            "en": "You are not an employee of this company",
+            "fr": "Vous n'êtes pas employé dans cette entreprise"
+        },
+        "desk_modal": {
+            "title": {
+                "en": "Employee management",
+                "fr": "Gestion des employés"
+            },
+
+            "first_name": {
+                "en": "First name",
+                "fr": "Prénom"
+            },
+            "last_name": {
+                "en": "Last name",
+                "fr": "Nom de famille"
+            },
+            "first_name_placeholder": {
+                "en": "Specify the first name of the person.",
+                "fr": "Spécifiez le prénom de la personne."
+            },
+            "last_name_placeholder": {
+                "en": "Specify the last name of the person.",
+                "fr": "Spécifiez le nom de famille de la personne."
+            }
+        },
+        "recruit_placeholder": {
+            "en": "Choose an employee to recruit",
+            "fr": "Choisissez un employé à recruter"
+        },
+        "fire_placeholder": {
+            "en": "Choose an employee to fire",
+            "fr": "Choisissez un employé à virer"
+        },
+        "unkown": {
+            "en": "Unknown",
+            "fr": "Inconnu"
+        },
+        "police_modal": {
+            "title": {
+                "en": "Police registration",
+                "fr": "Attribution du matricule"
+            },
+            "police_number": {
+                "en": "Police number",
+                "fr": "Matricule"
+            },
+            "placeholder": {
+                "en": "Specify the police number of the agent",
+                "fr": "Spécifiez le matricule de l'agent"
+            }
+        },
+        "invalid_police_number": {
+            "en": "The specified police number is invalid. Make sure it is a number.",
+            "fr": "Le matricule spécifié est invalide. Assurez vous qu'il s'agisse d'un nombre/chiffre."
+        },
+        "safe_modal": {
+            "title": {
+                "en": "Safe",
+                "fr": "Coffre"
+            },
+            "quantity": {
+                "en": "Quantity",
+                "fr": "Quantité"
+            },
+            "item_placeholder": {
+                "en": "Specify the name of the item to deposit/withdraw.",
+                "fr": "Spécifiez le nom de l'item à déposer/retirer."
+            },
+            "quantity_placeholder": {
+                "en": "Specify the quantity of the item to deposit/withdraw.",
+                "fr": "Spécifiez la quantité de l'item à déposer/retirer."
+            },
+            "select_placeholder": {
+                "en": "Choose an action to perform",
+                "fr": "Choisissez une action à effectuer"
+            }
+        },
+        "account_modal": {
+            "title": {
+                "en": "Account",
+                "fr": "Compte"
+            },
+            "amount": {
+                "en": "Amount",
+                "fr": "Montant"
+            },
+            "amount_placeholder": {
+                "en": "Specify the amount to deposit/withdraw.",
+                "fr": "Spécifiez le montant  à déposer/retirer."
+            }
+        },
+        "embed_panel": {
+            "title": {
+                "en": "Panel of {{company}}",
+                "fr": "Panel de {{company}}"
+            },
+            "fields": {
+                "boss": {
+                    "en": "Boss :",
+                    "fr": "Patron :"
+                },
+                "staff": {
+                    "have_staff": {
+                        "en": "Employees (0{{maxstaff}}) :",
+                        "fr": "Employés (0{{maxstaff}}) :"
+                    },
+                    "dont_staff": {
+                        "en": "No employees",
+                        "fr": "Aucun employé"
+                    }
+                },
+                "type": {
+                    "en": "Type:",
+                    "fr": "Type :"
+                },
+                "datecreation": {
+                    "en": "Creation date:",
+                    "fr": "Date de création :"
+                },
+                "speciality": {
+                    "en": "Speciality :",
+                    "fr": "Spécialité :",
+
+                    "none": {
+                        "en": "None",
+                        "fr": "Aucune"
+                    }
+                },
+                "specialities": {
+                    "police": {
+                        "en": "Police",
+                        "fr": "Police"
+                    },
+                    "ems": {
+                        "en": "EMS",
+                        "fr": "EMS"
+                    },
+                    "bank": {
+                        "en": "Bank",
+                        "fr": "Banque"
+                    },
+                    "realestate": {
+                        "en": "Real Estate Agency",
+                        "fr": "Agence Immobilière"
+                    }
+                }
+            }
+        },
+        "embed_desk": {
+            "description": {
+                "en": "Hello, what do you want to do ?",
+                "fr": "Bonjour, que voulez-vous faire ?"
+            },
+            "recruit": {
+                "en": "Recruit an employee would be interesting, it's always easier when you work with others.",
+                "fr": "Recruter un employé serait intéressant, c'est toujours plus facile quand on travaille à plusieurs."
+            },
+            "fire": {
+                "en": "You actually have **{{amount}}** employees. Who do you want to fire ?",
+                "fr": "Vous avez actuellement **{{amount}}** employés. Qui souhaitez-vous virer ?"
+            }
+        },
+        "embed_access": {
+            "description": {
+                "en": "Manage the access of all your employees to the safe and the company account.\n\nYou can give or remove the keys at any time.",
+                "fr": "Gérez l'accès de tous vos employés au coffre et au compte de l'entreprise.\n\nVous pouevz à tout moment leur donner ou leur retirer les clés."
+            },
+            "add_placeholder": {
+                "en": "Choose an employee to give the keys to of {{place}}.",
+                "fr": "Choisissez un employé à qui donner les clés du {{place}}."
+            },
+            "remove_placeholder": {
+                "en": "Choose an employee to remove the keys to of {{place}}.",
+                "fr": "Choisissez un employé à qui retirer les clés du {{place}}."
+            }
+        },
+        "embed_companycreate": {
+            "title": {
+                "en": "Company created",
+                "fr": "Entreprise créée"
+            },
+            "fields": {
+                "boss": {
+                    "en": "Boss :",
+                    "fr": "Patron :"
+                },
+                "name": {
+                    "en": "Name :",
+                    "fr": "Nom :"
+                },
+                "type": {
+                    "en": "Type :",
+                    "fr": "Type :"
+                }
+            }
+        },
+        "already_in_company": {
+            "en": "You are already in a company. But since you are not the boss of the company, you cannot change it.",
+            "fr": "Vous êtes déjà dans une entreprise. Mais comme vous n'êtes pas le patron de celle-ci, vous ne pouvez pas la modifier."
+        },
+        "already_boss": {
+            "en": "{{member}} is already the boss of this company.",
+            "fr": "{{member}} est déjà le patron de cette entreprise."
+        },
+        "have_already_company": {
+            "en": "You already have a business. Do you want to change it?",
+            "fr": "Vous avez déjà une entreprise. Voulez-vous la modifier ?"
+        },
+        "company_modified": {
+            "en": "Your company has been modified !",
+            "fr": "Votre entreprise a bien été modifiée !"
+        },
+        "not_boss": {
+            "en": "You are not the boss of your company, so you can't delete it",
+            "fr": "Vous n'êtes pas le patron de votre entreprise, vous ne pouvez donc pas la supprimer"
+        },
+        "question_delete_company": {
+            "en": "Do you really want to delete **{{name}}** ?",
+            "fr": "Voulez-vous vraiment supprimer **{{name}}** ?"
+        },
+        "member_not_found": {
+            "en": "I didn't find a citizen with the name **{{first_name}} {{last_name}}**",
+            "fr": "Je n'ai pas trouvé de citoyen avec le nom **{{first_name}} {{last_name}}**"
+        },
+        "cant_recruit_yourself": {
+            "en": "You can't recruit yourself",
+            "fr": "Vous ne pouvez pas vous recruter vous-même"
+        },
+        "cant_fire_yourself": {
+            "en": "You can't fire yourself",
+            "fr": "Vous ne pouvez pas vous virer vous-même"
+        },
+        "already_in_company_member": {
+            "en": "**{{member}}** is already in this company",
+            "fr": "**{{member}}** est déjà dans cette entreprise"
+        },
+        "not_in_company_member": {
+            "en": "**{{member}}** is not in this company",
+            "fr": "**{{member}}** n'est pas dans cette entreprise"
+        },
+        "validation_delete": {
+            "en": "**{{name}}** has been deleted !",
+            "fr": "**{{name}}** a bien été supprimée !"
+        },
+        "embed_delete_company": {
+            "title": {
+                "en": "Company deleted",
+                "fr": "Entreprise supprimée"
+            },
+            "field_boss": {
+                "en": "Boss :",
+                "fr": "Patron :"
+            }
+        },
+        "no_company_found": {
+            "en": "No public company with the name **{{companyName}}** was found",
+            "fr": "Aucune entreprise publique portant le nom **{{companyName}}** n'a été trouvée"
+        },
+        "several_companies": {
+            "en": "Several public companies with the name **{{companyName}}** were found",
+            "fr": "Plusieurs entreprises publiques portant le nom **{{companyName}}** ont été trouvées"
+        },
+        "company_type": {
+            "public": {
+                "en": "Public company",
+                "fr": "Entreprise publique"
+            },
+            "private": {
+                "en": "Private company",
+                "fr": "Entreprise privée"
+            },
+            "organization": {
+                "en": "Organization",
+                "fr": "Organisation"
+            },
+            "gang": {
+                "en": "Gang",
+                "fr": "Gang"
+            },
+            "association": {
+                "en": "Association",
+                "fr": "Association"
+            }
+        },
+        "unknown": {
+            "en": "Unknown",
+            "fr": "Inconnu"
+        },
+        "embed_company": {
+            "title": {
+                "en": "Panel of {{company}}",
+                "fr": "Panel de {{company}}"
+            },
+            "fields": {
+                "boss": {
+                    "en": "Boss :",
+                    "fr": "Patron :",
+
+                    "no_boss": {
+                        "en": "No boss",
+                        "fr": "Aucun patron"
+                    }
+                },
+                "staff": {
+                    "have_staff": {
+                        "en": "Employees ({{staff}}) :",
+                        "fr": "Employés ({{staff}}) :"
+                    },
+                    "others": {
+                        "en": "*and {{amount}} other{{s}}...*",
+                        "fr": "*et {{amount}} autre{{s}}...*"
+                    },
+                    "dont_staff": {
+                        "en": "No employees",
+                        "fr": "Aucun employé"
+                    }
+                },
+                "type": {
+                    "en": "Type :",
+                    "fr": "Type :"
+                },
+                "datecreation": {
+                    "en": "Creation date:",
+                    "fr": "Date de création :"
+                },
+                "account": {
+                    "en": "Bank account :",
+                    "fr": "Compte bancaire :"
+                },
+                "last_transactions": {
+                    "en": "Last transactions :",
+                    "fr": "Dernières transactions :"
+                },
+                "no_transactions": {
+                    "en": "No transactions have been made",
+                    "fr": "Aucune transaction n'a été effectué"
+                }
+            }
+        },
+        "not_owner": {
+            "en": "You are not the boss of this company",
+            "fr": "Vous n'êtes pas le patron de cette entreprise"
+        },
+        "no_item_company": {
+            "en": "There is no item in the safe.",
+            "fr": "Il n'y a aucun objet dans le coffre."
+        },
+        "not_enough_item": {
+            "en": "You only have **{{quantity}} {{item}}** in your safe.",
+            "fr": "Vous avez seulement **{{quantity}} {{item}}** de votre coffre."
+        },
+        "not_remove_money": {
+            "en": "You cannot withdraw money from your company's bank account since you are not the boss",
+            "fr": "Vous ne pouvez pas retirer de l'argent du compte bancaire de votre entreprise puisque vous n'êtes pas son patron"
+        },
+        "not_remove_null": {
+            "en": "You cannot withdraw zero or negative amounts of money",
+            "fr": "Vous ne pouvez pas retirer une somme nulle ou négative d'argent"
+        },
+        "money_lower": {
+            "en": "You only have **{{money}}{{symbol}}** on your company account",
+            "fr": "Vous n'avez que **{{money}}{{symbol}}** sur le compte de votre entreprise"
+        },
+        "not_enough_cash_money": {
+            "en": "You don't have **{{amount}}{{symbol}}** of cash money",
+            "fr": "Vous n'avez pas **{{amount}}{{symbol}}** d'argent liquide"
+        },
+        "not_enough_dirty_money": {
+            "en": "You don't have **{{amount}}{{symbol}}** of dirty money",
+            "fr": "Vous n'avez pas **{{amount}}{{symbol}}** d'argent sale"
+        },
+        "validation_remove_money": {
+            "en": "You did withdraw **{{amount}}{{symbol}}** from the company **{{company}}** account!",
+            "fr": "Vous avez bien retiré **{{amount}}{{symbol}}** du compte d'entreprise de **{{company}}** !"
+        },
+        "withdrawed_dirty_money": {
+            "en": "You did withdraw **{{amount}}{{symbol}}** of dirty money!",
+            "fr": "Vous avez bien retiré **{{amount}}{{symbol}}** d'argent sale !"
+        },
+        "deposited_dirty_money": {
+            "en": "You did deposit **{{amount}}{{symbol}}** of dirty money!",
+            "fr": "Vous avez bien déposé **{{amount}}{{symbol}}** d'argent sale !"
+        },
+        "withdrawed_cash_money": {
+            "en": "You did withdraw **{{amount}}{{symbol}}** of cash money!",
+            "fr": "Vous avez bien retiré **{{amount}}{{symbol}}** d'argent liquide !"
+        },
+        "deposited_cash_money": {
+            "en": "You did deposit **{{amount}}{{symbol}}** of cash money!",
+            "fr": "Vous avez bien déposé **{{amount}}{{symbol}}** d'argent liquide !"
+        },
+        "withdrawed": {
+            "en": "You have withdrawn **{{quantity}} {{item}}** from your safe.",
+            "fr": "Vous avez retiré **{{quantity}} {{item}}** de votre coffre."
+        },
+        "deposited": {
+            "en": "You have deposited **{{quantity}} {{item}}** in your safe.",
+            "fr": "Vous avez déposé **{{quantity}} {{item}}** dans votre coffre."
+        },
+        "not_depose_money_boss": {
+            "en": "You cannot deposit money from your company's bank account since you are not the owner",
+            "fr": "Vous ne pouvez pas déposer de l'argent du compte bancaire de votre entreprise puisque vous n'êtes pas son patron"
+        },
+        "not_deposit_null": {
+            "en": "You cannot deposit zero or negative amounts of money",
+            "fr": "Vous ne pouvez pas déposer une somme nulle ou négative d'argent"
+        },
+        "money_account": {
+            "en": "You only have **{{money}}{{symbol}}** in cash",
+            "fr": "Vous n'avez que **{{money}}{{symbol}}** en espèces"
+        },
+        "deposit_company": {
+            "en": "You have deposited **{{amount}}{{symbol}}** to the company **{{company}}** account!",
+            "fr": "Vous avez bien déposé **{{amount}}{{symbol}}** sur le compte d'entreprise de **{{company}}** !"
+        },
+        "put_company": {
+            "en": "You have put **{{amount}} {{item}}** in the **{{companyName}}'s** safe!",
+            "fr": "Vous avez posé **{{amount}} {{item}}** dans le coffre de **{{companyName}}** !"
+        },
+        "take_company": {
+            "en": "You have taken **{{amount}} {{item}}** from the **{{companyName}}'s** safe!",
+            "fr": "Vous avez pris **{{amount}} {{item}}** du coffre de **{{companyName}}** !"
+        },
+        "fire": {
+            "en": "You have fired {{member}} from your company!",
+            "fr": "Vous avez viré {{member}} de votre entreprise !"
+        },
+        "recruit": {
+            "en": "You have recruited {{member}} in your company!",
+            "fr": "Vous avez recruté {{member}} dans votre entreprise !"
+        },
+        "only_boss_update": {
+            "en": "Only the current boss can define a new boss (or the staff of the server)",
+            "fr": "Seul le patron actuel peut définir un nouveau patron (ou le staff du serveur)"
+        },
+        "no_in_server": {
+            "en": "{{member}} is not in the server",
+            "fr": "{{member}} n'est pas dans le serveur"
+        },
+        "is_bot": {
+            "en": "{{member}} is bot",
+            "fr": "{{member}} est un bot"
+        },
+        "not_in_company": {
+            "en": "{{member}} is not yet part of your company: `/recruter`",
+            "fr": "{{member}} ne fait pas encore partie de votre entreprise : `/recruter`"
+        },
+        "drug_not_found": {
+            "en": "This drug is not in your inventory or safe.",
+            "fr": "Cette drogue n'est pas dans votre inventaire ou votre coffre."
+        },
+        "new_boss": {
+            "en": "{{member}} is now the new boss of **{{company}}**",
+            "fr": "{{member}} est maintenant le nouveau patron de **{{company}}**"
+        },
+        "embed_update_company": {
+            "title": {
+                "en": "Entreprise modifiée",
+                "fr": "Entreprise modifiée"
+            },
+            "description": {
+                "en": "Change of boss",
+                "fr": "Changement de patron"
+            },
+            "field_lastboss": {
+                "en": "Former boss :",
+                "fr": "Ancien patron :"
+            },
+            "field_newboss": {
+                "en": "New boss :",
+                "fr": "Nouveau patron :"
+            },
+            "field_company": {
+                "en": "Name :",
+                "fr": "Nom :"
+            }
+        }
+    },
+    "facture": {
+        "self_invoicing": {
+            "en": "You can't bill yourself",
+            "fr": "Vous ne pouvez pas vous facturer vous-même"
+        },
+        "not_amount_null": {
+            "en": "The bill amount cannot be zero or negative",
+            "fr": "Le montant de la facture ne peut pas être nul ou négatif"
+        },
+        "datelimit": {
+            "en": " to be paid before {{date}}",
+            "fr": " à payer avant le {{date}}"
+        },
+        "embed": {
+            "title": {
+                "en": "Bill",
+                "fr": "Facture"
+            },
+            "description": {
+                "en": "You have received a {{type}} for **{{amount}}{{symbol}}**{{company}}{{dateLimit}}.\nThe reason is: **{{reason}}**.",
+                "fr": "Vous avez reçu une {{type}} de **{{amount}}{{symbol}}**{{company}}{{dateLimit}}.\nLa raison est : **{{reason}}**."
+            }
+        },
+        "fine": {
+            "en": "fine",
+            "fr": "amende"
+        },
+        "bill": {
+            "en": "bill",
+            "fr": "facture"
+        }
+    },
+    "liste_entreprises": {
+        "no_boss": {
+            "en": "No boss",
+            "fr": "Aucun patron"
+        },
+        "embed_companies_list": {
+            "title": {
+                "en": "Companies list ・ {{guild}}",
+                "fr": "Liste des entreprises ・ {{guild}}"
+            }
+        },
+        "company_type": {
+            "public": {
+                "en": "Public company",
+                "fr": "Entreprise publique"
+            },
+            "private": {
+                "en": "Private company",
+                "fr": "Entreprise privée"
+            },
+            "organization": {
+                "en": "Organization",
+                "fr": "Organisation"
+            },
+            "gang": {
+                "en": "Gang",
+                "fr": "Gang"
+            },
+            "association": {
+                "en": "Association",
+                "fr": "Association"
+            }
+        },
+        "previous": {
+            "en": "Previous",
+            "fr": "Précédent"
+        },
+        "next": {
+            "en": "Next",
+            "fr": "Suivant"
+        }
+    }
+}

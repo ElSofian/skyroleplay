@@ -1,0 +1,787 @@
+{
+    "compte_bancaire": {
+        "has_bank_account":  {
+            "classic": {
+                "en": "You already have a bank account",
+                "fr": "Vous avez déjà un compte bancaire"
+            },
+            "mention_member": {
+                "en": "{{member}} already has a bank account",
+                "fr": "{{member}} a déjà un compte bancaire"
+            }
+        },
+        "embed_question": {
+            "title": {
+                "en": "New banking system",
+                "fr": "Nouveau système bancaire"
+            },
+            "title_new_account": {
+                "en": "Security configuration",
+                "fr": "Configuration de sécurité"
+            },
+            "description": {
+                "en": "Dear {{member}},\n\nWe are pleased to announce that online banking has evolved!\nA lot of new features are coming where you will have several codes to manage your bank account. But who says codes says risk of data theft.\n\nFor this, we have set up a verification question system, choose below in the drop-down menu, the question you will remember the answer to and answer it.\nIf one day you lose your data, this question will allow you to recover them so don't forget it!",
+                "fr": "Cher {{member}},\n\nNous avons le plaisir de vous annoncer que banque en ligne a évolué !\nÉnormément de nouvelles fonctionnalités voient le jour où vous aurez plusieurs codes pour gérer votre compte bancaire. Mais qui dit codes dit risque de vols de données.\n\nPour cela, nous avons mis en place un système de question de vérification, choisissez ci-dessous dans le menu déroulant, la question dont vous vous souviendrez la réponse et répondez-y.\nSi un jour vous perdez vos données, cette question vous permettera de les récupérer donc ne l'oubliez pas !"
+            },
+            "description_new_account": {
+                "en": "Dear {{member}},\n\nWe are pleased to have you as a customer of the best online bank!\nIn order to guarantee your total security, and knowing that some features that are present contain several codes to manage your bank account, we have set up a simple and powerful protection system.\n\nWe have set up a verification question system, choose below in the drop-down menu the question you will remember the answer to and answer it.\nIf one day you lose your data, this question will allow you to recover them so don't forget it!",
+                "fr": "Cher {{member}},\n\nNous avons le plaisir de vous avoir parmis nos clients de la meilleure banque en ligne !\nAfin de garantir votre totale sécurité, et sachant que certaines fonctionnalités qui sont présentes contiennent plusieurs codes pour gérer votre compte bancaire, nous avons mis en place un système de protection simple et puissant.\n\nNous avons mis en place un système de question de vérification, choisissez ci-dessous dans le menu déroulant la question dont vous vous souviendrez la réponse et répondez-y.\nSi un jour vous perdez vos données, cette question vous permettera de les récupérer donc ne l'oubliez pas !"
+            },
+            "modal_title": {
+                "en": "Verification question",
+                "fr": "Question de vérification"
+            },
+            "answer": {
+                "en": "Answer",
+                "fr": "Réponse"
+            },
+            "placeholder": {
+                "en": "Select a question",
+                "fr": "Sélectionnez une question"
+            },
+            "answered": {
+                "en": "Your answer has been saved! You can now fully enjoy all our services!",
+                "fr": "Votre réponse a bien été enregistrée ! Vous pouvez à présent profiter pleinement de tous nos services !"
+            }
+        },
+        "connexion_error": {
+            "en": "You have entered an incorrect code, please try again.",
+            "fr": "Vous avez entré un code incorrect, veuillez réessayer."
+        },
+        "gel": {
+            "en": "This account is currently frozen",
+            "fr": "Ce compte est actuellement gelé"
+        },
+        "ban_account": {
+            "en": "You're bank account has been freeze since the {{frozen_date}}.",
+            "fr": "Votre compte bancaire a été gelé depuis le {{frozen_date}}. "
+        },
+        "ban_account_member": {
+            "en": "{{member}}'s bank account has been freeze since the **{{frozen_date}}** for **{{reason}}**.",
+            "fr": "Le compte bancaire de {{member}} a été gelé depuis le **{{frozen_date}}** pour **{{reason}}**. "
+        },
+        "account_with_iban_not_found": {
+            "en": "No bank account found with the ABA : **{{iban}}**",
+            "fr": "Aucun compte bancaire trouvé avec l'IBAN : **{{iban}}**"
+        },
+        "bank_transfer": {
+            "en": "Bank transfer {{verb}} {{name}}",
+            "fr": "Virement bancaire {{verb}} {{name}}"
+        },
+        "not_enough": {
+            "en": "You only have **{{amount}}{{symbol}}** {{place}}",
+            "fr": "Vous n'avez que **{{amount}}{{symbol}}** {{place}}"
+        },
+        "cash": {
+            "en": "on you",
+            "fr": "sur vous"
+        },
+        "bank": {
+            "en": "in your bank account",
+            "fr": "sur votre compte bancaire"
+        },
+        "no_reason": {
+            "en": "No reason specified",
+            "fr": "Aucune raison spécifiée"
+        },
+        "creation": {
+            "en": "Creating the bank account...",
+            "fr": "Création du compte bancaire..."
+        },
+        "buttons": {
+            "retry": {
+                "en": "Retry",
+                "fr": "Réessayer"
+            },
+            "account": {
+                "en": "Account",
+                "fr": "Compte"
+            },
+            "deposit": {
+                "en": "Deposit",
+                "fr": "Déposer"
+            },
+            "others": {
+                "en": "Others",
+                "fr": "Autres"
+            },
+            "withdraw": {
+                "en": "Withdraw",
+                "fr": "Retirer"
+            },
+            "loans": {
+                "en": "Loan{{s}}",
+                "fr": "Prêt{{s}}"
+            },
+            "refund": {
+                "en": "Refund",
+                "fr": "Rembourser"
+            },
+
+
+            "card": {
+                "en": "Card",
+                "fr": "Carte"
+            },
+            "manage": {
+                "en": "Manage",
+                "fr": "Gérer"
+            },
+            "connexion": {
+                "en": "Connexion Mode",
+                "fr": "Mode de Connexion"
+            },
+            "change_secret_code": {
+                "en": "Change secret code",
+                "fr": "Changer le code secret"
+            },
+            "urgencies": {
+                "en": "Urgencies",
+                "fr": "Urgences"
+            },
+            "transfer": {
+                "en": "Transfer",
+                "fr": "Virement bancaire"
+            },
+            "back": {
+                "en": "Back",
+                "fr": "Retour"
+            },
+            "change_code": {
+                "en": "Change code",
+                "fr": "Changer le code"
+            },
+            "block": {
+                "en": "Block",
+                "fr": "Opposition"
+            },
+            "unblock": {
+                "en": "Unblock",
+                "fr": "Débloquer"
+            },
+            "face_id": {
+                "en": "Face ID",
+                "fr": "Face ID"
+            },
+            "secret_code": {
+                "en": "Secret code",
+                "fr": "Code secret"
+            },
+            "none": {
+                "en": "None",
+                "fr": "Aucun"
+            }
+        },
+        "modal": {
+            "title": {
+                "en": "Management of your bank account",
+                "fr": "Gestion de votre compte bancaire"
+            },
+            "title_loans": {
+                "en": "Management of your loans",
+                "fr": "Gestion de vos prêts"
+            },
+            "amount": {
+                "en": "Amount",
+                "fr": "Montant"
+            },
+            "amount_placeholder": {
+                "en": "Enter the amount you want to withdraw/deposit.",
+                "fr": "Entrez le montant que vous souhaitez retirer/déposer."
+            },
+            "amount_placeholder_loans": {
+                "en": "Enter the amount you want to refund.",
+                "fr": "Entrez le montant que vous souhaitez rembourser."
+            }
+        },
+        "card_modal": {
+            "title": {
+                "en": "Management of your codes",
+                "fr": "Gestion de vos codes"
+            },
+            "iban": {
+                "en": "ABA",
+                "fr": "IBAN"
+            },
+            "placeholder_iban": {
+                "en": "Enter the ABA to whom you want to transfer money.",
+                "fr": "Entrez l'IBAN à qui vous souhaitez transférer de l'argent."
+            },
+            "amount": {
+                "en": "Amount",
+                "fr": "Montant"
+            },
+            "placeholder_amount": {
+                "en": "Enter the amount you want to transfer.",
+                "fr": "Entrez le montant que vous souhaitez transférer."
+            },
+            "code": {
+                "en": "Code",
+                "fr": "Code"
+            },
+            "placeholder_code": {
+                "en": "Enter the actuel code",
+                "fr": "Entrez le code actuel"
+            },
+            "new_code": {
+                "en": "New code",
+                "fr": "Nouveau code"
+            },
+            "placeholder_new_code": {
+                "en": "Enter the new code",
+                "fr": "Entrez le nouveau code"
+            },
+
+            "sm_placeholder": {
+                "en": "Choose the member to whom you want to transfer money.",
+                "fr": "Choisissez le membre à qui vous souhaitez transférer de l'argent."
+            }
+        },
+        "connexion_modal": {
+            "placeholder": {
+                "en": "Enter your secret code",
+                "fr": "Entrez votre code secret"
+            },
+            "wrong_secret_code": {
+                "en": "The secret code you entered is incorrect.",
+                "fr": "Le code secret que vous avez entré est incorrect."
+            },
+            "connexion_method_changed": {
+                "en": "Your connexion method has been changed!",
+                "fr": "Votre méthode de connexion a bien été changée !"
+            }
+        },
+        "ask_modal": {
+            "title": {
+                "en": "Verification",
+                "fr": "Vérification"
+            },
+            "reply_title": {
+                "en": "Forgot code",
+                "fr": "Oubli de code"
+            },
+            "wrong_answer": {
+                "en": "The answer to the verification question is incorrect. I can't send you your coordinates.",
+                "fr": "La réponse à la question de vérification est incorrecte. Je ne peux pas vous envoyer vos coordonnées."
+            },
+            "iban": {
+                "en": "Your ABA is : **{{code}}**",
+                "fr": "Votre IBAN est : **{{code}}**"
+            },
+            "secret_code": {
+                "en": "Your secret code to access your account is: **{{code}}**",
+                "fr": "Votre code secret pour accéder à votre compte est : **{{code}}**"
+            },
+            "card_code": {
+                "en": "Your bank card code is: **{{code}}**",
+                "fr": "Votre code de carte bancaire est : **{{code}}**"
+            }
+        },
+        "urgencies": {
+            "sm_placeholder": {
+                "en": "What is your emergency?",
+                "fr": "Quelle est votre urgence ?"
+            },
+            "options": {
+                "forgot_iban": {
+                    "en": "I forgot my ABA",
+                    "fr": "J'ai oublié mon IBAN"
+                },
+                "forgot_secret_code": {
+                    "en": "I forgot my secret code",
+                    "fr": "J'ai oublié mon code secret"
+                },
+                "forgot_card_code": {
+                    "en": "I forgot my bank card code",
+                    "fr": "J'ai oublié le code de ma carte bancaire"
+                }
+            }
+        },
+        "created": {
+            "en": "The bank account of {{member}} has been created!",
+            "fr": "Le compte bancaire de {{member}} a bien été créé !"
+        },
+        "embed_account": {
+            "title": {
+                "en": "Opening a bank account",
+                "fr": "Ouverture de Compte Bancaire"
+            },
+            "description": {
+                "en": "Ms./Mr. {{member}},\n{{emoji}}・We welcome you to the bank of `{{city}}`!\n\n:information_source:・All your transactions will now be done through our bank.\n\n:moneybag:・Your account balance has been credited with **{{startamount}}{{symbol}}**.\n\n:label: ・Your ABA is **{{iban}}**. Your fellow citizens will be able to transfer money to you via this identifier.\n\n:mobile_phone:・Here is your secret code to access your account, do not share it with anyone: **{{secretCode}}**\n\n:credit_card:・Here is also the code of your credit card: __{{cardCode}}__.",
+                "fr": "Mme/M. {{member}},\n\n{{emoji}}・Nous vous souhaitons la bienvenue dans la banque de `{{city}}` !\n\n:information_source:・Toutes vos transactions se feront désormais par le biais de notre banque.\n\n:moneybag:・Le solde de votre compte a été crédité de **{{startamount}}{{symbol}}**.\n\n:label:・ Votre IBAN est **{{iban}}**. Vos concitoyens pourront vous transférer de l'argent via cet identifiant.\n\n:mobile_phone:・Voici votre code secret pour accéder à votre compte, ne le partagez à personne : **{{secretCode}}**\n\n:credit_card:・Voici également le code de votre carte bleue : __{{cardCode}}__."
+            },
+            "description_already_have_account": {
+                "fr": "Mme/Mr. {{member}},\n\n{{emoji}}・Nous vous resouhaitons la bienvenue dans la banque de `{{city}}` !\nVoici toutes les nouvelles informations dont vous aurez besoin pour votre compte bancaire :\n\n:label:・ Votre IBAN est **{{iban}}**. Vos concitoyens pourront vous transférer de l'argent via cet identifiant.\n\n:mobile_phone:・Voici votre code secret pour accéder à votre compte, ne le partagez à personne : **{{secretCode}}**\n\n:credit_card:・Voici également le code de votre carte bleue : __{{cardCode}}__.",
+                "en": "Ms./Mr. {{member}},\n{{emoji}}・We welcome you to the bank of `{{city}}`! There is all the informations you will need for your bank account :\n\n:label: ・Your ABA is **{{iban}}**. Your fellow citizens will be able to transfer money to you via this identifier.\n\n:mobile_phone:・Here is your secret code to access your account, do not share it with anyone: **{{secretCode}}**\n\n:credit_card:・Here is also the code of your credit card: __{{cardCode}}__."
+            },
+            "footer": {
+                "en": "See you soon in our bank !",
+                "fr": "À bientôt dans notre banque !"
+            }
+        },
+        "embed_logs_creation": {
+            "title": {
+                "en": "Bank account created",
+                "fr": "Compte bancaire créé"
+            },
+            "field_banker": {
+                "en": "Banker :",
+                "fr": "Banquier :"
+            },
+            "field_client": {
+                "en": "Client :",
+                "fr": "Client :"    
+            }
+        },
+        "embed_close_account": {
+            "title": {
+                "en": "Bank Account Closure",
+                "fr": "Fermeture de Compte Bancaire"
+            },
+            "description": {
+                "en": "Ms./Mr. {{member}},\n\n{{emoji}}・Your account in the bank of `{{city}}` has been closed by the government !\n:information_source:・Your transactions will no longer be done through our bank.",
+                "fr": "Mme/M. {{member}},\n\n{{emoji}}・Votre compte dans la banque de `{{city}}` a été clôturé par le gouvernement !\n\n:information_source:・Vos transactions ne se feront plus par notre banque."
+            },
+            "footer": {
+                "en": "See you soon !",
+                "fr": "À bientôt !"
+            }
+        },
+        "embed_infos": {
+            "title": {
+                "en": "Bank Account Informations",
+                "fr": "Informations du compte bancaire"
+            },
+            "fields": {
+                "amount": {
+                    "en": "Amount",
+                    "fr": "Montant"
+                },
+                "crypto_wallet": {
+                    "en": "Crypto Wallet",
+                    "fr": "Portefeuille Crypto"
+                },
+                "iban": {
+                    "en": "ABA",
+                    "fr": "IBAN"
+                },
+                "secret_code": {
+                    "en": "Secret code",
+                    "fr": "Code secret"
+                },
+                "card_code": {
+                    "en": "Card code",
+                    "fr": "Code de carte"
+                },
+                "connexion_type": {
+                    "en": "Connexion type",
+                    "fr": "Type de connexion"
+                },
+                "connexions": {
+                    "1": {
+                        "en": "Face ID",
+                        "fr": "Face ID"
+                    },
+                    "2": {
+                        "en": "Secret Code",
+                        "fr": "Code Secret"
+                    },
+                    "3": {
+                        "en": "None",
+                        "fr": "Aucune"
+                    }
+                },
+                "answer": {
+                    "en": "Answer",
+                    "fr": "Réponse"
+                },
+                "frozen_account": {
+                    "en": "Frozen account",
+                    "fr": "Compte gelé"
+                },
+                "card_blocked": {
+                    "en": "Card blocked",
+                    "fr": "Carte bloquée"
+                }
+            }
+        },
+        "embed_logs_close": {
+            "title": {
+                "en": "Bank account deleted",
+                "fr": "Compte bancaire supprimé"
+            },
+            "field_banker": {
+                "en": "Banker :",
+                "fr": "Banquier :"
+            },
+            "field_client": {
+                "en": "Client ",
+                "fr": "Client :"
+            }
+        },
+        "embed_account_post": {
+            "title": {
+                "en": "Bank Account",
+                "fr": "Compte Bancaire",
+
+                "ban": {
+                    "en": "Bank Account (FROZEN)",
+                    "fr": "Compte Bancaire (GELÉ)"
+                }
+            },
+            "description": {
+                "classic": {
+                    "en": "You consult your bank account",
+                    "fr": "Vous consultez votre compte bancaire"
+                },
+                "mention": {
+                    "en": "You are consulting the bank account of {{member}}",
+                    "fr": "Vous consultez le compte bancaire de {{member}}"
+                }
+            },
+            "field_cash": {
+                "en": "💵 Cash",
+                "fr": "💵 Espèces"
+            },
+            "field_bank": {
+                "en": "💳 Bank",
+                "fr": "💳 Banque"
+            },
+            "footer": {
+                "en": "Bank of {{city}}",
+                "fr": "Banque de {{city}}"
+            }
+        },
+        "embed_connexion": {
+            "description": {
+                "en": "Choose your preferred connection method.\n\n{{warning}} Warning, without a safe connection method, your bank account is vulnerable.\n\n{{settings}} Your connection method is currently set to: **{{type}}**\n\n",
+                "fr": "Choisissez votre mode de connexion préféré.\n\n{{warning}} Attention, sans moyen de connexion sûr, votre compte bancaire est vulnérable.\n\n{{settings}} Votre mode de connexion est actuellement défini sur : **{{type}}**\n\n"
+            }
+        },
+        "bank_account_creation": {
+            "en": "Creation of your bank account",
+            "fr": "Création de votre compte bancaire"
+        },
+        "recuperation_data": {
+            "en": "{{emoji}} Recovery of credit card data...",
+            "fr": "{{emoji}} Récupération des données des cartes de crédit..."
+        },
+        "type_top": {
+            "bank": {
+                "en": "bank 💳",
+                "fr": "banque 💳"
+            },
+            "cash": {
+                "en": "cash 💵",
+                "fr": "espèce 💵"
+            },
+            "sale": {
+                "en": "dirty money 💰",
+                "fr": "argent sale 💰"
+            }
+        },
+        "no_bank_account_found": {
+            "en": "No member of this server has any money that matches: {{type}}",
+            "fr": "Aucun membre de ce serveur n'a d'argent correspondant à : {{type}}"
+        },
+        "embed_top": {
+            "title": {
+                "en": "💵 Ranking - {{city}}",
+                "fr": "💵 Classement - {{city}}"
+            },
+            "footer": {
+                "en": "Ranking - {{type}}",
+                "fr": "Classement - {{type}}"
+            }
+        },
+        "connexion_text": {
+            "en": "Please enter your secret code",
+            "fr": "Veuillez saisir votre code secret"
+        },
+        "all": {
+            "en": " and you have finished paying it, congratulations !",
+            "fr": " et vous avez fini de le payer, félicitations !"
+        },
+        "rest": {
+            "en": "You still have **{{amount}}{{symbol}}** to pay.",
+            "fr": "Il vous reste **{{amount}}{{symbol}}** à payer."
+        },
+        "refunded": {
+            "en": "You have refunded **{{amount}}{{symbol}}** of your loan{{rest}}{{all}}",
+            "fr": "Vous avez remboursé **{{amount}}{{symbol}}** de votre prêt{{rest}}{{all}}"
+        },
+        "deposited": {
+            "en": "You have deposited **{{amount}}{{symbol}}** in your bank account",
+            "fr": "Vous avez déposé **{{amount}}{{symbol}}** sur votre compte bancaire"
+        },
+        "withdrawed": {
+            "en": "You have withdrawn **{{amount}}{{symbol}}** from your bank account",
+            "fr": "Vous avez retiré **{{amount}}{{symbol}}** de votre compte bancaire"
+        },
+        "payed": {
+            "en": "You have just paid **{{amount}}{{symbol}}** to **{{name}}**.",
+            "fr": "Vous avez transféré **{{amount}}{{symbol}}** à **{{name}}**."
+        },
+        "wrong_old_card_code": {
+            "en": "The old code is incorrect",
+            "fr": "Le code actuel de votre carte est incorrect"
+        },
+        "wrong_old_secret_code": {
+            "en": "The old secret code is incorrect",
+            "fr": "Le code secret actuel est incorrect"
+        },
+        "same_code": {
+            "en": "The new code must be different from the old one",
+            "fr": "Le nouveau code doit être différent de l'ancien"
+        },
+        "code_starting_with_0": {
+            "en": "A credit card secret code cannot start with 0.",
+            "fr": "Un code secret de carte bancaire ne peut pas commencer par 0."
+        },
+        "secret_code_changed": {
+            "en": "Your secret code has been changed!",
+            "fr": "Votre code secret a bien été changé !"
+        },
+        "card_code_changed": {
+            "en": "The code of your credit card has been changed!",
+            "fr": "Le code de votre carte bancaire a bien été changé !"
+        },
+        "blocked": {
+            "en": "Your credit card has been blocked!",
+            "fr": "Votre carte bancaire a été bloquée !"
+        },
+        "unblocked": {
+            "en": "Your credit card has been unblocked!",
+            "fr": "Votre carte bancaire a été débloquée !"
+        }
+    },
+    "payer": {
+        "typeAsText": {
+            "bank_money": {
+                "en": "Bank",
+                "fr": "Banque"
+            },
+            "cash_money": {
+                "en": "Cash",
+                "fr": "Espèces"
+            },
+            "dirty_money": {
+                "en": "Dirty Money",
+                "fr": "Argent sale"
+            }
+        },
+        "embed_logs": {
+            "title": {
+                "anonyme": {
+                    "en": "Anonymous payment",
+                    "fr": "Paiement anonyme"
+                },
+                "classic": {
+                    "en": "Payment",
+                    "fr": "Paiement"
+                }
+            },
+            "field_sender": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "field_benefic": {
+                "en": "Beneficiary :",
+                "fr": "Bénéficiaire :"
+            },
+            "field_type": {
+                "en": "Type :",
+                "fr": "Type :"
+            },
+            "field_amount": {
+                "en": "Amount :",
+                "fr": "Montant :"
+            }
+        },
+        "jail": {
+            "en": "You are in jail, you can't pay by bank transfer.",
+            "fr": "Vous êtes en prison, vous ne pouvez pas payer par virement bancaire."
+        },
+        "not_pay_yourself": {
+            "en": "You can't pay yourself",
+            "fr": "Vous ne pouvez pas vous payer vous-même"
+        },
+        "no_dirty_money": {
+            "en": "You currently have no dirty money...",
+            "fr": "Vous n'avez actuellement pas d'argent sale..."
+        },
+        "you_dont_bank": {
+            "en": "You have no money in your bank account",
+            "fr": "Vous n'avez pas d'argent sur votre compte bancaire"
+        },
+        "you_dont_cash": {
+            "en": "You have no cash",
+            "fr": "Vous n'avez pas d'argent en espèces"
+        },
+        "have_only_money": {
+            "en": "You only have **{{amount}}{{symbol}}**.\nDo you want to pay this amount to {{member}} ?",
+            "fr": "Vous n'avez que **{{amount}}{{symbol}}**.\nVoulez-vous payer cette somme à {{member}} ?"
+        },
+        "anonyme_payement": {
+            "en": ":ninja: 4N0NYM0U5 paid **{{amount}}{{symbol}}** to {{member}} !",
+            "fr": ":ninja: 4N0NYM0U5 a payé **{{amount}}{{symbol}}** à {{member}} !"
+        },
+        "you_paid_anonyme": {
+            "en": "You paid **{{amount}}{{symbol}}** to {{member}}anonymously !",
+            "fr": "Vous avez payé **{{amount}}{{symbol}}** à {{member}} anonymement !"
+        },
+        "you_paid_member": {
+            "en": "You paid **{{amount}}{{symbol}}** to {{member}} !",
+            "fr": "Vous avez payé **{{amount}}{{symbol}}** à {{member}} !"
+        }
+    },
+    "prêt": {
+        "banquier": {
+            "en": "Banker",
+            "fr": "Banquier"
+        },
+        "mod": {
+            "en": "Moderator",
+            "fr": "Modérateur"
+        },
+        "admin": {
+            "en": "Administrators",
+            "fr": "Administrateurs"
+        },
+        "and_the": {
+            "en": "and",
+            "fr": "et les"
+        },
+        "no_permission": {
+            "en": "{{member}} does not have permission to make loans.\nOnly the {{admin}} can accept or reject loans.",
+            "fr": "{{member}} n'a pas la permission d'accorder des prêts.\nSeuls les {{admin}} peuvent accepter ou refuser les prêts."
+        },
+        "bank_not_enough": {
+            "en": "Bank **{{name}}** doesn't have **{{amount}}{{symbol}}** to loan.",
+            "fr": "La banque **{{name}}** n'a pas **{{amount}}{{symbol}}** à prêter."
+        },
+        "embed_pret": {
+            "title": {
+                "en": "Loan granted",
+                "fr": "Prêt accordé"
+            },
+            "at": {
+                "en": " at *{{name}}*",
+                "fr": " chez *{{name}}*"
+            },
+            "description": {
+                "en": "{{member}}, a loan of **{{amount}}{{symbol}}** has been granted by {{banker}}{{at}}.{{datelimit}}",
+                "fr": "{{member}}, un prêt de **{{amount}}{{symbol}}** vous a été accordé par {{banker}}{{at}}.{{datelimit}}"
+            },
+            "datelimit": {
+                "en": "\nHe set a repayment deadline to **{{date}}** that must not be exceeded.",
+                "fr": "\nIl a fixé une date limite de remboursement à **{{date}}** qu'il ne faut pas dépasser."
+            },
+            "field_banker": {
+                "en": "❓ Who is the banker ?",
+                "fr": "❓ Qui est le banquier ?"
+            }
+        },
+        "button_choice": {
+            "accept": {
+                "en": "Accept",
+                "fr": "Accepter"
+            },
+            "refuse": {
+                "en": "Refuse",
+                "fr": "Refuser"
+            }
+        },
+        "no_permission_choice": {
+            "en": "You don't have permissions to accept or refuse loans. \nOnly the {{banker}} ({{user}}) can accept or decline the request.",
+            "fr": "Tu n'as pas les permissions d'accepter ou refuser les prêts.\nSeul le {{banker}} ({{user}}) peut accepter ou refuser la demande."
+        },
+        "valid_pret": {
+            "en": "{{emoji}} {{member}} got a loan of **{{amount}}{{symbol}}** !",
+            "fr": "{{emoji}} {{member}} a obtenu un prêt de **{{amount}}{{symbol}}** !"
+        },
+        "embed_logs": {
+            "title": {
+                "en": "Loan",
+                "fr": "Prêt"
+            },
+            "field_banker": {
+                "en": "Banker :",
+                "fr": "Banquier :"
+            },
+            "field_client": {
+                "en": "Client :",
+                "fr": "Client :"
+            },
+            "field_amount": {
+                "en": "Amount :",
+                "fr": "Montant :"
+            },
+            "field_reason": {
+                "en": "Reason :",
+                "fr": "Raison :"
+            },
+            "field_date_limit": {
+                "en": "Date limit :",
+                "fr": "Date limite :"
+            },
+            "no_date_limit": {
+                "en": "No date limit specified",
+                "fr": "Aucune date limite spécifiée"
+            }
+        },
+        "refuse_pret": {
+            "en": "{{emoji}} {{member}} did not get his **{{amount}}{{symbol}}** loan !",
+            "fr" :"{{emoji}} {{member}} n'a pas obtenu son prêt de **{{amount}}{{symbol}}** !"
+        },
+        "error_time": {
+            "en": "{{member}} took too long to respond, please reapply for your **{{amount}}{{symbol}}** loan",
+            "fr": "{{member}} a mis trop de temps à répondre, veuillez redemander votre prêt de **{{amount}}{{symbol}}**"
+        }
+        
+    },
+    "salaire": {
+        "close_salary": {
+            "en": "Salary requests are closed, contact a moderator to open them",
+            "fr": "Les demandes de salaires sont fermées, contactez un modérateur pour les ouvrir"
+        },
+        "company": {
+            "en": " withdrawn from the company *{{name}}*",
+            "fr": " prélevé de l'entreprise *{{name}}*"
+        },
+        "embed_dmd": {
+            "title": {
+                "en": "Salary request",
+                "fr": "Demande de salaire"
+            },
+            "description": {
+                "en": "{{member}} requests a salary of **{{amount}}{{symbol}}**{{company}}",
+                "fr": "{{member}} demande un salaire de **{{amount}}{{symbol}}**{{company}}"
+            },
+            "field": {
+                "than_can_accept": {
+                    "en": "❓ Who can accept it ?",
+                    "fr": "❓ Qui peut l'accepter ?"
+                },
+                "admin": {
+                    "en": "An `Administrator`",
+                    "fr": "Un `Administrateur`"
+                },
+                "modo": {
+                    "en": "A <@&{{id}}> or an `Administrator`",
+                    "fr": "Un <@&{{id}}> ou un `Administrateur`"
+                }
+            }
+        },
+        "button_choice": {
+            "accept": {
+                "en": "Accept",
+                "fr": "Accepter"
+            },
+            "refuse": {
+                "en": "Refuse",
+                "fr": "Refuser"
+            }
+        }
+    }
+}

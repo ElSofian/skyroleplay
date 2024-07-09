@@ -1,0 +1,134 @@
+{
+    "aide": {
+        "time_recuperation": {
+            "en": "⏱ Cooldown",
+            "fr": "⏱ Temps de récupération"
+        },
+        "time_sec": {
+            "en": "{{time}} seconds",
+            "fr": "{{time}} secondes"
+        },
+        "instant": {
+            "en": "Instant",
+            "fr": "Immédiat"
+        },
+        "cmd_premium": {
+            "key": {
+               "en": "{{prememoji}} Premium Command",
+               "fr": "{{prememoji}} Commande Premium" 
+            },
+            "value": {
+                "en": "[Unlock the premium]({{linkpremium}})",
+                "fr": "[Débloquer le premium]({{linkpremium}})"
+            }
+        },
+        "menu": {
+            "en": "Main menu",
+            "fr": "Menu principal"
+        },
+        "help_embed": {
+            "author": {
+                "en": "Documentation ・ {{category}}",
+                "fr": "Documentation ・ {{category}}"
+            },
+            "title": {
+                "en": "> {{emoji}}   Available commands ・ {{cmdSize}}",
+                "fr": "> {{emoji}}   Commandes disponibles ・ {{cmdSize}}"
+            },
+            "description": {
+                "en": "Welcome to the {{mentionbot}} help!\n\n> <:staricon:1053045862886019103> The update has finally been deployed, if you encounter difficulties, join our [support]({{linksupport}})\nWe sincerely thank you for your understanding.\n\n**Commands**\n> Search our available commands in the drop-down menu below. \n\n**Useful links**\n> [Dashboard]({{linkdashboard}}) | [Support server]({{linksupport}}) | [Get premium]({{linkpremium}})",
+                "fr": "Bienvenu(e) dans l'aide de {{mentionbot}} !\n\n> <:staricon:1053045862886019103> La mise à jour a été enfin déployée, si vous rencontrez des difficultés, rejoignez notre [support]({{linksupport}})\nNous vous remercions sincèrement pour votre compréhension.\n\n**Commandes**\n> Recherchez nos commandes disponibles dans le menu déroulant ci-dessous. \n\n**Liens utiles**\n> [Dashboard]({{linkdashboard}}) | [Serveur de support]({{linksupport}}) | [Obtenir le premium]({{linkpremium}})"
+            },
+            "subcmd": {
+                "en": "**Sub-commands :**\n",
+                "fr": "**Sous-commandes :**\n"
+            }
+        },
+        "button_help": {
+            "invitation": {
+                "en": "Invitation",
+                "fr": "Invitation"
+            },
+            "support": {
+                "en": "Support",
+                "fr": "Support"
+            },
+            "dashboard": {
+                "en": "Dashboard",
+                "fr": "Dashboard"
+            },
+            "premium": {
+                "en": "⭐️ Premium",
+                "fr": "⭐️ Premium"
+            }
+        }
+    },
+    "bot_info": {
+        "info_title": {
+            "en": "📂 Informations",
+            "fr": "📂 Informations"
+        },
+        "infos": {
+            "en": "**・Bot :** {{bot}}\n**・Date of creation :** {{creation}}\n**・Creator :** NiDev Structure",
+            "fr": "**・Bot :** {{bot}}\n**・Date de création :** {{creation}}\n**・Créateur :** Structure NiDev"
+        },
+        "stat_title": {
+            "en": "📊 Statistics",
+            "fr": "📊 Statistiques"
+        },
+        "stats": {
+            "en": "**・Commands :** {{commands}}\n**・Servers :** {{servers}}\n**・Users :** {{users}}\n**・Channels :** {{channels}}",
+            "fr": "**・Commandes :** {{commands}}\n**・Serveurs :** {{servers}}\n**・Utilisateurs :** {{users}}\n**・Salons :** {{channels}}"
+        },
+        "system_title": {
+            "en": "🖥️ System",
+            "fr": "🖥️ Système"
+        },
+        "system": {
+            "en": "**・Plateform :** {{plateform}}\n**・Ping :** {{ping}}ms\n**・Shard :** n°{{shard}}\n**・Cluster :** n°{{cluser}}/{{totalCluster}}\n**・Launch :** {{lancement}}",
+            "fr": "**・Plateforme :** {{plateform}}\n**・Ping :** {{ping}}ms\n**・Shard :** n°{{shard}}\n**・Cluster :** n°{{cluser}}/{{totalCluster}}\n**・Disponible :** {{lancement}}"
+        },
+        "embed_info": {
+            "invitation": {
+                "en": "Invite the bot",
+                "fr": "Inviter le bot"
+            },
+            "support": {
+                "en": "Support",
+                "fr": "Support"
+            },
+            "website": {
+                "en": "Website",
+                "fr": "Site internet"
+            }
+        }
+    },
+    "check_staff": {
+        "embed_verification": {
+            "author": {
+                "en": "Verification of a member",
+                "fr": "Vérification d'un membre"
+            },
+            "verification": {
+                "yes": {
+                    "en": "{{emoji}} {{member}} is a member of the NiDev team.\nRole : {{role}}",
+                    "fr": "{{emoji}} {{member}} est membre de l'équipe NiDev.\nRôle : {{role}}"
+                },
+                "no": {
+                    "en": "{{emoji}} {{member}} isn't a member of the NiDev team.",
+                    "fr": "{{emoji}} {{member}} n'est pas membre de l'équipe NiDev."
+                }
+            }
+        }
+    },
+    "invitation": {
+        "utils_links": {
+            "en": "Useful links",
+            "fr": "Liens utiles"
+        },
+        "links": {
+            "en": "・[Invitation]({{invitation}})\n・[Dashboard]({{dashboard}})\n・[Documentation]({{documentation}})\n・[Support Server]({{support_srv}})\n・[Become Premium]({{premium}})",
+            "fr": "・[Invitation]({{invitation}})\n・[Dashboard]({{dashboard}})\n・[Documentation]({{documentation}})\n・[Serveur Support]({{support_srv}})\n・[Devenir Premium]({{premium}})"
+        }
+    }
+}

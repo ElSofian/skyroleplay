@@ -1,0 +1,202 @@
+{
+    "premium": {
+        "message": {
+            "fr": "La gestion des abonnements Premium se fait désormais sur notre site web !\n**[Cliquez ici pour y accéder]({{link}})**",
+            "en": "Premium subscriptions management is now done on our website !\n**[Click here to access it]({{link}})**"
+        },
+        "embed_info": {
+            "self_title": {
+                "en": "Information about your subscription",
+                "fr": "Informations sur votre abonnement"
+            },
+            "other_title": {
+                "en": "Server subscription informations",
+                "fr": "Informations sur l'abonnement du serveur"
+            },
+            "fields": {
+                "activation_date": {
+                    "en": "Activation date",
+                    "fr": "Date d'activation"
+                },
+                "end_date": {
+                    "en": "End date",
+                    "fr": "Date de fin"
+                },
+                "owner": {
+                    "en": "Owner",
+                    "fr": "Propriétaire"
+                },
+                "change_subscription": {
+                    "en": "Need to change server subscription ?",
+                    "fr": "Besoin de changer l'abonnement de serveur ?"
+                },
+                "transfer_cmd": {
+                    "en": "Use the `/premium transférer` command",
+                    "fr": "Utilisez la commande `/premium transférer`"
+                },
+                "remainting_time": {
+                    "en": "Remaining time",
+                    "fr": "Temps restant"
+                },
+                "remaining_days": {
+                    "en": "{{time}} day(s)",
+                    "fr": "{{time}} jour(s)"
+                },
+                "no_subscription": {
+                    "en": "*You do not have a current subscription on this server.*\n{{emoji}} [Get the premium]({{link}})",
+                    "fr": "*Vous n'avez pas d'abonnement en cours sur ce serveur.*\n{{emoji}} [Obtenir le Premium]({{link}})"
+                }
+            }
+        },
+        "embed_private_info": {
+            "title": {
+                "en": "Private informations about your subscription",
+                "fr": "Informations privées sur votre abonnement"
+            },
+            "fields": {
+                "key": {
+                    "en": "Premium key",
+                    "fr": "Clé premium"
+                },
+                "reactivate": {
+                    "en": "Reactivate the subscription on this server ?",
+                    "fr": "Réactiver l'abonnement sur ce serveur ?"
+                },
+                "reactivate_cmd": {
+                    "en": "Use the `/premium activer clé:{{key}}` command",
+                    "fr": "Utilisez la commande `/premium activer clé:{{key}}`"
+                }
+            }
+        },
+        "already_premium": {
+            "en": "You already have an active premium subscription on this server. If you want to extend your subscription, use the `/premium prolonger` command",
+            "fr": "Vous avez déjà un abonnement Premium actif sur ce serveur. Si vous voulez prolonger votre abonnement, utilisez la commande `/premium prolonger`"
+        },
+        "key_form": {
+            "en": "The key must be in the form `XXXX-XXXX-XXXX-XXXX-XXXX`.",
+            "fr": "La clé doit être sous la forme `XXXX-XXXX-XXXX-XXXX-XXXX`"
+        },
+        "doesnt_exist": {
+            "en": "The key `{{key}}` does not exist",
+            "fr": "La clé `{{key}}` n'existe pas"
+        },
+        "trial_version_used": {
+            "en": "The `{{key}}` key unlocks the trial version of our Premium offer but it has already been used on this server",
+            "fr": "La clé `{{key}}` débloque la version d'essai de notre offre Premium mais celle-ci a déjà été utilisée sur ce serveur"
+        },
+        "not_key_owner": {
+            "en": "You are not the buyer of this key, you cannot reactivate the premium. If you think this is a mistake, please open a premium ticket on our [support server]({{link}})",
+            "fr": "Vous n'êtes pas l'acheteur de cette clé, vous ne pouvez pas réactiver le premium. Si vous pensez que c'est une erreur, ouvrez un ticket Premium sur notre [serveur support]({{link}})"
+        },
+        "activation_confirmation": {
+            "en": "Congratulations ! Your Premium subscription has been **{{state}}** on this server, it will expire on {{time}}",
+            "fr": "Félicitations ! Votre abonnement Premium a bien été **{{state}}** sur ce serveur, il expirera le {{time}}"
+        },
+        "activation_state": {
+            "reactivated": {
+                "en": "reactivated",
+                "fr": "réactivé"
+            },
+            "activated": {
+                "en": "activated",
+                "fr": "activé"
+            }
+        },
+        "already_used": {
+            "en": "This key has already been used. If you think this is a mistake, please open a premium ticket on our [support server]({{link}})",
+            "fr": "Cette clé a déjà été utilisée. Si vous pensez que c'est une erreur, ouvrez un ticket Premium sur notre [serveur support]({{link}})"
+        },
+        "key_expired": {
+            "en": "Premium key `{{key}}` is expired",
+            "fr": "La clé Premium `{{key}}` est expirée"
+        },
+        "not_his_key": {
+            "en": "Premium key `{{key}}` does not belong to you",
+            "fr": "La clé Premium `{{key}}` ne vous appartient pas"
+        },
+        "no_key_associated": {
+            "en": "No active Premium subscription is associated to your name.\nIf you think this is an error, open a Premium ticket on our [support server]({{link}})",
+            "fr": "Aucun abonnement Premium actif n'a été trouvé à votre nom.\nSi vous pensez que c'est une erreur, ouvrez un ticket Premium sur notre [serveur support]({{link}})"
+        },
+        "prolonged_confirmation": {
+            "en": "Your Premium subscription whose key is `{{key}}` has been **extended** for a duration of **{{duration}}**",
+            "fr": "Votre abonnement Premium dont la clé est `{{key}}` a bien été **prolongé** d'une durée de **{{duration}}**"
+        },
+        "duration": {
+            "en": "Initial Duration",
+            "fr": "Durée initiale"
+        },
+        "server": {
+            "en": "Server",
+            "fr": "Serveur"
+        },
+        "cant_be_extended": {
+            "en": "None of your Premium subscriptions can be extended, the subscription must be activated or paused",
+            "fr": "Aucun de vos abonnements Premium ne peut être prolongé, l'abonnement doit être activé ou en pause"
+        },
+        "extension_embed": {
+            "title": {
+                "en": "Premium Subscription Extension",
+                "fr": "Prolongation d'Abonnement Premium"
+            },
+            "description": {
+                "en": "Please select **which** of your Premium subscriptions you would like to **extend** by {{time}}.",
+                "fr": "Veuillez choisir **lequel** de vos abonnements Premium vous souhaitez **prolonger** de {{time}}."
+            },
+            "placeholder": {
+                "en": "Choose the Premium subscription to extend",
+                "fr": "Choisir l'abonnement Premium à prolonger"
+            }
+        },
+        "ask_extension": {
+            "en": "You are about to extend by **{{time1}}** your Premium subscription whose key is `{{key1}}`.\n\n{{emoji}}  The key `{{key2}}` will be deleted and its duration will be added to your subscription whose initial duration was **{{time2}}**.\n\n**Are you sure you want to extend this subscription ?**",
+            "fr": "Vous êtes sur le point de prolonger de **{{time1}}** votre abonnement Premium dont la clé est `{{key1}}`.\n\n{{emoji}}  La clé `{{key2}}` sera supprimée et sa durée sera ajoutée à votre abonnement dont la durée initiale était de **{{time2}}**.\n\n**Êtes-vous sûr(e) de vouloir prolonger cet abonnement ?**"
+        },
+        "id_invalid": {
+            "en": "The `{{id}}` ID is invalid. Here is a [tutorial](https://bit.ly/3M0pJoc) to find your server id.",
+            "fr": "L'identifiant `{{id}}` est invalide. Voici un [tutoriel](https://bit.ly/3M0pJoc) afin de trouver votre identifiant de serveur."
+        },
+        "already_activated": {
+            "en": "A Premium subscription is already activated on the server whose ID is `{{id}}`.\nIf you think this is an error, open a Premium ticket on our [support server]({{link}})",
+            "fr": "Un abonnement Premium est déjà activé sur le serveur dont l'identifiant est `{{id}}`.\nSi vous pensez que c'est une erreur, ouvrez un ticket Premium sur notre [serveur support]({{link}})"
+        },
+        "guild_unfound": {
+            "en": "I could not find the server with the ID `{{id}}`. Please check if I am on this server before transferring your Premium subscription to it.",
+            "fr": "Je n'ai pas trouvé le serveur dont l'identifiant est `{{id}}`. Merci de vérifier si je suis bien sur ce serveur avant d'y transférer votre abonnement Premium."
+        },
+        "cant_check": {
+            "en": "I was not able to verify that you are the `Administrator` of the server whose ID is `{{id}}` in order to transfer your Premium subscription to it.\nPlease try again and if it still doesn't work, open a Premium ticket on our [support server]({{link}}).",
+            "fr": "Je n'ai pas pu vérifier si vous êtes bien `Administrateur` du serveur dont l'identifiant est `{{id}}` afin d'y transférer votre abonnement Premium.\nVeuillez réessayer et si cela ne fonctionne toujours pas, ouvrez un ticket Premium sur notre [serveur support]({{link}})."
+        },
+        "administrator": {
+            "en": "You must be the `Administrator` of the server whose ID is `{{id}}` in order to transfer your Premium subscription to it.",
+            "fr": "Vous devez être `Administrateur` du serveur dont l'identifiant est `{{id}}` afin d'y transférer votre abonnement Premium."
+        },
+        "transferred_confirmation": {
+            "en": "Your Premium subscription has been **transferred** to the server whose ID is `{{id}}`. For your information it will expire on {{date}}",
+            "fr": "Votre abonnement Premium a bien été **transféré** sur le serveur dont l'identifiant est `{{id}}`. Pour information il expirera le {{date}}"
+        },
+        "server_id": {
+            "en": "Identifier of the associated server",
+            "fr": "Identifiant du serveur associé"
+        },
+        "cant_be_transferred": {
+            "en": "None of your Premium subscriptions can be transferred, the subscription must be activated or paused",
+            "fr": "Aucun de vos abonnements Premium ne peut être transféré, l'abonnement doit être activé ou en pause"
+        },
+        "transfer_embed": {
+            "title": {
+                "en": "Premium Subscription Transfer",
+                "fr": "Transfert d'Abonnement Premium"
+            },
+            "description": {
+                "en": "Please choose **which** of your Premium subscriptions you want to **transfer** to the server whose ID is `{{id}}`",
+                "fr": "Veuillez choisir **lequel** de vos abonnements Premium vous souhaitez **transférer** vers le serveur dont l'identifiant est `{{id}}`"
+            }
+        },
+        "transfer_placeholder": {
+            "en": "Choose the Premium subscription to transfer",
+            "fr": "Choisir l'abonnement Premium à transférer"
+        }
+    }
+}

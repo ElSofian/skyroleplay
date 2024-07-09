@@ -1,0 +1,1160 @@
+{
+    "cachette": {
+        "fake_id": {
+            "en": "Fake identity card",
+            "fr": "Fausse carte d'identité"
+        },
+        "id_card": {
+            "en": "Identity card",
+            "fr": "Carte d'identité"
+        },
+        "dirty_money": {
+            "en": "Dirty money",
+            "fr": "Argent sale"
+        },
+        "cash": {
+            "en": "Cash",
+            "fr": "Argent liquide"
+        },
+        "treated": {
+            "en": "Treated {{drugName}}",
+            "fr": "{{drugName}} traité(e)"
+        },
+        "untreated": {
+            "en": "Untreated {{drugName}}",
+            "fr": "{{drugName}} non traité(e)"
+        },
+        "self_empty": {
+            "en": "Your hideout is empty",
+            "fr": "Votre cachette est vide"
+        },
+        "main_embed": {
+            "title": {
+                "en": "Hideout",
+                "fr": "Cachette"
+            }
+        }
+    },
+    "coffre": {
+        "dirty_money": {
+            "en": "Dirty money",
+            "fr": "Argent sale"
+        },
+        "cash_money": {
+            "en": "Cash",
+            "fr": "Argent liquide"
+        },
+        "item_no_longer_exists": {
+            "en": "The item **{{item}}** no longer exists.",
+            "fr": "L'item **{{item}}** n'existe plus."
+        },
+        "withdrawed": {
+            "en": "You have withdrawn **{{quantity}} {{item}}** from your safe.",
+            "fr": "Vous avez retiré **{{quantity}} {{item}}** de votre coffre."
+        },
+        "deposited": {
+            "en": "You have deposited **{{quantity}} {{item}}** in your safe.",
+            "fr": "Vous avez déposé **{{quantity}} {{item}}** dans votre coffre."
+        },
+        "withdrawed_cash_money": {
+            "en": "You did withdraw **{{amount}}{{symbol}}** of cash money!",
+            "fr": "Vous avez bien retiré **{{amount}}{{symbol}}** d'argent liquide !"
+        },
+        "deposited_cash_money": {
+            "en": "You did deposit **{{amount}}{{symbol}}** of cash money!",
+            "fr": "Vous avez bien déposé **{{amount}}{{symbol}}** d'argent liquide !"
+        },
+        "withdrawed_dirty_money": {
+            "en": "You did withdraw **{{amount}}{{symbol}}** of dirty money!",
+            "fr": "Vous avez bien retiré **{{amount}}{{symbol}}** d'argent sale !"
+        },
+        "deposited_dirty_money": {
+            "en": "You did deposit **{{amount}}{{symbol}}** of dirty money!",
+            "fr": "Vous avez bien déposé **{{amount}}{{symbol}}** d'argent sale !"
+        },
+        "not_enough_item": {
+            "en": "You only have **{{quantity}} {{item}}** in your safe.",
+            "fr": "Vous avez seulement **{{quantity}} {{item}}** dans votre coffre."
+        },
+        "not_enough_money": {
+            "en": "You only have **{{quantity}}{{symbol}}** in your safe.",
+            "fr": "Vous avez seulement **{{quantity}}{{symbol}}** dans votre coffre."
+        }
+    },
+    "compte": {
+        "buttons": {
+            "back": {
+                "en": "Back",
+                "fr": "Retour"
+            },
+            "manage": {
+                "en": "Manage",
+                "fr": "Gérer"
+            },
+            "following": {
+                "en": "Following",
+                "fr": "Abonnements"
+            },
+            "followers": {
+                "en": "Followers",
+                "fr": "Abonnés"
+            },
+            "change_nickname": {
+                "en": "Change nickname",
+                "fr": "Modifier le nom"
+            },
+            "change_pp": {
+                "en": "Change profile picture",
+                "fr": "Modifier la photo de profil"
+            }
+        }
+    },
+    "contacts": {
+        "already_have_contact": {
+            "en": "You already have a contact with the name **{{name}}** (**{{number}}**)",
+            "fr": "Vous avez déjà un contact avec le nom **{{name}}** (**{{number}}**)"
+        },
+        "not_in_contacts": {
+            "en": "You don't have a contact with the name **{{name}}**",
+            "fr": "Vous n'avez pas de contact avec le nom **{{name}}**"
+        },
+        "no_contacts": {
+            "en": "You don't have any contacts",
+            "fr": "Vous n'avez aucun contact"
+        },
+        "add": {
+            "en": "Add",
+            "fr": "Ajouter"
+        },
+        "remove": {
+            "en": "Remove",
+            "fr": "Supprimer"
+        },
+        "name": {
+            "en": "Name",
+            "fr": "Nom"
+        },
+        "number": {
+            "en": "Number",
+            "fr": "Numéro"
+        },
+        "modal": {
+            "title": {
+                "en": "Contacts Managment",
+                "fr": "Gestion des contacts"
+            },
+            "placeholder_name": {
+                "en": "Enter the name of the new contact",
+                "fr": "Entrez le nom du nouveau contact"
+            },
+            "placeholder_number": {
+                "en": "Enter the number of the new contact",
+                "fr": "Entrez le numéro du nouveau contact"
+            }
+        },
+        "contact_add": {
+            "en": "**{{name}}** has been added to your contacts !",
+            "fr": "**{{name}}** a été ajouté à vos contacts !"
+        },
+        "contact_remove": {
+            "en": "**{{name}}** has been removed from your contacts !",
+            "fr": "**{{name}}** a été retiré de vos contacts !"
+        }
+    },
+    "factures": {
+        "no_bills": {
+            "en": "You don't have any bills",
+            "fr": "Vous n'avez aucune facture"
+        },
+        "not_enough_money": {
+            "en": "You don't have enough money to pay this bill",
+            "fr": "Vous n'avez pas assez d'argent pour payer cette facture"
+        },
+        "embed": {
+            "title": {
+                "en": "Bills",
+                "fr": "Factures"
+            },
+            "fields": {
+                "company": {
+                    "en": "Company",
+                    "fr": "Entreprise"
+                },
+                "amount": {
+                    "en": "Amount",
+                    "fr": "Montant"
+                },
+                "reason": {
+                    "en": "Reason",
+                    "fr": "Raison"
+                },
+                "fine_id": {
+                    "en": "Fine ID",
+                    "fr": "ID de l'amende"
+                }
+            }
+        },
+        "buttons": {
+            "pay": {
+                "en": "Pay",
+                "fr": "Payer"
+            }
+        },
+        "fine": {
+            "en": "Fine from {{name}}",
+            "fr": "Amende de {{name}}"
+        },
+        "bill": {
+            "en": "Bill",
+            "fr": "Facture"
+        },
+        "fine_id": {
+            "en": "Fine ID",
+            "fr": "ID de l'amende"
+        },
+        "bill_payed": {
+            "en": "You paid a bill for **{{amount}}{{symbol}}**{{company}} !",
+            "fr": "Vous avez payé la facture de **{{amount}}{{symbol}}**{{company}} !"
+        }
+    },
+    "inventaire": {
+        "identity_card": {
+            "en": "Identity card{{s}}",
+            "fr": "Carte{{s}} d'identité"
+        },
+        "driver_licence": {
+            "en": "Driving license{{s}}",
+            "fr": "Permis de conduire"
+        },
+        "weapon_licence": {
+            "en": "Weapon license{{s}}",
+            "fr": "PPA"
+        },
+        "license_plate": {
+            "en": "License plate{{s}}",
+            "fr": "Carte{{s}} grise{{s}}"
+        },
+        "treated": {
+            "en": "Treated {{drugName}}",
+            "fr": "{{drugName}} traité(e)"
+        },
+        "untreated": {
+            "en": "Untreated {{drugName}}",
+            "fr": "{{drugName}} non traité(e)"
+        },
+        "self_empty": {
+            "en": "Your inventory is empty",
+            "fr": "Votre inventaire est vide"
+        },
+        "empty": {
+            "en": "The inventory of {{member}} is empty",
+            "fr": "L'inventaire de {{member}} est vide"
+        },
+        "main_embed": {
+            "title": {
+                "en": "Inventory of {{name}}",
+                "fr": "Inventaire de {{name}}"
+            },
+            "description": {
+                "self": {
+                    "en": "**You consult your backpack**",
+                    "fr": "**Vous consultez votre sac à dos**"
+                },
+                "member": {
+                    "en": "**You consult the backpack of {{member}}**",
+                    "fr": "**Vous consultez le sac à dos de {{member}}**"
+                }
+                
+            }
+        }
+    },
+    "item": {
+        "item_not_found": {
+            "en": "I didn't find the item.",
+            "fr": "Je n'ai pas trouvé l'item."
+        },
+        "cash_money": {
+            "en": "Cash",
+            "fr": "Argent liquide"
+        },
+        "dirty_money": {
+            "en": "Dirty money",
+            "fr": "Argent sale"
+        },
+        "canvas_quantity": {
+            "en": "{{quantity}}{{items}} in inventory",
+            "fr": "{{quantity}}{{items}} dans l'inventaire"
+        },
+        "canvas_hidden_quantity": {
+            "en": "{{quantity}}{{items}} are hidden",
+            "fr": "{{quantity}}{{items}} caché{{s}}"
+        },
+        "quantity": {
+            "en": "Quantity",
+            "fr": "Quantité"
+        },
+        "member": {
+            "en": "Member",
+            "fr": "Membre"
+        },
+        "hidden": {
+            "en": "hidden",
+            "fr": "caché"
+        },
+        "name": {
+            "en": "Name",
+            "fr": "Nom"
+        },
+        "sm_placeholder": {
+            "en": "Choose the player to give {{item}}",
+            "fr": "Choisissez le joueur à qui donner {{item}}"
+        },
+        "placeholder_name": {
+            "en": "Enter the new name of {{item}}",
+            "fr": "Entrez le nouveau nom pour {{item}}"
+        },
+        "placeholder_quantity": {
+            "en": "Enter the amount of {{item}} you want to use ",
+            "fr": "Entrez le montant de {{item}} que vous souhaitez utiliser"
+        },
+        "placeholder_member": {
+            "en": "Enter the member you want to give {{item}}",
+            "fr": "Entrez le membre auquel vous souhaitez donner {{item}}"
+        },
+        "modal": {
+            "title": {
+                "en": "Item management",
+                "fr": "Gestion des Items"
+            }
+        },
+        "buttons": {
+            "use": {
+                "en": "Use",
+                "fr": "Utiliser"
+            },
+            "food": {
+                "en": "Eat",
+                "fr": "Manger"
+            },
+            "drink": {
+                "en": "Drink",
+                "fr": "Boire"
+            },
+            "consume": {
+                "en": "Consume",
+                "fr": "Consommer"
+            },
+            "untreated": {
+                "en": "Consume",
+                "fr": "Consommer"
+            },
+            "treated": {
+                "en": "Consume",
+                "fr": "Consommer"
+            },
+            "give": {
+                "en": "Give",
+                "fr": "Donner"
+            },  
+            "rename": {
+                "en": "Rename",
+                "fr": "Renommer"
+            },
+            "hide": {
+                "en": "Hide",
+                "fr": "Cacher"
+            },
+            "retrieve": {
+                "en": "Retrieve",
+                "fr": "Récupérer"
+            },
+            "drop": {
+                "en": "Drop",
+                "fr": "Jeter"
+            },
+            "cancel": {
+                "en": "Cancel",
+                "fr": "Annuler"
+            }
+        },
+        "not_enough": {
+            "en": "You don't have enough **{{modalQuantity}} {{name}}** but **{{quantity}}** in your {{place}}.",
+            "fr": "Vous n'avez pas **{{modalQuantity}} {{name}}** mais **{{quantity}}** dans votre {{place}}."
+        },
+        "use": {
+            "en": "You have used **{{quantity}}{{name}}**",
+            "fr": "Vous avez utilisé **{{quantity}}{{name}}**"
+        },
+        "food": {
+            "en": "You have eaten **{{quantity}}{{name}}**",
+            "fr": "Vous avez mangé **{{quantity}}{{name}}**"
+        },
+        "drink": {
+            "en": "You have drunk **{{quantity}}{{name}}**",
+            "fr": "Vous avez bu **{{quantity}}{{name}}**"
+        },
+        "consume": {
+            "en": "You have consumed **{{quantity}}{{name}}**",
+            "fr": "Vous avez consommé **{{quantity}}{{name}}**"
+        },
+        "sm": {
+            "en": "You have given **{{quantity}}{{name}}** to {{member}}",
+            "fr": "Vous avez donné **{{quantity}}{{name}}** à {{member}}"
+        },
+        "rename": {
+            "en": "You have renamed **{{name}}** en **{{newName}}**",
+            "fr": "Vous avez renommé **{{name}}** en **{{newName}}**"
+        },
+        "reset": {
+            "en": "You have reset the name of **{{newName}}**",
+            "fr": "Vous avez réinitialisé le nom de **{{newName}}**"
+        },
+        "hide": {
+            "en": "You have hidden **{{quantity}}{{name}}**",
+            "fr": "Vous avez caché **{{quantity}}{{name}}**"
+        },
+        "retrieve": {
+            "en": "You have retrieved **{{quantity}}{{name}}**",
+            "fr": "Vous avez récupéré **{{quantity}}{{name}}**"
+        },
+        "drop": {
+            "en": "You dropped **{{quantity}}{{name}}**",
+            "fr": "Vous avez jeté **{{quantity}}{{name}}**"
+        },
+        "drug_not_found": {
+            "en": "The drug **{{name}}** was not found.",
+            "fr": "La drogue **{{name}}** n'a pas été trouvée."
+        }
+    },
+    "leboncoin": {
+        "uploading": {
+            "en": "*{{emoji}} Uploading data...*",
+            "fr": "*{{emoji}} Sauvegarde des données en cours...*"
+        },
+        "sell_embed": {
+            "title": {
+                "en": "<:leboncoin:926139400230932561> ・ LeBonCoin",
+                "fr": "<:leboncoin:926139400230932561> ・ LeBonCoin"
+            },
+            "fields": {
+                "seller": {
+                    "en": "Seller",
+                    "fr": "Vendeur"
+                },
+                "name": {
+                    "en": "Name",
+                    "fr": "Nom"
+                },
+                "price": {
+                        "en": "Price",
+                        "fr": "Prix"
+                }
+            }
+        },
+        "account_embed": {
+            "description": {
+                "en": "Welcome to your account. Here you can view your ads as well as your favorite sales.",
+                "fr": "Bienvenue sur votre compte. Ici, vous pouvez consulter vos annonces ainsi que vos ventes favorites."
+            }
+        },
+        "modal": {
+            "title": {
+                "en": "Management of your ads",
+                "fr": "Gestion de vos annonces"
+            }
+        },
+        "buttons": {
+            "close": {
+                "en": "Close",
+                "fr": "Fermer"
+            },
+            "account": {
+                "en": "My Account",
+                "fr": "Mon Compte"
+            },
+            "sales": {
+                "en": "My Sales",
+                "fr": "Mes Ventes"
+            },
+            "likes": {
+                "en": "My Likes",
+                "fr": "Mes Favoris"
+            },
+            "edit": {
+                "en": "Edit",
+                "fr": "Modifier"
+            },
+            "delete": {
+                "en": "Delete",
+                "fr": "Supprimer"
+            },
+            "buy": {
+                "en": "Buy",
+                "fr": "Acheter"
+            }
+        },
+        "cant_buy_yourself": {
+            "en": "You can't buy your own product!",
+            "fr": "Vous ne pouvez pas acheter votre propre produit !"
+        },
+        "buyed": {
+            "en": "You have bought **{{name}}** for **{{price}}{{symbol}}**",
+            "fr": "Vous avez acheté **{{name}}** pour **{{price}}{{symbol}}**"
+        },
+        "deleted": {
+            "en": "You have deleted your ad concerning **{{name}}** !",
+            "fr": "Vous avez supprimé votre annonce concernant **{{name}}** !"
+        },
+        "confirm_delete": {
+            "en": "Are you sure you want to delete this ad ?",
+            "fr": "Êtes-vous sûr de vouloir supprimer cette annonce ?"
+        },
+        "name_too_long": {
+            "en": "The name is too long, it must be less than 255 characters",
+            "fr": "Le nom est trop long, il doit faire moins de 255 caractères"
+        },
+        "description_too_long": {
+            "en": "The description is too long, it must be less than 500 characters",
+            "fr": "La description est trop longue, elle doit faire moins de 500 caractères"
+        },
+        "no_description": {
+            "en": "No description",
+            "fr": "Aucune description"
+        },
+        "no_sales": {
+            "en": "There is no product for sale.",
+            "fr": "Il n'y aucun produit en vente."
+        },
+        "not_enough_money": {
+            "en": "You don't have enough money to buy this product.",
+            "fr": "Vous n'avez pas assez d'argent pour acheter ce produit."
+        }
+    },
+    "papiers": {
+        "embed": {
+            "title": {
+                "en": "Wallet",
+                "fr": "Portefeuille"
+            },
+            "description": {
+                "en": "Welcome to your digital wallet, you can consult all your identity cards and licenses here.",
+                "fr": "Bienvenue dans votre portefeuille numérique, vous pouvez ici consulter toutes vos pièces d'identité et vos licences délivrées."
+            }
+        },
+        "buttons": {
+            "wallet": {
+                "en": "Wallet",
+                "fr": "Portefeuille"
+            },
+            "id_cards": {
+                "en": "Identity card{{s}}",
+                "fr": "Carte{{s}} d'identité"
+            },
+            "cg": {
+                "en": "Car{{s}} Registration Document",
+                "fr": "Carte{{s}} Grise{{s}}"
+            },
+            "driver_license": {
+                "en": "Driver license{{s}}",
+                "fr": "Permis"
+            },
+            "weapon_license": {
+                "en": "Weapon license{{s}}",
+                "fr": "PPA"
+            }
+        },
+        "cg": {
+            "buying_date": {
+                "en": "Purchase date",
+                "fr": "Date d'achat"
+            },
+            "no_adress": {
+                "en": "Adress not specified",
+                "fr": "Adresse non renseignée"
+            }
+        },
+        "driver_license": {
+            "license_name": {
+                "en": "DRIVER LICENSE",
+                "fr": "PERMIS DE CONDUIRE"
+            },
+            "acquisition_date": {
+                "en": "Acquisition date",
+                "fr": "Date d'acquisition"
+            },
+            "french_republic": {
+                "en": "French Republic",
+                "fr": "République Française"
+            },
+            "types": {
+                "car": {
+                    "en": "Car",
+                    "fr": "Voiture"
+                },
+                "motorcycle": {
+                    "en": "Motorcycle",
+                    "fr": "Moto"
+                },
+                "truck": {
+                    "en": "Truck",
+                    "fr": "Camion"
+                },
+                "helicopter": {
+                    "en": "Helicopter",
+                    "fr": "Hélicoptère"
+                },
+                "boat": {
+                    "en": "Boat",
+                    "fr": "Bateau"
+                }
+            }
+        },
+        "weapon_license": {
+            "license_name": {
+                "us": {
+                    "en": "Weapon License",
+                    "fr": "Permis de Port d'Armes"
+                },
+                "fr": {
+                    "en": "FRENCH CERTIFICATION OF WEAPON CARRYING LICENSE",
+                    "fr": "CERTIFICATION FRANÇAISE DU PERMIS DE PORT D’ARMES"
+                }
+            },
+            "name": {
+                "us": {
+                    "en": "Name",
+                    "fr": "Nom"
+                },
+                "fr": {
+                    "en": "Mr/Mrs",
+                    "fr": "Mr/Mme"
+                }
+            },
+            "since": {
+                "en": "Since",
+                "fr": "Depuis le"
+            },
+            "interior_departement": {
+                "en": "Interior Department",
+                "fr": "Ministère de l'Intérieur"
+            },
+            "undersigned": {
+                "en": "Undersigned,",
+                "fr": "Soussigné,"
+            },
+            "1": {
+                "en": "Authorized",
+                "fr": "Autorisé"
+            },
+            "2": {
+                "en": "License Revoked",
+                "fr": "Permis Retiré"
+            },
+            "types": {
+                "cold": {
+                    "en": "Cold Weapons",
+                    "fr": "Armes Blanches"
+                },
+                "light": {
+                    "en": "Light Weapons",
+                    "fr": "Armes Légères"
+                },
+                "heavy": {
+                    "en": "Heavy Weapons",
+                    "fr": "Armes Lourdes"
+                }
+            }
+        }
+    },
+    "propriété": {
+        "dont_have_properties": {
+            "en": "You don't have the keys to any property",
+            "fr": "Vous n'avez les clés d'aucune propriété."
+        },
+        "cash_money": {
+            "en": "Cash",
+            "fr": "Argent liquide"
+        },
+        "dirty_money": {
+            "en": "Dirty money",
+            "fr": "Argent sale"
+        },
+        "keys": {
+            "en": "Keys",
+            "fr": "Clés"
+        },
+        "unkown": {
+            "en": "Unknown",
+            "fr": "Inconnu"
+        },
+        "embed": {
+            "description_owner": {
+                "en": "{{pronouns}}{{name}}, you are the owner of this beautiful property {{localisation}} since {{sell_date}}.",
+                "fr": "{{pronouns}}{{name}}, vous êtes le propriétaire de ce magnifique bien {{localisation}} depuis le {{sell_date}}."
+            },
+            "description": {
+                "en": "{{pronouns}}{{name}}, you have the keys to this beautiful property{{localisation}}.",
+                "fr": "{{pronouns}}{{name}}, vous possédez les clés de ce magnifique bien{{localisation}}."
+            },
+            "localisation": {
+                "en": " located at {{localisation}}",
+                "fr": " situé au {{localisation}}"
+            },
+            "double_keys": {
+                "en": "Key management",
+                "fr": "Gestion des clés"
+            }
+        },
+        "modal": {
+            "safe": {
+                "en": "Safe",
+                "fr": "Coffre"
+            },
+            "double_keys": {
+                "en": "Locksmith",
+                "fr": "Serrurier"
+            },
+            "sell": {
+                "en": "Sell",
+                "fr": "Vendre"
+            },
+            "quantity": {
+                "en": "Quantity",
+                "fr": "Quantité"
+            },
+            "item_placeholder": {
+                "en": "Specify the name of the item to deposit/withdraw.",
+                "fr": "Spécifiez le nom de l'item à déposer/retirer."
+            },
+            "quantity_placeholder": {
+                "en": "Specify the quantity of the item to deposit/withdraw.",
+                "fr": "Spécifiez la quantité de l'item à déposer/retirer."
+            },
+
+
+            "select_placeholder": {
+                "en": "Choose an action to perform",
+                "fr": "Choisissez une action à effectuer"
+            },
+
+
+            "add": {
+                "en": "Choose the player to give the double keys",
+                "fr": "Choisissez le joueur à qui donner le double des clés"
+            },
+            "remove": {
+                "en": "Choose the player to remove the double keys",
+                "fr": "Choisissez le joueur à qui retirer le double des clés"
+            },
+
+
+            "sale": {
+                "en": "Sale contract",
+                "fr": "Contrat de vente"
+            },
+            "price": {
+                "en": "Price",
+                "fr": "Prix"
+            },
+            "price_placeholder": {
+                "en": "Specify the price of sell of the property.",
+                "fr": "Spécifiez le prix de vente de la propriété."
+            }
+        },
+        "buttons": {
+            "out": {
+                "en": "Go out",
+                "fr": "Sortir"
+            },
+            "home": {
+                "en": "Home",
+                "fr": "Accueil"
+            },
+            "safe": {
+                "en": "Safe",
+                "fr": "Coffre"
+            },
+            "double_keys": {
+                "en": "Doubles keys",
+                "fr": "Double des clés"
+            },
+            "sell": {
+                "en": "Sell",
+                "fr": "Vendre"
+            },
+            "deposit": {
+                "en": "Deposit",
+                "fr": "Déposer"
+            },
+            "withdraw": {
+                "en": "Withdraw",
+                "fr": "Retirer"
+            },
+            "add": {
+                "en": "Add",
+                "fr": "Ajouter"
+            },
+            "remove": {
+                "en": "Remove",
+                "fr": "Retirer"
+            },
+            "buy": {
+                "en": "Buy",
+                "fr": "Acheter"
+            },
+            "refuse": {
+                "en": "Decline",
+                "fr": "Refuser"
+            }
+        },
+        "confirm_buy_embed": {
+            "title": {
+                "en": "Buy offer",
+                "fr": "Offre de vente"
+            },
+            "description": {
+                "en": "<@{{member}}> puts his property **{{name}}** on sale at the price of **{{price}}{{symbol}}**.\nDo you accept this offer ?",
+                "fr": "<@{{member}}> met son bien **{{name}}** en vente au prix de **{{price}}{{symbol}}**.\nAcceptez-vous cette offre ?"
+            }
+        },
+        "confirm_sell": {
+            "en": "Are you sure you want to sell **{{name}}** for **{{price}}{{symbol}}** ?",
+            "fr": "Êtes-vous sûr de vouloir vendre **{{name}}** pour **{{price}}{{symbol}}** ?"
+        },
+        "confirm_buy": {
+            "en": "Are you sure you want to buy **{{name}}** for **{{price}}{{symbol}}** ?",
+            "fr": "Êtes-vous sûr de vouloir acheter **{{name}}** pour **{{price}}{{symbol}}** ?"
+        },
+        "cancelled": {
+            "en": "The sale has been canceled.",
+            "fr": "La vente a été annulée."
+        },
+        "selled": {
+            "en": "You have sold **{{name}}** for **{{price}}{{symbol}}**.",
+            "fr": "Vous avez vendu **{{name}}** pour **{{price}}{{symbol}}**."
+        },
+        "withdrawed": {
+            "en": "You have withdrawn **{{quantity}} {{item}}** from your safe.",
+            "fr": "Vous avez retiré **{{quantity}} {{item}}** de votre coffre."
+        },
+        "deposited": {
+            "en": "You have deposited **{{quantity}} {{item}}** in your safe.",
+            "fr": "Vous avez déposé **{{quantity}} {{item}}** dans votre coffre."
+        },
+        "withdrawed_money": {
+            "en": "You have withdrawn **{{quantity}}{{symbol}}** from your safe.",
+            "fr": "Vous avez retiré **{{quantity}}{{symbol}}** de votre coffre."
+        },
+        "deposited_money": {
+            "en": "You have deposited **{{quantity}}{{symbol}}** in your safe.",
+            "fr": "Vous avez déposé **{{quantity}}{{symbol}}** dans votre coffre."
+        },
+        "double_keys_added": {
+            "en": "**{{memberName}}** now has the double keys of **{{name}}**.",
+            "fr": "**{{memberName}}** a maintenant le double des clés de **{{name}}**."
+        },
+        "double_keys_removeed": {
+            "en": "**{{memberName}}** no longer has the double keys of **{{name}}**.",
+            "fr": "**{{memberName}}** n'a plus le double des clés de **{{name}}**."
+        },
+        "no_items": {
+            "en": "There is no items in your safe.",
+            "fr": "Il n'y a aucun objet dans votre coffre."
+        },
+        "item_not_found": {
+            "en": "I did not find the item **{{item}}**.",
+            "fr": "Je n'ai pas trouvé l'item **{{item}}**."
+        },
+        "drug_not_found": {
+            "en": "I did not find the drug **{{drug}}**.",
+            "fr": "Je n'ai pas trouvé la drogue **{{drug}}**."
+        },
+        "not_enough_item": {
+            "en": "You only have **{{quantity}} {{item}}** in your safe.",
+            "fr": "Vous avez seulement **{{quantity}} {{item}}** dans votre coffre."
+        },
+        "not_enough_cash_money": {
+            "en": "You only have **{{quantity}}{{symbol}}** of cash money.",
+            "fr": "Vous avez seulement **{{quantity}}{{symbol}}** d'argent liquide."
+        },
+        "not_enough_dirty_money": {
+            "en": "You only have **{{quantity}}{{symbol}}** of dirty money.",
+            "fr": "Vous avez seulement **{{quantity}}{{symbol}}** d'argent sale."
+        },
+        "not_enough_cash_money_safe": {
+            "en": "You only have **{{quantity}}{{symbol}}** of cash money in your safe.",
+            "fr": "Vous avez seulement **{{quantity}}{{symbol}}** d'argent liquide dans votre coffre."
+        },
+        "not_enough_dirty_money_safe": {
+            "en": "You only have **{{quantity}}{{symbol}}** of dirty money in your safe.",
+            "fr": "Vous avez seulement **{{quantity}}{{symbol}}** d'argent sale dans votre coffre."
+        },
+        "not_enough_money2": {
+            "en": "You only have **{{quantity}}{{symbol}}** in your safe.",
+            "fr": "Vous avez seulement **{{quantity}}{{symbol}}** dans votre coffre."
+        },
+        "not_enough_money": {
+            "en": "The real estate agency only has **{{money}}{{symbol}}**.",
+            "fr": "L'agence immobilière n'a que **{{money}}{{symbol}}**."
+        },
+        "not_your_property": {
+            "en": "This property is not yours, you can't sell it.",
+            "fr": "Cette propriété ne vous appartient pas, vous ne pouvez pas la vendre."
+        },
+        "no_authorized_members": {
+            "en": "No one has the double keys of your property.",
+            "fr": "Aucune personne n'a le double des clés de votre propriété."
+        },
+        "member_not_found": {
+            "en": "I did not find the citizen **{{first_name}} {{last_name}}**.",
+            "fr": "Je n'ai pas trouvé le citoyen **{{first_name}} {{last_name}}**."
+        },
+        "already_authorized": {
+            "en": "**{{memberName}}** already has the double keys of your property.",
+            "fr": "**{{memberName}}** a déjà le double des clés de votre propriété."
+        },
+        "cant_double_keys_yourself": {
+            "en": "You can't give yourself the double keys of your property.",
+            "fr": "Vous ne pouvez pas vous donner le double des clés de votre propriété."
+        },
+        "no_real_estate_agent": {
+            "en": "There is no real estate agent in this server.",
+            "fr": "Il n'y a aucun agent immobilier dans ce serveur."
+        },
+        "no_real_estate_role": {
+            "en": "There is no real estate role in this server.\nYou can configure it on our [dashboard]({{link}}).",
+            "fr": "Il n'y a pas de rôle d'agent immobilier sur ce serveur.\nVous pouvez le configurer sur notre [dashboard]({{link}})."
+        },
+        "no_real_estate_company": {
+            "en": "There is no real estate company in this server.\nYou can create a company with the specialty `Real estate agency` with the command `/company create` or on our [dashboard]({{link}}).",
+            "fr": "Il n'y a pas d'entreprise immobilière sur ce serveur.\nVous pouvez créer une entreprise avec la spécialité `Agence immobilière` avec la commande `/company create` ou sur notre [dashboard]({{link}})."
+        },
+        "not_real_estate_agent": {
+            "en": "You must be a real estate agent to buy back a property.",
+            "fr": "Vous devez être un agent immobilier pour racheter un bien immobilier."
+        }
+    },
+    "statut": {
+        "hunger": {
+            "en": "Hunger",
+            "fr": "Faim"
+        },
+        "thirst": {
+            "en": "Thirst",
+            "fr": "Soif"
+        },
+        "healthy": {
+            "en": "Perfect health",
+            "fr": "Santé parfaite"
+        },
+        "coma": {
+            "en": "In coma",
+            "fr": "Dans le coma"
+        }
+    },
+    "véhicule": {
+        "cash_money": {
+            "en": "Cash",
+            "fr": "Argent liquide"
+        },
+        "dirty_money": {
+            "en": "Dirty money",
+            "fr": "Argent sale"
+        },
+        "dont_have_vehicles": {
+            "en": "You don't have the keys to any vehicles.",
+            "fr": "Vous n'avez les clés d'aucun véhicule."
+        },
+        "buying_date": {
+            "en": "Purchase date",
+            "fr": "Date d'achat"
+        },
+        "no_adress": {
+            "en": "Adress not specified",
+            "fr": "Adresse non renseignée"
+        },
+        "embed": {
+            "description_owner": {
+                "en": "{{pronouns}}{{name}}, you are the owner of this beautiful vehicle {{localisation}} since {{date}}.",
+                "fr": "{{pronouns}}{{name}}, vous êtes le propriétaire de ce magnifique véhicule {{localisation}} depuis le {{date}}."
+            },
+            "description": {
+                "en": "{{pronouns}}{{name}}, you have the keys to this beautiful vehicle {{localisation}}.",
+                "fr": "{{pronouns}}{{name}}, vous possédez les clés de ce magnifique véhicule {{localisation}}."
+            },
+            "localisation": {
+                "en": "parked at {{localisation}}",
+                "fr": "garé au {{localisation}}"
+            },
+            "double_keys": {
+                "en": "Key management",
+                "fr": "Gestion des clés"
+            }
+        },
+        "modal": {
+            "safe": {
+                "en": "Safe",
+                "fr": "Coffre"
+            },
+            "double_keys": {
+                "en": "Locksmith",
+                "fr": "Serrurier"
+            },
+            "quantity": {
+                "en": "Quantity",
+                "fr": "Quantité"
+            },
+            "item_placeholder": {
+                "en": "Specify the name of the item to deposit/withdraw.",
+                "fr": "Spécifiez le nom de l'item à déposer/retirer."
+            },
+            "quantity_placeholder": {
+                "en": "Specify the quantity of the item to deposit/withdraw.",
+                "fr": "Spécifiez la quantité de l'item à déposer/retirer."
+            },
+
+
+            "select_placeholder": {
+                "en": "Choose an action to perform",
+                "fr": "Choisissez une action à effectuer"
+            },
+
+            "add": {
+                "en": "Choose the player to give the double keys",
+                "fr": "Choisissez le joueur à qui donner le double des clés"
+            },
+            "remove": {
+                "en": "Choose the player to remove the double keys",
+                "fr": "Choisissez le joueur à qui retirer le double des clés"
+            },
+
+
+            "first_name": {
+                "en": "First name",
+                "fr": "Prénom"
+            },
+            "last_name": {
+                "en": "Last name",
+                "fr": "Nom de famille"
+            },
+            "first_name_placeholder": {
+                "en": "Specify the first name of the person to whom you want to give the keys.",
+                "fr": "Spécifiez le prénom de la personne à qui vous voulez donner les clés."
+            },
+            "last_name_placeholder": {
+                "en": "Specify the last name of the person to whom you want to give the keys.",
+                "fr": "Spécifiez le nom de famille de la personne à qui vous voulez donner les clés."
+            },
+            "double_keys_gived": {
+                "en": "You have given the double keys of **{{name}}** to **{{first_name}} {{last_name}}**",
+                "fr": "Vous avez donné le double des clés de **{{name}}** à **{{first_name}} {{last_name}}**."
+            }
+        },
+        "buttons": {
+            "out": {
+                "en": "Lock",
+                "fr": "Verrouiller"
+            },
+            "vehicle": {
+                "en": "Vehicle",
+                "fr": "Véhicule"
+            },
+            "safe": {
+                "en": "Safe",
+                "fr": "Coffre"
+            },
+            "double_keys": {
+                "en": "Doubles keys",
+                "fr": "Double des clés"
+            },
+            "deposit": {
+                "en": "Deposit",
+                "fr": "Déposer"
+            },
+            "withdraw": {
+                "en": "Withdraw",
+                "fr": "Retirer"
+            },
+            "add": {
+                "en": "Add",
+                "fr": "Ajouter"
+            },
+            "remove": {
+                "en": "Remove",
+                "fr": "Retirer"
+            }
+        },
+        "withdrawed": {
+            "en": "You have withdrawn **{{quantity}} {{item}}** from your safe.",
+            "fr": "Vous avez retiré **{{quantity}} {{item}}** de votre coffre."
+        },
+        "deposited": {
+            "en": "You have deposited **{{quantity}} {{item}}** in your safe.",
+            "fr": "Vous avez déposé **{{quantity}} {{item}}** dans votre coffre."
+        },
+        "withdrawed_money": {
+            "en": "You have withdrawn **{{quantity}}{{symbol}}** from your safe.",
+            "fr": "Vous avez retiré **{{quantity}}{{symbol}}** de votre coffre."
+        },
+        "deposited_money": {
+            "en": "You have deposited **{{quantity}}{{symbol}}** in your safe.",
+            "fr": "Vous avez déposé **{{quantity}}{{symbol}}** dans votre coffre."
+        },
+        "double_keys_added": {
+            "en": "**{{memberName}}** now has the double keys of **{{name}}**.",
+            "fr": "**{{memberName}}** a maintenant le double des clés de **{{name}}**."
+        },
+        "double_keys_removeed": {
+            "en": "**{{memberName}}** no longer has the double keys of **{{name}}**.",
+            "fr": "**{{memberName}}** n'a plus le double des clés de **{{name}}**."
+        },
+        "no_items": {
+            "en": "There is no items in your safe.",
+            "fr": "Il n'y a aucun objet dans votre coffre."
+        },
+        "item_not_found": {
+            "en": "I did not find the item **{{item}}**.",
+            "fr": "Je n'ai pas trouvé l'item **{{item}}**."
+        },
+        "drug_not_found": {
+            "en": "I did not find the drug **{{drug}}**.",
+            "fr": "Je n'ai pas trouvé la drogue **{{drug}}**."
+        },
+        "not_enough_item": {
+            "en": "You only have **{{quantity}} {{item}}** in your safe.",
+            "fr": "Vous avez seulement **{{quantity}} {{item}}** de votre coffre."
+        },
+        "no_authorized_members": {
+            "en": "No one has the double keys of your vehicle.",
+            "fr": "Aucune personne n'a le double des clés de votre véhicule."
+        },
+        "member_not_found": {
+            "en": "I did not find the citizen **{{first_name}} {{last_name}}**.",
+            "fr": "Je n'ai pas trouvé le citoyen **{{first_name}} {{last_name}}**."
+        },
+        "cant_double_keys_yourself": {
+            "en": "You can't give yourself the double keys of your vehicle.",
+            "fr": "Vous ne pouvez pas vous donner le double des clés de votre véhicule."
+        },
+        "already_authorized": {
+            "en": "**{{memberName}}** already has the double keys of your vehicle",
+            "fr": "**{{memberName}}** a déjà le double des clés de votre véhicule."
+        },
+        "no_id_card": {
+            "en": "**{{memberName}}** does not have an identity card.",
+            "fr": "**{{memberName}}** n'a pas de carte d'identité."
+        },
+        "idcard_set": {
+            "en": "This registration certificate with plate ``{{plate}}`` is now linked to your identity card bearing the name **{{first_name}} {{last_name}}**.",
+            "fr": "Cette carte grise avec la plaque ``{{plate}}`` est désormais relié à votre carte d'identité portant le nom **{{first_name}} {{last_name}}**."
+        },
+        "unkown": {
+            "en": "Unknown",
+            "fr": "Inconnu"
+        },
+        "keys": {
+            "en": "Keys",
+            "fr": "Clés"
+        }
+    }
+}

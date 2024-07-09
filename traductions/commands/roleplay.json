@@ -1,0 +1,1651 @@
+{
+    "agence_immobilière": {
+        "too_many_properties": {
+            "en": "For now, only 25 properties are supported. But don't worry, soon many more will be!",
+            "fr": "Pour le moment, seulement 25 propriétés sont supportées. Mais ne ne vous inquiétez pas, bientôt beaucoup plus le seront !"
+        },
+        "embed": {
+            "title": {
+                "en": "{{emoji}}   Real Estate Agency", 
+                "fr": "{{emoji}}   Agence Immobilière"
+            },
+            "description": {
+                "en": "Visit all the apartments and choose the one that suits you best !",
+                "fr": "Visitez tous les appartements et choisissez celui qui vous convient le mieux !"
+            }
+        },
+        "embed_property": {
+            "name": {
+                "en": "Name",
+                "fr": "Nom"
+            },
+            "localisation": {
+                "en": "Localisation",
+                "fr": "Localisation"
+            },
+            "price": {
+                "en": "Price",
+                "fr": "Prix"
+            }
+        },
+        "sm_placeholder": {
+            "en": "List of real estate",
+            "fr": "Liste des biens immobiliers"
+        },
+        "sm_option_description": {
+            "fr": "{{localisation}} - {{price}}{{symbol}}"
+        },
+        "none": {
+            "en": "No localisation given",
+            "fr": "Aucune localisation donnée"
+        },
+        "free": {
+            "en": "Free",
+            "fr": "Gratuite"
+        },
+        "button": {
+            "buy": {
+                "en": "Buy",
+                "fr": "Acheter"
+            }
+        },
+        "no_property": {
+            "en": "There isn't any property to sell.",
+            "fr": "Il n'y a aucune propriété à vendre."
+        },
+        "freezed_account": {
+            "en": "Your bank account is freezed you can't buy a real estate.",
+            "fr": "Votre compte en banque est gelé vous ne pouvez pas acheter de bien immobilier."
+        },
+        "not_enough_money": {
+            "en": "You are missing **{{amount}}{{symbol}}** to buy this real estate.",
+            "fr": "Il vous manque **{{amount}}{{symbol}}** pour acheter ce bien immobilier."
+        },
+        "success": {
+            "en": "You have successfully bought the real estate **{{name}}** !",
+            "fr": "Vous avez acheté le bien immobilier **{{name}}** !"
+        }
+    },
+    "bourse": {
+        "updating_crpytos": {
+            "en": "Cryptocurrencies are currently updating, please wait a few seconds.",
+            "fr": "Les cryptomonnaies se mettent à jour, veuillez patienter quelques secondes."
+        },
+        "warning_title": {
+            "en": "<:nidev_warning:1054711113675190352>  **__IMPORTANT MESSAGE__**",
+            "fr": "<:nidev_warning:1054711113675190352>  **__MESSAGE IMPORTANT__**"
+        },
+        "warning": {
+            "en": "Dear {{member}},\n\nThe stock exchange system is currently being tested. Any money invested can only be transferred to your bank account with the approval of an administrator.\n\n**Why ?**\nThe stock exchange system is the same as in real life, it evolves according to the investments of the players inter-guilds. We can't test it 100% internally.\n\nThis system is set up temporarily to avoid any degradation of the server's economy in case of bugs.\nWe strongly advise you to keep this message every time you make the command so as not to forget because the tests can last several weeks.\n\nTo stay informed, you can join the [support server]({{link}}) !",
+            "fr": "Cher(e) {{member}},\n\nLe système de bourse est actuellement en cours de test. Tout argent investi ne pourra être transféré sur votre compte bancaire qu'avec approbation d'un administrateur.\n\n**Pourquoi ?**\nLe système de bourse est le même que dans la vraie vie, il évolue selon les investissements des joueurs inter-serveurs. Nous ne pouvons donc pas le tester à 100% en interne.\n\nCe système est mis en place provisoirement pour éviter toute dégradation de l'économie du serveur en cas de bugs.\nNous vous conseillons fortement de garder ce message à chaque fois que vous effectuerez la commande pour ne pas oublier car les tests peuvent dureront plusieurs semaines.\n\nPour rester informé, vous pouvez rejoindre le [serveur support]({{link}}) !"
+        },
+        "buttons": {
+            "bourse": {
+                "en": "Stock Exchange",
+                "fr": "Bourse"
+            },
+            "wallet": {
+                "en": "My Wallet",
+                "fr": "Mon Portefeuille"
+            },
+            "invest": {
+                "en": "Invest",
+                "fr": "Investir"
+            },
+            "sell": {
+                "en": "Sell",
+                "fr": "Vendre"
+            },
+            "funds": {
+                "en": "Funds",
+                "fr": "Fonds"
+            },
+            "fund": {
+                "en": "Fund",
+                "fr": "Approvisionner"
+            },
+            "accept": {
+                "en": "Accept",
+                "fr": "Accepter"
+            },
+            "refuse": {
+                "en": "Refuse",
+                "fr": "Refuser"
+            },
+            "hide": {
+                "en": "Don't show again",
+                "fr": "Ne plus afficher"
+            }
+        },
+        "modal": {
+            "title": {
+                "en": "Stock Exchange",
+                "fr": "Bourse"
+            },
+            "fields": {
+                "name": {
+                    "en": "Name",
+                    "fr": "Nom"
+                },
+                "amount": {
+                    "en": "Amount",
+                    "fr": "Montant"
+                },
+                "quantity": {
+                    "en": "Quantity",
+                    "fr": "Quantité"
+                },
+
+                "name_placeholder": {
+                    "en": "Enter the name of the crypto currency",
+                    "fr": "Entrez le nom de la crypto monnaie"
+                },
+                "amount_placeholder": {
+                    "en": "Enter the amount of money you want to invest",
+                    "fr": "Entrez le montant d'argent que vous voulez investir"
+                },
+                "quantity_placeholder": {
+                    "en": "Enter the quantity of crypto currency you want to sell",
+                    "fr": "Entrez la quantité de crypto monnaie que vous voulez vendre"
+                }
+            }
+        },
+        "balance": {
+            "en": "Balance",
+            "fr": "Solde"
+        },
+        "invalid_crypto": {
+            "en": "The crypto currency you entered is invalid : *{{name}}*.",
+            "fr": "La crypto monnaie que vous avez entré est invalide : *{{name}}*."
+        },
+        "no_crypto": {
+            "en": "You have no investment in the crypto currency **{{name}}**.",
+            "fr": "Vous n'avez aucun investissement dans la crypto monnaie **{{name}}**."
+        },
+        "invalid_amount": {
+            "en": "The amount you entered is invalid : *{{amount}}*.",
+            "fr": "Le montant que vous avez entré est invalide : *{{amount}}*."
+        },
+        "not_enough_funds": {
+            "en": "You don't have enough funds in your wallet to invest. Your current funds : **{{walletAmount}}{{symbol}}**.",
+            "fr": "Vous n'avez pas assez de fonds dans votre wallet pour investir. Vos fonds actuels : **{{walletAmount}}{{symbol}}**."
+        },
+        "overdraft": {
+            "en": "You don't have enough funds in your wallet to invest. Your current funds : **{{walletAmount}}{{symbol}}**.\n\nYou can invest **{{amount}}{{symbol}}** but you will be in overdraft.",
+            "fr": "Vous n'avez pas assez de fonds dans votre wallet pour investir. Vos fonds actuels : **{{walletAmount}}{{symbol}}**.\n\nVous pouvez investir **{{amount}}{{symbol}}** mais vous serez à découvert."
+        },
+        "funded": {
+            "en": "You have funded your wallet with **{{amount}}{{symbol}}** !",
+            "fr": "Vous avez approvisionné votre portefeuille de **{{amount}}{{symbol}}** !"
+        },
+        "invested": {
+            "en": "You have invested **{{amount}}{{symbol}}** in **{{name}}** !",
+            "fr": "Vous avez investi **{{amount}}{{symbol}}** dans **{{name}}** !"
+        },
+        "ask_sell": {
+            "en": "{{member}} wants to sell __{{quantity}}__ of **{{name}}** for **{{amount}}{{symbol}}**.",
+            "fr": "{{member}} souhaite vendre __{{quantity}}__ de **{{name}}** pour *{{amount}}{{symbol}}*."
+        }
+    },
+    "boutique": {
+        "no_manage_role_permission": {
+            "en": "I don't have the permission to manage roles. I can't add or remove the role {{role}}.",
+            "fr": "Je n'ai pas la permission de gérer les rôles. Je ne pourrais donc pas ajouter ou retirer le rôle {{role}}."
+        },
+        "imgur_error": {
+            "en": "Currently our image storage system is overloaded (600k users is a lot hehe). We will soon migrate to another image storage system.\n\nThank you for your understanding and patience,\nThe NiDev team.",
+            "fr": "Actuellement notre système de sauvegarde d'image est surchargé (600k utilisateurs ça commence à faire beaucoup). Nous allons bientôt migrer vers un autre système de sauvegarde d'image.\n\nMerci de votre compréhension et de votre patience,\nL'équipe NiDev."
+        },
+        "premium_only": {
+            "en": "{{emoji}} Adding a thumbnail, customizing the color or linking a company to a shop is a Premium feature. To learn more, visit our [website](https://nidev.fr/skyroleplay/premium).",
+            "fr": "{{emoji}} Ajouter une vignette, personnaliser la couleur ou relié une entreprise à une boutique est une fonctionnalité Premium. Pour en savoir plus, rendez-vous sur notre [site web](https://nidev.fr/skyroleplay/premium)."
+        },
+        "dot_in_shop_name": {
+            "en": "The name of the shop cannot contain a dot ('.').",
+            "fr": "Le nom de la boutique ne peut pas contenir de point ('.')."
+        },
+        "dot_in_item_name": {
+            "en": "The name of the shop cannot contain a dot ('.').",
+            "fr": "Le nom de l'item ne peut pas contenir de point ('.')."
+        },
+        "max_shops": {
+            "en": "{{emoji}} You have reached the maximum number of shops. If you want more, you can subscribe to SkyRoleplay Premium on our [website](https://nidev.fr/skyroleplay/premium).",
+            "fr": "{{emoji}} Vous avez atteint le nombre maximum de boutiques. Si vous souhaitez en avoir plus, vous pouvez soucrire à SkyRoleplay Premium sur notre [site web](https://nidev.fr/skyroleplay/premium)."
+        },
+        "max_shop_items": {
+            "en": "{{emoji}} You have reached the maximum number of items in this shop. If you want more, you can subscribe to SkyRoleplay Premium on our [website](https://nidev.fr/skyroleplay/premium).",
+            "fr": "{{emoji}} Vous avez atteint le nombre maximum d'items dans cette boutique. Si vous souhaitez en avoir plus, vous pouvez soucrire à SkyRoleplay Premium sur notre [site web](https://nidev.fr/skyroleplay/premium)."
+        },
+        "no_shops": {
+            "en": "There are no shops on this server. Use the `/shop create` command to create one" ,
+            "fr": "Il n'y a aucune boutique sur ce serveur. Utilisez la commande `/boutique créer` pour en créer une"   
+        },
+        "shop_not_found": {
+            "en": "This shop does not exist or was not found.",
+            "fr": "Cette boutique n'existe pas ou n'a pas été trouvée."
+        },
+        "long_name": {
+            "en": "The name is too long (maximum {{limit}} characters)",
+            "fr": "Le nom est trop long (maximum {{limit}} caractères)"
+        },
+        "long_description": {
+            "en": "The description is too long (maximum {{limit}} characters)",
+            "fr": "La description est trop long (maximum {{limit}} caractères)"
+        },
+        "cant_add": {
+            "en": "You can't add `{{name}}` in your store",
+            "fr": "Vous ne pouvez pas ajouter dans votre boutique `{{name}}`"
+        },
+        "item_not_found": {
+            "en": "I didn't find the item in the shop.",
+            "fr": "Je n'ai pas trouvé l'item dans la boutique."
+        },
+        "already_exist": {
+            "en": "This item already exists. Do you want to change its price?",
+            "fr": "Cet objet existe déjà. Voulez-vous modifier son prix ?"
+        },
+        "already_exist_shops": {
+            "en": "This shop already exists. Do you want to edit it ?",
+            "fr": "Cette boutique existe déjà. Voulez-vous la modifier ?"
+        },
+        "confirm_delete_shop": {
+            "en": "Are you sure you want to delete this shop ?",
+            "fr": "Êtes-vous sûr de vouloir supprimer cette boutique ?"
+        },
+        "success_modification": {
+            "en": "The price of the item has been changed !",
+            "fr": "Le prix de l'objet a bien été modifié !"
+        },
+        "success_edit_shop": {
+            "en": "The shop has been successfully edited !",
+            "fr": "La boutique a été modifiée avec succès !"
+        },
+        "success_delete_shop": {
+            "en": "The shop has been successfully deleted !",
+            "fr": "La boutique a été supprimée avec succès !"
+        },
+        "max_object": {
+            "en": "You have reached the limit of items ({{max}}). To remove them, do `/boutique retirer`",
+            "fr": "Vous avez atteint la limite d'objets ({{max}}). Pour en supprimer, faites `/boutique retirer`"
+        },
+        "displayed": {
+            "en": "Welcome to the **{{name}}** shop !",
+            "fr": "Bienvenue dans la boutique **{{name}}** !"
+        },
+        "cart": {
+            "en": "Your Cart",
+            "fr": "Votre Panier"
+        },
+        "add_cart": {
+            "en": "You have added the item **{{name}}** in your cart !",
+            "fr": "Vous avez ajouté l'item **{{name}}** dans votre panier !"
+        },
+        "free_msg": {
+            "en": "This item is free !",
+            "fr": "Cet item est gratuit !"
+        },
+        "inventory_weight": {
+            "en": "The weight of your inventory is currently **{{currentWeight}}**. You can't add this item otherwise the weight of your inventory will exceed **{{maxWeight}}**.",
+            "fr": "Le poids de votre inventaire est actuellement de **{{currentWeight}}**. Vous ne pouvez pas ajouter cet item sinon le poids de votre inventaire dépassera **{{maxWeight}}**."
+        },
+        "choose_payement_method": {
+            "en": "Which payment method do you want to use ?",
+            "fr": "Quelle méthode de payement souhaitez-vous utiliser ?"
+        },
+        "buttons": {
+            "cart": {
+                "en": "Cart",
+                "fr": "Panier"
+            },
+            "cancel": {
+                "en": "Cancel",
+                "fr": "Annuler"
+            },
+            "buy":  {
+                "en": "Validate the Cart",
+                "fr": "Valider le Panier"
+            },
+            "shop": {
+                "en": "Shop",
+                "fr": "Boutique"
+            },
+            "cash": {
+                "en": "Cash",
+                "fr": "Espèces"
+            },
+            "bank": {
+                "en": "Bank card",
+                "fr": "Carte Bancaire"
+            },
+            "card": {
+                "en": "Insert bank card",
+                "fr": "Insérer la carte"
+            },
+            "without_contact": {
+                "en": "Pay without contact",
+                "fr": "Payer sans contact"
+            }, 
+
+            "placeholder_add": {
+                "en": "Add an item to the cart",
+                "fr": "Ajouter un objet au panier"
+            },
+            "placeholder_remove": {
+                "en": "Remove an item from the cart",
+                "fr": "Retirer un objet du panier"
+            }
+        },
+        "modal": {
+            "quantity": {
+                "en": "Quantity",
+                "fr": "Quantité"
+            },
+            "placeholder_quantity": {
+                "en": "Enter the quantity of {{item}} to add to the cart",
+                "fr": "Entrez la quantité de {{item}} à ajouter au panier"
+            }
+        },
+        "add_embed": {
+            "title": {
+                "shop": {
+                    "en": "Shop added",
+                    "fr": "Boutique ajoutée"
+                },
+                "item": {
+                    "en": "Item added in __{{shop}}__",
+                    "fr": "Objet ajouté dans __{{shop}}__"
+                }
+            },
+            "fields": {
+                "name": {
+                    "en": "Name",
+                    "fr": "Nom"
+                },
+                "company": {
+                    "en": "Company",
+                    "fr": "Entreprise"
+                },
+                "price": {
+                    "en": "Price",
+                    "fr": "Prix"
+                },
+                "free": {
+                    "en": "Free",
+                    "fr": "Gratuit"
+                },
+                "none_feminin": {
+                    "en": "None",
+                    "fr": "Aucune"
+                },
+                "none_masculin": {
+                    "en": "None",
+                    "fr": "Aucun"
+                },
+                "weight": {
+                    "en": "Weight",
+                    "fr": "Poids"
+                },
+                "requiredRole": {
+                    "en": "Required role",
+                    "fr": "Rôle requis"
+                },
+                "roleToAdd": {
+                    "en": "Role to add",
+                    "fr": "Rôle à ajouter"
+                },
+                "roleToRemove": {
+                    "en": "Role to remove",
+                    "fr": "Rôle à retirer"
+                }
+            }
+        },
+        "didnt_exist": {
+            "en": "This item does not exist",
+            "fr": "Cet objet n'existe pas"
+        },
+        "remove_embed": {
+            "title": {
+                "en": "Item removed",
+                "fr": "Objet retiré"
+            }
+        },
+        "no_object": {
+            "en": "There are no items in this store: `/boutique add`",
+            "fr": "Il n'y a aucun objet dans cette boutique : `/boutique ajouter`"
+        },
+        "display_embed_shops": {
+            "title": {
+                "en": "Stores of {{name}}",
+                "fr": "Boutiques de {{name}}"
+            },
+            "description": {
+                "en": "Select in the menu below wich store you want to see.",
+                "fr": "Sélectionnez dans le menu ci-dessous la boutique que vous souhaitez voir."
+            }
+        },
+        "placeholder_shops": {
+            "en": "Select a shop",
+            "fr": "Sélectionnez une boutique"
+        },
+        "display_error": {
+            "en": "The store display encountered an error, please try again",
+            "fr": "L'affichage de la boutique a rencontré une erreur, veuillez réessayer"
+        },
+        "ask_confirmation": {
+            "en": "Do you want to buy **1 {{item}}** {{price}} ?",
+            "fr": "Voulez-vous acheter **1 {{item}}** {{price}} ?"
+        },
+        "price": {
+            "free": {
+                "en": "for free",
+                "fr": "gratuitement"
+            }
+        },
+        "not_enough_money": {
+            "en": "You don't have enough money on you to buy this item",
+            "fr": "Vous n'avez pas assez d'argent sur vous pour acheter cet objet"
+        },
+        "buying": {
+            "en": "*Buying...*",
+            "fr": "*Achat en cours...*"
+        },
+        "buyed": {
+            "en": "You have bought **{{cart}}** {{items}} {{for}}{{price}}{{max}}",
+            "fr": "Vous avez bien acheté **{{cart}}** {{items}} {{for}}{{price}}{{max}}"
+        },
+        "stop": {
+            "en": ".\nSome items have exceeded their maximum amounts allowed in your inventory and have therefore been put back.",
+            "fr": ".\nCertains items ont dépassé leurs montants maximum autorisé dans votre inventaire et ont donc été reposés."
+        },
+        "for": {
+            "en": "for ",
+            "fr": "pour "
+        }
+    },
+    "code_de_la_route": {
+        "code": {
+            "en": "Highway Code",
+            "fr": "Code de la route"
+        },
+        "already_have_code": {
+            "en": "You already have the highway code.",
+            "fr": "Vous avez déjà le code la route."
+        },
+        "description": {
+            "en": "Welcome to the highway code exam! To validate this exam you will have to answer {{total}} questions, and have {{min}} correct answers out of {{total}}. You have 7 minutes to answer all the questions.\n\nWe wish you good luck!",
+            "fr": "Bienvenue à l'examen du code de la route ! Pour valider cet examen vous devrez répondre à {{total}} questions, et avoir {{min}} bonnes réponses sur {{total}}. Vous avez 7 minutes pour répondre à toutes les questions.\n\nNous vous souhaitons bonne chance !"
+        },
+        "start": {
+            "en": "Let's go !",
+            "fr": "C'est parti !"
+        },
+        "success": {
+            "en": "Congratulations ! You passed your highway code exam with {{points}} good answers out of {{total}} !\nYou can now take any type of vehicle license.",
+            "fr": "Bravo ! Vous avez réussi votre examen du code de la route avec {{points}} bonnes réponses sur {{total}} !\nVous pouvez à présent passer le permis de conduire de n'importe quel type de véhicule."
+        },
+        "failed": {
+            "en": "Ouch... You failed your highway code exam with only {{points}} good answers out of {{total}}.\nDon't hesitate to ask questions to the examiners during your training sessions to avoid making mistakes!\n\nIt's not a big deal, you can try again next time!",
+            "fr": "Aïe aïe aÏe... Vous avez échoué votre examen du code de la route avec seulement {{points}} bonnes réponses sur {{total}}.\nN'hésitez pas à poser des questions au examinateurs lors de vos entraînements pour ne plus faire d'erreurs !\n\nCe n'est pas grave, vous pouvez réessayer la prochaine fois !"
+        },
+        "response": {
+            "en": "Answer",
+            "fr": "Réponse"
+        }
+    },
+    "coma": {
+        "durations": {
+            "5m": {
+                "en": "the `5` minutes",
+                "fr": "les `5` minutes"
+            },
+            "10m": {
+                "en": "the `10` minutes",
+                "fr": "les `10` minutes"
+            },
+            "15m": {
+                "en": "the `15` minutes",
+                "fr": "les `15` minutes"
+            },
+            "1h": {
+                "en": "the `1` hour",
+                "fr": "`l heure`"
+            },
+            "3h": {
+                "en": "the `3` hours",
+                "fr": "les `3` heures"
+            }
+        },
+        "coma_embed": {
+            "title": {
+                "en": "🩹・ Coma",
+                "fr": "🩹・ Coma"
+            },
+            "description": {
+                "en": "{{member}} fell in the coma.\n\n➜ He forgot what happened during {{duration}} before the accident.",
+                "fr": "{{member}} est tombé dans le coma.\n\n➜ Il oublie ce qu'il s'est passé pendant {{duration}} précédant l'accident.\n\n\nVous devez attendre qu'une personne vous `/réanimer` !"
+            }
+        }
+    },
+    "donner": {
+        "self": {
+            "en": "You can't give an item to yourself",
+            "fr": "Vous ne pouvez pas donner un objet à vous-même"
+        },
+        "invalid_items": {
+            "en": ["Dirty money", "Driving license", "Identity card", "Weapon license", "License plate", "Untreated", "Treated"],
+            "fr": ["Argent sale", "Permis de conduire", "Carte d'identité", "Permis de port d'armes", "Carte grise", "non traité(e)", "traité(e)"]
+        },
+        "invalid_error": {
+            "en": "You cannot give the **{{name}}** item with this command",
+            "fr": "Vous ne pouvez pas donner l'objet **{{name}}** avec cette commande"
+        },
+        "didnthave": {
+            "en": "You have no **{{name}}** in your inventory",
+            "fr": "Vous n'avez pas de **{{name}}** dans votre inventaire"
+        },
+        "gave": {
+            "en": "You gave **{{quantity}} {{name}}** to {{member}} !",
+            "fr": "Vous avez donné **{{quantity}} {{name}}** à {{member}} !"
+        },
+        "confirm": {
+            "en": "You only have **{{quantity}} {{name}}** in your inventory. Do you want to give this quantity to {{member}} ?",
+            "fr": "Vous n'avez que **{{quantity}} {{name}}** dans votre inventaire. Voulez-vous donner cette quantité à {{member}} ?"
+        },
+        "error": {
+            "en": "An error occurred during the commannd. Check that the roles are well configured, that they still exist in this server, that the bot can add them and that they are lower than him in the roles list. If the error persists even though you are well configured, contact our [support]({{link}}).",
+            "fr": "Une erreur est survenue lors de la commande. Vérifiez que les rôles sont bien configurés, qu'ils existent toujours dans ce serveur, que le bot peut les ajouter et qu'ils soient inférieur à lui dans la liste de rôles. Si l'erreur persiste alors que tout est bien configuré, contactez notre [support]({{link}})."
+        }
+    },
+    "mandat": {
+        "mandate_embed": {
+            "title": {
+                "en": "📓 Search Warrant",
+                "fr": "📓 Mandat de Perquisition"
+            },
+            "description": {
+                "en": "Awarded by : {{user}}\nMade on : {{time}}\nAt : {{city}}\n\nMrs/Ms {{member}},\n\nThis document gives you the ability to search all property of any person or community. You will have the right to search the house and car during the search.\n**It has been agreed and determined as follows :**\n\n``I - OBJECT``\n{{content}}\n\n``II - DURATION OF THE MANDATE``\nThis mandate will expire at the end of the investigation for the above mentioned facts.\n\nSincerely yours,\n{{user}}",
+                "fr": "Attribué par : {{user}}\nFait le : {{time}}\nÀ : {{city}}\n\nMme/M {{member}},\n\nCe document vous donne la possibilité de perquisitionner tous les biens d'une personne ou d'une collectivité quelconque. Vous aurez le droit de fouiller maison et voiture lors de la perquisition.\n**Il a été convenu et arrêté ce qui suit :**\n\n``I - OBJET``\n{{content}}\n\n``II - DURÉE DU MANDAT``\nCe mandat arrivera a expiration lors de la fin de l'enquête pour les faits cités précédemment.\n\nBien à vous,\n{{user}}"
+            }
+        }
+    },
+    "menottes": {
+        "already_handcuffed": {
+            "en": "{{member}} is already handcuffed",
+            "fr": "{{member}} est déjà menotté"
+        },
+        "not_handcuffed": {
+            "en": "{{member}} is not handcuffed",
+            "fr": "{{member}} n'est pas menotté"
+        },
+        "cuff": {
+            "en": "{{member}} has been cuffed since {{time}} at {{hm}}",
+            "fr": "{{member}} est menotté depuis le {{time}} à {{hm}}"
+        },
+        "uncuff": {
+            "en": "{{member}} has been uncuffed since {{time}} at {{hm}}",
+            "fr": "{{member}} est démenotté depuis le {{time}} à {{hm}}"
+        }
+    },
+    "ordinateur_police": {
+        "max_criminal_records": {
+            "en": "{{emoji}} You have reached the maximum number of criminal records. If you want more, you can subscribe to SkyRoleplay Premium on our [website](https://nidev.fr/skyroleplay/dashboard).",
+            "fr": "{{emoji}} Vous avez atteint le maximum d'entrées de casiers judiciaires. Si vous souhaitez en avoir plus, vous pouvez souscrire à SkyRoleplay Premium sur note [site web](https://nidev.fr/skyroleplay/dashboard)."
+        },
+        "no_police_role": {
+            "en": "You don't have a ``Police`` role configured. Please go to the [dashboard]({{link}}) to configure it.",
+            "fr": "Vous n'avez pas de rôle ``Police`` configuré. Veuillez vous rendre sur le [dashboard]({{link}}) pour le configurer."
+        },
+        "no_member_found": {
+            "en": "No citizen named **{{first_name}} {{last_name}}** has been found.",
+            "fr": "Aucun citoyen portant le nom **{{first_name}} {{last_name}}** n'a été trouvé."
+        },
+        "no_license_plate": {
+            "en": "You have to specify the license plate to find the vehicule.", 
+            "fr": "Vous devez spécifiez la plaque d'immatriculation pour que nous puissions trouver le véhicule."
+        },
+        "no_vehicule_found": {
+            "en": "No vehicule named **{{vehicule_name}} {{license_plate}}** has been found.",
+            "fr": "Aucun véhicule nommé **{{vehicule_name}} {{license_plate}}** n'a été trouvé."
+        },
+        "already_wanted": {
+            "en": "**{{first_name}} {{last_name}}** is already wanted.",
+            "fr": "**{{first_name}} {{last_name}}** est déjà recherché."
+        },
+        "not_wanted": {
+            "en": "**{{first_name}} {{last_name}}** is not wanted.",
+            "fr": "**{{first_name}} {{last_name}}** n'est pas recherché."
+        },
+        "put_wanted": {
+            "en": "**{{first_name}} {{last_name}}** is now wanted.",
+            "fr": "**{{first_name}} {{last_name}}** est désormais recherché."
+        },
+        "no_wanteds": {
+            "en": "There is no wanted person.",
+            "fr": "Il n'y a aucune personne recherchée."
+        },
+        "remove_wanted": {
+            "en": "**{{first_name}} {{last_name}}** has been removed from the wanted list.",
+            "fr": "**{{first_name}} {{last_name}}** a été enlevé de la liste des recherchés."
+        },
+        "confirm_delete_wanted": {
+            "en": "Are you sure to delete the wanted of **{{first_name}} {{last_name}}** ?",
+            "fr": "Êtes-vous sûr de vouloir supprimer l'avis de recherche de **{{first_name}} {{last_name}}** ?"
+        },
+        "no_criminal_record_found": {
+            "en": "**{{first_name}} {{last_name}}** has no criminal record.",
+            "fr": "**{{first_name}} {{last_name}}** n'a pas de casier judiciaire."
+        },
+        "no_criminal_record_id_found": {
+            "en": "No criminal record with the ID **{{id}}** has been found.",
+            "fr": "Aucun casier judiciaire avec l'ID **{{id}}** n'a été trouvé."
+        },
+        "confirm_delete_cr": {
+            "en": "Are you surer to delete the entry ``#{{id}}`` for **{{reason}}** of **{{first_name}} {{last_name}}** ?",
+            "fr": "Êtes-vous sûr de vouloir supprimer l'entrée ``#{{id}}`` pour **{{reason}}** de **{{first_name}} {{last_name}}** ?"
+        },
+        "put_criminal_records": {
+            "en": "The entry ``#{{id}}`` has been added to the criminal record of **{{first_name}} {{last_name}}**.",
+            "fr": "L'entrée ``#{{id}}`` a été ajoutée au casier judiciaire de **{{first_name}} {{last_name}}**."
+        },
+        "remove_criminal_records": {
+            "en": "The entry ``#{{id}}`` for **{{reason}}** of **{{first_name}} {{last_name}}** has been deleted.",
+            "fr": "L'entrée ``#{{id}}`` pour **{{reason}}** de **{{first_name}} {{last_name}}** a été supprimée."
+        },
+        "no_criminal_records": {
+            "en": "There is no criminal record.",
+            "fr": "Il n'y a aucun casier judiciaire."
+        },
+        "already_pounded": {
+            "en": "**{{vehicule_name}} {{license_plate}}** is already in the pound.",
+            "fr": "**{{vehicule_name}} {{license_plate}}** est déjà en fourrière."
+        },
+        "not_pounded": {
+            "en": "**{{vehicule_name}} {{license_plate}}** is not in the pound.",
+            "fr": "**{{vehicule_name}} {{license_plate}}** n'est pas en fourrière."
+        },
+        "pounded_vehicles": {
+            "en": "{{amount}} pounded vehicle{{s}}",
+            "fr": "{{amount}} véhicule{{s}} en fourrière"
+        },
+        "put_pounded": {
+            "en": "**{{vehicule_name}} {{license_plate}}** is now in the pound.",
+            "fr": "**{{vehicule_name}} {{license_plate}}** est désormais en fourrière."
+        },
+        "remove_pounded": {
+            "en": "**{{vehicule_name}} {{license_plate}}** has been removed from the pound.",
+            "fr": "**{{vehicule_name}} {{license_plate}}** a été enlevé de la fourrière."
+        },
+        "confirm_delete_pounded": {
+            "en": "Are you sure to remove **{{vehicule_name}} {{license_plate}}** from the pound ?",
+            "fr": "Êtes-vous sûr de vouloir enlever **{{vehicule_name}} {{license_plate}}** de la fourrière ?"
+        },
+        "no_poundeds": {
+            "en": "There is no vehicle in the pound.",
+            "fr": "Il n'y a aucun véhicule en fourrière."
+        },
+        "put_fines": {
+            "en": "The fine of **{{amount}}{{symbol}}** has been given to **{{first_name}} {{last_name}}**.\n(ID : __{{id}}__)",
+            "fr": "L'amende de **{{amount}}{{symbol}}** a été donnée à **{{first_name}} {{last_name}}**.\n(ID : __{{id}}__)"
+        },
+        "no_fines_found": {
+            "en": "No fine with the ID **{{id}}** has been found.",
+            "fr": "Aucune amende avec l'ID **{{id}}** n'a été trouvée."
+        },
+        "not_fine": {
+            "en": "The bill with the ID **{{id}}** is not a fine. You can't delete it.",
+            "fr": "La facture avec l'ID **{{id}}** n'est pas une amende. Vous ne pouvez donc pas la supprimer."
+        },
+        "confirm_delete_fine": {
+            "en": "Are you sure to delete the fine of **{{amount}}{{symbol}}** with the ID **{{id}}** ?",
+            "fr": "Êtes-vous sûr de vouloir supprimer l'amende de **{{amount}}{{symbol}}** avec l'ID **{{id}}** ?"
+        },
+        "remove_fine": {
+            "en": "The fine **{{id}}** of **{{amount}}{{symbol}}** has been deleted.",
+            "fr": "L'amende **{{id}}** de **{{amount}}{{symbol}}** a été supprimée."
+        },
+        "identity": {
+            "en": "Identity",
+            "fr": "Identité"
+        },
+        "amount": {
+            "en": "Amount",
+            "fr": "Montant"
+        },
+        "fines_per_agents": {
+            "en": "Fines per agents",
+            "fr": "Amendes par agents"
+        },
+        "buttons": {
+            "connect": {
+                "en": "Connect",
+                "fr": "Se connecter"
+            },
+            "manage": {
+                "en": "Manage",
+                "fr": "Gérer"
+            },
+            "home": {
+                "en": "Home",
+                "fr": "Accueil"
+            },
+            "disconnect": {
+                "en": "Disconnect",
+                "fr": "Déconnexion"
+            },
+            "fines": {
+                "en": "Fines",
+                "fr": "Amendes"
+            },
+            "search": {
+                "en": "Search",
+                "fr": "Rechercher"
+            },
+            "criminal-records": {
+                "en": "Criminal records",
+                "fr": "Casiers judiciaires"
+            },
+            "pound": {
+                "en": "Pound",
+                "fr": "Fourrière"
+            },
+            "add": {
+                "en": "Add",
+                "fr": "Ajouter"
+            },
+            "remove": {
+                "en": "Remove",
+                "fr": "Retirer"
+            },
+            "see": {
+                "en": "See",
+                "fr": "Voir"
+            },
+            "interpol": {
+                "en": "Interpol",
+                "fr": "Interpol"
+            },
+            "plate": {
+                "en": "Plate",
+                "fr": "Plaque"
+            },
+            "plates": {
+                "en": "Plates",
+                "fr": "Plaques"
+            },
+            "id_card": {
+                "en": "ID card",
+                "fr": "Carte d'identité"
+            },
+            "id_cards": {
+                "en": "ID cards",
+                "fr": "Cartes d'identité"
+            },
+            "list": {
+                "en": "List",   
+                "fr": "Liste"
+            },
+            "identifiers": {
+                "en": "Identifiers",
+                "fr": "Identifiants"
+            },
+            "access": {
+                "en": "Access",
+                "fr": "Accès"
+            },
+            "retry": {
+                "en": "Retry",
+                "fr": "Réessayer"
+            }
+        },
+        "modal": {
+            "title": {
+                "en": "Police computer",
+                "fr": "Ordinateur de Police"
+            },
+            "id": {
+                "en": "ID of the criminal record",
+                "fr": "ID du casier judiciaire"
+            },
+            "placeholder_id": {
+                "en": "Enter the ID of the criminal record",
+                "fr": "Entrez l'ID du casier judiciaire"
+            },
+            "vehicule_name": {
+                "en": "vehicule name",
+                "fr": "Modèle du véhicule"
+            },
+            "placeholder_vehicule_name": {
+                "en": "Enter the vehicule name",
+                "fr": "Entrez le modèle du véhicule"
+            },
+            "license_plate": {
+                "en": "License plate",
+                "fr": "Plaque d'immatriculation"
+            },
+            "placeholder_license_plate": {
+                "en": "Enter the license plate",
+                "fr": "Entrez la plaque d'immatriculation"
+            },
+            "first_name": {
+                "en": "First name",
+                "fr": "Prénom"
+            },
+            "placeholder_first_name": {
+                "en": "Enter the first name",
+                "fr": "Entrez le prénom"
+            },
+            "last_name": {
+                "en": "Last name",
+                "fr": "Nom"
+            },
+            "placeholder_last_name": {
+                "en": "Enter the last name",
+                "fr": "Entrez le nom"
+            }, 
+            "amount": {
+                "en": "Amount",
+                "fr": "Montant"
+            },
+            "placeholder_amount": {
+                "en": "Enter the amount of the fine",
+                "fr": "Entrez le montant de l'amende"
+            },
+            "reason": {
+                "en": "Reason",
+                "fr": "Raison"
+            },
+            "placeholder_reason": {
+                "en": "Enter the reason",
+                "fr": "Entrez la raison"
+            },
+            "fine_id": {
+                "en": "Fine ID",
+                "fr": "ID de l'amende"
+            },
+            "placeholder_fine_id": {
+                "en": "Enter the fine ID",
+                "fr": "Entrez l'ID de l'amende"
+            },
+            "placeholder_interpol": {
+                "en": "Choose the wanted you want to see",
+                "fr": "Choisissez l'avis de recherche que vous souhaitez voir"
+            },
+            "placeholder_criminal-records": {
+                "en": "Choose the criminal record you want to see",
+                "fr": "Choisissez le casier judiciaire que vous souhaitez voir"
+            },
+            "placeholder_pound": {
+                "en": "Choose the pounded vehicle you want to see",
+                "fr": "Choisissez le véhicule en fourrière que vous souhaitez voir"
+            },
+            "identifier": {
+                "en": "Identifier",
+                "fr": "Identifiant"
+            },
+            "placeholder_identifier": {
+                "en": "Enter the identifier",
+                "fr": "Entrez l'identifiant"
+            },
+            "password": {
+                "en": "Password",
+                "fr": "Mot de passe"
+            },
+            "placeholder_password": {
+                "en": "Enter the password",
+                "fr": "Entrez le mot de passe"
+            }
+        },
+        "embed": {
+            "interpol": {
+                "title": {
+                    "en": "Interpol",
+                    "fr": "Interpol"
+                },
+                "fields": {
+                    "gender": {
+                        "en": "Sex",
+                        "fr": "Sexe"
+                    },
+                    "gender_male": {
+                        "en": "Man",
+                        "fr": "Homme"
+                    },
+                    "gender_female": {
+                        "en": "Woman",
+                        "fr": "Femme"
+                    },
+                    "officer": {
+                        "en": "Officer",
+                        "fr": "Officier"
+                    }
+                }
+            },
+            "criminal-records": {
+                "title": {
+                    "en": "Criminal records",
+                    "fr": "Casiers judiciaires"
+                },
+                "fields": {
+                    "id": {
+                        "en": "ID",
+                        "fr": "ID"
+                    },
+                    "name": {
+                        "en": "Name",
+                        "fr": "Nom"
+                    }
+                }
+            },
+            "pound": {
+                "title": {
+                    "en": "Pound",
+                    "fr": "Fourrière"
+                },
+                "fields": {
+                    "vehicule_name": {
+                        "en": "vehicule name",
+                        "fr": "Modèle du véhicule"
+                    },
+                    "license_plate": {
+                        "en": "License plate",
+                        "fr": "Plaque d'immatriculation"
+                    },
+                    "status": {
+                        "en": "Status",
+                        "fr": "Statut"
+                    },
+                    "status_value": {
+                        "en": "In the pound",
+                        "fr": "En fourrière"
+                    }
+                }
+            }
+        }
+    },
+    "prison": {
+        "self": {
+            "enter": {
+                "en": "You can't send yourself to jail",
+                "fr": "Vous ne pouvez pas vous envoyer en prison vous-même"
+            },
+            "leave": {
+                "en": "You can't get yourself out of jail",
+                "fr": "Vous ne pouvez pas vous faire sortir de prison vous-même"
+            }
+        },
+        "prison_embed": {
+            "author": {
+                "en": "Prison Administration of {{city}}",
+                "fr": "Administration pénitentiaire de {{city}}"
+            },
+            "description": {
+                "enter": {
+                    "en": "👮 {{member}} has entered prison since {{time}}",
+                    "fr": "👮 {{member}} est entré en prison depuis le {{time}}"
+                },
+                "leave": {
+                    "en": "👮 {{member}} has been released from prison since {{time}}.",
+                    "fr": "👮 {{member}} est sorti de prison depuis le {{time}}"
+                }
+            }
+        }
+    },
+    "publication": {
+        "role": {
+            "en": " the {{staffRole}} role or",
+            "fr": " le rôle {{staffRole}} ou"
+        },
+        "no_link": {
+            "en": "Links within publications are forbidden. You must have{{role}} the ``Administrator`` permission to be able to send links.",
+            "fr": "Les liens au sein des publications sont interdits. Vous devez posséder{{role}} la permission ``Administrateur`` pour pouvoir envoyer des liens."
+        },
+        "action": {
+            "en": "{{name}} is performing the following action:",
+            "fr": "{{name}} est en train d'effectuer l'action suivante :"
+        },
+        "anonyme": {
+            "title": {
+                "en": "・ Anonymous Message",
+                "fr": "・ Message Anonyme"
+            },
+            "footer": {
+                "en": "No IP address detected",
+                "fr": "Aucune adresse IP détectée"
+            }
+        },
+        "journal": {
+            "en": "📰 ・ Newspaper of {{city}}",
+            "fr": "📰 ・ Journal de {{city}}"
+        },
+        "confirm": {
+            "en": "Your [publication]({{url}}) has been sent",
+            "fr": "Votre [publication]({{url}}) a bien été envoyée"
+        },
+        "message": {
+            "en": "message",
+            "fr": "message"
+        },
+        "publication": {
+            "en": "publication",
+            "fr": "publication"
+        },
+        "logs_embed": {
+            "titles": {
+                "message": {
+                    "en": "Published message",
+                    "fr": "Message publié"
+                },
+                "publication": {
+                    "en": "New publication",
+                    "fr": "Nouvelle publication"
+                } 
+            },
+            "by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "type": {
+                "en": "Type of {{text}} :",
+                "fr": "Type de {{text}} :"
+            },
+            "normal": {
+                "en": "Normal message",
+                "fr": "Message normal"
+            },
+            "link_message": {
+                "en": "Message link :",
+                "fr": "Lien du message :"
+            },
+            "link_publication": {
+                "en": "Publication link :",
+                "fr": "Lien de la publication :"
+            },
+            "clickhere": {
+                "en": "Click here",
+                "fr": "Cliquez ici"
+            },
+            "content": {
+                "en": "Content :",
+                "fr": "Contenu :"
+            },
+            "invalid": {
+                "en": "Invalid",
+                "fr": "Invalide"
+            }
+        }
+    },
+    "réanimer": {
+        "revived": {
+            "en": "{{member}} has been revived by {{author}} !",
+            "fr": "{{member}} a été réanimé par {{author}} !"
+        },
+        "not_in_coma": {
+            "en": "{{member}} is not in coma",
+            "fr": "{{member}} n'est pas dans le coma"
+        }
+    },
+    "run": {
+        "not_found": {
+            "en": "The run company **{{name}}** is not available.",
+            "fr": "L'entreprise de run **{{name}}** n'est pas disponible."
+        },
+        "no_setup": {
+            "en": "No drugs have been configured on our [dashboard]({{dashboard}}), please contact an Administrator",
+            "fr": "Aucune drogue n'a été configurée sur notre [dashboard]({{dashboard}}), veuillez contacter un Administrateur"
+        },
+        "ask_quantity": {
+            "en": "Send the quantity of drugs you want to sell.",
+            "fr": "Envoyez la quantité de drogues que vous souhaitez vendre."
+        },
+        "choice_embed": {
+            "title": {
+                "en": "💠  Drugs panel",
+                "fr": "💠  Panneau des drogues"
+            },
+            "description": {
+                "en": "Select the drug you wish {{action}}",
+                "fr": "Sélectionnez la drogue que vous souhaitez {{action}}"
+            },
+            "action": {
+                "afficher": {
+                    "en": "to display",
+                    "fr": "afficher"
+                },
+                "ajouter": {
+                    "en": "to add",
+                    "fr": "ajouter"
+                },
+                "donner": {
+                    "en": "to give",
+                    "fr": "donner"
+                },
+                "jeter": {
+                    "en": "to discard",
+                    "fr": "jeter"
+                },
+                "retirer": {
+                    "en": "to remove",
+                    "fr": "retirer"
+                },
+                "consommer": {
+                    "en": "to consume",
+                    "fr": "consommer"
+                },
+                "dépister": {
+                    "en": "to detect",
+                    "fr": "dépister"
+                }
+            }
+        },
+        "choice_placeholder": {
+            "en": "Drug selection",
+            "fr": "Sélection de la drogue"
+        },
+        "gram_price": {
+            "en": "Price per gram",
+            "fr": "Prix du gramme"
+        },
+        "total_quantity": {
+            "en": "Total quantity",
+            "fr": "Quantité totale"
+        },
+        "treated_quantity": {
+            "en": "Treated quantity",
+            "fr": "Quantité traitée"
+        },
+        "member_no_drugs": {
+            "en": "You have no drugs in your inventory",
+            "fr": "Vous n'avez pas de drogue dans votre inventaire"
+        },
+        "main_embed": {
+            "description": {
+                "en": "{{user}}, choose the action that u wish to realize",
+                "fr": "{{user}}, sélectionnez l'action que vous souhaitez réaliser"
+            }
+        },
+        "buttons": {
+            "harvesting": {
+                "en": "Harvesting",
+                "fr": "Récolte"
+            },
+            "treatment": {
+                "en": "Treatment",
+                "fr": "Traitement"
+            },
+            "selling": {
+                "en": "Selling",
+                "fr": "Vente"
+            }
+        },
+        "modal": {
+            "textinput": {
+                "en": "Quantity",
+                "fr": "Quantité"
+            },
+            "placeholder": {
+                "en": "Enter the quantity",
+                "fr": "Entrez la quantité"
+            }
+        },
+        "no_drug_founded": {
+            "en": "The drug you selected could not be found... Please try again",
+            "fr": "La drogue que vous avez sélectionné est introuvable... Veuillez réessayer"
+        },
+        "harvesting_embed": {
+            "title": {
+                "en": "⛏️ Harvest in progress...",
+                "fr": "⛏️ Récolte en cours..."
+            },
+            "description": {
+                "en": "{{user}}, you are actually harvesting !\n\nPlease wait at harvest point before be able to treat.\n\n**⏰ End of the harvesting : ** {{time}}",
+                "fr": "{{user}}, vous êtes en train de récolter !\n\nVeuillez patienter au point de récolte avant de pouvoir traiter.\n\n**⏰ Fin de la récolte :** {{time}}"
+            }
+        },
+        "harvest_started": {
+            "en": "Your harvest has started. [See the message]({{link}})",
+            "fr": "Votre récolte a bien commencé. [Voir le message]({{link}})"
+        },
+        "end_harvesting_embed": {
+            "title": {
+                "en": "⛏️ Harvest finished",
+                "fr": "⛏️ Récolte terminée"
+            },
+            "description": {
+                "en": "{{user}}, you've harvested **{{result}}** of **{{item}}** !\n\n⚗️ You can now treat your product.",
+                "fr": "{{user}}, vous avez récolté **{{result}}** de **{{item}}** !\n\n⚗️ Vous pouvez à présent traiter votre produit."
+            }
+        },
+        "treatment_embed": {
+            "title": {
+                "en": "⚗️ Treatment in progress...",
+                "fr": "⚗️ Traitement en cours..."
+            },
+            "description": {
+                "en": "{{user}}, you are actually treating !\n\nPlease wait at treatment point before be able to sell.\n\n**⏰ End of the treatment :** {{time}}",
+                "fr": "{{user}}, vous êtes en train de traiter !\n\nVeuillez patienter au point de traitement avant de pouvoir vendre.\n\n**⏰ Fin du traitement :** {{time}}"
+            }
+        },
+        "treatment_started": {
+            "en": "Your treatment has started. [See the message]({{link}})",
+            "fr": "Votre traitement a bien commencé. [Voir le message]({{link}})"
+        },
+        "end_treatment_embed": {
+            "title": {
+                "en": "⚗️ Treatment finished",
+                "fr": "⚗️ Traitement terminé"
+            },
+            "description": {
+                "en": "{{user}}, you've treated **{{result}}** of **{{item}}** !\n\n💰 You can now sell your product.",
+                "fr": "{{user}}, vous avez traité **{{result}}** de **{{item}}** !\n\n💰 Vous pouvez à présent vendre votre produit."
+            }
+        },
+        "not_enoug": {
+            "en": "You don't have **{{modalQuantity}}** of **{{item}}** but **{{quantity}}g**",
+            "fr": "Vous n'avez pas **{{modalQuantity}}** de **{{item}}** mais **{{quantity}}**"
+        },
+        "no_drug_to_sell": {
+            "en": "{{member}} doesn't have {{item}} to sell",
+            "fr": "{{member}} n'a pas de {{item}} à vendre"
+        },
+        "selling_embed": {
+            "title": {
+                "en": "💰 Selling in progress",
+                "fr": "💰 Vente en cours"
+            },
+            "description": {
+                "en": "{{user}}, you are actually selling !\n\nPlease wait at selling point before be able to leave.\n\n**⏰ End of the selling :** {{time}}",
+                "fr": "{{user}}, vous êtes en train de vendre !\n\nVeuillez patienter au point de vente avant de pouvoir partir.\n\n**⏰ Fin de la vente :** {{time}}"
+            }
+        },
+        "selling_started": {
+            "en": "Your sell has started. [See the message]({{link}})",
+            "fr": "Votre vente a bien commencé. [Voir le message]({{link}})"
+        },
+        "end_selling_embed": {
+            "title": {
+                "en": "💰 Selling finished",
+                "fr": "💰 Vente terminée"
+            },
+            "description": {
+                "en": "{{user}}, you've selled **{{result}}** of {{item}} for **{{money}}** !",
+                "fr": "{{user}}, vous avez vendu **{{result}}** de {{item}} pour **{{money}}** !"
+            }
+        },
+        "not_give_yourself": {
+            "en": "You can't give yourself drugs",
+            "fr": "Vous ne pouvez pas vous donner de la drogue"
+        },
+        "all": {
+            "en": "{{drugName}}",
+            "fr": "{{drugName}}"
+        },
+        "type_all_no_quantity": {
+            "en": "You cannot enter a quantity if you select 'Treated and untreated drug'",
+            "fr": "Vous ne pouvez pas entrer de quantité si vous sélectionnez 'Drogue traitée et non traitée'"
+        }
+    },
+    "saisir": {
+        "item_not_found": {
+            "en": "I didn't find the item **{{name}}**.",
+            "fr": "Je n'ai pas trouvé l'item **{{name}}**."
+        },
+        "member_no_item": {
+            "en": "I didn't find the item **{{name}}** in {{member}}'s inventory.",
+            "fr": "Je n'ai pas trouvé l'item **{{name}}** dans l'inventaire de {{member}}."
+        },
+        "dirty_money": {
+            "en": "Dirty money",
+            "fr": "Argent sale" 
+        },
+        "cash_money": {
+            "en": "Cash money",
+            "fr": "Argent liquide"
+        },
+        "id_card": {
+            "en": "ID card",
+            "fr": "Carte d'identité"
+        },
+        "frisk_embed": {
+            "title": {
+                "en": "Seizure",
+                "fr": "Saisie"
+            },
+            "description": {
+                "en": "🔍 You have seized **{{quantity}}{{name}}** to **{{member}}**",
+                "fr": "🔍 Vous avez saisi **{{quantity}}{{name}}** à **{{member}}**"
+            }
+        },
+        "logs_embed": {
+            "title": {
+                "en": "Seizure",
+                "fr": "Saisie"
+            },
+            "fields": {
+                "field1": {
+                    "value": {
+                        "en": "{{user}} ({{id}})",
+                        "fr": "{{user}} ({{id}})"
+                    }
+                },
+                "field2": {
+                    "name": {
+                        "en": "Member :",
+                        "fr": "Membre :"
+                    },
+                    "value": {
+                        "en": "{{member}} ({{id}})",
+                        "fr": "{{member}} ({{id}})"
+                    }
+                },
+                "field3": {
+                    "name": {
+                        "en": "Seizure :",
+                        "fr": "Saisie :"
+                    }
+                }
+            },
+            "dirty_money_seized": {
+                "en": "Dirty money seized",
+                "fr": "Argent sale saisi"
+            }
+        }
+    },
+    "service": {
+        "already_in_service": {
+            "en": "You are already in service.\n[Click here]({{link}}) to go to the message.",
+            "fr": "Vous êtes déjà en service.\n[Cliquez ici]({{link}}) pour revenir au message."
+        },
+        "take_service_embed": {
+            "title": {
+                "en": "Taking the service",
+                "fr": "Prise de service"
+            },
+            "description": {
+                "en": "{{user}} taken his service as a **{{job}}**.\n🕑 Time : {{time}}",
+                "fr": "{{user}} a pris son service en tant que **{{job}}**.\n🕑 Heure : {{time}}"
+            }
+        },
+        "not_in_service": {
+            "en": "You are not in service actually",
+            "fr": "Vous n'êtes pas en service actuellement"
+        },
+        "leave_service_embed": {
+            "title": {
+                "en": "End of service",
+                "fr": "Fin de service"
+            },
+            "description": {
+                "en": "{{user}} has finished his service.\n🕑 Time : {{time}}",
+                "fr": "{{user}} a fini son service.\n🕑 Heure :{{time}}"
+            }
+        }
+    },
+    "sms": {
+        "sms_embed": {
+            "title": {
+                "en": "💬 ・ Message",
+                "fr": "💬 ・ Message"
+            },
+            "footer": {
+                "en": "From {{name}} of {{city}}",
+                "fr": "De {{name}} de {{city}}"
+            }
+        },
+        "sms_content": {
+            "en": "`/sms` from {{user}}",
+            "fr": "`/sms` de {{user}}"
+        },
+        "logs_embed": {
+            "title": {
+                "en": "・ Message",
+                "fr": "・ Message"
+            },
+            "fields": {
+                "field1": {
+                    "name": {
+                        "en": "Author :",
+                        "fr": "Auteur :"
+                    },
+                    "value": {
+                        "en": "{{user}} ({{id}})",
+                        "fr": "{{user}} ({{id}})"
+                    }
+                },
+                "field2": {
+                    "name": {
+                        "en": "Target : ",
+                        "fr": "Cible : "
+                    },
+                    "value": {
+                        "en": "{{member}} ({{id}})",
+                        "fr": "{{member}} ({{id}})"
+                    }
+                },
+                "field3": {
+                    "name": {
+                        "en": "Content :",
+                        "fr": "Contenu :"
+                    },
+                    "value": {
+                        "en": "{{content}}",
+                        "fr": "{{content}}"
+                    }
+                }
+            }
+        },
+        "validation_embed": {
+            "en": "Your SMS has been sent to {{member}} !",
+            "fr": "Votre SMS a bien été envoyé à {{member}} !"
+        },
+        "error_embed": {
+            "en": "Your SMS could not be sent to {{member}}, his private messages are closed",
+            "fr": "Votre SMS n'a pas pu être envoyé à {{member}}, ses messages privés sont fermés"
+        }
+    },
+    "taxi": {
+        "role_not_defined": {
+            "en": "The **Taxi** role isn't defined. Contact an administrator of your server to configure this role on the [dashboard]({{link}})",
+            "fr": "Le rôle **Taxi** n'est pas défini. Contactez un administrateur de votre serveur pour configurer ce rôle sur le [dashboard]({{link}})"
+        },
+        "taxi_embed": {
+            "title": {
+                "en": "☎️ ・ Call to the taxi office",
+                "fr": "☎️ ・ Appel à la centrale de taxi"
+            },
+            "description": {
+                "en": "Your request has been received.\n\nPlease wait for one of our drivers to pick you up.\n\n📍 **Location :** {{place}}",
+                "fr": "Votre demande a bien été prise en compte.\n\nVeuillez patienter le temps que l'un de nos chauffeurs prennent en charge votre course.\n\n📍 **Localisation :** {{place}}"
+            }
+        }
+    },
+    "ticket_gratter": {
+        "title": {
+            "en": "🎫  Scratch ticket",
+            "fr": "🎫  Ticket à gratter"
+        },
+        "ask": {
+            "en": "Would you like to buy a scratch card ? (**{{money}}**)",
+            "fr": "Voulez-vous acheter un ticket à gratter ? (**{{money}}**)"
+        },
+        "confirm": {
+            "en": "Your scratch ticket has been purchased !",
+            "fr": "Votre ticket à gratter a bien été acheté !"
+        },
+        "no_money": {
+            "en": "You don't have enough money in your pockets !",
+            "fr": "Vous n'avez pas assez d'argent dans vos poches !"
+        },
+        "description": {
+            "en": "> {{user}}, Please scratch the **black boxes** below for a chance to win.\n> Caution, the **3 symbols** must be identical !",
+            "fr": "> {{user}}, Veuillez gratter les **cases noires** ci-dessous pour tenter d'obtenir un gain.\n> Attention, Les **3 symboles** doivent être identiques !"
+        },
+        "win": {
+            "en": "»  You won **{{money}}** !",
+            "fr": "»  Vous avez gagné **{{money}}** !"
+        },
+        "lose": {
+            "en": "»  You lost...",
+            "fr": "»  Vous avez perdu..."
+        }
+    },
+    "urgences": {
+        "no_role": {
+            "en": "Please configure the role for the **{{service}}** service. You can configure this role on our [dashboard]({{link}}).",
+            "fr": "Veuillez configurer le rôle pour le service **{{service}}**. Vous pouvez configurer ce rôle sur notre [dashboard]({{link}})."
+        },
+        "take": {
+            "en": "Take the call",
+            "fr": "Prendre l'appel"
+        },  
+        "main_embed": {
+            "title": {
+                "en": "Emergency call of {{name}}",
+                "fr": "Appel d'urgence de {{name}}"
+            },
+            "description": {
+                "en": "You composed the emergency number for the following reason :\n> {{reason}}",
+                "fr": "Vous avez composé le numéro d'urgences pour la raison suivante :\n> {{reason}}"
+            }
+        },
+        "buttons": {
+            "police": {
+                "en": "Police",
+                "fr": "Police"
+            },
+            "ems": {
+                "en": "EMS",
+                "fr": "SAMU"
+            },
+            "firefighters": {
+                "en": "Firefighters",
+                "fr": "Pompiers"
+            }
+        },
+        "perm_send": {
+            "en": "The bot don't have the permission to send messages in {{channel}}. Contact an administrator of the server",
+            "fr": "Le bot n'a pas la permission d'envoyer des messages dans {{channel}}. Contactez un administrateur de votre serveur"
+        },
+        "call_embed": {
+            "title": {
+                "en": " ・ Emergency call",
+                "fr": " ・ Appel d'urgence"
+            },
+            "description": {
+                "ems": {
+                    "en": "{{user}} composed the emergency number of the **EMS**",
+                    "fr": "{{user}} a composé le numéro d'urgences des **EMS**"
+                },
+                "police": {
+                    "en": "{{user}} composed the emergency number of the **Police**",
+                    "fr": "{{user}} a composé le numéro d'urgences de la **Police**"
+                },
+                "firefighters": {
+                    "en": "{{user}} composed the emergency number of the **Firefighters",
+                    "fr": "{{user}} a composé le numéro d'urgences des **Pompiers**"
+                }
+            },
+            "description_take": {
+                "en": "{{user}} took the emergency call. The agent is currently on his way to you.\nPlease stay away and don't move.",
+                "fr": "{{user}} a pris l'appel d'urgence. L'agent est actuellement en route vers vous.\nVeuillez rester à l'abri et à ne pas bouger."
+            },
+            "fields": {
+                "reason": {
+                    "en": "Reason :",
+                    "fr": "Raison :"
+                },
+                "location": {
+                    "en": "Location :",
+                    "fr": "Localisation :"
+                }
+            }
+        },
+        "confirmation": {
+            "ems": {
+                "en": "Your [emergency call]({{link}}) has been made to the **SAMU**",
+                "fr": "Votre [appel d'urgence]({{link}}) a bien été passé au **SAMU**"
+            },
+            "police": {
+                "en": "Your [emergency call]({{link}}) has been made to the **Police**",
+                "fr": "Votre [appel d'urgence]({{link}}) a bien été passé à la **Police**"
+            },
+            "firefighters": {
+                "en": "Your [emergency call]({{link}}) has been made to the **Firefighters**",
+                "fr": "Votre [appel d'urgence]({{link}}) a bien été passé aux **Pompiers**"
+            }
+        }
+    },
+    "visite_medicale": {
+        "view_embed": {
+            "title": {
+                "en": "🌡️ Medical Visit",
+                "fr": "🌡️ Visite Médicale"
+            },
+            "description": {
+                "intro": {
+                    "en": "Official medical visit of **{{city}}**\n\n",
+                    "fr": "Visite médicale officielle de **{{city}}**\n\n"
+                },
+                "already": {
+                    "en": "Last medical visit for {{member}} on {{time}}",
+                    "fr": "Dernière visite médicale de {{member}} le {{time}}"
+                },
+                "never": {
+                    "en": "{{member}} has never did his medical visit",
+                    "fr": "{{member}} n'a encore jamais passé sa visite médicale"
+                }
+            }
+        },
+        "same_day": {
+            "en": "{{member}} can only have a maximum of one medical visit per day. Last visit on {{time}}",
+            "fr": "{{member}} ne peut passer au maximum qu'une visite médicale par jour. Dernière visite le {{time}}"
+        },
+        "valid_embed": {
+            "title": {
+                "en": "🌡️ Medical Visit",
+                "fr": "🌡️ Visite Médicale"
+            },
+            "description": {
+                "en": "Official medical visit at **{{city}}**\n\n{{member}} has validated his medical visit on {{time}}.",
+                "fr": "Visite médicale officielle de **{{city}}**\n\n{{member}} a validé sa visite médicale le {{time}}"
+            }
+        },
+        "logs_embed": {
+            "title": {
+                "en": "Past medical check-up",
+                "fr": "Visite médicale passée"
+            },
+            "fields": {
+                "field1": {
+                    "name": {
+                        "en": "Doctor :",
+                        "fr": "Docteur :"
+                    },
+                    "value": {
+                        "en": "{{user}} ({{id}})",
+                        "fr": "{{user}} ({{id}})"
+                    }
+                },
+                "field2": {
+                    "name": {
+                        "en": "Patient :",
+                        "fr": "Patient :"
+                    },
+                    "value": {
+                        "en": "{{member}} ({{id}})",
+                        "fr": "{{member}} ({{id}})"
+                    }
+                },
+                "field3": {
+                    "name": {
+                        "en": "Date :",
+                        "fr": "Date :"
+                    },
+                    "value": {
+                        "en": "{{time}}",
+                        "fr": "{{time}}"
+                    }
+                }
+            }
+        }
+    }
+}

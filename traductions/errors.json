@@ -1,0 +1,276 @@
+{
+    "pass_autocomplete": {
+        "en": "<:emergency:976955107398795365> If no choice is offered to you in the ``{{option}}`` option, you cannot specify something yourself.\n\nIn this command, you must wait for the ``{{option}}`` option to return a result to you, if it does not, it means that there is no possible result to perform the command.\nIf a result appears, you must choose from what the bot offers you.",
+        "fr": "<:emergency:976955107398795365> Si aucun choix ne s'offre à vous dans l'option ``{{option}}``, vous ne pouvez pas spécifiez vous-même quelque chose.\n\nDans cette commande, vous devez attendre que l'option ``{{option}}`` vous renvoie un résultat, si elle ne le fais pas, c'est qu'il n'y a aucun résultat possible pour effectuer la commande.\nSi un résultat s'affiche, vous devez choisir parmis ce que le bot vous propose uniquement."
+    },
+    "perms_send": {
+        "en": "I didn't have needed perms to execute your command in {{channel}} !\n\nAn administrator of your server should verify that my rôle has the permissions `View Channel`, `Send Messages` and `Embed Links` in this channel",
+        "fr": "Je n'ai pas les permissions requises pour réagir à votre commande dans {{channel}} !\n\nUn administrateur de votre serveur devrait vérifier que mon rôle ait bien les permissions `Voir le salon`, `Envoyer des messages` et `Intégrer des liens` dans ce salon."
+    },
+    "not_number": {
+        "en": "**{{number}}** isn't a number greater than 0.",
+        "fr": "**{{number}}** n'est pas un nombre supérieur à 0."
+    },
+    "no_modo_role": {
+        "en": "I didn't find the moderator role. Please configure it on the [dashboard](https://nidev.fr/)",
+        "fr": "Je n'ai pas trouvé le rôle modérateur. Veuillez le configurer sur le [dashboard](https://nidev.fr/)"
+    },
+    "not_in_server": {
+        "en": "{{member}} isn't in the server",
+        "fr": "{{member}} n'est pas dans le serveur"
+    },
+    "missing_permission": {
+        "en": "To do this action you need the `{{permission}}` permission.",
+        "fr": "Pour effectuer cette action il vous faut la permission ``{{permission}}``."
+    },
+    "eastes_missing_permission": {
+        "en": "This property must be purchased by a person employed in the real estate agency.",
+        "fr": "Ce bien immobilier doit être acheter par une personne étant employé dans l'agence immobilière."
+    },
+    "missiong_permissions": {
+        "en": "To do this action you need the following permissions : `{{permissions}}`.",
+        "fr": "Pour effectuer cette action il vous faut les permissions suivantes : ``{{permissions}}``."
+    },
+    "member_is_null": {
+        "en": "The mentioned member",
+        "fr": "Le membre mentionné"
+    },
+    "is_a_bot": {
+        "en": "{{member}} is a bot",
+        "fr": "{{member}} est un bot"
+    },
+    "reason_too_long": {
+        "en": "The reason is too long ({{limit}} characters max)",
+        "fr": "La raison est trop longue ({{limit}} caractères maximum)"
+    }, 
+    "not_yet_available": {
+        "en": "This feature is not yet available",
+        "fr": "Cette fonctionnalité n'est pas encore disponible"
+    },
+    "impossible_send_here": {
+        "en": "It is not possible to send a message in this channel",
+        "fr": "Il n'est pas possible d'envoyer un message dans ce salon"
+    },
+    "cant_include_yourself": {
+        "en": "You cannot include yourself in this command.",
+        "fr": "Vous ne pouvez pas vous inclure vous-même dans cette commande."
+    },
+    "cant_include_bot": {
+        "en": "You cannot include a bot in this command.",
+        "fr": "Vous ne pouvez pas inclure un bot dans cette commande."
+    },
+    "already_doing": {
+        "en": "You are already doing something illegal.\n[Click here]({{link}}) to go back to message.",
+        "fr": "Vous êtes déjà en train de faire une action illégale.\n[Cliquez ici]({{link}}) pour revenir au message."
+    },
+    "already_doing_without_link": { 
+        "en": "You are already doing something illegal.",
+        "fr": "Vous êtes déjà en train de faire une action illégale."
+    },
+    "unkown_command": {
+        "en": "The {{command}} command cannot be found",
+        "fr": "La commande {{command}} est introuvable"
+    },
+    "int_passing": {
+        "en": "The amount of **{{name}}** must lower than **2 147 483 647**.",
+        "fr": "Le montant de **{{name}}** doit être inférieur à **2 147 483 647**."
+    },
+    "int_passing_member": {
+        "en": "{{member}}'s amount of **{{name}}** must lower than **2 147 483 647**.",
+        "fr": "Le montant **{{name}}** de {{member}} doit être inférieur à **2 147 483 647**."
+    },
+    "too_much_int": {
+        "en": "Your quantity of **{{name}}** must lower than **2 147 483 647**.",
+        "fr": "Votre quantité de **{{name}}** doit être inférieure à **2 147 483 647**."
+    },
+    "not_your_interaction": {
+        "en": "{{member}}, This interaction is not yours. You can do the command yourself to interact with me.",
+        "fr": "{{member}}, cette interaction ne vous appartient pas. Vous pouvez faire la commande vous-même pour intéragir avec moi."
+    },
+    "dont_have_item": {
+        "en": "You don't have **{{name}}**",
+        "fr": "Vous n'avez pas **{{name}}**"
+    },
+    "no_inventory": {
+        "en": "Your inventory is empty.",
+        "fr": "Votre inventaire est vide."
+    },
+    "inventory_full": {
+        "en": "Your inventory is full.",
+        "fr": "Votre inventaire est plein."
+    },
+    "inventory_full_member": {
+        "en": "{{member}}'s inventory is full, he cannot receive **{{item}}**",
+        "fr": "L'inventaire de {{member}} est plein, il ne peut pas recevoir **{{item}}**"
+    },
+    "max_item": {
+        "en": "You cannot have more than **{{max}}** **{{name}}**.",
+        "fr": "Vous ne pouvez pas avoir plus de **{{max}}** **{{name}}**."
+    },
+    "color_undefined": {
+        "en": "The color ``{{color}}`` is impossible to find. You can go to [this website]({{link}}) to take the **hex code** of a valid color or enter the name of a known color (ex: red, blue, light gray)",
+        "fr": "La couleur ``{{color}}`` est impossible à trouver. Vous pouvez vous rendre sur [ce site web]({{link}}) afin de prendre le **code hex** d'une couleur valide ou entrer le nom d'une couleur connue (ex: rouge, bleu, gris clair)"
+    },
+    "max_item_member": {
+        "en": "{{member}} cannot have more than **{{max}}** **{{name}}**.",
+        "fr": "{{member}} ne peut pas avoir plus de **{{max}}** **{{name}}**."
+    },
+    "time": {
+        "en": "You took too long to answer, please start again",
+        "fr": "Vous avez mis trop de temps à répondre, veuillez recommencer"
+    },
+    "invalid_date": {
+        "en": "The date mentioned must be valid and in the format **MM/DD/YYYY**",
+        "fr": "La date mentionnée doit être valide et au format **JJ/MM/AAAA**"
+    },
+    "invalid_amount": {
+        "en": "The amount mentioned must be valid and greater than 0",
+        "fr": "Le montant mentionné doit être valide et supérieur à 0"
+    },
+    "overdraft": {
+        "en": "This transaction will put you over the overdraft limit of **{{limit}}{{symbol}}** authorized by the bank.",
+        "fr": "Cette transaction vous ménera à un découvert supérieur à **{{limit}}{{symbol}}** autorisé par la banque."
+    },
+    "freeze_account": {
+        "en": "Your account is frozen, you cannot make bank transactions",
+        "fr": "Votre compte est gelé, vous ne pouvez pas effectuer de transactions bancaires"
+    },
+    "freeze_account_member": {
+        "en": "The account of {{member}} is frozen, he cannot make/receive bank transactions",
+        "fr": "Le compte de {{member}} est gelé, il ne peut pas effectuer/recevoir de transactions bancaires"
+    },
+    "error_occurred": {
+        "en": "An error has occurred, please try again. If the problem persists, contact our [support]({{link}}).",
+        "fr": "Une erreur est survenue, veuillez recommencer. Si le problème persiste, contactez notre [support]({{link}})."
+    },
+    "staff_cmd": {
+        "en": "You need the role <&{{role}}> to use this command",
+        "fr": "Vous devez avoir le rôle <&{{role}}> pour utiliser cette commande"
+    },
+    "role_higher": {
+        "en": "The selected role is higher than your highest role",
+        "fr": "Le rôle sélectionné est supérieur à votre rôle le plus haut"
+    },
+    "role_same": {
+        "en": "The role to add is the same as the role to remove",
+        "fr": "Le rôle à ajouter est identique au rôle à retirer"
+    },
+    "role_add_required_same": {
+        "en": "The role to add is the same as the required role",
+        "fr": "Le rôle à ajouter est identique au rôle requis"
+    },
+    "role_required": {
+        "en": "You need the role <@&{{role}}> to receive **{{item}}**",
+        "fr": "Vous devez avoir le rôle <@&{{role}}> pour recevoir **{{item}}**"
+    },
+    "role_required_member": {
+        "en": "{{member}} need the role <@&{{role}}> to receive **{{item}}**",
+        "fr": "{{member}} doit avoir le rôle <@&{{role}}> pour recevoir **{{item}}**"
+    },
+    "role_not_found": {
+        "en": "The role <@&{{role}}> cannot be found",
+        "fr": "Le rôle <@&{{role}}> est introuvable"
+    },
+    "dont_have_role": {
+        "en": "You do not have the role <@&{{role}}>",
+        "fr": "Vous n'avez pas le rôle <@&{{role}}>"
+    },
+    "cant_give_role": {
+        "en": "I cannot give the role <@&{{role}}>",
+        "fr": "Je ne peux pas donner le rôle <@&{{role}}>"
+    },
+    "cant_remove_role": {
+        "en": "I cannot remove the role <@&{{role}}>",
+        "fr": "Je ne peux pas retirer le rôle <@&{{role}}>"
+    },
+    "include_dot": {
+        "en": "`{{option}}` cannot contain a dot ('.')",
+        "fr": "`{{option}}` ne doit pas contenir de point ('.')."
+    },
+    "admin_cmd": {
+        "en": "You need to be `Administrator` of the server to use this command",
+        "fr": "Vous devez être `Administrateur` du serveur pour utiliser cette commande"
+    },
+    "no_bank_account": {
+        "en": "You do not have a bank account : `/compte-bancaire créer`",
+        "fr": "Vous n'avez pas de compte bancaire : `/compte-bancaire créer`"
+    },
+    "no_member_account": {
+        "en": "{{member}} have not a bank account : `/compte-bancaire créer`",
+        "fr": "{{member}} n'a pas de compte bancaire : `/compte-bancaire créer`"
+    },
+    "blocked": {
+        "en": "Your bank card is blocked, you cannot make bank transactions.",
+        "fr": "Vous carte bancaire est bloquée, vous ne pouvez pas effectuer de transactions bancaires."
+    },
+    "handcuffed": {
+        "en": "You are handcuffed, you cannot make this action.",
+        "fr": "Vous êtes menotté, vous ne pouvez pas effectuer cette action."
+    },
+    "in_jail": {
+        "en": "You are in jail, you cannot make this action.",
+        "fr": "Vous êtes en prison, vous ne pouvez pas effectuer cette action."
+    },
+    "frozen": {
+        "en": "Your bank account is frozen, you cannot make or receive bank transactions.",
+        "fr": "Vous compte bancaire est gelé, vous ne pouvez pas effectuer ou recevoir de transactions bancaires."
+    },
+    "frozen_member": {
+        "en": "The bank account of {{member}} is frozen, he cannot make or receive bank transactions.",
+        "fr": "Le compte bancaire de {{member}} est gelé, il ne peut pas effectuer ou recevoir de transactions bancaires."
+    },
+    "idcard_user": {
+        "en": "You do not have an identity card : `/carte-identite créer`",
+        "fr": "Vous n'avez pas de carte d'identité : `/carte-identite créer`"
+    },
+    "idcard_member": {
+        "en": "{{member}} does not have an ID card : `/carte-identite créer`",
+        "fr": "{{member}} n'a pas de carte d'identité : `/carte-identite créer`"
+    },
+    "no_company": {
+        "en": "You do not have a company : `/entreprise créer`",
+        "fr": "Vous n'avez pas d'entreprise : `/entreprise créer`"
+    },
+    "not_enough_cash_money": {
+        "en": "You only have **{{amount}}{{symbol}}** of cash money",
+        "fr": "Vous avez seulement **{{amount}}{{symbol}}** d'argent liquide"
+    },
+    "not_enough_dirty_money": {
+        "en": "You only have **{{amount}}{{symbol}}** of dirty money",
+        "fr": "Vous avez seulement **{{amount}}{{symbol}}** d'argent sale"
+    },
+    "not_enough_bank_money": {
+        "en": "You only have **{{amount}}{{symbol}}** of bank money",
+        "fr": "Vous avez seulement **{{amount}}{{symbol}}** sur votre compte bancaire"
+    },
+    "no_cash_money": {
+        "en": "You do not have any cash money",
+        "fr": "Vous n'avez pas d'argent liquide"
+    },
+    "member_no_cash_money": {
+        "en": "{{member}} does not have any cash money",
+        "fr": "{{member}} n'a pas d'argent liquide"
+    },
+    "no_companies": {
+        "en": "Your server does not have any companies : `/entreprise créer`",
+        "fr": "Votre serveur n'a pas d'entreprises : `/entreprise créer`"
+    },
+    "premium": {
+        "en": "You must be [Premium](https://nidev.fr/skyroleplay/premium) {{emoji}} to do this !",
+        "fr": "Vous devez être [Premium](https://nidev.fr/skyroleplay/premium) {{emoji}} pour faire ceci !"
+    },
+    "premium_function": {
+        "en": "This function is only available for [Premium](https://nidev.fr/skyroleplay/premium) {{emoji}}.",
+        "fr": "Cette fonctionnalité est uniquement disponible pour les [Premium](https://nidev.fr/skyroleplay/premium) {{emoji}}."
+    },
+    "error_embed": {
+        "title": {
+            "en": "{{emoji}} Uh-oh...",
+            "fr": "{{emoji}} Oh oh..."
+        },
+        "description": {
+            "en": "An error occurred while processing the order!\nAn error report has been sent to the developers.",
+            "fr": "Une erreur est survenue lors du traitement de la commande !\nUn rapport d'erreur a été envoyé aux développeurs."
+        }
+    }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "skyroleplay",
+  "version": "5.0.0",
+  "description": "Discord bot created by NiDev",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nidev-fr/skyroleplay.git"
+  },
+  "author": {
+    "name": "NiDev",
+    "url": "https://nidev.fr",
+    "email": "contact@nidev.fr"
+  },
+  "contributors": [
+    "Austrian",
+    "Imblaw_",
+    "Gk93.",
+    "Simon_",
+    "Hokib",
+    "Sofian"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nidev-fr/skyroleplay/issues"
+  },
+  "homepage": "https://github.com/nidev-fr/skyroleplay#readme",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.367.0",
+    "@bugsnag/js": "^7.20.2",
+    "@napi-rs/canvas": "^0.1.30",
+    "axios": "^1.4.0",
+    "bufferutil": "^4.0.3",
+    "canvas": "^2.9.3",
+    "canvas-constructor": "^7.0.0",
+    "chalk": "^4.1.2",
+    "customizable-discordjs-pagination": "^2.0.1",
+    "dayjs": "^1.11.5",
+    "discord-hybrid-sharding": "^2.1.1",
+    "discord.js": "^14.8.0",
+    "express": "^4.17.1",
+    "i18next": "^21.9.1",
+    "imgur-uploader": "^4.2.1",
+    "mysql": "^2.18.1",
+    "utf-8-validate": "^5.0.5",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  },
+  "engines": {
+    "node": ">=16.6.0",
+    "npm": ">=7.0.0"
+  }
+}

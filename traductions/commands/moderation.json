@@ -1,0 +1,1252 @@
+{
+    "argent": {
+        "not_bank_accounts": {
+            "en": "No member with the role {{role}} has a bank account",
+            "fr": "Aucun membre ayant le rôle {{role}} n'a de compte bancaire"
+        },
+        "not_guild_bank_accounts": {
+            "en": "No member of your server has a bank account",
+            "fr": "Aucun membre de votre serveur n'a de compte bancaire"
+        },
+        "not_valid_members": {
+            "en": "No member with the role {{role}} has enough money to withdraw this amount",
+            "fr": "Aucun membre ayant le rôle {{role}} n'a assez d'argent pour retirer ce montant"
+        },
+        "text_type": {
+            "bank_money": {
+                "en": "from the bank",
+                "fr": "en banque"
+            },
+            "cash_money": {
+                "en": "in cash",
+                "fr": "en espèces"
+            },
+            "dirty_money": {
+                "en": "in dirty money",
+                "fr": "en argent sale"
+            }
+        },
+        "ajouter": {
+            "en": "Add",
+            "fr": "Ajout"
+        },
+        "retirer": {
+            "en": "Withdraw",
+            "fr": "Retrait"
+        },
+        "adding": {
+            "en": "{{method}} in progress on **{{amount}}** member{{s}}...",
+            "fr": "{{method}} en cours sur **{{amount}}** membre{{s}}..."
+        },
+        "added": {
+            "en": "added",
+            "fr": "ajoutés"
+        },
+        "withdrawn": {
+            "en": "withdrawned from",
+            "fr": "retirés"
+        },
+        "after": {
+            "en": "and a bank account",
+            "fr": "et un compte bancaire " 
+        },
+        "time": {
+            "en": "**{{money}}** have been {{state}} {{type}} of **{{amount}}** people with the {{role}} role {{after}}!",
+            "fr": "**{{money}}** ont été {{state}} {{type}} {{at}} **{{amount}}** personne{{s}} ayant le rôle {{role}} {{after}}!"
+        },
+        "at": {
+            "plurial": {
+                "en": "at",
+                "fr": "aux"
+            },
+            "singular": {
+                "en": "at",
+                "fr": "à"
+            }
+        },
+        "no_user_dirty_money": {
+            "en": "You have less than **{{money}}** in dirty money",
+            "fr": "Vous avez moins de **{{money}}** en argent sale"
+        },
+        "no_member_dirty_money": {
+            "en": "{{member}} has less than **{{money}}** in dirty money",
+            "fr": "{{member}} a moins de **{{money}}** en argent sale"
+        },
+        "less_self_remove_cash": {
+            "en": "You have less than **{{money}}** in cash",
+            "fr": "Vous avez moins de **{{money}}** en espèces"
+        },
+        "less_self_remove_bank": {
+            "en": "You cannot have less than **{{limit}}** in your bank account",
+            "fr": "Vous ne pouvez pas avoir moins de **{{limit}}** sur votre compte bancaire"
+        },
+        "member_remove_cash": {
+            "en": "{{member}} has less than **{{money}}** in cash",
+            "fr": "{{member}} a moins de **{{money}}** en espèces"
+        },
+        "member_remove_bank": {
+            "en": "{{member}} cannot have less than **{{limit}}** in his bank account",
+            "fr": "{{member}} ne peut pas avoir moins de **{{limit}}** sur son compte bancaire"
+        },
+        "self_add_bank": {
+            "en": "You have successfully added **{{money}}** to your bank account !",
+            "fr": "Vous vous êtes bien ajouté(e) **{{money}}** sur votre compte bancaire !"
+        },
+        "self_remove_bank": {
+            "en": "You have successfully withdrawn **{{money}}** from your bank account !",
+            "fr": "Vous vous êtes bien retiré(e) **{{money}}** de votre compte bancaire !"
+        },
+        "user_add_bank": {
+            "en": "You have successfully added **{{money}}** to {{member}}'s bank account !",
+            "fr": "Vous avez bien ajouté **{{money}}** sur le compte bancaire de {{member}} !"
+        },
+        "user_remove_bank": {
+            "en": "You did successfully withdrew **{{money}}** from {{member}}'s bank account !",
+            "fr": "Vous avez bien retiré **{{money}}** du compte bancaire de {{member}} !"
+        },
+        "self_add_cash": {
+            "en": "You have successfully added **{{money}}** in cash !",
+            "fr": "Vous vous êtes bien ajouté(e) **{{money}}** en espèces !"
+        },
+        "self_remove_cash": {
+            "en": "You successfully withdrew **{{money}}** in cash !",
+            "fr": "Vous vous êtes bien retiré(e) **{{money}}** en espèces !"
+        },
+        "user_add_cash": {
+            "en": "You have successfully added **{{money}}** in cash to {{member}} !",
+            "fr": "Vous avez bien ajouté **{{money}}** en espèces à {{member}} !"
+        },
+        "user_remove_cash": {
+            "en": "You successfully withdrew **{{money}}** in cash at {{member}} !",
+            "fr": "Vous avez bien retiré **{{money}}** en espèces à {{member}} !"
+        },
+        "self_add_dmoney": {
+            "en": "You have successfully added **{{money}}** in dirty money !",
+            "fr": "Vous vous êtes bien ajouté(e) **{{money}}** en argent sale !"
+        },
+        "self_remove_dmoney": {
+            "en": "You successfully withdrew **{{money}}** in dirty money !",
+            "fr": "Vous vous êtes bien retiré(e) **{{money}}** en argent sale !"
+        },
+        "user_add_dmoney": {
+            "en": "You have successfully added **{{money}}** in dirty money to {{member}} !",
+            "fr": "Vous avez bien ajouté **{{money}}** en argent sale à {{member}} !"
+        },
+        "user_remove_dmoney": {
+            "en": "You did withdraw **{{money}}** in dirty money from {{member}} !",
+            "fr": "Vous avez bien retiré **{{money}}** en argent sale à {{member}} !"
+        },
+        "typeAsText": {
+            "bank_money": {
+                "en": "Bank",
+                "fr": "Banque"
+            },
+            "cash_money": {
+                "en": "Cash",
+                "fr": "Espèces"
+            },
+            "dirty_money": {
+                "en": "Dirty Money",
+                "fr": "Argent sale"
+            }
+        },
+        "logs_embed": {
+            "title": {
+                "add": {
+                    "en": "Money added",
+                    "fr": "Argent ajouté"
+                },
+                "remove": {
+                    "en": "Money withdrawn",
+                    "fr": "Argent retiré"
+                }
+            },
+            "fields": {
+                "author": {
+                    "en": "Author :",
+                    "fr": "Auteur :"
+                },
+                "beneficiary": {
+                    "en": "Beneficiary(ies) :",
+                    "fr": "Bénéficiaire(s) :"
+                },
+                "beneficiaryvalue": {
+                    "en": "{{number}} affected players",
+                    "fr": "{{number}} joueurs affectés"
+                },
+                "type": {
+                    "en": "Type :",
+                    "fr": "Type :"
+                },
+                "amount": {
+                    "en": "Amount :",
+                    "fr": "Montant :"
+                }
+            }
+        }
+    },
+    "candidature": {
+        "self": {
+            "en": "You cannot validate or reject your own application",
+            "fr": "Vous ne pouvez pas valider ou refuser votre propre candidature"
+        },
+        "role_undefined": {
+            "en": "The role **{{role}}** is not defined.",
+            "fr": "Le rôle **{{role}}** n'est pas défini."
+        },
+        "roles": {
+            "vocal": {
+                "en": "Vocal Candidate",
+                "fr": "Candidat Vocal"
+            },
+            "written": {
+                "en": "Candidate Written",
+                "fr": "Candidat Ecrit"
+            },
+            "citizen": {
+                "en": "Citizen",
+                "fr": "Citoyen"
+            }
+        },
+        "contact": {
+            "en": "Contact your server administrator to configure this role on the [dashboard]({{url}})",
+            "fr": "Contactez un administrateur de votre serveur pour configurer ce rôle sur le [dashboard]({{url}})"
+        },
+        "neededRole": {
+            "en": "{{member}} does not have the role <@&{{id}}>",
+            "fr": "{{member}} ne possède pas le rôle <@&{{id}}>"
+        },
+        "remove_role": {
+            "en": "The bot does not have permission to remove the <@&{{id}}> role from {{member}}",
+            "fr": "Le bot n'a pas la permission de retirer le rôle <@&{{id}}> à {{member}}"
+        },
+        "add_role": {
+            "en": "The bot does not have permission to add the role <@&{{id}}> to {{member}}",
+            "fr": "Le bot n'a pas la permission d'ajouter le rôle <@&{{id}}> à {{member}}"
+        },
+        "comment": {
+            "en": "Comment :",
+            "fr": "Commentaire :"
+        },
+        "logs": {
+            "role_removed": {
+                "en": "Role removed :",
+                "fr": "Rôle retiré :"
+            },
+            "role_added": {
+                "en": "Role added :",
+                "fr": "Rôle ajouté :"
+            },
+            "title_yes": {
+                "en": "Accepted application",
+                "fr": "Candidature acceptée"
+            },
+            "title_no": {
+                "en": "Application rejected",
+                "fr": "Candidature refusée"
+            },
+            "customs_officer": {
+                "en": "Customs officer :",
+                "fr": "Douanier :"
+            },
+            "migrant": {
+                "en": "Migrant :",
+                "fr": "Migrant :"
+            }
+        }
+    },
+    "carte_grise": {
+        "limit_card": {
+            "en": "The limit of car registration document per player is `{{limit}}`, so it is impossible to create more cards for {{member}}.",
+            "fr": "La limite de cartes grises par joueur est de `{{limit}}`, il est donc impossible de créer plus de cartes pour {{member}}."
+        },
+        "not_exceeded_plate": {
+            "en": "The license plate cannot exceed 30 characters !",
+            "fr": "La plaque d'immatriculation ne peut pas dépasser 30 caractères !"
+        },
+        "already_exist": {
+            "en": "The vehicle with the license plate `{{plate}}` or the name **{{name}}** already exists !",
+            "fr": "Le véhicule avec la plaque d'immatriculation `{{plate}}` ou le nom **{{name}}** existe déjà !"
+        },
+        "name_car_exceeded": {
+            "en": "The vehicle name cannot exceed 30 characters !",
+            "fr": "Le nom du véhicule ne peut pas dépasser 30 caractères !"
+        },
+        "not_informed": {
+            "en": "No informed",
+            "fr": "Non renseignée"
+        },
+        "adress_exceeded": {
+            "en": "The address cannot exceed 40 characters !",
+            "fr": "L'adresse ne peut excéder 40 caractères !"
+        },
+        "valid_create_card": {
+            "en": "The registration card of {{member}} with license plate `{{late}}` has been created.",
+            "fr": "La carte grise de {{member}} dont la plaque d'immatriculation est `{{plate}}` a bien été créée."
+        },
+        "plate_no_existent": {
+            "en": "The `{{plate}}` license plate seems to be non-existent!",
+            "fr": "La plaque d'immatriculation `{{plate}}` semble être inexistante !"
+        },
+        "deleted_driving_licence": {
+            "en": "The registration card with the number plate `{{plate}}` has been abolished.",
+            "fr": "La carte grise dont la plaque d'immatriculation est `{{plate}}` a bien été supprimée."
+        },
+        "not_given_card": {
+            "en": "You can't give yourself a car registration card.",
+            "fr": "Vous ne pouvez pas vous donner une carte grise."
+        },
+        "not_given_card_bot": {
+            "en": "You can't give a car registration card to a bot.",
+            "fr": "Vous ne pouvez pas donner une carte grise à un bot."
+        },
+        "not_crate_because_limit": {
+            "en": "The limit of car registration document per player is `{{limit}}`, so it is impossible to give more cards to {{member}}.",
+            "fr": "La limite de cartes grises par joueur est de `{{limit}}`, il est donc impossible de donner plus de cartes à {{member}}."
+        },
+        "unkown_card": {
+            "en": "The license plate `{{plate}}` seems to be non-existent or does not belong to you !",
+            "fr": "La plaque d'immatriculation `{{plate}}` semble être inexistante ou ne vous appartient pas !"
+        },
+        "valid_give": {
+            "en": "The registration card with the license plate `{{plate}}` was given to {{member}}!",
+            "fr": "La carte grise dont la plaque d'immatriculation est `{{plate}}` a bien été donnée à {{member}} !"
+        },
+        "plate_not_exist": {
+            "en": "The `{{plate}}` license plate seems to be non-existent.",
+            "fr": "La plaque d'immatriculation `{{plate}}` semble être inexistante."
+        },
+        "already_confistated": {
+            "en": "The registration card with the license plate `{{plate}}` seems to be confiscated already!",
+            "fr": "La carte grise dont la plaque d'immatriculation est `{{plate}}` semble déjà être confisquée !"
+        },
+        "is_confistated": {
+            "en": "The registration card of <@{{user}}> whose license plate is `{{plate}}` has just been confiscated !",
+            "fr": "La carte grise de <@{{user}}> dont la plaque d'immatriculation est `{{plate}}` vient d'être confisquée !"
+        },
+        "card_no_exist": {
+            "en": "The license plate `{{plate}}` seems to be non-existent or does not belong to you !",
+            "fr": "La plaque d'immatriculation `{{plate}}` semble être inexistante ou ne vous appartient pas !"
+        },
+        "not_confiscated": {
+            "en": "The car registration with the license plate `{{plate}}` isn't confiscated.",
+            "fr": "La carte grise dont la plaque d'immatriculation est `{{plate}}` n'est pas confisquée."
+        },
+        "give_back": {
+            "en": "The car registration with the license plate `{{plate}}` has just been returned to <@{{id}}>!",
+            "fr": "La carte grise dont la plaque d'immatriculation est `{{plate}}` vient d'être rendue à <@{{id}}> !"
+        },
+        "plate_dexist": {
+            "en": "The license plate `{{plate}}` seems to be non-existent or does not belong to you!",
+            "fr": "La plaque d'immatriculation `{{plate}}` semble être inexistante ou ne vous appartient pas !"
+        },
+        "plate": {
+            "en": "The license plate cannot exceed 30 characters !",
+            "fr": "La plaque d'immatriculation ne peut pas dépasser 30 caractères !"
+        },
+        "name": {
+            "en": "The vehicle name cannot exceed 30 characters !",
+            "fr": "Le nom du véhicule ne peut pas dépasser 30 caractères !"
+        },
+        "adress": {
+            "en": "The address cannot exceed 40 characters !",
+            "fr": "L'adresse ne peut excéder 40 caractères !"
+        },
+        "not_owned": {
+            "en": "You cannot modify a car registration that does not belong to you.",
+            "fr": "Vous ne pouvez pas modifier une carte-grise ne vous appartenant pas."
+        },
+        "already_confiscated": {
+            "en": "The vehicle **{{name}}** is currently confiscated since {{date}}. It is therefore impossible to modify the car registration of this one.",
+            "fr": "Le véhicule **{{name}}** est actuellement confisquée depuis le {{date}}. Il est donc impossible de modifié la carte-grise de celle-ci."
+        },
+        "untraceable": {
+            "en": "The car registration seems to be missing... Not even the vehicle. A theft has surely been committed...",
+            "fr": "La carte grise semble être introuvable... Ni même le véhicule. Un vol a sûrement été commit..."
+        },
+        "error_name": {
+            "en": "Please provide a new address, a new name or a new plate.",
+            "fr": "Merci de fournir une nouvelle adresse, un nouveau nom ou une nouvelle plaque."
+        },
+        "confirm_modification": {
+            "en": "The registration card with the `{{plate}}` plate has been modified.",
+            "fr": "La carte grise avec la plaque `{{plate}}` a bien été modifiée."
+        },
+        "self_no_registration": {
+            "en": "You don't have any registration card : `/carte-grise créer`",
+            "fr": "Vous n'avez aucune carte grise : `/carte-grise créer`"
+        },
+        "user_no_registration": {
+            "en": "{{member}} currently has no registration card : `/carte-grise créer`",
+            "fr": "{{member}} n'a actuellement aucune carte grise : `/carte-grise créer`"
+        },
+        "title": {
+            "en": "Vehicle registration(s) of {{first_name}} {{last_name}}",
+            "fr": "Carte(s) grise(s) de {{first_name}} {{last_name}}"
+        },
+        "placeholder": {
+            "en": "See the details of a vehicle registration...",
+            "fr": "Voir les détails d'une carte grise..."
+        },
+        "display_error": {
+            "en": "The license plates display encountered an error, please try again",
+            "fr": "L'affichage des cartes grises a rencontré une erreur, veuillez réessayer"
+        },
+        "confiscated": {
+            "en": "The vehicle **{{name}}** is currently confiscated since {{date}}.",
+            "fr": "Le véhicule **{{name}}** est actuellement confisquée depuis le {{date}}."
+        },
+        "theft": {
+            "en": "The vehicle registration **{{name}}** is currently untraceable... A theft has surely been committed on this car.",
+            "fr": "La carte grise du véhicule **{{name}}** est actuellement introuvable... Un vol a sûrement été commis sur cette voiture."
+        }
+    },
+    "carte_identite": {
+        "date_of_birth": {
+            "en": "The date of birth is invalid (check that it is in the format `dd/mm/yyyy`, less than the year **3000** and greater than the year **1000**).",
+            "fr": "La date de naissance est invalide (vérifiez bien qu'elle soit au format `jj/mm/aaaa`, inférieur à l'an **3000** et supérieur à l'an **1000**)."
+        },
+        "born_the_at": {
+            "en": "Born the {{date}} at {{place}}",
+            "fr": "Né{{e}} le {{date}} à {{place}}"
+        },
+        "create_id_card": {
+            "classic": {
+                "en": "Your identity card has been created !\nYou can see it with the command `/papers`.",
+                "fr": "Votre carte d'identité a bien été créée !\nVous pouvez la voir avec la commande `/papiers`."
+            },
+            "member": {
+                "en": "The {{member}} ID card has been created !\nYou can see it with the command `/papers`.",
+                "fr": "La carte d'identité de {{member}} a bien été créée !\nVous pouvez la voir avec la commande `/papiers`."
+            }
+        },
+        "logs_create": {
+            "title": {
+                "en": "Identity card created",
+                "fr": "Carte d'identité créée"
+            },
+            "field_by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "field_beneficiary": {
+                "en": "Beneficiary :",
+                "fr": "Bénéficiaire :"
+            }
+        },
+        "already_have_this_name": {
+            "en": "You already have an ID card with this name and first name. You cannot have a {{fake}} ID card with the same name and first name as the {{real}} one.",
+            "fr": "Vous avez déjà une carte d'identité avec ce nom et prénom. Vous ne pouvez pas avoir une {{fake}}carte d'identité avec le même nom et prénom que la {{real}}."
+        },
+        "your_already_card": {
+            "en": "You already have an ID card. Do you want to change it ?",
+            "fr": "Vous avez déjà une carte d'identité. Voulez-vous la modifier ?"
+        },
+        "member_already_card": {
+            "en": "{{member}} already has an ID card. Do you want to change it ?",
+            "fr": "{{member}} a déjà une carte d'identité. Voulez-vous la modifier ?"
+        },
+        "card_edited": {
+            "yourself": {
+                "en": "Your identity card has been changed !",
+                "fr": "Votre carte d'identité a bien été modifiée !"
+            },
+            "member": {
+                "en": "The identity card of {{member}} has been modified !",
+                "fr": "La carte d'identité de {{member}} a bien été modifiée !"
+            }
+        },
+        "card_deleted": {
+            "yourself": {
+                "en": "Your identity card has been deleted !",
+                "fr": "Votre carte d'identité a bien été supprimée !"
+            },
+            "member": {
+                "en": "The identity card of {{member}} has been deleted !",
+                "fr": "La carte d'identité de {{member}} a bien été supprimée !"
+            }
+        },
+        "card_returned": {
+            "yourself": {
+                "en": "Your identity card has been returned !",
+                "fr": "Votre carte d'identité a bien été rendue !"
+            },
+            "member": {
+                "en": "The identity card of {{member}} has been returned !",
+                "fr": "La carte d'identité de {{member}} a bien été rendue !"
+            }
+        },
+        "logs_delete": {
+            "title": {
+                "en": "Suppressed identity card",
+                "fr": "Carte d'identité supprimée"
+            },
+            "field_by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "field_beneficiary": {
+                "en": "Beneficiary :",
+                "fr": "Bénéficiaire :"
+            }
+        },
+        "recuperation_data": {
+            "en": "{{emoji}} Recovery of identity data...",
+            "fr": "{{emoji}} Récupération des données d'identité..."
+        },
+        "valid_recuperation": {
+            "en": "{{emoji}} Recovered data !",
+            "fr": "{{emoji}} Données récupérées !"
+        },
+        "embed_creation": {
+            "title": {
+                "en": "Identity card creation request",
+                "fr": "Demande de création de Carte d'identité"
+            },
+            "title_edit": {
+                "en": "Identity card modification request",
+                "fr": "Demande de modification de Carte d'identité"
+            },
+            "description": {
+                "en": "{{member}} wants to create an identity card with the following information.",
+                "fr": "{{member}} souhaite créer une carte d'identité avec les informations suivantes."
+            },
+            "description_edit": {
+                "en": "{{member}} wants to edit his identity card with the following information.\nThe information that has been modified has a **\\*** after the name.",
+                "fr": "{{member}} souhaite modifier sa carte d'identité avec les informations suivantes.\nLes informations qui ont été modifiées ont un **\\*** après le nom."
+            },
+            "fields": {
+                "first_name": {
+                    "en": "First name",
+                    "fr": "Prénom"
+                },
+                "last_name": {
+                    "en": "Name",
+                    "fr": "Nom"
+                },
+                "gender": {
+                    "en": "Sex",
+                    "fr": "Sexe"
+                },
+                "birthdate": {
+                    "en": "Birthdate",
+                    "fr": "Date de naissance"
+                },
+                "birthplace": {
+                    "en": "Birth Place",
+                    "fr": "Lieu de naissance"
+                },
+                "fake": {
+                    "en": "Fake",
+                    "fr": "Fausse"
+                }
+            }
+        }
+    },
+    "dégel": {
+        "not_freeze": {
+            "en": "The bank account of {{member}} is not frozen",
+            "fr": "Le compte bancaire de {{member}} n'est pas gelé"
+        },
+        "title": {
+            "en": "Bank account unfrozen",
+            "fr": "Compte bancaire dégelé"
+        },
+        "description": {
+            "en": "The bank account of {{member}} has been unfrozed by {{author}}.",
+            "fr": "Le compte bancaire de {{member}} a été dégelé par {{author}}."
+        }
+    },
+    "embed": {
+        "title_description_image": {
+            "en": "The embed must contain at least a title, a description or an image",
+            "fr": "L'embed doit contenir au minimum un titre, une description ou une image"
+        },
+        "confirm": {
+            "en": "Your [embed]({{link}}) has been sent !",
+            "fr": "Votre [embed]({{link}}) a bien été envoyé !"
+        },
+        "logs_embed": {
+            "title": {
+                "en": "Embed sent",
+                "fr": "Embed envoyé"
+            },
+            "by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "link": {
+                "en": "Message link :",
+                "fr": "Lien du message :"
+            },
+            "click": {
+                "en": "Click here",
+                "fr": "Cliquez ici"
+            }
+        }
+    },
+    "fausse_carte_identite": {
+        "date_of_birth": {
+            "en": "The date of birth must be in the format `dd/mm/yyyy`.",
+            "fr": "La date de naissance doit être du format `jj/mm/aaaa`"
+        },
+        "create_id_card": {
+            "classic": {
+                "en": "Your fake identity card has been created !",
+                "fr": "Votre fausse carte d'identité a bien été créée !"
+            },
+            "member": {
+                "en": "The {{member}} fake ID card has been created !",
+                "fr": "La fausse carte d'identité de {{member}} a bien été créée !"
+            }
+        },
+        "logs_create": {
+            "title": {
+                "en": "Fake identity card created",
+                "fr": "Fausse carte d'identité créée"
+            },
+            "field_by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "field_beneficiary": {
+                "en": "Beneficiary :",
+                "fr": "Bénéficiaire :"
+            }
+        },
+        "your_already_card": {
+            "en": "You already have a fake ID card. Do you want to change it ?",
+            "fr": "Vous avez déjà une fausse carte d'identité. Voulez-vous la modifier ?"
+        },
+        "member_already_card": {
+            "en": "{{member}} already has a fake ID card. Do you want to change it ?",
+            "fr": "{{member}} a déjà une fausse carte d'identité. Voulez-vous la modifier ?"
+        },
+        "card_edited": {
+            "yourself": {
+                "en": "Your fake identity card has been changed !",
+                "fr": "Votre fausse carte d'identité a bien été modifiée !"
+            },
+            "member": {
+                "en": "The fake identity card of {{member}} has been modified !",
+                "fr": "La fausse carte d'identité de {{member}} a bien été modifiée !"
+            }
+        },
+        "card_deleted": {
+            "yourself": {
+                "en": "Your fake identity card has been deleted !",
+                "fr": "Votre fausse carte d'identité a bien été supprimée !"
+            },
+            "member": {
+                "en": "The fake identity card of {{member}} has been deleted !",
+                "fr": "La fausse carte d'identité de {{member}} a bien été supprimée !"
+            }
+        },
+        "logs_delete": {
+            "title": {
+                "en": "Suppressed identity card",
+                "fr": "Carte d'identité supprimée"
+            },
+            "field_by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "field_beneficiary": {
+                "en": "Beneficiary :",
+                "fr": "Bénéficiaire :"
+            }
+        },
+        "dont_have": {
+            "user": {
+                "en": "You do not have a fake identity card",
+                "fr": "Vous n'avez pas de fausse carte d'identité"
+            },
+            "member": {
+                "en": "{{member}} does not have a fake identity card",
+                "fr": "{{member}} n'a pas de fausse carte d'identité"
+            }
+        },
+        "recuperation_data": {
+            "en": "{{emoji}} Recovery of identity data...",
+            "fr": "{{emoji}} Récupération des données d'identité..."
+        },
+        "valid_recuperation": {
+            "en": "{{emoji}} Recovered data !",
+            "fr": "{{emoji}} Données récupérées !"
+        }
+    },
+    "gel": {
+        "already_freeze": {
+            "en": "The bank account of {{member}} is already frozen",
+            "fr": "Le compte bancaire de {{member}} est déjà gelé"
+        },
+        "title": {
+            "en": "Bank account frozen",
+            "fr": "Compte bancaire gelé"
+        },
+        "description": {
+            "en": "The bank account of {{member}} has been frozen by {{author}} for **{{reason}}**.",
+            "fr": "Le compte bancaire de {{member}} a été gelé par {{author}} pour **{{reason}}**."
+        }
+    },
+    "mort_rp": {
+        "title": {
+            "en": "Deaths",
+            "fr": "Décès"
+        },
+        "description": {
+            "en": "{{member}} has passed away, may he rest in peace.",
+            "fr": "{{member}} est décédé(e), paix à son âme."
+        },
+        "when": {
+            "en": "When",
+            "fr": "Quand"
+        },
+        "the": {
+            "en": "The",
+            "fr": "Le"
+        }
+    },
+    "objet": {
+        "member_item_not_found": {
+            "en": "I didn't find the item **{{name}}** in the inventory of {{member}}.",
+            "fr": "Je n'ai pas trouvé l'item **{{name}}** dans l'inventaire de {{member}}."
+        },
+        "invalid_items": {
+            "en": ["Dirty money", "Driving license", "Identity card", "Weapon license", "License plate", "Untreated", "Treated"],
+            "fr": ["Argent sale", "Permis de conduire", "Carte d'identité", "Permis de port d'armes", "Carte grise", "non traité(e)", "traité(e)"]
+        },
+        "invalid_error": {
+            "en": "You cannot add/remove the **{{name}}** object with this command",
+            "fr": "Vous ne pouvez pas ajouter/retirer l'objet **{{name}}** avec cette commande"
+        },
+        "no_items_in_shop": {
+            "en": "There isn't item in the shop : `/boutique ajouter`",
+            "fr": "Il n'y a aucun objet dans la boutique : `/boutique ajouter`"
+        },
+        "item_not_found": {
+            "en": "I don't found the item asked in the shop : `/boutique afficher`",
+            "fr": "Je ne trouve pas d'item correspondant dans votre boutique : `/boutique afficher`"
+        },
+        "gave": {
+            "en": "You gave **{{quantity}} {{name}}** to {{member}} !",
+            "fr": "Vous avez donné **{{quantity}} {{name}}** à {{member}} !"
+        },
+        "dont_have": {
+            "en": "{{member}} has no {{name}} in its inventory",
+            "fr": "{{member}} n'a pas de {{name}} dans son inventaire"
+        },
+        "only": {
+            "en": "This member only has **{{quantity}} {{name}}** in his inventory. Do you want to remove this quantity anyway ?",
+            "fr": "Ce membre n'a que **{{quantity}} {{name}}** dans son inventaire. Voulez-vous retirer tout de même cette quantité ?"
+        },
+        "removed": {
+            "en": "You have removed **{{quantity}} {{name}}** from {{member}} !",
+            "fr": "Vous avez retiré **{{quantity}} {{name}}** à {{member}} !"
+        }
+    },
+    "permis_de_conduire": {
+        "licencesTypes": {
+            "car": {
+                "en": "🚙 Car",
+                "fr": "🚙 Voiture"
+            },
+            "motorcycle": {
+                "en": "🏍️ Motorcycle",
+                "fr": "🏍️ Moto"
+            },
+            "truck": {
+                "en": "🚚 Truck",
+                "fr": "🚚 Camion"
+            },
+            "helicopter": {
+                "en": "🚁 Helicopter",
+                "fr": "🚁 Hélicoptère"
+            },
+            "boat": {
+                "en": "🚤 Boat",
+                "fr": "🚤 Bateau"
+            }
+        },
+        "idcard_user": {
+            "en": "{{member}} does not have an identity card.",
+            "fr": "{{member}} ne possède pas de carte d'identité."
+        },
+        "idcard_member": {
+            "en": "You do not have an identity card.",
+            "fr": "Vous ne possédez pas de carte d'identité."
+        },
+        "already_user": {
+            "en": "You already have this driver's license.",
+            "fr": "Vous possédez déjà ce permis de conduire."
+        },
+        "already_member": {
+            "en": "{{member}} already has this driver's license.",
+            "fr": "{{member}} possède déjà ce permis de conduire."
+        },
+        "confirm_user": {
+            "en": "You now have the driver's license `{{name}}` !",
+            "fr": "Vous possédez maintenant le permis de conduire `{{name}}` !"
+        },
+        "confirm_member": {
+            "en": "{{member}} now has the driver's license `{{name}}` !",
+            "fr": "{{member}} possède maintenant le permis de conduire `{{name}}` !"
+        },
+        "logs_create": {
+            "title": {
+                "en": "Driver's license created",
+                "fr": "Permis de conduire créé"
+            },
+            "by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "for": {
+                "en": "For :",
+                "fr": "Pour :"
+            },
+            "type": {
+                "en": "Type :",
+                "fr": "Type :"
+            }
+        },
+        "not_yet_user": {
+            "en": "You do not yet have this driver's license.",
+            "fr": "Vous ne possédez pas encore ce permis de conduire."
+        },
+        "not_yet_member": {
+            "en": "{{member}} does not have this driver's license yet.",
+            "fr": "{{member}} ne possède pas encore ce permis de conduire."
+        },
+        "already_not_user": {
+            "en": "You no longer have this driver's license.",
+            "fr": "Vous ne possédez déjà plus ce permis de conduire."
+        },
+        "already_not_member": {
+            "en": "{{member}} no longer has this driver's license.",
+            "fr": "{{member}} ne possède déjà plus ce permis de conduire."
+        },
+        "no_longer_user": {
+            "en": "You no longer have the driver's license `{{name}}` !",
+            "fr": "Vous ne possédez plus le permis de conduire `{{name}}` !"
+        },
+        "no_longer_member": {
+            "en": "{{member}} no longer has the driver's license `{{name}}` !",
+            "fr": "{{member}} ne possède plus le permis de conduire `{{name}}` !"
+        },
+        "logs_delete": {
+            "en": "Driver's license removed",
+            "fr": "Permis de conduire supprimé"
+        },
+        "dont_have": {
+            "user": {
+                "en": "You do not have a driver's license.",
+                "fr": "Vous n'avez pas de permis de conduire."
+            },
+            "member": {
+                "en": "{{member}} does not have a driver's license.",
+                "fr": "{{member}} n'a pas de permis de conduire."
+            }
+        },
+        "license": {
+            "not_acquired": {
+                "en": "Not Acquired",
+                "fr": "Non Acquis"
+            },
+            "acquired": {
+                "en": "Acquired on {{date}}.",
+                "fr": "Acquis le {{date}}"
+            },
+            "removed": {
+                "en": "Removed on {{date}}",
+                "fr": "Retiré le {{date}}"
+            }    
+        },
+        "max_user": {
+            "en": "You already have the maximum number of points.",
+            "fr": "Vous avez déjà le nombre maximum de points."
+        },
+        "max_member": {
+            "en": "{{member}} already has the maximum number of points.",
+            "fr": "{{member}} a déjà le nombre maximum de points."
+        },
+        "max": {
+            "en": "The maximum number of points on a license is **{{number}}**.",
+            "fr": "Le nombre maximum de points sur un permis est fixé à **{{number}}**."
+        },
+        "confirmadd_user": {
+            "en": "You have added **{{amount}}** point{{s}} on your driver's license !\n **New capital :** {{newamount}}/{{maxamount}}",
+            "fr": "Vous vous êtes bien ajouté **{{amount}}** point{{s}} sur votre permis de conduire !\n **Nouveau capital :** {{newamount}}/{{maxamount}}"
+        },
+        "confirmadd_member": {
+            "en": "You have added **{{amount}}** point{{s}} to {{member}}'s driver's license !\n**New capital :** {{newamount}}/{{maxamount}}",
+            "fr": "Vous avez bien ajouté **{{amount}}** point{{s}} sur le permis de conduire de {{member}} !\n**Nouveau capital :** {{newamount}}/{{maxamount}}"
+        },
+        "negate_user": {
+            "en": "You cannot have a negative point balance.",
+            "fr": "Vous ne pouvez pas avoir un solde de points négatif."
+        },  
+        "negate_member": {
+            "en": "{{member}} cannot have a negative point balance.",
+            "fr": "{{member}} ne peut pas avoir un solde de points négatif."
+        },
+        "confirmremove_user": {
+            "en": "You have removed **{{amount}}** point{{s}} on your driver's license !\n**New capital :** {{newamount}}/{{maxamount}}",
+            "fr": "Vous vous êtes bien retiré **{{amount}}** point{{s}} sur votre permis de conduire !\n**Nouveau capital :** {{newamount}}/{{maxamount}}"
+        },
+        "confirmremove_member": {
+            "en": "You have removed **{{amount}}** point{{s}} to {{member}}'s driver's license !\n**New capital :** {{newamount}}/{{maxamount}}",
+            "fr": "Vous avez bien retiré **{{amount}}** point{{s}} sur le permis de conduire de {{member}} !\n**Nouveau capital :** {{newamount}}/{{maxamount}}"
+        },
+        "confirmremove_user_delete": {
+            "en": "You have removed **{{amount}}** point{{s}} on your driver's license !\n**New capital :** {{newamount}}/{{maxamount}}\n\nYour license has been deleted because you have no more points.\nYou will therefore have to retake your highway code test.",
+            "fr": "Vous vous êtes bien retiré **{{amount}}** point{{s}} sur votre permis de conduire !\n**Nouveau capital :** {{newamount}}/{{maxamount}}\n\nVotre permis de conduire a été supprimé car vous n'avez plus de points.\nVous devrez donc repasser votre code de la route."
+        },
+        "confirmremove_member_delete": {
+            "en": "You have removed **{{amount}}** point{{s}} to {{member}}'s driver's license !\n**New capital :** {{newamount}}/{{maxamount}}\n\n{{member}}'s license has been deleted because he has no more points.",
+            "fr": "Vous avez bien retiré **{{amount}}** point{{s}} sur le permis de conduire de {{member}} !\n**Nouveau capital :** {{newamount}}/{{maxamount}}\n\nLe permis de conduire de {{member}} a été supprimé car il n'a plus de points."
+        }
+    },
+    "permis_port_armes": {
+        "weaponTypes": {
+            "light": {
+                "en": "Light weapons",
+                "fr": "Armes légères"
+            },
+            "heavy": {
+                "en": "Heavy weapons",
+                "fr": "Armes lourdes"
+            },
+            "cold": {
+                "en": "Cold weapons",
+                "fr": "Armes blanches"
+            }
+        },
+        "select_weapon_type": {
+            "en": "Select the type of gun license",
+            "fr": "Sélectionnez le type de port d'armes"
+        },
+        "weapon_type": {
+            "en": "Type of gun license",
+            "fr": "Type de port d'armes"
+        },
+        "self_no_licenses": {
+            "en": "You don't have any gun licenses",
+            "fr": "Vous n'avez aucun permis de port d'armes"
+        },
+        "user_no_licenses": {
+            "en": "{{member}} doesn't have any gun licenses",
+            "fr": "{{member}} n'a aucun permis de port d'armes"
+        },
+        "self_already_all": {
+            "en": "You already have all the gun licenses",
+            "fr": "Vous possédez déjà tous les permis de port d'armes"
+        },
+        "user_already_all": {
+            "en": "{{member}} already have all the gun licenses",
+            "fr": "{{member}} possède déjà tous les permis de port d'armes"
+        },
+        "self_already": {
+            "en": "You already have this gun license",
+            "fr": "Vous possédez déjà ce permis de port d'armes"
+        },
+        "user_already": {
+            "en": "{{member}} already have this gun license",
+            "fr": "{{member}} possède déjà ce permis de port d'armes"
+        },
+        "self_confirm": {
+            "en": "You now have the gun license `{{name}}` !",
+            "fr": "Vous possédez maintenant le permis de port d'armes `{{name}}` !"
+        },
+        "user_confirm": {
+            "en": "{{member}} now have the gun license `{{name}}` !",
+            "fr": "{{member}} possède maintenant le permis de port d'armes `{{name}}` !"
+        },
+        "logs_create": {
+            "en": "Gun license created",
+            "fr": "Permis de port d'armes créé"
+        },
+        "logs": {
+            "by": {
+                "en": "By :",
+                "fr": "Par :"
+            },
+            "for": {
+                "en": "For :",
+                "fr": "Pour :"
+            },
+            "type": {
+                "en": "Type :",
+                "fr": "Type :"
+            }
+        },
+        "self_dont_have": {
+            "en": "You do not yet have this gun license",
+            "fr": "Vous ne possédez pas encore ce permis de port d'armes"
+        },
+        "user_dont_have": {
+            "en": "{{member}} do not yet have this gun license",
+            "fr": "{{member}} ne possède pas encore ce permis de port d'armes"
+        },
+        "self_no_longer": {
+            "en": "You no longer have this gun license",
+            "fr": "Vous ne possédez déjà plus ce permis de port d'armes"
+        },
+        "user_no_longer": {
+            "en": "{{member}} no longer have this gun license",
+            "fr": "{{member}} ne possède déjà plus ce permis de port d'armes"
+        },
+        "self_no_longer2": {
+            "en": "You doesn't have the gun license `{{name}}` anymore",
+            "fr": "Vous ne possédez plus le permis de port d'armes `{{name}}`"
+        },
+        "user_no_longer2": {
+            "en": "{{member}} doesn't have this gun license `{{name}}` anymore",
+            "fr": "{{member}} n'a plus le permis de port d'arme `{{name}}`"
+        },
+        "gun_license_deleted": {
+            "en": "Gun license deleted",
+            "fr": "Permis de port d'armes supprimé"
+        },
+        "recovery": {
+            "en": "Recovering data from the gun license...",
+            "fr": "Récupération des données du permis de port d'armes..."
+        },
+        "text": {
+            "not_acquired": {
+                "en": "Not Acquired",
+                "fr": "Non Acquis"
+            },
+            "acquired": {
+                "en": "Acquired the {{date}}  ({{points}} point{{s}})",
+                "fr": "Acquis le {{date}}  ({{points}} point{{s}})"
+            },
+            "removed": {
+                "en": "Removed the {{date}}",
+                "fr": "Retiré le {{date}}"
+            }
+        }
+    },
+    "réinitialiser": {
+        "owner": {
+            "en": "Only the server owner (<@{{id}}>) can use this command",
+            "fr": "Seul le propriétaire du serveur (<@{{id}}>) peut utiliser cette commande"
+        },
+        "srv_name": {
+            "en": "The server name is not correct.\n*For security reasons, please enter the full server name.*",
+            "fr": "Le nom du serveur n'est pas correct.\n*Pour des raisons de sécurité, merci d'entrer le nom complet du serveur.*"
+        },
+        "reset": {
+            "en": "Reset",
+            "fr": "Réinitialisation"
+        },
+        "warning": {
+            "en": "You are about to reset bot data on this server !\n**:warning: THIS ACTION IS IRREVERSIBLE!**",
+            "fr": "Vous vous apprêtez à réinitialiser des données du bot sur ce serveur !\n**:warning: CETTE ACTION EST IRRÉVERSIBLE !**"
+        },
+        "delete": {
+            "en": "<:status_dnd:839233903662596117> What will be deleted :",
+            "fr": "<:status_dnd:839233903662596117> Ce qui sera supprimé :"
+        },
+        "keep": {
+            "en": "<:status_online:839233632413679618> What will not be deleted :",
+            "fr": "<:status_online:839233632413679618> Ce qui ne sera pas supprimé :"
+        },
+        "all_delete": {
+            "en": "- All bot configurations for this server on the dashboard (log channel, card themes, command permissions, etc...)\n- The players data (bank accounts, ID cards, inventories, criminal records, etc...)\n- The companies\n- The store\n- The illegal (drugs, etc...)",
+            "fr": "- Toutes les configurations du bot pour ce serveur sur le dashboard (salon de logs, thèmes des cartes permissions des commandes, etc...)\n- Les données des joueurs (comptes bancaires, cartes d'identité, inventaires, casiers judiciaires, etc...)\n- Les entreprises\n- La boutique\n- L'illégal (drogues, etc...)"
+        },
+        "all_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur"
+        },
+        "dashboard_delete": {
+            "en": "- The channels of logs, emergencies, etc...\n- The themes of the different cards (identity, license, bank account, ...)\n- The permissions of the commands\n- All the configurations of the bot for this server made on our [dashboard](https://nidev.fr/skyroleplay/dashboard)\n\nAll drugs, their configurations, and __the amounts of those drugs that players possess__",
+            "fr": "- Les salons de logs, des urgences, etc...\n- Les thèmes des différentes cartes (identité, permis, compte bancaires, ...)\n- Les permissions des commandes\n- Toutes les configurations du bot pour ce serveur effectuées sur notre [dashboard](https://nidev.fr/skyroleplay/dashboard)\n\nToutes les drogues, leurs configurations et __les quantités de ces drogues que les joueurs possèdent__"
+        },
+        "dashboard_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server\n- The players data (bank accounts, ID cards, inventories, criminal records, etc...)\n- The companies, the store",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur\n- Les données des joueurs (comptes bancaires, cartes d'identité, inventaires, casiers judiciaires, etc...)\n- Les entreprises, la boutique"
+        },
+        "members_delete": {
+            "en": "- The data of the players on your server :\n- Bank accounts, dirty money\n- Identity cards, vehicle registration cards, driver's licenses, weapon licenses\n- Inventories\n- Criminal records, quantities of untreated and treated drugs, ...\n\n- The company of the player if he is a boss",
+            "fr": "- Les données des joueurs sur votre serveur :\n- Comptes bancaires, argent sale\n- Cartes d'identité, cartes grises, permis de conduire, permis de port d'armes\n- Inventaires\n- Casiers judiciaires, les quantités des drogues non traitées et traitées, ...\n\nL'entreprise du joueur s'il est patron"
+        },
+        "members_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server\n- All the bot configurations for this server made on our [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- The store, the illegal (drugs, etc...)",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur\n- Toutes les configurations du bot pour ce serveur effectuées sur notre [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- La boutique, l'illégal (drogues, etc...)"
+        },
+        "economy_delete": {
+            "en": "- The bank accounts of the players on your server :\n- Cash\n- Cash in the bank\n- Dirty money\n- Ranking according to the economy of the server",
+            "fr": "- Les comptes bancaires des joueurs sur votre serveur :\n- Les espèces\n- L'argent en banque\n- L'argent sale\n- Le classement en fonction de l'économie du serveur"
+        },
+        "economy_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server\n- The players data  (ID cards, inventories, criminal records, etc...)\n- All the bot configurations for this server made on our [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Companies, store, illegal (drugs, etc...)",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur\n- Les données des joueurs (cartes d'identité, inventaires, casiers judiciaires, etc...)\n- Toutes les configurations du bot pour ce serveur effectuées sur notre [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Les entreprises, la boutique, l'illégal (drogues, etc...)"
+        },
+        "shop_delete": {
+            "en": "- All items in the store with their configuration displayed using the command `/boutique afficher`",
+            "fr": "- Tous les objets de la boutique avec leur configuration affichés en utilisant la commande `/boutique afficher`"
+        },
+        "shop_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server\n- The players data (bank accounts, ID cards, inventories, criminal records, etc...)\n- All bot configurations for this server made on our [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Companies, illegal (drugs, etc...)",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur\n- Les données des joueurs (comptes bancaires, cartes d'identité, inventaires, casiers judiciaires, etc...)\n- Toutes les configurations du bot pour ce serveur effectuées sur notre [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Les entreprises, l'illégal (drogues, etc...)"
+        },
+        "inventories_delete": {
+            "en": "- All items in player inventories displayed using the `/inventaire afficher` command",
+            "fr": "- Tous les objets des inventaires des joueurs affichés en utilisant la commande `/inventaire afficher`"
+        },
+        "inventories_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server\n- The players data (bank accounts, ID cards, criminal records, etc...)\n- All bot configurations for this server made on our [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Companies, store, illegal (drugs, etc...)",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur\n- Les données des joueurs (comptes bancaires, cartes d'identité, casiers judiciaires, etc...)\n- Toutes les configurations du bot pour ce serveur effectuées sur notre [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Les entreprises, la boutique, l'illégal (drogues, etc...)"
+        },
+        "companies_delete": {
+            "en": "- All companies created on this server :\n- Their bank accounts\n- Employees will be kicked",
+            "fr": "- Toutes les entreprises créées sur ce serveur :\n- Leurs comptes bancaires\n- Les employés seront expulsés"
+        },
+        "companies_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server\n- The players data (bank accounts, ID cards, inventories, criminal records, etc...)\n- All the bot configurations for this server made on our [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- The store, the illegal (drugs, etc...)",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur\n- Les données des joueurs (comptes bancaires, cartes d'identité, inventaires, casiers judiciaires, etc...)\n- Toutes les configurations du bot pour ce serveur effectuées sur notre [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- La boutique, l'illégal (drogues, etc...)"
+        },
+        "cards_delete": {
+            "en": "- The /false/ identity cards\n- Driver's licenses\n- Weapons Licenses\n- License plates",
+            "fr": "- Les /fausses/ cartes d'identité\n- Les permis de conduire\n- Les permis de port d'armes\n- Les cartes grises"
+        },
+        "cards_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server\n- The players data (bank accounts, inventories, criminal records, etc...)\n- All the configurations of the bot for this server made on our [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- The companies, the store, the illegal (drugs, etc...)",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur\n- Les données des joueurs (comptes bancaires, inventaires, casiers judiciaires, etc...)\n- Toutes les configurations du bot pour ce serveur effectuées sur notre [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Les entreprises, la boutique, l'illégal (drogues, etc...)"
+        },
+        "criminal_records_delete": {
+            "en": "- Players' criminal records",
+            "fr": "- Les casiers judiciaires des joueurs"
+        },
+        "criminal_records_keep": {
+            "en": "- Your Premium subscription if your server has one\n- The channels, roles and all the \"Discord\" configurations of your server\n- The players data (bank accounts, ID cards, inventories, etc...)\n- All the bot configurations for this server made on our [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Companies, the store, the illegal (drugs, etc...)",
+            "fr": "- Votre abonnement Premium si votre serveur en possède un\n- Les salons, rôles et toutes les configurations \"Discord\" de votre serveur\n- Les données des joueurs (comptes bancaires, cartes d'identité, inventaires, etc...)\n- Toutes les configurations du bot pour ce serveur effectuées sur notre [dashboard](https://nidev.fr/skyroleplay/dashboard)\n- Les entreprises, la boutique, l'illégal (drogues, etc...)"
+        },
+        "confirmation": {
+            "en": "*To continue, click on **Reset** below*",
+            "fr": "*Pour continuer, cliquez sur **Réinitialiser** ci-dessous*"
+        },
+        "back": {
+            "en": "Return to a safe place",
+            "fr": "Revenir en lieu sûr"
+        },
+        "reset_confirmation": {
+            "en": "**Reset in progress...**\nThis operation may take some time...",
+            "fr": "**Réinitialisation en cours...**\nCette opération peut prendre un certain temps..."
+        },
+        "success_all": {
+            "en": "All bot data for this server have been reset!",
+            "fr": "Toutes les données du bot pour ce serveur ont bien été réinitialisées !"
+        },
+        "success": {
+            "en": "The **{{data}}** have been reset for this server",
+            "fr": "Les **{{data}}** ont bien été réinitialisées pour ce serveur !"
+        },
+        "cancel": {
+            "en": "The reset has been cancelled",
+            "fr": "La réinitialisation a bien été annulée"
+        }
+    },
+    "salaires": {
+        "title_open": {
+            "en": "Salary request open !",
+            "fr": "Demande de salaire ouvertes !"
+        },
+        "title_close": {
+            "en": "Salary request closed !",
+            "fr": "Demande de salaire fermées !"
+        },
+        "description_open": {
+            "en": "Salary requests have been opened by {{member}} the {{date}} at {{hours}}",
+            "fr": "Les demandes de salaires ont été ouvertes par {{member}} le {{date}} à {{hours}}"
+        },
+        "description_close": {
+            "en": "Salary requests have been closed by {{member}} the {{date}} at {{hours}}",
+            "fr": "Les demandes de salaires ont été fermées par {{member}} le {{date}} à {{hours}}"
+        },
+        "already_open": {
+            "en": "Salary requests are already open",
+            "fr": "Les demandes de salaires sont déjà ouvertes"
+        },
+        "already_close": {
+            "en": "Salary requests are already closed",
+            "fr": "Les demandes de salaires sont déjà fermées"
+        }
+    },
+    "session": {
+        "time": {
+            "en": "The time given is not valid\n*Example : `18:30`*",
+            "fr": "L'heure indiquée n'est pas valide\n*Exemple : `18:30`*"
+        },
+        "format": {
+            "en": "The date must be in the format `dd/mm/yyyy`",
+            "fr": "La date doit être du format `jj/mm/aaaa`"
+        },
+        "past": {
+            "en": "The date cannot be in the past",
+            "fr": "La date ne peut pas être dans le passé"
+        },
+        "negative": {
+            "en": "You cannot start a session with a negative number of people",
+            "fr": "Vous ne pouvez pas commencer une session avec un nombre négatif de personnes"
+        },
+        "start": {
+            "title": {
+                "en": "Start of the session",
+                "fr": "Début de session"
+            },
+            "description": {
+                "en": "🛬 ・ A plane just took off !\n⏰ ・ The plane took off on the {{time}}.\n👤 ・ Launcher : **{{name}}**\n\n👥 ・ Passengers : {{passengers}}",
+                "fr": "🛬 ・ Un avion vient de décoller !\n\n⏰ ・ L'avion a décollé le {{time}}.\n\n👤 ・ Lanceur : **{{name}}**\n\n👥 ・ Passagers : {{passengers}}"
+            }
+        },
+        "new": {
+            "title": {
+                "en": "New session",
+                "fr": "Nouvelle session"
+            },
+            "description": {
+                "en": "*Come and book your ticket for takeoff !*\n\n📅 ・ Date : {{date}}}\n\n⏰ ・ Departure time : {{time}}\n\n👤 ・ Pilot: **{{name}}**",
+                "fr": "*Venez réserver votre billet pour le décollage !*\n\n📅 ・ Date : {{date}}\n\n⏰ ・ Heure de départ : {{time}}\n\n👤 ・ Pilote : **{{name}}**"
+            },
+            "footer": {
+                "en": "✅ Present ・ ❌ Absent ・ 🕑 Late ・ 🤷‍♂️ Maybe",
+                "fr": "✅ Présent ・ ❌ Absent ・ 🕑 En retard ・ 🤷‍♂️ Peut-être"
+            }
+        },
+        "vocal": {
+            "title": {
+                "en": "Creation of vocal",
+                "fr": "Création de vocal"
+            },
+            "description": {
+                "en": "🔊 ・ A voice group has been created !\n\n⏰ ・ The plane will take off on the {{date}}.\n\n👤 ・ Launcher : **{{name}}**",
+                "fr": "🔊 ・ Une partie vocale a été créée !\n\n⏰ ・ L'avion décollera le {{date}}.\n\n👤 ・ Lanceur : **{{name}}**"
+            }
+        },
+        "force-end": {
+            "button": {
+                "fr": "Confirmer",
+                "en": "Confirm"
+            },
+            "cancel": {
+                "fr": "Annuler",
+                "en": "Cancel"
+            },
+            "success": {
+                "fr": "Tous les joueurs ont bien été retirés de la session.",
+                "en": "All players has been removed from the session."
+            },
+            "title": {
+                "fr": "Forcer la fin de la session",
+                "en": "Force end of the session"
+            },
+            "description": {
+                "fr": "Êtes-vous sûr de vouloir forcer la fin de la session ?",
+                "en": "Are you sure you want to force the end of the session?"
+            }
+        }
+    }
+}

@@ -117,7 +117,7 @@ module.exports = {
 
         const _logs = async(interaction, member, amount, symbol, type, lang, anonyme = false) => {
             let typeAsText = { bank_money: "💳 " + t("typeAsText.bank_money"), cash_money: "💵 " + t("typeAsText.cash_money"), dirty_money: "💰 " + t("typeAsText.dirty_money") }[type];
-            if(!interaction) return;
+            if (!interaction) return;
         
             const logsEmbed = new EmbedBuilder()
                 .setTitle(anonyme ? t("embed_logs.title.anonyme") : t("embed_logs.title.classic"))
@@ -133,7 +133,7 @@ module.exports = {
         }
         
         const member = interaction.options.getMember("joueur");
-        if(verify("member", { cantSelfInclued: true })) return;
+        if (verify("member", { cantSelfInclued: true })) return;
 
         const method = interaction.options.getString("méthode") || "cash_money";
         const options = interaction.options.getString("options");
@@ -142,29 +142,29 @@ module.exports = {
 
         const isBan = await client.db.isFreezeAccount(interaction.guildId, interaction.member.id);
         const isMemberBan = await client.db.isFreezeAccount(interaction.guildId, member.user.id);
-        if(isBan && method == "bank_money") return errorEmbed(t("freeze_account", false, "errors"));
-        if(isMemberBan && method == "bank_money") return errorEmbed(t("freeze_account_member", { member: member.toString() }, "errors"));
+        if (isBan && method == "bank_money") return errorEmbed(t("freeze_account", false, "errors"));
+        if (isMemberBan && method == "bank_money") return errorEmbed(t("freeze_account_member", { member: member.toString() }, "errors"));
 
         const memberState = await client.db.getMemberState(interaction.guildId, interaction.member.id);
-        if(memberState.jail == 1 && method == "bank_money") return errorEmbed(t("jail", { member: member.toString() }));
+        if (memberState.jail == 1 && method == "bank_money") return errorEmbed(t("jail", { member: member.toString() }));
 
         if (method === "dirty_money") {
             selfAccount = await client.db.getDirtyMoney(interaction.guildId, interaction.user.id);
-            if(!selfAccount || selfAccount[method] <= 0) return errorEmbed(t("no_dirty_money"));
+            if (!selfAccount || selfAccount[method] <= 0) return errorEmbed(t("no_dirty_money"));
                 
             memberAccount = await client.db.getDirtyMoney(interaction.guildId, member.user.id);
 
         } else {
             // Get accounts
             selfAccount = await client.db.getMoney(interaction.guildId, interaction.user.id);
-            if(selfAccount?.blocked == 1) return errorEmbed(t("blocked", false, "errors"));
-            if(selfAccount?.frozen_date || selfAccount?.frozen_reason) return errorEmbed(t("frozen", false, "errors"));
-            if(!selfAccount || selfAccount.bank_money == null || isNaN(selfAccount.bank_money)) return errorEmbed(t("no_bank_account", false, "errors"));
+            if (selfAccount?.blocked == 1) return errorEmbed(t("blocked", false, "errors"));
+            if (selfAccount?.frozen_date || selfAccount?.frozen_reason) return errorEmbed(t("frozen", false, "errors"));
+            if (!selfAccount || selfAccount.bank_money == null || isNaN(selfAccount.bank_money)) return errorEmbed(t("no_bank_account", false, "errors"));
 
             memberAccount = await client.db.getMoney(interaction.guildId, member.user.id);
-            if(method == "bank_money" && (memberAccount?.frozen_date || memberAccount?.frozen_reason)) return errorEmbed(t("frozen_member", { member: member.toString() }, "errors"));
-            if(method == "bank_money" && !memberAccount || memberAccount.bank_money == null || isNaN(memberAccount.bank_money)) return errorEmbed(t("no_member_account", { member: member.toString() }, "errors"));
-            if((method == "cash_money" && selfAccount[method] <= 0) || (method == "bank_money" && selfAccount[method] < overdraftLimit)) return errorEmbed(t(`you_dont_${method.replace("_money", "")}`));
+            if (method == "bank_money" && (memberAccount?.frozen_date || memberAccount?.frozen_reason)) return errorEmbed(t("frozen_member", { member: member.toString() }, "errors"));
+            if (method == "bank_money" && !memberAccount || memberAccount.bank_money == null || isNaN(memberAccount.bank_money)) return errorEmbed(t("no_member_account", { member: member.toString() }, "errors"));
+            if ((method == "cash_money" && selfAccount[method] <= 0) || (method == "bank_money" && selfAccount[method] < overdraftLimit)) return errorEmbed(t(`you_dont_${method.replace("_money", "")}`));
         }
         
         if (!overdraftLimit && amount > selfAccount[method]) {
@@ -174,17 +174,17 @@ module.exports = {
                 t("have_only_money", { amount: separate(selfAccount[method]), symbol: economySymbol, member: member.toString() })
             );
 
-            if(!result) return;
+            if (!result) return;
             amount = selfAccount[method];
         }
 
         if (!memberAccount) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
         
-        if(overdraftLimit && method == "bank_money" && selfAccount[method] - amount < overdraftLimit) return errorEmbed(t("overdraft", { limit: overdraftLimit.replace("-", ""), symbol: economySymbol }, "errors"))
-        if(selfAccount[method] + amount >= 2147483647) return errorEmbed(t("int_passing", { name: lang == "fr" ? method == "bank_money" ? "votre compte" : method == "dirty_money" ? "votre argent sale" : "votre argent liquide" : method == "bank_money" ? "your bank account" : method == "dirty_money" ? "your dirty money" : "your cash money" }, "errors"));
-        if(memberAccount[method] + amount >= 2147483647) return errorEmbed(t("int_passing_member", { name: lang == "fr" ? method == "bank_money" ? "du compte bancaire" : method == "dirty_money" ? "d'argent sale" : "d'argent liquide" : method == "bank_money" ? "bank account money" : method == "dirty_money" ? "dirty money" : "cash money", member: member.toString() }, "errors"));
+        if (overdraftLimit && method == "bank_money" && selfAccount[method] - amount < overdraftLimit) return errorEmbed(t("overdraft", { limit: overdraftLimit.replace("-", ""), symbol: economySymbol }, "errors"))
+        if (selfAccount[method] + amount >= 2147483647) return errorEmbed(t("int_passing", { name: lang == "fr" ? method == "bank_money" ? "votre compte" : method == "dirty_money" ? "votre argent sale" : "votre argent liquide" : method == "bank_money" ? "your bank account" : method == "dirty_money" ? "your dirty money" : "your cash money" }, "errors"));
+        if (memberAccount[method] + amount >= 2147483647) return errorEmbed(t("int_passing_member", { name: lang == "fr" ? method == "bank_money" ? "du compte bancaire" : method == "dirty_money" ? "d'argent sale" : "d'argent liquide" : method == "bank_money" ? "bank account money" : method == "dirty_money" ? "dirty money" : "cash money", member: member.toString() }, "errors"));
 
-        if(method === "dirty_money") {
+        if (method === "dirty_money") {
             await client.db.addDirtyMoney(interaction.guildId, interaction.user.id, -amount);
             await client.db.addDirtyMoney(interaction.guildId, member.user.id, amount);
         } else {
@@ -192,7 +192,7 @@ module.exports = {
             await client.db.addMoney(interaction.guildId, member.user.id, method, amount);
         }
 
-        if(method == "bank_money") {
+        if (method == "bank_money") {
             const idCard = await client.db.getIDCard(interaction.guildId, interaction.member.id);
             const idCardMember = await client.db.getIDCard(interaction.guildId, member.user.id);
             await client.db.addTransactionLog(interaction.guildId, interaction.member.id, -amount, `${lang == "fr" ? "Payement à" : "Payment to"} ${idCardMember ? `${idCardMember.first_name} ${idCardMember.last_name}` : member.displayName}` )
@@ -218,7 +218,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

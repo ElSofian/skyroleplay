@@ -116,13 +116,13 @@ module.exports = {
         
         const method = interaction.options.getSubcommand();
 
-        if(!(interaction.options.getString("gang") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: "gang" }, "errors"));
-        if(!(interaction.options.getString("ennemis") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "ennemis" : "ennemies" }, "errors"));
+        if (!(interaction.options.getString("gang") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: "gang" }, "errors"));
+        if (!(interaction.options.getString("ennemis") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "ennemis" : "ennemies" }, "errors"));
 
         const gangId = interaction.options.getString("gang").split("&#46;")[1];
         const ennemiesId = interaction.options.getString("ennemis").split("&#46;")[1];
 
-        if(verify("member", { cantBotInclued: true, cantSelfInclued: true })) return;
+        if (verify("member", { cantBotInclued: true, cantSelfInclued: true })) return;
 
         const gang = await client.db.getCompany(interaction.guildId, gangId);
         const ennemies = await client.db.getCompany(interaction.guildId, ennemiesId);
@@ -140,7 +140,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     },
@@ -153,15 +153,15 @@ client.bugsnag.notify(err);
         const optionGang = focusedOption.name == "gang" ? true : false;
 
         const gangs = (await client.db.getCompaniesWithOwner(interaction.guildId)).filter(c => c.type == 4 && (optionGang ? c.user_id.find(e => e == interaction.member.id) == interaction.member.id : c.user_id.find(e => e == interaction.member.id) !== interaction.member.id)).sort((a, b) => a.name.localeCompare(b.name))
-        if(!optionGang) {
+        if (!optionGang) {
             for (const gang of gangs) {
                 const war = await client.db.getWar(interaction.guildId, interaction.options._hoistedOptions[0].value.replace(`${code}`, ""), gang.id);
-                if(method == "guerre" ? !war : war) response.push(gang);
+                if (method == "guerre" ? !war : war) response.push(gang);
             } 
         } else response.push(...gangs)
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...response.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

@@ -56,8 +56,4 @@ module.exports = class Logger {
         console.log(`${Logger.time()} - ${chalk[color](title)} ${args}`);
     }
 
-    bugsnag(...args) {
-        console.log(`${Logger.time()} - ${chalk.cyan('[BUGSNAG]')} ${args}`);
-    }
-
 }

@@ -61,22 +61,22 @@ module.exports = {
             "economy.salaries_open",
         ]);
 
-        if(!options["economy.salaries_open"]) return errorEmbed(t("close_salary"));
+        if (!options["economy.salaries_open"]) return errorEmbed(t("close_salary"));
         const moderatorRole = await interaction.guild.roles.fetch(options["roles.moderator"] ?? "");
-        if(!moderatorRole) return errorEmbed(t("no_modo_role", { id: options["roles.moderator"] }, "errors"))
+        if (!moderatorRole) return errorEmbed(t("no_modo_role", { id: options["roles.moderator"] }, "errors"))
 
         // Get account
         const account = await client.db.getBankAccount(interaction.guildId, interaction.member.id);
-        if(isNaN(parseInt(account?.bank_money))) return errorEmbed(t("no_bank_account", false, "errors"));
+        if (isNaN(parseInt(account?.bank_money))) return errorEmbed(t("no_bank_account", false, "errors"));
 
         const isBan = await client.db.isFreezeAccount(interaction.guildId, interaction.member.id);
-        if(isBan) return errorEmbed(t("freeze_account", false, "errors"));
+        if (isBan) return errorEmbed(t("freeze_account", false, "errors"));
         
         // Validate amount
         const amount = interaction.options.getNumber("montant") || 0;
-        if(account.bank_money + amount >= 2147483647) return errorEmbed(t("int_passing", { name: lang == "fr" ? "votre compte bancaire" : "your bank account" }, "errors"));
+        if (account.bank_money + amount >= 2147483647) return errorEmbed(t("int_passing", { name: lang == "fr" ? "votre compte bancaire" : "your bank account" }, "errors"));
 
-        if(!(interaction.options.getString("entreprise")?.split("&#46;")?.[0] ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "entreprise" : "company" }, "errors"));
+        if (!(interaction.options.getString("entreprise")?.split("&#46;")?.[0] ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "entreprise" : "company" }, "errors"));
         const company = await client.db.getCompany(interaction.guildId, interaction.options.getString("entreprise")?.split("&#46;")?.[1])
         
         // Send confirmation embed
@@ -98,7 +98,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         
@@ -110,7 +110,7 @@ module.exports = {
         const memberCompanies = await client.db.getMemberCompanies(interaction.guildId, interaction.member.id);
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...memberCompanies.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...memberCompanies.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

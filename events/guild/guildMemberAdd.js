@@ -3,7 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 module.exports.run = async(client, member) => {
 
         const isPremium = await client.db.isPremium(member.guild.id);
-        if(!isPremium || member.user.bot) return;
+        if (!isPremium || member.user.bot) return;
 
         const options = await client.db.getOptions(member.guild.id, [
             "economy.symbol",
@@ -14,8 +14,8 @@ module.exports.run = async(client, member) => {
             "guild.lang"
         ]);
 
-        if(!options["economy.create_account_bank_start"]) return;
-        if(await client.db.hasBankAccount(member.guild.id, member.id)) return;
+        if (!options["economy.create_account_bank_start"]) return;
+        if (await client.db.hasBankAccount(member.guild.id, member.id)) return;
 
         // Generate IBAN, secret code and card code
         async function generate(type) {
@@ -23,7 +23,7 @@ module.exports.run = async(client, member) => {
             let code = Math.floor(Math.random() * max) + min;
             
             while (`${code}`.split("")[0] == '0') code = Math.floor(Math.random() * max) + min;
-            if(type == "iban") while(await client.db.checkIban(member.guild.id, code)) code = Math.floor(Math.random() * max) + min;
+            if (type == "iban") while(await client.db.checkIban(member.guild.id, code)) code = Math.floor(Math.random() * max) + min;
             
             return code;
         }
@@ -44,7 +44,7 @@ module.exports.run = async(client, member) => {
             .setTimestamp();
 
         const channel = member.guild.channels.cache.get(options["channel.logs"]);
-        if(!channel) return;
+        if (!channel) return;
         
         channel.send({ embeds: [logsEmbed] }).catch(() => { });
 

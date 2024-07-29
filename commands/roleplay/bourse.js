@@ -25,27 +25,27 @@ module.exports = {
         await interaction.deferReply().catch(() => {});
 
         const cryptos = client.cryptos;
-        if(!cryptos.length) return errorEmbed(t("updating_crpytos"), false, true, "editReply");
+        if (!cryptos.length) return errorEmbed(t("updating_crpytos"), false, true, "editReply");
 
         const memberCryptos = await client.db.getMemberCryptos(interaction.guildId, interaction.member.id);
         const memberAccount = await client.db.getBankAccount(interaction.guildId, interaction.member.id);
-        if(!memberAccount?.id) return errorEmbed(t("no_bank_account", false, "errors"), false, true, "editReply");
+        if (!memberAccount?.id) return errorEmbed(t("no_bank_account", false, "errors"), false, true, "editReply");
 
         const render = async(customId) => {
         
             const memberAccount = await client.db.getBankAccount(interaction.guildId, interaction.member.id);
-            if(!memberAccount?.id) return errorEmbed(t("no_bank_account", false, "errors"), false, true, "editReply");
+            if (!memberAccount?.id) return errorEmbed(t("no_bank_account", false, "errors"), false, true, "editReply");
 
             const canvas = new Canvas(customId == "funds" ? 930 : 500, customId == "funds" ? 500 : 980)
             .printImage(await loadImage(`assets/bourse/${customId}.png`), 0, 0, customId == "funds" ? 930 : 500, customId == "funds" ? 500 : 980)
             .printCircularImage(await loadImage(interaction.member.displayAvatarURL({ format: "png", size: 1024 })), customId == "funds" ? 65 : 250, customId == "funds" ? 190 : 32.5, customId == "funds" ? 35 : 25, customId == "funds" ? 35 : 25)
 
-            if(customId == "funds") {
+            if (customId == "funds") {
 
                 const getName = async(id) => {
                     const idCards = [await client.db.getIDCard(interaction.guildId, id), await client.db.getIDCard(interaction.guildId, id, true)]
-                    if(idCards[0]) return `${idCards[0].first_name} ${idCards[0].last_name}`;
-                    else if(idCards[1]) return `${idCards[1].first_name} ${idCards[1].last_name}`;
+                    if (idCards[0]) return `${idCards[0].first_name} ${idCards[0].last_name}`;
+                    else if (idCards[1]) return `${idCards[1].first_name} ${idCards[1].last_name}`;
                     
                     await interaction.guild.members.fetch();
                     const member = interaction.guild.members.cache.get(id);
@@ -79,7 +79,7 @@ module.exports = {
                     .printText(client.functions.other.cfl(crypto.id == "b.coin" ? "B.Coin" : crypto.id), 115, 135 + (i * 89.5))
                     .setTextFont("25px Poppins")
 
-                    if(customId == "wallet") {
+                    if (customId == "wallet") {
                         
                         const memberCrypto = memberCryptos.find((m) => m.crypto_name.toLowerCase() == crypto.id.toLowerCase())
                         const quantity = memberCrypto ? `${(memberCrypto?.quantity).toFixed(4)}` : `${(0).toFixed(4)}`;
@@ -167,10 +167,10 @@ module.exports = {
         )
 
         const message = await interaction.editReply(passWarning == 1 ? await render("bourse") : { embeds: [warningEmbed], components: [warningRow] }).catch(() => {});
-        if(!message) return;
+        if (!message) return;
 
         const collector = message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.user.id, time: 120000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         let dontRemoveComponents = false;
         collector.on("collect", async(i) => {
@@ -185,12 +185,12 @@ module.exports = {
                 case "fund":
                 case "invest": {
 
-                    if(!memberAccount?.id) return i.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], ephemeral: true });
+                    if (!memberAccount?.id) return i.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], ephemeral: true });
 
                     const code = Math.floor(Math.random() * 9000000000) + 1000000000
                     const modal = new ModalBuilder().setCustomId(`modal_invest_${code}`).setTitle(t("modal.title"))
                         
-                    if(i.customId == "invest") modal.addComponents(new ActionRowBuilder().addComponents(
+                    if (i.customId == "invest") modal.addComponents(new ActionRowBuilder().addComponents(
                         new TextInputBuilder().setCustomId("name").setStyle(TextInputStyle.Short).setLabel(t("modal.fields.name")).setPlaceholder(t("modal.fields.name_placeholder")).setMinLength(1).setMaxLength(11).setRequired(true)
                     ))
 
@@ -202,22 +202,22 @@ module.exports = {
 
                     await i.showModal(modal).catch(() => {})
                     const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id === i.user.id && ii.customId == `modal_invest_${code}`, time: 60000 });
-                    if(!modalCollector) return;
+                    if (!modalCollector) return;
 
                     const collectedValue = modalCollector?.fields?.getTextInputValue("amount") ? ((modalCollector?.fields?.getTextInputValue("amount") ?? "")).toLowerCase() : null
                     const amount = ["tout", "all"].includes(collectedValue?.toString()?.toLowerCase()) || !collectedValue ? memberAccount[i.customId == "fund" ? "bank_money" : "crypto_wallet"] : parseFloat(collectedValue.replaceAll(",", "."));
-                    if(isNaN(amount) || amount <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_amount", { amount: amount.toFixed(2) }), true)], components: [], files: [] }).catch(() => {});
+                    if (isNaN(amount) || amount <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_amount", { amount: amount.toFixed(2) }), true)], components: [], files: [] }).catch(() => {});
                     
                     const newMemberAccount = await client.db.getBankAccount(interaction.guildId, i.user.id);
-                    if(!newMemberAccount?.id) return i.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], ephemeral: true });
-                    if((newMemberAccount?.[i.customId == "fund" ? "bank_money" : "crypto_wallet"] ?? 0) - amount.toFixed(2) < (i.customId == "fund" ? overdraftLimit : 0)) return modalCollector.reply({ embeds: [errorEmbed(t(i.customId == "fund" ? "overdraft" : "not_enough_funds", { limit: overdraftLimit, symbol: economySymbol, amount: separate(memberAccount?.bank_money) }, "errors"), true)], components: [], files: [] });
+                    if (!newMemberAccount?.id) return i.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], ephemeral: true });
+                    if ((newMemberAccount?.[i.customId == "fund" ? "bank_money" : "crypto_wallet"] ?? 0) - amount.toFixed(2) < (i.customId == "fund" ? overdraftLimit : 0)) return modalCollector.reply({ embeds: [errorEmbed(t(i.customId == "fund" ? "overdraft" : "not_enough_funds", { limit: overdraftLimit, symbol: economySymbol, amount: separate(memberAccount?.bank_money) }, "errors"), true)], components: [], files: [] });
                     
-                    if(i.customId == "invest") {
+                    if (i.customId == "invest") {
 
                         const name = modalCollector.fields.getTextInputValue("name");
                         var crypto = client.cryptos.find(c => c.id.toLowerCase() == name.toLowerCase() || c.symbol.toLowerCase() == name.toLowerCase());
     
-                        if(!crypto) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_crypto", { name: name }), true)], components: [], files: [] }).catch(() => {});
+                        if (!crypto) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_crypto", { name: name }), true)], components: [], files: [] }).catch(() => {});
                         await client.db.addMoney(interaction.guildId, interaction.member.id, "crypto_wallet", -amount.toFixed(2));
                         await client.db.addMemberCrypto(interaction.guildId, interaction.member.id, crypto.id, (amount / crypto.current_price).toFixed(4));
 
@@ -234,7 +234,7 @@ module.exports = {
 
                 case "sell": {
 
-                    if(!memberAccount?.id) return i.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], ephemeral: true });
+                    if (!memberAccount?.id) return i.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], ephemeral: true });
 
                     const code = Math.floor(Math.random() * 9000000000) + 1000000000
                     const modal = new ModalBuilder()
@@ -251,19 +251,19 @@ module.exports = {
 
                     await i.showModal(modal).catch(() => {})
                     const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id === i.user.id && ii.customId == `modal_sell_${code}`, time: 60000 });
-                    if(!modalCollector) return;
+                    if (!modalCollector) return;
 
                     const name = modalCollector.fields.getTextInputValue("name");
                     const crypto = client.cryptos.find(c => c.id.toLowerCase() == name.toLowerCase() || c.symbol.toLowerCase() == name.toLowerCase());
-                    if(!crypto) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_crypto", { name: name }), true)], components: [], files: [] }).catch(() => {});
+                    if (!crypto) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_crypto", { name: name }), true)], components: [], files: [] }).catch(() => {});
                     
                     const memberCrypto = memberCryptos.find(c => c.crypto_name.toLowerCase() == crypto.id.toLowerCase());
-                    if(!memberCrypto) return modalCollector.reply({ embeds: [errorEmbed(t("no_crypto", { name: client.functions.other.cfl(crypto.id) }), true)], components: [], files: [] }).catch(() => {});
+                    if (!memberCrypto) return modalCollector.reply({ embeds: [errorEmbed(t("no_crypto", { name: client.functions.other.cfl(crypto.id) }), true)], components: [], files: [] }).catch(() => {});
 
                     const quantity = ["tout", "all"].includes((modalCollector.fields.getTextInputValue("quantity")).toLowerCase()) || !modalCollector.fields.getTextInputValue("quantity") ? memberCrypto.quantity : parseFloat(modalCollector.fields.getTextInputValue("quantity").replaceAll(",", "."));
-                    if(isNaN(quantity) || quantity <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_amount", { amount: amount.toFixed(2) }), true)], components: [], files: [] }).catch(() => {});
+                    if (isNaN(quantity) || quantity <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_amount", { amount: amount.toFixed(2) }), true)], components: [], files: [] }).catch(() => {});
 
-                    if((memberAccount.bank_money + (memberCrypto.current_price * quantity).toFixed(2)) >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: lang == "fr" ? "votre compte bancaire" : "your bank account" }, "errors"), true)], components: [], files: [] });
+                    if ((memberAccount.bank_money + (memberCrypto.current_price * quantity).toFixed(2)) >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: lang == "fr" ? "votre compte bancaire" : "your bank account" }, "errors"), true)], components: [], files: [] });
 
                     const rows = new ActionRowBuilder().addComponents(
                         new ButtonBuilder().setCustomId("accept-crypto-sell").setLabel(t("buttons.accept")).setStyle(ButtonStyle.Success),
@@ -280,13 +280,13 @@ module.exports = {
         })
 
         collector.on("end", async (collected) => {
-            if(dontRemoveComponents) return;
+            if (dontRemoveComponents) return;
             return interaction?.editReply({ components: [] }).catch(() => {});
         });
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

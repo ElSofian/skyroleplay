@@ -305,19 +305,19 @@ module.exports = {
         const method = interaction.options.getSubcommand();
         const member = interaction.options.getMember("joueur") || interaction.member;
         const own = member.id === interaction.member.id;
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
 
         switch (method) {
             case "créer": {
 
                 const type = interaction.options.getString("type");
                 const license = t(`licencesTypes.${type}`)
-                if(verify("member", { cantBotInclued: true })) return;
+                if (verify("member", { cantBotInclued: true })) return;
 
-                if(!(await client.db.hasIDCard(interaction.guildId, member.user.id))) return errorEmbed(own ? t("idcard_user", false, "errors") : t("idcard_member", { member: member.toString() }));
+                if (!(await client.db.hasIDCard(interaction.guildId, member.user.id))) return errorEmbed(own ? t("idcard_user", false, "errors") : t("idcard_member", { member: member.toString() }));
 
                 const licenceStatus = await client.db.getDriverLicenseStatus(interaction.guildId, member.user.id, type);
-                if(licenceStatus === 1) return errorEmbed(own ? t("already_user") : t("already_member", { member: member.toString() }));
+                if (licenceStatus === 1) return errorEmbed(own ? t("already_user") : t("already_member", { member: member.toString() }));
 
                 await client.db.setDriverLicense(interaction.guildId, member.user.id, type, 1);
 
@@ -343,16 +343,16 @@ module.exports = {
 
             case "supprimer": {
 
-                if(!(interaction.options.getString("type") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: "type" }, "errors"));
+                if (!(interaction.options.getString("type") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: "type" }, "errors"));
                 
                 const type = interaction.options.getString("type").split("&#46;")[1];
                 const license = t(`licencesTypes.${type}`)
 
-                if(!(await client.db.hasIDCard(interaction.guildId, member.user.id))) return errorEmbed(own ? t("idcard_user", false, "errors") : t("idcard_member", { member: member.toString() }, "errors"));
+                if (!(await client.db.hasIDCard(interaction.guildId, member.user.id))) return errorEmbed(own ? t("idcard_user", false, "errors") : t("idcard_member", { member: member.toString() }, "errors"));
 
                 const licenceStatus = await client.db.getDriverLicenseStatus(interaction.guildId, member.user.id, type);
-                if(!licenceStatus) return errorEmbed(own ? t("not_yet_user") : t("not_yet_member", { member: member.toString() }));
-                if(licenceStatus === 2) return errorEmbed(own ? t("already_not_user") : t("already_not_member", { member: member.toString() }) );
+                if (!licenceStatus) return errorEmbed(own ? t("not_yet_user") : t("not_yet_member", { member: member.toString() }));
+                if (licenceStatus === 2) return errorEmbed(own ? t("already_not_user") : t("already_not_member", { member: member.toString() }) );
 
                 await client.db.setDriverLicense(interaction.guildId, member.user.id, type, 2);
 
@@ -378,18 +378,18 @@ module.exports = {
             case "ajouter": {
 
                 const driverLicense = interaction.options.getString("permis").split("&#46;")[1];
-                if(!(interaction.options.getString("permis") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "permis" : "license" }, "errors"));
+                if (!(interaction.options.getString("permis") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "permis" : "license" }, "errors"));
                 
                 const currentPoints = await client.db.getDriverLicensePoints(interaction.guildId, member.user.id, driverLicense);
-                if(currentPoints == null) return errorEmbed(own ? t("dont_have.user") : t("dont_have.member", { member: member.toString() }));
+                if (currentPoints == null) return errorEmbed(own ? t("dont_have.user") : t("dont_have.member", { member: member.toString() }));
 
                 const amount = interaction.options.getNumber("points");
                 const maxPoints = await client.db.getOption(interaction.guildId, "driver_licences.max_points");
 
-                if(currentPoints >= maxPoints) return errorEmbed(own ? t("max_user") : t("max_member", { member: member.toString() }));
+                if (currentPoints >= maxPoints) return errorEmbed(own ? t("max_user") : t("max_member", { member: member.toString() }));
 
                 const newAmount = currentPoints + amount;
-                if(newAmount > maxPoints) return errorEmbed(t("max", { number: maxPoints.toString() }));
+                if (newAmount > maxPoints) return errorEmbed(t("max", { number: maxPoints.toString() }));
 
                 await client.db.setDriverLicensePoints(interaction.guildId, member.user.id, driverLicense, newAmount);
 
@@ -403,16 +403,16 @@ module.exports = {
             case "retirer": {
 
                 const driverLicense = interaction.options.getString("permis").split("&#46;")[1];
-                if(!(interaction.options.getString("permis") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "permis" : "license" }, "errors"));
+                if (!(interaction.options.getString("permis") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "permis" : "license" }, "errors"));
                 
                 const currentPoints = await client.db.getDriverLicensePoints(interaction.guildId, member.user.id, driverLicense);
-                if(currentPoints == null) return errorEmbed(own ? t("dont_have.user") : t("dont_have.member", { member: member.toString() }));
+                if (currentPoints == null) return errorEmbed(own ? t("dont_have.user") : t("dont_have.member", { member: member.toString() }));
 
                 const amount = interaction.options.getNumber("points");
                 const maxPoints = await client.db.getOption(interaction.guildId, "driver_licences.max_points");
                 const newAmount = currentPoints - amount;
 
-                if(newAmount < 0) return errorEmbed(own ? t("negate_user") : t("negate_member", { member: member.toString() }));
+                if (newAmount < 0) return errorEmbed(own ? t("negate_user") : t("negate_member", { member: member.toString() }));
 
                 await client.db.removeHighwayCode(interaction.guildId, member.user.id);
                 await client.db.setDriverLicensePoints(interaction.guildId, member.user.id, driverLicense, newAmount, amount == currentPoints);
@@ -428,7 +428,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 
@@ -442,7 +442,7 @@ module.exports = {
         const maxPoints = await client.db.getOption(interaction.guildId, "driver_licences.max_points");
         const driverLicences = (await client.db.getDriverLicense(interaction.guildId, memberId)).filter(licence => licence.status !== 2 && (method == "ajouter" ? licence.points < maxPoints : true))
 
-        if((driverLicences.filter(licence => licence.status !== 2)).length > 0) {
+        if ((driverLicences.filter(licence => licence.status !== 2)).length > 0) {
             for (const licence of driverLicences) response.push({ name: t(`licencesTypes.${licence.type}`), value: `${code}&#46;${licence.type}` });
         }
 

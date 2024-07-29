@@ -100,23 +100,23 @@ module.exports = {
         try {
 
         const companyString = interaction.options.getString("entreprise") ?? `${code}`
-        if(!companyString.startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "entreprise" : "company" }, "errors"));
+        if (!companyString.startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "entreprise" : "company" }, "errors"));
         
         const member = interaction.options.getMember("joueur");
-        if(verify(["member", "reason"], { cantBotInclued: true, limit: 255 })) return;
+        if (verify(["member", "reason"], { cantBotInclued: true, limit: 255 })) return;
 
         const company = !isPremium || !interaction.options.getString("entreprise") ? true : await client.db.getCompany(interaction.guildId, companyString.split("&#46;")[1]);
-        if(!company) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
+        if (!company) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
 
         const dateLimit = interaction.options.getString("date-limite");
-        if(dateLimit && !dateLimit.match(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/(19|20)\d\d$/)) return errorEmbed(t("invalid_date", { option: lang == "fr" ? "date-limite" : "deadline" }, "errors"));
+        if (dateLimit && !dateLimit.match(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/(19|20)\d\d$/)) return errorEmbed(t("invalid_date", { option: lang == "fr" ? "date-limite" : "deadline" }, "errors"));
 
         const memberAccount = await client.db.getBankAccount(interaction.guildId, member.user.id);
-        if(!memberAccount || memberAccount.bank_money == null || isNaN(memberAccount.bank_money)) return errorEmbed(t("no_member_account", false, "errors"));
+        if (!memberAccount || memberAccount.bank_money == null || isNaN(memberAccount.bank_money)) return errorEmbed(t("no_member_account", false, "errors"));
         
         // Validate amount
         const amount = interaction.options.getNumber("montant");
-        if(parseInt(amount) <= 0) return errorEmbed(t("not_amount_null"));
+        if (parseInt(amount) <= 0) return errorEmbed(t("not_amount_null"));
         
         const reason = interaction.options.getString("raison");
         const police = await client.db.getSpecifyCompany(interaction.guildId, "police")
@@ -141,7 +141,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         
@@ -150,7 +150,7 @@ module.exports = {
 
     runAutocomplete: async(client, interaction, { isPremium }) => {
 
-        if(!isPremium) {
+        if (!isPremium) {
             const policeRole = await client.db.getOption(interaction.guildId, "roles.police")
             return interaction.respond(policeRole && interaction.member.roles.cache.has(policeRole) ? [{ name: "Police", value: `${code}&#46;police` }] : []).catch(() => {});
         }
@@ -162,7 +162,7 @@ module.exports = {
         response.push(...companies)
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...response.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

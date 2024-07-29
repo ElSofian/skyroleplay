@@ -169,7 +169,7 @@ module.exports = {
 
         // Check whether the bot has permissions
         const hasSendPermissions = interaction.channel.permissionsFor(client.user.id).has(["ViewChannel", "SendMessages", "EmbedLinks"]);
-        if(!hasSendPermissions) return errorEmbed(t("perms_send", { channel: interaction.channel.toString() }, "errors"));
+        if (!hasSendPermissions) return errorEmbed(t("perms_send", { channel: interaction.channel.toString() }, "errors"));
 
         // Image
         const image = interaction.options.getString("image", false);
@@ -177,35 +177,35 @@ module.exports = {
             .setDescription((interaction.options.getString("description", false) || null))
             .setTitle((interaction.options.getString("titre", false) || null));
         
-        if(isWebUri(image)) embed.setImage(image);
-        if(!embed.data.description && !embed.data.title && !embed.data.image) return errorEmbed(t("title_description_image"));
+        if (isWebUri(image)) embed.setImage(image);
+        if (!embed.data.description && !embed.data.title && !embed.data.image) return errorEmbed(t("title_description_image"));
 
         // Author
         const authorName = interaction.options.getString("nom-auteur", false);
         const authorIcon = interaction.options.getString("icone-auteur", false);
-        if(authorName) embed.setAuthor({ name: authorName, iconURL: isWebUri(authorIcon) ? authorIcon : null });
+        if (authorName) embed.setAuthor({ name: authorName, iconURL: isWebUri(authorIcon) ? authorIcon : null });
 
         // Footer
         const footerText = interaction.options.getString("texte-bas-de-page", false);
         const footerIcon = interaction.options.getString("icone-bas-de-page", false);
-        if(footerText) embed.setFooter({ text: footerText, iconURL: isWebUri(footerIcon) ? footerIcon : null });
+        if (footerText) embed.setFooter({ text: footerText, iconURL: isWebUri(footerIcon) ? footerIcon : null });
 
         // Color
         const color = interaction.options.getString("couleur", false);
         const resolvedColor = client.functions.other.isHexColor(color ? color.toLowerCase() : "");
-        if(color && !resolvedColor) return errorEmbed(t("color_undefined", { color: color, link: client.constants.links.colorPicker }, "errors"));
+        if (color && !resolvedColor) return errorEmbed(t("color_undefined", { color: color, link: client.constants.links.colorPicker }, "errors"));
         embed.setColor(resolvedColor ?? "#2f3136");
 
         // Thumbnail
         const thumbnail = interaction.options.getString("vignette", false);
-        if(isWebUri(thumbnail)) embed.setThumbnail(thumbnail);
+        if (isWebUri(thumbnail)) embed.setThumbnail(thumbnail);
 
         // Timestamp
-        if(interaction.options.getBoolean("heure", false)) embed.setTimestamp();
+        if (interaction.options.getBoolean("heure", false)) embed.setTimestamp();
 
         // Send the embed
         const message = await interaction.channel.send({ embeds: [embed] }).catch(() => { });
-        if(!message) return;
+        if (!message) return;
 
         successEmbed(t("confirm", { link: message.url }), false, true)
 
@@ -224,7 +224,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

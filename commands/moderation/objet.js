@@ -159,14 +159,14 @@ module.exports = {
         const method = interaction.options.getSubcommand();
         const member = interaction.options.getMember("joueur");
 
-        if(verify("member", { cantBotInclued: true })) return;
-        if(method == "retirer" && !(interaction.options.getString("objet") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "objet" : "object" }, "errors"))
+        if (verify("member", { cantBotInclued: true })) return;
+        if (method == "retirer" && !(interaction.options.getString("objet") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "objet" : "object" }, "errors"))
         
         const item = interaction.options.getString("objet").split("&#46;");
         const itemId = item[1]
 
         const findItem = await client.db.getShopItem(interaction.guildId, itemId, true)
-        if(!findItem) return errorEmbed(t("item_not_found"));
+        if (!findItem) return errorEmbed(t("item_not_found"));
         
         const memberItem = await client.db.getMemberItem(interaction.guildId, member.id, itemId)
         const giveQuantity = !interaction.options.getNumber("quantité") ? (memberItem?.quantity ?? 1) : interaction.options.getNumber("quantité");
@@ -177,10 +177,10 @@ module.exports = {
                 const maxWeight = await client.db.getOption(interaction.guildId, "inventory.max_weight");
                 const inventoryWeight = (await client.db.getMemberItems(interaction.guildId, interaction.member.id)).reduce((a, b) => a + (b.weight * b.quantity), 0) + (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id)).reduce((a, b) => a + ((b?.untreated ?? 0) + (b?.treated ?? 0)), 0);
 
-                if(maxWeight && inventoryWeight + findItem.weight > maxWeight) return errorEmbed(t("inventory_full_member", { member: member.toString(), item: findItem.name }, "errors"))
-                if(findItem.role_add && !member.roles.cache.has(findItem.role_add)) await member.roles.add(findItem.role_add).catch(() => errorEmbed(t("cant_give_role", { role: findItem.role_add.toString() }, "errors")))
-                if(findItem.role_remove && giveQuantity == memberItem?.quantity) await member.roles.remove(findItem.role_add).catch(() => errorEmbed(t("cant_remove_role", { role: findItem.role_add.toString() }, "errors")));
-                if(findItem.role_remove) await member.roles.remove(findItem.role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: findItem.role_remove.toString() }, "errors")))
+                if (maxWeight && inventoryWeight + findItem.weight > maxWeight) return errorEmbed(t("inventory_full_member", { member: member.toString(), item: findItem.name }, "errors"))
+                if (findItem.role_add && !member.roles.cache.has(findItem.role_add)) await member.roles.add(findItem.role_add).catch(() => errorEmbed(t("cant_give_role", { role: findItem.role_add.toString() }, "errors")))
+                if (findItem.role_remove && giveQuantity == memberItem?.quantity) await member.roles.remove(findItem.role_add).catch(() => errorEmbed(t("cant_remove_role", { role: findItem.role_add.toString() }, "errors")));
+                if (findItem.role_remove) await member.roles.remove(findItem.role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: findItem.role_remove.toString() }, "errors")))
 
                 await client.db.addMemberItem(interaction.guildId, member.id, findItem.id, giveQuantity);
 
@@ -190,14 +190,14 @@ module.exports = {
 
             case 'retirer':
 
-                if(!memberItem) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"))
+                if (!memberItem) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"))
                 const { id, name, quantity, role_add, hidden_quantity } = memberItem
 
-                if(role_add && member.roles.cache.has(role_add) && giveQuantity == quantity) await member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors")))
-                if(giveQuantity > quantity) {
+                if (role_add && member.roles.cache.has(role_add) && giveQuantity == quantity) await member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors")))
+                if (giveQuantity > quantity) {
 
                     const confirm = await client.functions.userinput.askValidation(interaction, t("only", { quantity: quantity, name: name }));
-                    if(!confirm) return;
+                    if (!confirm) return;
 
                     
                 }
@@ -212,7 +212,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     },
@@ -226,7 +226,7 @@ client.bugsnag.notify(err);
         const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...sortedItems.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...sortedItems.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

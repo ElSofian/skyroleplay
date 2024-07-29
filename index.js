@@ -1,15 +1,16 @@
 const { ClusterManager, HeartbeatManager } = require('discord-hybrid-sharding');
-const { WebhookClient } = require('discord.js');
-const { token, shardsNumber } = require("./config");
+const dotenv = require('dotenv');
+dotenv.config();
+const { shardsNumber } = require("./config");
 const axios = require('axios');
 const Logger = new (require('./structures/Logger.js'))
-const webhook = new WebhookClient({ url: 'https://discord.com/api/webhooks/1047573615819903096/PB3YZY1gYQLzJiMeOIFFq0IWqPkdLVouLkl6CUi-LbzezVpdaYpNL_r4colGljJQXNWj' });
+// const webhook = new WebhookClient({ url: 'https://discord.com/api/webhooks/1047573615819903096/PB3YZY1gYQLzJiMeOIFFq0IWqPkdLVouLkl6CUi-LbzezVpdaYpNL_r4colGljJQXNWj' });
 
 const manager = new ClusterManager(`${__dirname}/shard.js`, {
     totalShards: shardsNumber ?? "auto",
     shardsPerClusters: 2,
     mode: 'process',
-    token: token,
+    token: process.env.token,
     restarts: {
         max: 1,
         interval: 60000 * 60,
@@ -37,11 +38,11 @@ manager.on('clusterCreate', cluster => {
     cluster.on('death', (cluster, thread) => {
         console.log('');
         console.log(`Cluster ${cluster.id} dead`);
-        webhook.send(`Cluster ${cluster.id} dead`);
+        // webhook.send(`Cluster ${cluster.id} dead`);
     });
     cluster.on('error', (error) => {
         console.log(`Cluster ${cluster.id} errored with ${error}`)
-        webhook.send(`Cluster ${cluster.id} errored with ${error}`)
+        // webhook.send(`Cluster ${cluster.id} errored with ${error}`)
     });
 
 });

@@ -21,7 +21,7 @@ const client = new Client({
     presence: {
         activities: [
             {
-                name: "/aide | nidev.fr",
+                name: "i'm reborn",
                 type: ActivityType.Watching,
             },
         ],
@@ -33,27 +33,14 @@ const client = new Client({
 client.config = require("./config.js");
 client.logger = new (require("./structures/Logger"))();
 
-// const Bugsnag = require('@bugsnag/js');
-// Bugsnag.start({
-//     apiKey: client.config.bugsnag_apikey,
-//     releaseStage: client.config.environment,
-//     logger: { error: client.logger.error, warn: client.logger.warn, info: client.logger.bugsnag, debug: client.logger.bugsnag },
-//     onError: (event) => {
-//         if(event?.errors?.[0]?.errorClass?.includes("[InteractionCollectorError]")) return false;
-//     },
-// });
-
-// client.bugsnag = Bugsnag;
-
 client.cluster = new ClusterClient(client);
 client.cluster.on('error', (error) => {
-    client.bugsnag.notify(error);
     client.logger.error("Cluster Error: " + error)
 });
 
 client.cryptos = [];
 client.cluster.on("message", (message) => {
-    if(message.content == "cryptos_update") client.cryptos = message.data;
+    if (message.content == "cryptos_update") client.cryptos = message.data;
 });
 
 client.dayjs = dayjs;
@@ -72,8 +59,7 @@ require(`./handlers/Events`)(client);
 
 client.login(client.config.token);
 
-process.on("unhandledRejection", (err) => {
-    if(err.code == "InteractionCollectorError") return;
-    console.error(err);
-    client.bugsnag.notify(err);
-});
+// process.on("unhandledRejection", (err) => {
+//     if (err.code == "InteractionCollectorError") return;
+//     console.error(err);
+// });

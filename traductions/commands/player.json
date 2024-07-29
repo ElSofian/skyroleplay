@@ -82,7 +82,83 @@
         }
     },
     "compte": {
+        "modal": {
+            "name": {
+                "en": "Name",
+                "fr": "Nom"
+            },
+            "placeholder_name": {
+                "en": "Enter your name",
+                "fr": "Entrez votre nom"
+            },
+			"placeholder_new_name": {
+				"en": "Enter your new name",
+				"fr": "Entrez votre nouveau nom"
+			},
+            "password": {
+                "en": "Password",
+                "fr": "Mot de passe"
+            },
+            "placeholder_password": {
+                "en": "Enter the password of the account",
+                "fr": "Entrez le mot de passe du compte"
+            },
+            "nickname": {
+                "en": "Nickname",
+                "fr": "Pseudo"
+            },
+            "placeholder_nickname": {
+                "en": "Enter the nickname of the account",
+                "fr": "Entrez le pseudo du compte"
+            },
+            "placeholder_new_nickname": {
+                "en": "Enter the new nickname of the account",
+                "fr": "Entrez le nouveau pseudo du compte"
+            },
+			"bio": {
+				"en": "Bio",
+				"fr": "Biographie"
+			},
+			"placeholder_bio": {
+				"en": "Enter the bio of the account",
+				"fr": "Entrez la biographie du compte"
+			},
+			"placeholder_new_bio": {
+				"en": "Enter the new bio of the account",
+				"fr": "Entrez la nouvelle biographie du compte"
+			}
+        },
+        "select_menu": {
+            "placeholder": {
+                "en": "Select the {{type}}",
+                "fr": "Sélectionnez l'{{type}}"
+            },
+            "followers": {
+                "en": "follower",
+                "fr": "abonné"
+            },
+            "following": {
+                "en": "following user",
+                "fr": "abonnement"
+            }
+        },
         "buttons": {
+            "connect": {
+                "en": "Connect",
+                "fr": "Se connecter"
+            },
+            "signup": {
+                "en": "Sign up",
+                "fr": "S'inscrire"
+            },
+            "retry": {
+                "en": "Retry",
+                "fr": "Réessayer"
+            },
+            "disconnect": {
+                "en": "Disconnect",
+                "fr": "Se déconnecter"
+            },
             "back": {
                 "en": "Back",
                 "fr": "Retour"
@@ -99,15 +175,129 @@
                 "en": "Followers",
                 "fr": "Abonnés"
             },
+			"change_name": {
+				"en": "Change name",
+				"fr": "Modifier le nom"
+			},
             "change_nickname": {
                 "en": "Change nickname",
-                "fr": "Modifier le nom"
+                "fr": "Modifier le pseudo"
             },
             "change_pp": {
                 "en": "Change profile picture",
                 "fr": "Modifier la photo de profil"
+            },
+			"change_bio": {
+				"en": "Change bio",
+				"fr": "Modifier la bio"
+			},
+			"delete": {
+				"en": "Delete your account.",
+				"fr": "Supprimer votre compte."
+			}
+        },
+        "embed": {
+            "description": {
+                "connect": {
+                    "en": "Please connect to your {{type}} account",
+                    "fr": "Veuillez vous connecter à votre compte {{type}}"
+                },
+                "connect_error": {
+                    "en": "The username or password is incorrect.",
+                    "fr": "Le nom d'utilisateur ou le mot de passe est incorrect."
+                },
+                "account": {
+                    "en": "Welcome to {{type}}. You can consult your profile, followers and following here or manage your entire account.",
+                    "fr": "Bienvenue sur {{type}}. Vous pouvez ici consulter votre profil, vos abonnements et vos abonnées ou encore gérer l'entière de votre compte."
+                },
+                "manage": {
+                    "en": "Edit your profile as you wish, whether it's your profile picture or your nickname!",
+                    "fr": "Modifiez votre profil à votre guise que ce soit votre photo de profil ou encore votre pseudo !"
+                },
+                "change_pp": {
+                    "en": "To change your profile picture, just send the photo you want to put in profile picture in this channel.\n\n{{warningEmoji}} Warning, you have to mention me (<@{{clientId}}>) in the message otherwise I won't be able to get the image.",
+                    "fr": "Pour changer votre photo de profil, il suffit d'envoyer en message dans ce salon la photo que vous souhaitez mettre en photo de profil.\n\n{{warningEmoji}} Attention, il faut me mentionner (<@{{clientId}}) dans le message car sinon je ne pourrais pas récupérer l'image."
+                },
+                "followers": {
+                    "en": "Here is the list of your {{followers}} follower(s). You can watch their profile or unsubscribe them from your account.",
+                    "fr": "Voici la liste de vos {{followers}} abonné(s). Vous pouvez regarder leur profil ou encore les désabonner de votre compte."
+                },
+                "following": {
+                    "en": "Here is the list of your {{following}} following user(s). You can watch their profile or unsubscribe from their account.",
+                    "fr": "Voici la liste de vos {{following}} abonnement(s). Vous pouvez regarder leur profil ou encore vous désabonner de leur compte."
+                }
+            },
+            "fields": {
+                "name": {
+                    "en": "Name",
+                    "fr": "Nom"
+                },
+                "nickname": {
+                    "en": "Nickname",
+                    "fr": "Pseudo"
+                },
+                "certified": {
+                    "en": "Certified",
+                    "fr": "Certifié"
+                },
+                "creation_date": {
+                    "en": "Creation date",
+                    "fr": "Date de création"
+                },
+                "followers": {
+                    "en": "Followers",
+                    "fr": "Abonnés"
+                },
+                "following": {
+                    "en": "Following",
+                    "fr": "Abonnements"
+                }
             }
-        }
+        },
+        "no_attachment": {
+            "en": "You must provide an image to the message",
+            "fr": "Vous devez fournir une image au message."
+        },
+        "changed_nickname": {
+            "en": "You have changed your nickname to **{{nickname}}**!",
+            "fr": "Vous avez changé votre pseudo en **{{nickname}}** !"
+        },
+        "changed_pp": {
+            "en": "You have changed your profile picture!",
+            "fr": "Vous avez changé votre photo de profil !"
+        },
+		"changed_bio": {
+			"en": "You have changed your bio!",
+			"fr": "Vous avez changé votre bio !" 
+		},
+        "confirm": {
+            "en": "Are you sure you want to delete your {{type}} account (@{{username}}?",
+            "fr": "Êtes-vous sûr de vouloir supprimer votre compte (@{{username}} {{type}} ?"
+        },
+        "deleted": {
+            "en": "You have deleted your {{type}} account!",
+            "fr": "Vous avez supprimé votre compte {{type}} !"
+        },
+        "no_longer_exists": {
+            "fr": "Ce compte n'existe pas / plus",
+            "en": "This account does not exist / no longer exists"
+        },
+        "connection": {
+            "en": "Connection",
+            "fr": "Connexion"
+        },
+        "no_followers": {
+            "en": "You don't have any followers",
+            "fr": "Vous n'avez aucun abonné"
+        },
+        "no_following": {
+            "en": "You don't have any following",
+            "fr": "Vous n'avez aucun abonnement"
+        },
+		"name_already_exists": {
+			"en": "This name is already taken.",
+			"fr": "Ce nom est déjà pris."
+		}
     },
     "contacts": {
         "already_have_contact": {

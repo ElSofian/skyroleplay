@@ -191,7 +191,7 @@ module.exports = {
         const method = interaction.options.getSubcommand();
         const member = interaction.options.getMember("joueur") || interaction.member;
 
-        if(verify("member", { cantBotInclued: true, cantSelfInclued: true }, t("self"))) return;
+        if (verify("member", { cantBotInclued: true, cantSelfInclued: true }, t("self"))) return;
 
         switch (method) {
             case "valider": {
@@ -221,13 +221,13 @@ module.exports = {
                         break;
                 }
 
-                if(!interaction.guild.roles.cache.has(neededRole))
+                if (!interaction.guild.roles.cache.has(neededRole))
                     return errorEmbed(`${t("role_undefined", { role: type == 1 ? t("roles.vocal") : t("roles.written"),  })} ${t("contact", { url: client.constants.links.dashboard })}`)
 
-                if(!interaction.guild.roles.cache.has(nextRole))
+                if (!interaction.guild.roles.cache.has(nextRole))
                     return errorEmbed(`${t("role_undefined", { role: type == 1 ? t("roles.vocal") : t("roles.citizen") })} ${t("contact", { url: client.constants.links.dashboard })}`) 
 
-                if(!member.roles.cache.has(neededRole)) return errorEmbed(t("neededRole", { member: member.toString(), id: neededRole }));
+                if (!member.roles.cache.has(neededRole)) return errorEmbed(t("neededRole", { member: member.toString(), id: neededRole }));
 
                 // Remove role
                 try {
@@ -261,8 +261,8 @@ module.exports = {
                         { name: t("logs.role_added"), value: `<@&${nextRole}>`, inline: true },
                     ]);
 
-                if(description) embed.setDescription(description);
-                if(comment) embed.addFields([{ name: t("comment"), value: comment }]);
+                if (description) embed.setDescription(description);
+                if (comment) embed.addFields([{ name: t("comment"), value: comment }]);
 
                 await interaction.reply({ content: spoiler(member.toString()), embeds: [embed] }).catch(() => {})
 
@@ -276,7 +276,7 @@ module.exports = {
                     ])
                     .setThumbnail(interaction.user.displayAvatarURL())
 
-                if(comment) logsEmbed.addFields([{ name: t("comment"), value: comment }]);
+                if (comment) logsEmbed.addFields([{ name: t("comment"), value: comment }]);
                 client.functions.logs.send(interaction, logsEmbed, "creation");
 
                 break;
@@ -298,8 +298,8 @@ module.exports = {
                     case 1: neededRole = options["roles.voice_applicant"]; break;
                 }
 
-                if(!interaction.guild.roles.cache.has(neededRole)) return errorEmbed(`${t("role_undefined", { role: type == 0 ? t("roles.written") : t("roles.vocal") })} ${t("contact", { url: client.constants.links.dashboard })}`)
-                if(!member.roles.cache.has(neededRole)) return errorEmbed(t("neededRole", { member: member.toString(), id: neededRole }));
+                if (!interaction.guild.roles.cache.has(neededRole)) return errorEmbed(`${t("role_undefined", { role: type == 0 ? t("roles.written") : t("roles.vocal") })} ${t("contact", { url: client.constants.links.dashboard })}`)
+                if (!member.roles.cache.has(neededRole)) return errorEmbed(t("neededRole", { member: member.toString(), id: neededRole }));
 
                 const description = options["applications.deny_description"]
                     .replace(/\{nom_serveur\}/gi, options["global.city_name"] || interaction.guild.name)
@@ -315,8 +315,8 @@ module.exports = {
                     .setThumbnail("https://cdn.discordapp.com/attachments/850491658339352577/881924058239889488/invalid.gif")
                     .setAuthor({ name: member.displayName, iconURL: member.user.displayAvatarURL() });
 
-                if(description) embed.setDescription(description);
-                if(comment) embed.addFields([{ name: t("comment"), value: comment }]);
+                if (description) embed.setDescription(description);
+                if (comment) embed.addFields([{ name: t("comment"), value: comment }]);
 
                 await interaction.reply({ content: spoiler(member.toString()), embeds: [embed] }).catch(() => {})
 
@@ -328,7 +328,7 @@ module.exports = {
                     ])
                     .setThumbnail(interaction.user.displayAvatarURL());
 
-                    if(comment) logsEmbed.addFields([{ name: t("comment"), value: comment }]);
+                    if (comment) logsEmbed.addFields([{ name: t("comment"), value: comment }]);
 
                 client.functions.logs.send(interaction, logsEmbed, "deletion");
                 break;
@@ -339,7 +339,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

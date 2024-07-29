@@ -27,7 +27,7 @@ module.exports = {
         const roleId = await client.db.getOption(interaction.guildId, "roles.taxi");
         const role = interaction.guild.roles.cache.get(roleId);
 
-        if(!role) return errorEmbed(t("role_not_defined", { link: client.constants.links.dashboard }));
+        if (!role) return errorEmbed(t("role_not_defined", { link: client.constants.links.dashboard }));
 
         const place = interaction.options.getString("localisation");
         const embed = new EmbedBuilder()
@@ -43,7 +43,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

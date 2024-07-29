@@ -32,7 +32,7 @@ module.exports = {
         const shard = interaction.options.getNumber("shard");
         const async = interaction.options.getBoolean("async") || false;
 
-        if(shard && shard + 1 > this.client.shard.count) return interaction.editReply({ content: "Le shard spécifié est invalide." });
+        if (shard && shard + 1 > this.client.shard.count) return interaction.editReply({ content: "Le shard spécifié est invalide." });
 
         const evalString = async ? `(async () => {${code}})()` : code;
         try {

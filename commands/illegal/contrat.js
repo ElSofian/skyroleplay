@@ -73,7 +73,7 @@ module.exports = {
         const motif = interaction.options.getString("motif", false);
         const options = await client.db.getOptions(interaction.guildId, ["economy.symbol", "illegal.contract.channel"]);
 
-        if(verify("member", { cantBotInclued: true, cantSelfInclued: true }, t("self"))) return;
+        if (verify("member", { cantBotInclued: true, cantSelfInclued: true }, t("self"))) return;
 
         const embed = new EmbedBuilder()
             .setColor("#BD9047")
@@ -95,7 +95,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

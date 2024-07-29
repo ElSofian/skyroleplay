@@ -54,10 +54,10 @@ module.exports = {
             
         const member = interaction.options.getMember("joueur");
         const reason = interaction.options.getString("raison");
-        if(verify(["member", "reason"], { cantBotInclued: true, limit: 255 })) return;
+        if (verify(["member", "reason"], { cantBotInclued: true, limit: 255 })) return;
         
         const isBan = await client.db.isFreezeAccount(interaction.guildId, member.user.id)
-        if(isBan) return errorEmbed(t("already_freeze", { member: member.toString() }));
+        if (isBan) return errorEmbed(t("already_freeze", { member: member.toString() }));
         
         await client.db.freezeAccount(interaction.guildId, member.user.id, reason);
         
@@ -72,7 +72,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

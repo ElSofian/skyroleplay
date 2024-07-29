@@ -107,7 +107,7 @@ module.exports = {
         const role = interaction.guild.roles.cache.get(options[`roles.${service}`]);
         const channel = interaction.guild.channels.cache.get(options[`channel.${service}`]) ?? interaction.channel;
 
-        if(!role) return errorEmbed(t("no_role", { service: services.find(s => s.value == service).name, link: client.constants.links.dashboard }))
+        if (!role) return errorEmbed(t("no_role", { service: services.find(s => s.value == service).name, link: client.constants.links.dashboard }))
 
         // Check whether the bot has permissions
         const hasSendPermissions = channel.permissionsFor(client.user.id).has(["ViewChannel", "SendMessages", "EmbedLinks"]);
@@ -135,16 +135,16 @@ module.exports = {
         const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId("take").setLabel(t("take")).setStyle(service == "firefighters" ? ButtonStyle.Danger : ButtonStyle.Primary))
 
         const message = await channel.send({ content: role ? spoiler(role.toString()) : null, embeds: [embed], components: [row], fetchReply: true }).catch(() => {});
-        if(!message) return; // interaction isn't edited
+        if (!message) return; // interaction isn't edited
 
         successEmbed(t(`confirmation.${service.toLowerCase()}`, { link: message.url }), false, true);
 
         const collector = message.createMessageComponentCollector({ time: 60000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         collector.on("collect", async (i) => {
 
-            if(!i.member.roles.cache.has(role.id)) return i.reply({ embeds: [errorEmbed(t("dont_have_role", { role: role?.id }, "errors"), true)], ephemeral: true }).catch(() => {});
+            if (!i.member.roles.cache.has(role.id)) return i.reply({ embeds: [errorEmbed(t("dont_have_role", { role: role?.id }, "errors"), true)], ephemeral: true }).catch(() => {});
             
             switch (service) {
                 case "ems":
@@ -170,7 +170,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

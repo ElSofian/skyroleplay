@@ -259,12 +259,12 @@ module.exports = {
         const method = interaction.options.getSubcommand();
         const member = interaction.options.getMember("joueur") || interaction.member;
         const own = member.id === interaction.member.id;
-        if(verify("member")) return;
+        if (verify("member")) return;
 
         switch (method) {
             case "créer": {
                 
-                if(await client.db.hasBankAccount(interaction.guildId, member.id)) return errorEmbed(own ? t("has_bank_account.classic") : t("has_bank_account.mention_member", { member: member.toString() }));
+                if (await client.db.hasBankAccount(interaction.guildId, member.id)) return errorEmbed(own ? t("has_bank_account.classic") : t("has_bank_account.mention_member", { member: member.toString() }));
 
                 const options = await client.db.getOptions(interaction.guildId, ["economy.start_amount", "global.city_name"]);
                 options["global.city_name"] ||= interaction.guild.name;
@@ -276,7 +276,7 @@ module.exports = {
                     let code = Math.floor(Math.random() * max) + min;
                     
                     while (`${code}`.split("")[0] == '0') code = Math.floor(Math.random() * max) + min;
-                    if(type == "iban") while(await client.db.checkIban(interaction.guildId, code)) code = Math.floor(Math.random() * max) + min;
+                    if (type == "iban") while(await client.db.checkIban(interaction.guildId, code)) code = Math.floor(Math.random() * max) + min;
                     
                     return code;
                 }
@@ -311,12 +311,12 @@ module.exports = {
 
             case "supprimer": {
 
-                if(!(await client.functions.permissions.configModerator(interaction, "compte-bancaire supprimer"))) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "compte-bancaire supprimer"))) return;
                 const packet = await client.db.deleteBankAccount(interaction.guildId, member.id);
 
                 const cityName = (await client.db.getOption(interaction.guildId, "global.city_name")) || interaction.guild.name;
 
-                if(packet.affectedRows > 0) {
+                if (packet.affectedRows > 0) {
                     const embed = new EmbedBuilder()
                         .setColor("Red")
                         .setTitle(t("embed_close_account.title"))
@@ -349,11 +349,11 @@ module.exports = {
 
             case "infos": {
 
-                if(!(await client.functions.permissions.configModerator(interaction, "compte-bancaire infos", true)) && !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "compte-bancaire infos", true)) && !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return;
 
                 const memberAccount = await client.db.getBankAccount(interaction.guildId, member.id);
-                if(!memberAccount) return errorEmbed(own ? t("no_bank_account", false, "errors") : t("no_member_account", { member: member.toString() }, "errors"));
-                // if(![0, 1, 2, 3].includes(memberAccount?.question)) return errorEmbed(`${interaction.member.id !== memberAccount.user_id ? "Vous devez" : `${member.toString()} doit`} d'abord utiliser la commande \`/compte-bancaire afficher\` pour adapter le compte bancaire au nouveau système.`);
+                if (!memberAccount) return errorEmbed(own ? t("no_bank_account", false, "errors") : t("no_member_account", { member: member.toString() }, "errors"));
+                // if (![0, 1, 2, 3].includes(memberAccount?.question)) return errorEmbed(`${interaction.member.id !== memberAccount.user_id ? "Vous devez" : `${member.toString()} doit`} d'abord utiliser la commande \`/compte-bancaire afficher\` pour adapter le compte bancaire au nouveau système.`);
 
                 const embed = new EmbedBuilder()
                 .setColor("Green")
@@ -384,9 +384,9 @@ module.exports = {
                 const options = await client.db.getOptions(interaction.guildId, ["global.city_name", "bank_cards.theme"]);
 
                 // Adapting users to the new system
-                if(![0, 1, 2, 3].includes(account?.question)) {
+                if (![0, 1, 2, 3].includes(account?.question)) {
 
-                    if(interaction.member.id !== account.user_id) return errorEmbed(`${member.toString()} doit d'abord utiliser la commande \`/compte-bancaire afficher\` pour adapter son compte bancaire au nouveau système.`);
+                    if (interaction.member.id !== account.user_id) return errorEmbed(`${member.toString()} doit d'abord utiliser la commande \`/compte-bancaire afficher\` pour adapter son compte bancaire au nouveau système.`);
 
                     // If the user hasn't created an account we say "welcome to the bank choose a question", if he already have an account we say "ALERT the system changed, choose a question"
                     const alreadyCreated = account?.creation_date ? false : true
@@ -403,10 +403,10 @@ module.exports = {
                     )
 
                     const message = await interaction.reply({ embeds: [embed], components: [sm], ephemeral: true}).catch(() => {})
-                    if(!message) return
+                    if (!message) return
 
                     const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.user.id && i.customId == "choose_question", time: 90000 });
-                    if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
+                    if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
 
                     collector.on("collect", async (i) => {
 
@@ -419,7 +419,7 @@ module.exports = {
 
                         await i.showModal(modal).catch(() => {})
                         const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id === i.user.id && ii.customId == `modal_answer_${code}`, time: 90000 }).catch(() => {})
-                        if(!modalCollector) return
+                        if (!modalCollector) return
 
                         const answer = modalCollector.fields.getTextInputValue("answer")
                         const responseEmbed = new EmbedBuilder()
@@ -509,7 +509,7 @@ module.exports = {
                     const transactions = (loan?.transactions?.split(","))?.reverse() ?? []
                     for(let i = 0; i < 3; i++) {
                         const transaction = transactions[i];
-                        if(!transaction) continue;
+                        if (!transaction) continue;
 
                         canvas.setTextAlign("left").setTextFont("27px PoppinsRegular").setColor(options["bank_cards.theme"] == "light" ? "#72C6B7" : "#179E4B").printText("+", 525, 350 + (i * 50)).setColor(options["bank_cards.theme"] == "light" ? "#3E4742" : "#F5F5F5").printText(`${separate(parseFloat(transaction))}${economySymbol}`, 550, 350 + (i * 50))
                     }
@@ -531,7 +531,7 @@ module.exports = {
                         .setDisabled(isBan || loan.payed >= loan.amount || newMemberAccount?.bank_money < overdraftLimit)
                     )
 
-                    if(loans.length > 1) {
+                    if (loans.length > 1) {
                         rows.addComponents(
                             new ButtonBuilder().setCustomId("previous").setEmoji("◀").setStyle(ButtonStyle.Secondary).setDisabled(current == 0),
                             new ButtonBuilder().setCustomId("next").setEmoji("▶").setStyle(ButtonStyle.Secondary).setDisabled(current + 1 == loans.length)
@@ -544,7 +544,7 @@ module.exports = {
 
                 const renderCard = async(customId) => {
                     const account = await client.db.getBankAccount(interaction.guildId, member.user.id);
-                    if(!account || !account.bank_money == null || isNaN(account.bank_money)) return { embeds: [errorEmbed(t("no_bank_account", { member: member.toString() }, "errors"), true)], components: [], files: [] }
+                    if (!account || !account.bank_money == null || isNaN(account.bank_money)) return { embeds: [errorEmbed(t("no_bank_account", { member: member.toString() }, "errors"), true)], components: [], files: [] }
 
                     const idCards = [await client.db.getIDCard(interaction.guildId, member.id), await client.db.getIDCard(interaction.guildId, member.id, true)];
                     const name = idCards[0] ? `${idCards[0].first_name} ${idCards[0].last_name}` : idCards[1] ? `${idCards[1].first_name} ${idCards[1].last_name}` : interaction.guild.members.cache.get(member.id)?.displayName ?? t("unknown", false, "global")
@@ -583,10 +583,10 @@ module.exports = {
                 const renderConnexion = async(urgencies = null) => {
 
                     const account = await client.db.getBankAccount(interaction.guildId, member.id);
-                    if(!account) return { embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] };
+                    if (!account) return { embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] };
 
-                    if(parseInt(code) == account.secret_code) return render()
-                    if(code.length >= 6 && !urgencies) fail = true
+                    if (parseInt(code) == account.secret_code) return render()
+                    if (code.length >= 6 && !urgencies) fail = true
 
                     const canvas = new Canvas(705, 295)
                     .printImage(await loadImage(`./assets/bank_cards/connexion/${lang}/${fail ? "error" : "success"}.png`), 0, 0, 705, 295)
@@ -599,7 +599,7 @@ module.exports = {
                     .setColor("#2a79ea")
                     .setImage("attachment://connexion.png")
 
-                    if(fail && !urgencies) {
+                    if (fail && !urgencies) {
                         var errorRow = new ActionRowBuilder().addComponents(
                             new ButtonBuilder().setCustomId("retry").setLabel(t("buttons.retry")).setStyle(ButtonStyle.Primary),
                             new ButtonBuilder().setCustomId("connexion-urgencies").setLabel(t("buttons.urgencies")).setStyle(ButtonStyle.Danger)
@@ -613,7 +613,7 @@ module.exports = {
                 const renderManageConnexion = async() => {
 
                     const account = await client.db.getBankAccount(interaction.guildId, member.id);
-                    if(!account) return { embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] };
+                    if (!account) return { embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] };
 
                     const rows = new ActionRowBuilder().addComponents(
                         new ButtonBuilder().setCustomId("manage").setLabel(t("buttons.back")).setStyle(ButtonStyle.Primary),
@@ -633,10 +633,10 @@ module.exports = {
                 const render = async(secondRows = null) => {
 
                     const account = await client.db.getBankAccount(interaction.guildId, member.id);
-                    if(!account) return { embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] };
+                    if (!account) return { embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] };
 
-                    if(!isPremium) {
-                        if(["dark", "embed"].includes(options["bank_cards.theme"])) await client.db.setOption(interaction.guildId, "bank_cards.theme", "light");
+                    if (!isPremium || (isPremium && options["bank_cards.theme"] == "dark")) {
+                        await client.db.setOption(interaction.guildId, "bank_cards.theme", "light");
                         options["bank_cards.theme"] = "light";
                     }
 
@@ -652,7 +652,7 @@ module.exports = {
                     for (let i = 0; i < 5; i++) {
 
                         const transaction = transactions[i];
-                        if(!transaction) break;
+                        if (!transaction) break;
 
                         let emoji = `${transaction.amount}`.startsWith("-") ? "-" : "+";
 
@@ -680,7 +680,7 @@ module.exports = {
                 }
                 
                 const message = await interaction.reply(own && account.connexion_type == 1 || account.connexion_type == 3 ? await render() : await renderConnexion()).catch(() => {})
-                if(!message) return;
+                if (!message) return;
 
                 const collector = message.createMessageComponentCollector({ filter: (i) => i.user.id == interaction.member.id, time: 240000 });
                 if (!collector) return errorEmbed(t("error_occurred", false, "errors"), false, true, "editReply");
@@ -689,7 +689,7 @@ module.exports = {
                 collector.on("collect", async (i) => {
 
                     const account = await client.db.getBankAccount(interaction.guildId, member.id);
-                    if(!account) return i.update({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] }).catch(() => {});
+                    if (!account) return i.update({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] }).catch(() => {});
 
                     switch(i.customId) {
 
@@ -697,7 +697,7 @@ module.exports = {
 
                         case "retry":
                         case "1": case "2": case "3": case "4": case "5": case "6": case "7": case "8": case "9": case "0": {
-                            if(i.customId == "retry") {
+                            if (i.customId == "retry") {
                                 code = ""; fail = false;
                             } else code += i.customId;
                             
@@ -738,13 +738,13 @@ module.exports = {
                         case "sm_urgencies": {
 
                             const type = i.values[0].replace("forgot_", "");
-                            if(type == "account") return i.update(await render(othersRows)).catch(() => {});
-                            else if(type == "connexion") return i.update(await renderConnexion()).catch(() => {});
+                            if (type == "account") return i.update(await render(othersRows)).catch(() => {});
+                            else if (type == "connexion") return i.update(await renderConnexion()).catch(() => {});
 
                             const questions = client.constants.questions
 
                             let reply = i;
-                            if(type !== "iban") {
+                            if (type !== "iban") {
 
                                 const code = Math.floor(Math.random() * 900000) + 100000;
                                 const modal = new ModalBuilder().setCustomId(`modal_ask_${code}`).setTitle(t("ask_modal.title")).addComponents(new ActionRowBuilder().addComponents(
@@ -752,11 +752,11 @@ module.exports = {
                                 ))
 
                                 await i.showModal(modal).catch(() => {});
-                                const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id == interaction.member.id && ii.customId == `modal_ask_${code}`, time: 75000 });
-                                if(!modalCollector) return;
+                                const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id == interaction.member.id && ii.customId == `modal_ask_${code}`, time: 75000 }).catch(() => {});
+                                if (!modalCollector) return;
 
                                 const answer = modalCollector.fields.getTextInputValue("question");
-                                if(answer.toLowerCase() !== account.answer.toLowerCase()) return modalCollector.reply({ embeds: [errorEmbed(t("ask_modal.wrong_answer"), true)], components: [], files: [] });
+                                if (answer.toLowerCase() !== account.answer.toLowerCase()) return modalCollector.reply({ embeds: [errorEmbed(t("ask_modal.wrong_answer"), true)], components: [], files: [] });
 
                                 reply = modalCollector
                             }
@@ -780,23 +780,23 @@ module.exports = {
                             )
 
                             await i.showModal(modal).catch(() => {});
-                            const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id == i.member.id && ii.customId == `modal_amount_${code}`, time: 45000 });
-                            if(!modalCollector) return;
+                            const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id == i.member.id && ii.customId == `modal_amount_${code}`, time: 45000 }).catch(() => {});
+                            if (!modalCollector) return;
 
                             const iban = modalCollector.fields.getTextInputValue("iban");
                             const newAmount = await client.db.getMoney(interaction.guildId, member.id);
                             const newMemberAmount = await client.db.getBankAccountWithIban(interaction.guildId, iban);
-                            if(!newAmount?.bank_money) return modalCollector.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] }).catch(() => {});
-                            if(newAmount?.frozen_date || newAmount?.frozen_reason) return modalCollector.reply({ embeds: [errorEmbed(t("frozen", false, "errors"), true)], components: [], files: [] }).catch(() => {})
+                            if (!newAmount?.bank_money) return modalCollector.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (newAmount?.frozen_date || newAmount?.frozen_reason) return modalCollector.reply({ embeds: [errorEmbed(t("frozen", false, "errors"), true)], components: [], files: [] }).catch(() => {})
                             
-                            if(!newMemberAmount?.bank_money) return modalCollector.reply({ embeds: [errorEmbed(t("account_with_iban_not_found", { iban: iban }), true)], components: [], files: [] }).catch(() => {});
-                            if(newMemberAmount?.frozen_date || newMemberAmount?.frozen_reason) return modalCollector.reply({ embeds: [errorEmbed(t("frozen_member", { member: `<@${newMemberAmount?.user_id}>` }, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (!newMemberAmount?.bank_money) return modalCollector.reply({ embeds: [errorEmbed(t("account_with_iban_not_found", { iban: iban }), true)], components: [], files: [] }).catch(() => {});
+                            if (newMemberAmount?.frozen_date || newMemberAmount?.frozen_reason) return modalCollector.reply({ embeds: [errorEmbed(t("frozen_member", { member: `<@${newMemberAmount?.user_id}>` }, "errors"), true)], components: [], files: [] }).catch(() => {});
 
                             const amount = modalCollector.fields.getTextInputValue("amount") == t("all", false, "global") ? (newAmount?.bank_money ?? 0) : parseInt(modalCollector.fields.getTextInputValue("amount"));
-                            if(isNaN(amount) || amount <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: amount }, "errors"), true)], components: [], files: [] }).catch(() => {});
-                            if(amount > (newAmount?.bank_money ?? 0)) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_bank_money", { amount: separate(newAmount?.bank_money ?? 0), symbol: economySymbol }, "errors"), true)], components: [], files: [] }).catch(() => {});
-                            if(amount + (newAmount?.bank_money ?? 0) >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: t("your_bank_account", false, "global") }, "errors"), true)], components: [], files: [] }).catch(() => {});
-                            if(amount + (newMemberAmount?.bank_money ?? 0) >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing_member", { name: t("your_bank_account", false, "global"), member: `<@${`<@${newMemberAmount?.user_id}>`}>`, }, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (isNaN(amount) || amount <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: amount }, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (amount > (newAmount?.bank_money ?? 0)) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_bank_money", { amount: separate(newAmount?.bank_money ?? 0), symbol: economySymbol }, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (amount + (newAmount?.bank_money ?? 0) >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: t("your_bank_account", false, "global") }, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (amount + (newMemberAmount?.bank_money ?? 0) >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing_member", { name: t("your_bank_account", false, "global"), member: `<@${`<@${newMemberAmount?.user_id}>`}>`, }, "errors"), true)], components: [], files: [] }).catch(() => {});
 
                             await client.db.addMoney(interaction.guildId, i.user.id, "bank_money", -amount);
                             await client.db.addMoney(interaction.guildId, newMemberAmount?.user_id, "bank_money", amount);
@@ -825,19 +825,19 @@ module.exports = {
                             )
 
                             await i.showModal(modal).catch(() => {})
-                            const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id == i.member.id && ii.customId == `modal_code_${modalCode}`, time: 60000 });
-                            if(!modalCollector) return;
+                            const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id == i.member.id && ii.customId == `modal_code_${modalCode}`, time: 60000 }).catch(() => {});
+                            if (!modalCollector) return;
 
                             const newCode = modalCollector.fields.getTextInputValue("new_code");
-                            if(isNaN(parseInt(newCode))) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: newCode }, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (isNaN(parseInt(newCode))) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: newCode }, "errors"), true)], components: [], files: [] }).catch(() => {});
                             
                             const newBankAccount = await client.db.getBankAccount(interaction.guildId, i.user.id);
-                            if(!newBankAccount) return modalCollector.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (!newBankAccount) return modalCollector.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], files: [] }).catch(() => {});
                             
                             const code = modalCollector.fields.getTextInputValue("code");
-                            if(((type == "card" ? newBankAccount.card_code : newBankAccount.secret_code) ?? code) !== parseInt(code)) return modalCollector.reply({ embeds: [errorEmbed(t(`wrong_old_${type}_code`), true)], components: [], files: [] }).catch(() => {});
-                            if(code == newCode) return modalCollector.reply({ embeds: [errorEmbed(t("same_code"), true)], components: [], files: [] }).catch(() => {});
-                            if(newCode.toString().startsWith(0)) return modalCollector.reply({ embeds: [errorEmbed(t("code_starting_with_0"), true)], components: [], files: [] }).catch(() => {});
+                            if (((type == "card" ? newBankAccount.card_code : newBankAccount.secret_code) ?? code) !== parseInt(code)) return modalCollector.reply({ embeds: [errorEmbed(t(`wrong_old_${type}_code`), true)], components: [], files: [] }).catch(() => {});
+                            if (code == newCode) return modalCollector.reply({ embeds: [errorEmbed(t("same_code"), true)], components: [], files: [] }).catch(() => {});
+                            if (newCode.toString().startsWith(0)) return modalCollector.reply({ embeds: [errorEmbed(t("code_starting_with_0"), true)], components: [], files: [] }).catch(() => {});
 
                             await client.db.setBankCode(interaction.guildId, i.user.id, type, newCode);
 
@@ -855,11 +855,11 @@ module.exports = {
                             )
 
                             await i.showModal(modal).catch(() => {})
-                            const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id == i.member.id && ii.customId == `modal_code_${code}`, time: 60000 });
-                            if(!modalCollector) return;
+                            const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id == i.member.id && ii.customId == `modal_code_${code}`, time: 60000 }).catch(() => {});
+                            if (!modalCollector) return;
 
                             const secretCode = modalCollector.fields.getTextInputValue("modal_secret_code");
-                            if(isNaN(parseInt(secretCode)) || account.secret_code !== parseInt(secretCode)) return modalCollector.reply({ embeds: [errorEmbed(t("connexion_modal.wrong_secret_code"), true)], components: [], files: [] }).catch(() => {});
+                            if (isNaN(parseInt(secretCode)) || account.secret_code !== parseInt(secretCode)) return modalCollector.reply({ embeds: [errorEmbed(t("connexion_modal.wrong_secret_code"), true)], components: [], files: [] }).catch(() => {});
                             
                             const type = i.customId == "face_id" ? 1 : i.customId == "secret_code" ? 2 : 3
                             await client.db.setBankConnexionMethod(interaction.guildId, i.user.id, type);
@@ -891,7 +891,7 @@ module.exports = {
                             .setComponents(new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId("amount").setLabel(t("modal.amount")).setPlaceholder(t(`modal.amount_placeholder${i.customId == "refund" ? "_loans" : ""}`)).setStyle(TextInputStyle.Short).setMinLength(1).setMaxLength(11).setRequired(false)));
     
                             await i.showModal(modal).catch(() => {})
-                            const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id == i.user.id && ii.customId == `modal_${i.customId}_${code}`, time: 60000 });
+                            const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id == i.user.id && ii.customId == `modal_${i.customId}_${code}`, time: 60000 }).catch(() => {});
                             if (!modalCollector) return i.update({ embeds: [errorEmbed(t("error_occurred", false, "errors"), true)], components: [], files: [] });
         
                             const newMemberAmount = await client.db.getMoney(interaction.guildId, member.id);
@@ -911,7 +911,7 @@ module.exports = {
                             newTransactions.push(amount);
                             newTransactions = newTransactions.join(",");
 
-                            if(i.customId == "refund") await client.db.payLoan(interaction.guildId, member.id, loan.id, amount, loan.bank_id, newTransactions, current+1, lang, amount == (loan.amount - loan.payed));
+                            if (i.customId == "refund") await client.db.payLoan(interaction.guildId, member.id, loan.id, amount, loan.bank_id, newTransactions, current+1, lang, amount == (loan.amount - loan.payed));
                             else {
                                 if (i.customId == "withdraw") {
                                     await client.db.addMoney(interaction.guildId, member.id, "bank_money", -amount)
@@ -952,8 +952,8 @@ module.exports = {
 
                 const type = interaction.options.getString("type", false);
                 let number = interaction.options.getString("nombre");
-                if(number == 'ten') number = 10;
-                if(number == 'twenty') number = 20;
+                if (number == 'ten') number = 10;
+                if (number == 'twenty') number = 20;
 
                 let builder = "";
                 let top;
@@ -991,7 +991,7 @@ module.exports = {
 
                 let typeAsText = { "bank": t("type_top.bank"), "species": t("type_top.cash"), "dirty": t("type_top.sale") }[type];
 
-                if(!builder) return errorEmbed(t("no_bank_account_found", { type: typeAsText }));
+                if (!builder) return errorEmbed(t("no_bank_account_found", { type: typeAsText }));
 
                 const embed = new EmbedBuilder()
                     .setColor("Green")
@@ -1008,7 +1008,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

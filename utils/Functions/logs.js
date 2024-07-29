@@ -20,7 +20,7 @@ module.exports = class Logs {
         const globalCityName = await this.client.db.getOption(interaction.guildId, "global.city_name");
         const channelLogs = await this.client.db.getOption(interaction.guildId, "channel.logs")
         const channel = interaction.guild.channels.cache.get(channelLogs);
-        if(!channel) return;
+        if (!channel) return;
 
         embed.setFooter({ text: globalCityName || interaction.guild.name, iconURL: interaction.guild.iconURL() }).setTimestamp();
 

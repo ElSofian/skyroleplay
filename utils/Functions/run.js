@@ -13,7 +13,7 @@ module.exports = class Run {
     
     getRunLink = (guildId, userId) => {
         const run = this.client._currentRun.get(`${guildId}-${userId}`);
-        if(!run || run.end < Date.now()) return null;
+        if (!run || run.end < Date.now()) return null;
         else return run.link;
     };
 

@@ -49,7 +49,7 @@ module.exports = {
         const content = interaction.options.getString("contenu");
         const member = interaction.options.getMember("joueur");
 
-        if(verify("member", { cantBotInclued: true, cantSelfInclued: true })) return;
+        if (verify("member", { cantBotInclued: true, cantSelfInclued: true })) return;
 
         await interaction.deferReply({ ephemeral: true }).catch(() => {});
 
@@ -85,7 +85,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     }

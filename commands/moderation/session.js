@@ -176,7 +176,7 @@ module.exports = {
         
         const method = interaction.options.getSubcommand();
 
-        if(method === "force-fin") {
+        if (method === "force-fin") {
             
             const embed = new EmbedBuilder()
                 .setColor(Colors.Red)
@@ -191,10 +191,10 @@ module.exports = {
 
             let msg = await interaction.reply({ embeds: [embed], components: [row] })
             msg.awaitMessageComponent({ filter: i => i.user.id === interaction.user.id, time: 5000 }).then(async i => {
-                if(i.customId === "force-end") {
+                if (i.customId === "force-end") {
                     await client.db.forceEndSession(interaction.guild.id);
                     return successEmbed(t("force-end.success"), false, false, "editReply");
-                } else if(i.customId === "cancel") {
+                } else if (i.customId === "cancel") {
                     await i.deferUpdate();
                     await msg.delete();
                 }
@@ -206,20 +206,20 @@ module.exports = {
 
         let pseudo = interaction.options.getString("lanceur");
 
-        if(["annonce", "vocale"].includes(method)) {
+        if (["annonce", "vocale"].includes(method)) {
             let dateString = interaction.options.getString("date");
             let timeString = interaction.options.getString("heure").replace("h", ":");
             let [hourString, minuteString] = timeString.split(":");
 
             var date = dateString ? client.dayjs(dateString, "DD/MM/YYYY") : client.dayjs();
 
-            if(!/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(timeString)) return errorEmbed(t("time"));
-            if(!date.isValid()) return errorEmbed(t("format"));
+            if (!/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(timeString)) return errorEmbed(t("time"));
+            if (!date.isValid()) return errorEmbed(t("format"));
 
             date = date.hour(hourString).minute(minuteString);
-            if(!dateString && date.isBefore(new Date())) date = date.add(1, "day");
+            if (!dateString && date.isBefore(new Date())) date = date.add(1, "day");
             
-            if(date.isBefore(new Date())) return errorEmbed(t("past"));
+            if (date.isBefore(new Date())) return errorEmbed(t("past"));
         }
 
         // Send embeds
@@ -251,7 +251,7 @@ module.exports = {
                     .setFooter({ text: t("new.footer") });
 
                 const message = await interaction.reply({ embeds: [embed], fetchReply: true }).catch(() => {});
-                if(message && interaction.channel.permissionsFor(client.user.id).has("AddReactions")) ["✅", "❌", "🕑", "🤷‍♂️"].forEach(r => message.react(r).catch(() => {}));
+                if (message && interaction.channel.permissionsFor(client.user.id).has("AddReactions")) ["✅", "❌", "🕑", "🤷‍♂️"].forEach(r => message.react(r).catch(() => {}));
                 break;
             }
 
@@ -270,7 +270,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

@@ -382,12 +382,12 @@ module.exports = {
             case "créer": {
 
                 await interaction.deferReply().catch(() => {});
-                if(!(await client.functions.permissions.configModerator(interaction, "boutique créer", true, "editReply"))) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "boutique créer", true, "editReply"))) return;
 
-                if(!(interaction.options.getString("entreprise") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "entreprise" : "company" }, "errors"), false, true, "editReply")
+                if (!(interaction.options.getString("entreprise") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "entreprise" : "company" }, "errors"), false, true, "editReply")
 
                 const shops = await client.db.getShop(interaction.guildId);
-                if(!isPremium && shops.length >= 3) return errorEmbed(t("max_shops", { emoji: client.constants.emojis.premium }), false, true, "editReply");
+                if (!isPremium && shops.length >= 3) return errorEmbed(t("max_shops", { emoji: client.constants.emojis.premium }), false, true, "editReply");
 
                 const name = interaction.options.getString("nom");
                 const description = interaction.options.getString("description");
@@ -396,25 +396,25 @@ module.exports = {
                 const thumbnail = interaction.options.getAttachment("vignette");
                 let color = interaction.options.getString("couleur");
 
-                if(name.includes(".")) return errorEmbed(t("dot_in_shop_name"), false, true, "editReply");
-                if(color && !isPremium || thumbnail && !isPremium || companyId && !isPremium) return errorEmbed(t("premium_only", { emoji: client.constants.emojis.premium }), false, true, "editReply");
+                if (name.includes(".")) return errorEmbed(t("dot_in_shop_name"), false, true, "editReply");
+                if (color && !isPremium || thumbnail && !isPremium || companyId && !isPremium) return errorEmbed(t("premium_only", { emoji: client.constants.emojis.premium }), false, true, "editReply");
 
                 let thumbnailUrl;
-                if(thumbnail) {
+                if (thumbnail) {
                     await imgurUploader(thumbnail.url, { title: thumbnail.name }).then(data => {
                         thumbnailUrl = (data?.link ?? null);
                     }).catch(() => interaction.channel.send(t("imgur_error")).catch(() => {}));
                 }
 
-                if(color) {
+                if (color) {
                     const resolvedColor = client.functions.other.isHexColor(color.toLowerCase());
-                    if(!resolvedColor) return errorEmbed(t("color_undefined", { color: color, link: client.constants.links.colorPicker }, "errors"), false, true, "editReply");
+                    if (!resolvedColor) return errorEmbed(t("color_undefined", { color: color, link: client.constants.links.colorPicker }, "errors"), false, true, "editReply");
                     else color = resolvedColor;
                 }
 
                 // Validate name    
-                if(name.length > 255) return errorEmbed(t("long_name", { limit: 255 }), false, true, "editReply");
-                if(description && description.length > 255) return errorEmbed(t("long_description", { limit: 255 }), false, true, "editReply");
+                if (name.length > 255) return errorEmbed(t("long_name", { limit: 255 }), false, true, "editReply");
+                if (description && description.length > 255) return errorEmbed(t("long_description", { limit: 255 }), false, true, "editReply");
 
                 await client.db.createShop(interaction.guildId, name, description, companyId, color, thumbnailUrl);
 
@@ -436,15 +436,15 @@ module.exports = {
             // Delete a shop    
             case "supprimer": {
                 
-                if(!(await client.functions.permissions.configModerator(interaction, "boutique supprimer"))) return;
-                if(!(interaction.options.getString("boutique") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "boutique" : "shop" }, "errors"));
+                if (!(await client.functions.permissions.configModerator(interaction, "boutique supprimer"))) return;
+                if (!(interaction.options.getString("boutique") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "boutique" : "shop" }, "errors"));
                 
                 const id = interaction.options.getString("boutique").split("&#46;")[2];
                 const shop = await client.db.getShop(interaction.guildId, id);
-                if(!shop) return errorEmbed(t("shop_not_found"));
+                if (!shop) return errorEmbed(t("shop_not_found"));
                 
                 const confirm = await client.functions.userinput.askValidation(interaction, t("confirm_delete_shop"));
-                if(!confirm) return;
+                if (!confirm) return;
                 
 
                 await client.db.deleteShop(shop.id);
@@ -455,18 +455,18 @@ module.exports = {
 
             // Add an object
             case "ajouter": {
-                if(!(await client.functions.permissions.configModerator(interaction, "boutique ajouter", true, "editReply"))) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "boutique ajouter", true, "editReply"))) return;
 
                 await interaction.deferReply().catch(() => {});
-                if(!(interaction.options.getString("boutique") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "boutique" : "shop" }, "errors"));
+                if (!(interaction.options.getString("boutique") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "boutique" : "shop" }, "errors"));
 
                 const shopId = interaction.options.getString("boutique").split("&#46;")[2]
                 const shopName = interaction.options.getString("boutique").split("&#46;")[3];
                 const shop = await client.db.getShop(interaction.guildId, shopId);
-                if(!shop) return errorEmbed(t("shop_not_found", { shop: shopName }), false, true, "editReply");
+                if (!shop) return errorEmbed(t("shop_not_found", { shop: shopName }), false, true, "editReply");
 
                 const shopItems = await client.db.getShopItems(interaction.guildId, shop.id);
-                if(!isPremium && shopItems.length >= 20) return errorEmbed(t("max_shop_items", { emoji: client.constants.emojis.premium }), false, true, "editReply");
+                if (!isPremium && shopItems.length >= 20) return errorEmbed(t("max_shop_items", { emoji: client.constants.emojis.premium }), false, true, "editReply");
 
                 const name = interaction.options.getString("objet");
                 const description = interaction.options.getString("description") || null;
@@ -481,12 +481,12 @@ module.exports = {
                 if (!shop_check) return errorEmbed(t("shop_not_found"), false, true, "editReply");
 
                 // Validate name
-                if(name.includes(".")) return errorEmbed(t("dot_in_item_name"), false, true, "editReply")
+                if (name.includes(".")) return errorEmbed(t("dot_in_item_name"), false, true, "editReply")
                 if (name.length > 75) return errorEmbed(t("long_name", { limit: 75 }), false, true, "editReply");
                 if (description && description.length > 100) return errorEmbed(t("long_description", { limit: 100 }), false, true, "editReply");
                 if (["treated drug", "untreated drug", "dirty money", "drogue traitée", "drogue non traitée", "argent sale"].includes(name.toLowerCase())) return errorEmbed(t("cant_add", { name: name }), false, true, "editReply");
     
-                if((roleToAdd || roleToRemove) && !interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageRoles)) return errorEmbed(t("no_manage_role_permission", { role: roleToAdd ?? roleToRemove }), false, true, "editReply");
+                if ((roleToAdd || roleToRemove) && !interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageRoles)) return errorEmbed(t("no_manage_role_permission", { role: roleToAdd ?? roleToRemove }), false, true, "editReply");
 
                 if (roleToAdd || roleToRemove || requiredRole) {
                     let firstRole = interaction.member.roles?.cache?.sort((r1, r2) => r2.rawPosition - r1.rawPosition)?.first() ?? undefined;
@@ -500,7 +500,7 @@ module.exports = {
                 // Check items count
                 const maxSize = 20;
                 const currentItems = await client.db.getShopItems(interaction.guildId, shop.id)
-                if(currentItems && currentItems.length >= maxSize && !isPremium) return errorEmbed(t("max_object", { max: maxSize }), false, true, "editReply");
+                if (currentItems && currentItems.length >= maxSize && !isPremium) return errorEmbed(t("max_object", { max: maxSize }), false, true, "editReply");
 
                 await client.db.addShopItem(interaction.guildId, shop.id, name, description, price, weight, requiredRole?.id ?? null, roleToAdd?.id ?? null, roleToRemove?.id ?? null);
 
@@ -525,14 +525,14 @@ module.exports = {
             // Remove
             case "retirer": {
 
-                if(!(await client.functions.permissions.configModerator(interaction, "boutique retirer", true, "editReply"))) return;
-                if(!(interaction.options.getString("boutique") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "boutique" : "shop" }, "errors"));
-                if(!(interaction.options.getString("objet") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "objet" : "object" }, "errors"));
+                if (!(await client.functions.permissions.configModerator(interaction, "boutique retirer", true, "editReply"))) return;
+                if (!(interaction.options.getString("boutique") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "boutique" : "shop" }, "errors"));
+                if (!(interaction.options.getString("objet") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "objet" : "object" }, "errors"));
 
                 // Validate shop
                 const shopId = interaction.options.getString("boutique").split("&#46;")[2]
                 const shop = await client.db.getShop(interaction.guildId, shopId);
-                if(!shop) return errorEmbed(t("shop_not_found"));
+                if (!shop) return errorEmbed(t("shop_not_found"));
                 const shopItemId = interaction.options.getString("objet").split("&#46;")[2]
                 const shopItem = await client.db.getShopItem(interaction.guildId, shopItemId);
                 if (!shopItem) return errorEmbed(t("item_not_found"));
@@ -557,17 +557,17 @@ module.exports = {
 
                 
                 const shops = await client.db.getShop(interaction.guildId);
-                if(!shops.length) return errorEmbed(t("no_shops"))
+                if (!shops.length) return errorEmbed(t("no_shops"))
                 
                 await interaction.deferReply().catch(() => {});
-                if(!(interaction.options.getString("boutique") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "boutique" : "shop" }, "errors"), false, true, "editReply");
+                if (!(interaction.options.getString("boutique") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "boutique" : "shop" }, "errors"), false, true, "editReply");
 
                 const shopId = interaction.options.getString("boutique").split("&#46;")[2];
                 const shop = await client.db.getShop(interaction.guildId, shopId);
-                if(!shop) return errorEmbed(t("shop_not_found"), false, true, "editReply");
+                if (!shop) return errorEmbed(t("shop_not_found"), false, true, "editReply");
 
                 const items = (await client.db.getShopItems(interaction.guildId, parseInt(shop.id))).sort((a, b) => a.name.localeCompare(b.name))
-                if(!items || !items.length) return errorEmbed(t("no_object"), false, true, "editReply");
+                if (!items || !items.length) return errorEmbed(t("no_object"), false, true, "editReply");
 
                 const cart = [];
                 
@@ -587,10 +587,10 @@ module.exports = {
                     )
 
                     const shopItems = [];
-                    if(cart.length > 0 && !isCart) shopItems.push({ name: `${code}&#46;${lang == "fr" ? "Panier" : "Cart"}&#46;cart`, description: undefined, price: 0, quantity: 0, emoji: client.constants.emojis.cart })
-                    if(total > 1) {
-                        if(index !== 0) shopItems.push({ name: `${code}&#46;${t("words.previous", false, "global")}&#46;previous`, description: undefined, price: 0, quantity: 0, emoji: client.constants.emojis.larrow })
-                        if(index + 1 !== total) shopItems.push({ name: `${code}&#46;${t("words.next", false, "global")}&#46;next`, description: undefined, price: 0, quantity: 0, emoji: client.constants.emojis.rarrow })
+                    if (cart.length > 0 && !isCart) shopItems.push({ name: `${code}&#46;${lang == "fr" ? "Panier" : "Cart"}&#46;cart`, description: undefined, price: 0, quantity: 0, emoji: client.constants.emojis.cart })
+                    if (total > 1) {
+                        if (index !== 0) shopItems.push({ name: `${code}&#46;${t("words.previous", false, "global")}&#46;previous`, description: undefined, price: 0, quantity: 0, emoji: client.constants.emojis.larrow })
+                        if (index + 1 !== total) shopItems.push({ name: `${code}&#46;${t("words.next", false, "global")}&#46;next`, description: undefined, price: 0, quantity: 0, emoji: client.constants.emojis.rarrow })
                     }
                     shopItems.push(...items);
                         
@@ -624,7 +624,7 @@ module.exports = {
                         )
 
                             
-                    if(total > 1 && !isCart) embed.setFooter({ text: `${index + 1}/${total}` });
+                    if (total > 1 && !isCart) embed.setFooter({ text: `${index + 1}/${total}` });
 
                     return {
                         embeds: [embed],
@@ -635,16 +635,16 @@ module.exports = {
 
                 // Create pages
                 const chunks = client.functions.other.chunkArray(items, 10);
-                if(!chunks || !chunks[0] || chunks[0].length <= 0) return errorEmbed(t("display_error"), false, true, "editReply");
+                if (!chunks || !chunks[0] || chunks[0].length <= 0) return errorEmbed(t("display_error"), false, true, "editReply");
 
                 const total = chunks.length;
                 const _render = await render(chunks[0], 0, total);
 
                 const message = await interaction.editReply({ embeds: _render.embeds, components: _render.components, fetchReply: true })
-                if(!message) return; // interaction isn't edited
+                if (!message) return; // interaction isn't edited
                 
                 const collector = message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.member.id, time: 180000 });
-                if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+                if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
                 let current = 0, currentCart = 0, removingCart;
                 collector.on("collect", async (i) => {
@@ -667,9 +667,9 @@ module.exports = {
                             const itemId = value.split("&#46;")[1];
                             const chunksCart = client.functions.other.chunkArray(cart, 10);
 
-                            if(value.startsWith(`${code}`)) {
-                                if(value.split("&#46;")[2] == "next") current++;
-                                else if(value.split("&#46;")[2] == "previous") current--;
+                            if (value.startsWith(`${code}`)) {
+                                if (value.split("&#46;")[2] == "next") current++;
+                                else if (value.split("&#46;")[2] == "previous") current--;
                                 else return i.update(await render(chunksCart[currentCart], currentCart, chunksCart.length, true))
 
                                 await i.update(await render(chunks[current], current, total)).catch(() => {});
@@ -677,10 +677,10 @@ module.exports = {
                             }
 
                             let item = await client.db.getShopItem(interaction.guildId, itemId);
-                            if(!item) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
+                            if (!item) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
 
                             let reply = i;
-                            if(cart.find((i) => i.id === item.id)) {
+                            if (cart.find((i) => i.id === item.id)) {
 
                                 const index = cart.findIndex((i) => i.id === item.id);
                                 const code = Math.floor(Math.random() * 9000000000) + 1000000000
@@ -691,11 +691,11 @@ module.exports = {
                             
                                 await i.showModal(modal).catch(() => {})
                                 const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id === i.user.id && ii.customId == `modal_add_cart_${code}`, time: 30000 });
-                                if(!modalCollector) return
+                                if (!modalCollector) return
 
                                 const collectedValue = modalCollector.fields.getTextInputValue("quantity");
                                 const modalQuantity = ["tout", "all"].includes(collectedValue.toLowerCase()) ? (cart[index]?.quantity ?? 1) : !collectedValue ? 1 : parseInt(collectedValue) ?? 1;
-                                if(isNaN(modalQuantity) || modalQuantity <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: modalQuantity }, "errors"), true)], components: [] })
+                                if (isNaN(modalQuantity) || modalQuantity <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: modalQuantity }, "errors"), true)], components: [] })
                                 
                                 const inventory = await client.db.getMemberItems(interaction.guildId, interaction.user.id);
                                 const memberDrugs = await client.db.getMemberDrugs(interaction.guildId, interaction.member.id);
@@ -705,7 +705,7 @@ module.exports = {
                                 reply = modalCollector
 
                                 const maxWeight = options["inventory.max_weight"];
-                                if(maxWeight && (inventoryWeight + cartWeight + (item.weight * modalQuantity)) > maxWeight) return reply?.reply({ embeds: [errorEmbed(t("inventory_weight", { maxWeight: maxWeight >= 1000 ? `${maxWeight / 1000}kg` : `${maxWeight}g`, currentWeight: inventoryWeight >= 1000 ? `${inventoryWeight / 1000}kg` : `${inventoryWeight}g` }), true)], ephemeral: true }).catch(() => {});
+                                if (maxWeight && (inventoryWeight + cartWeight + (item.weight * modalQuantity)) > maxWeight) return reply?.reply({ embeds: [errorEmbed(t("inventory_weight", { maxWeight: maxWeight >= 1000 ? `${maxWeight / 1000}kg` : `${maxWeight}g`, currentWeight: inventoryWeight >= 1000 ? `${inventoryWeight / 1000}kg` : `${inventoryWeight}g` }), true)], ephemeral: true }).catch(() => {});
 
                                 cart[index].quantity += modalQuantity;
 
@@ -716,7 +716,7 @@ module.exports = {
                                 const memberDrugs = await client.db.getMemberDrugs(interaction.guildId, interaction.member.id);
                                 const inventoryWeight = inventory.reduce((a, b) => a + (b.weight * b.quantity), 0) + memberDrugs.reduce((a, b) => a + ((b?.untreated ?? 0) + (b?.treated ?? 0)), 0);
                                 const cartWeight = cart.reduce((a, b) => a + (b.weight * b.quantity), 0);
-                                if(maxWeight && (inventoryWeight + cartWeight + item.weight) > maxWeight) return reply?.reply({ embeds: [errorEmbed(t("inventory_weight", { maxWeight: maxWeight >= 1000 ? `${maxWeight / 1000}kg` : `${maxWeight}g`, currentWeight: inventoryWeight >= 1000 ? `${inventoryWeight / 1000}kg` : `${inventoryWeight}g` }), true)], ephemeral: true }).catch(() => {});
+                                if (maxWeight && (inventoryWeight + cartWeight + item.weight) > maxWeight) return reply?.reply({ embeds: [errorEmbed(t("inventory_weight", { maxWeight: maxWeight >= 1000 ? `${maxWeight / 1000}kg` : `${maxWeight}g`, currentWeight: inventoryWeight >= 1000 ? `${inventoryWeight / 1000}kg` : `${inventoryWeight}g` }), true)], ephemeral: true }).catch(() => {});
                                 
                                 cart.push({ id: item.id, name: item.name, description: item.description, price: item.price, quantity: 1, weight: item?.weight ?? 0 });
 
@@ -732,20 +732,20 @@ module.exports = {
                             const itemId = value.split("&#46;")[1];
                             const chunksCart = client.functions.other.chunkArray(cart, 10);
                             
-                            if(value.startsWith(`${code}`)) {
-                                if(value.split("&#46;")[2] == "next") currentCart++;
-                                else if(value.split("&#46;")[2] == "previous") currentCart--;
+                            if (value.startsWith(`${code}`)) {
+                                if (value.split("&#46;")[2] == "next") currentCart++;
+                                else if (value.split("&#46;")[2] == "previous") currentCart--;
 
                                 await i.update(await render(chunksCart[currentCart], currentCart, chunksCart.length, true)).catch(() => {});
                                 break;
                             }
 
                             let item = await client.db.getShopItem(interaction.guildId, itemId);
-                            if(!item) return i.update({ content: null, embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
+                            if (!item) return i.update({ content: null, embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
                             const index = cart.findIndex((i) => i.id === item.id);
 
                             let reply = i, modalQuantity = 1;
-                            if(removingCart?.item_id == item.id) {
+                            if (removingCart?.item_id == item.id) {
 
                                 const code = Math.floor(Math.random() * 9000000000) + 1000000000
                                 const modal = new ModalBuilder()
@@ -755,10 +755,10 @@ module.exports = {
                             
                                 await i.showModal(modal).catch(() => {})
                                 const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id === i.user.id && ii.customId == `modal_remove_cart_${code}`, time: 30000 });
-                                if(!modalCollector) return
+                                if (!modalCollector) return
 
                                 modalQuantity = ["tout", "all"].includes(modalCollector.fields.getTextInputValue("quantity")) || !modalCollector.fields.getTextInputValue("quantity") ? (cart[index].quantity ?? 1) : parseInt(modalCollector.fields.getTextInputValue("quantity"));
-                                if(isNaN(modalQuantity) || modalQuantity <= 0 || modalQuantity > (cart[index].quantity ?? 0)) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: modalQuantity }, "errors"), true)], components: [] })
+                                if (isNaN(modalQuantity) || modalQuantity <= 0 || modalQuantity > (cart[index].quantity ?? 0)) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: modalQuantity }, "errors"), true)], components: [] })
 
                                 reply = modalCollector
                             } else {
@@ -766,12 +766,12 @@ module.exports = {
                             }
 
                             cart[index].quantity -= modalQuantity;
-                            if(cart[index].quantity <= 0) cart.splice(index, 1);
+                            if (cart[index].quantity <= 0) cart.splice(index, 1);
 
                             const newChunksCart = client.functions.other.chunkArray(cart, 10)
 
                             let __render;
-                            if(!cart.length) __render = await render(chunks[current], current, total)
+                            if (!cart.length) __render = await render(chunks[current], current, total)
                             else __render = await render(newChunksCart?.[currentCart] ?? newChunksCart?.[currentCart-1] ?? newChunksCart?.[0], currentCart, newChunksCart.length, true)
                             return reply?.update(__render).catch(() => {});
 
@@ -824,28 +824,28 @@ module.exports = {
                             const amount = cart.reduce((a, b) => a + (b.price * b.quantity), 0)
                             
                             let reply = i;
-                            if(i.customId == "bank_method_with_card") {
+                            if (i.customId == "bank_method_with_card") {
                                 const displayTPE = await client.functions.userinput.displayTPE(interaction, i, { amount: separate(amount), symbol: economySymbol });
-                                if(!displayTPE) return
+                                if (!displayTPE) return
                                 else reply = displayTPE
                             }
 
                             await reply?.update({ embeds: [successEmbed(t("buying"), true)], components: [], files: [] })
 
                             const isBan = await client.db.isFreezeAccount(interaction.guildId, interaction.member.id);
-                            if(isBan) return reply?.editReply({ embeds: [errorEmbed(t("freeze_account", false, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (isBan) return reply?.editReply({ embeds: [errorEmbed(t("freeze_account", false, "errors"), true)], components: [], files: [] }).catch(() => {});
 
                             const inventory = await client.db.getMemberItems(interaction.guildId, interaction.user.id);
                             let count = { total: 0, amount: 0, stop: false }
                             for (const item of cart) {
                                 
                                 const shopItem = await client.db.getShopItem(interaction.guildId, item.id, true);
-                                if(!shopItem || count.stop) break;
+                                if (!shopItem || count.stop) break;
 
-                                if(shopItem.role_required && !interaction.member.roles.cache.has(shopItem.role_required)) return reply?.editReply({ embeds: [errorEmbed(t("role_required", { role: shopItem.role_required, item: shopItem.name }, "errors"), true)], components: [], files: [] }).catch(() => {});
-                                if(shopItem.role_add && isPremium) await interaction.member.roles.add(shopItem.role_add).catch(() => errorEmbed(t("cant_give_role", { role: shopItem.role_add.toString() }, "errors"), false, false, "editReply", reply));
-                                if(shopItem.role_remove && isPremium) await interaction.member.roles.remove(shopItem.role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: shopItem.role_remove.toString() }, "errors"), false, false, "editReply", reply));
-                                if(shopItem.max_items && (item.quantity + (((inventory.find(i => i.id == item.id))?.quantity ?? 0) + (inventory.find(i => i.id == item.id))?.hidden_quantity) > shopItem.max_items)) count.stop = true
+                                if (shopItem.role_required && !interaction.member.roles.cache.has(shopItem.role_required)) return reply?.editReply({ embeds: [errorEmbed(t("role_required", { role: shopItem.role_required, item: shopItem.name }, "errors"), true)], components: [], files: [] }).catch(() => {});
+                                if (shopItem.role_add && isPremium) await interaction.member.roles.add(shopItem.role_add).catch(() => errorEmbed(t("cant_give_role", { role: shopItem.role_add.toString() }, "errors"), false, false, "editReply", reply));
+                                if (shopItem.role_remove && isPremium) await interaction.member.roles.remove(shopItem.role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: shopItem.role_remove.toString() }, "errors"), false, false, "editReply", reply));
+                                if (shopItem.max_items && (item.quantity + (((inventory.find(i => i.id == item.id))?.quantity ?? 0) + (inventory.find(i => i.id == item.id))?.hidden_quantity) > shopItem.max_items)) count.stop = true
                             
                                 else {
                                     await client.db.addMemberItem(interaction.guildId, interaction.user.id, shopItem.id, item.quantity);
@@ -854,15 +854,15 @@ module.exports = {
                                 }
                             }
                             
-                            if(count.amount !== 0) {
+                            if (count.amount !== 0) {
                                 
-                                if(shop?.company_id) {
+                                if (shop?.company_id) {
                                     await client.db.addMoneyToCompany(shop.company_id, count.amount)
                                     await client.db.addTransactionLog(interaction.guildId, shop.company_id, count.amount, `${lang == "fr" ? "Achat de" : "Purchase of"} ${cart.length > 1 ? `${cart.length} articles` : cart[0].name}`)
                                 }
 
                                 await client.db.addMoney(interaction.guildId, interaction.user.id, method, -count.amount);
-                                if(method == "bank_money") await client.db.addTransactionLog(interaction.guildId, interaction.member.id, -count.amount, `${lang == "fr" ? "Achat de" : "Purchase of"} ${cart.length > 1 ? `${cart.length} articles` : cart[0].name}`)
+                                if (method == "bank_money") await client.db.addTransactionLog(interaction.guildId, interaction.member.id, -count.amount, `${lang == "fr" ? "Achat de" : "Purchase of"} ${cart.length > 1 ? `${cart.length} articles` : cart[0].name}`)
                             }
                             
                             await reply?.editReply({ embeds: [successEmbed(t("buyed", { cart: count?.stop ? count.total : cart.length == 1 ? cart[0].quantity : cart.length, items: cart.length == 1 ? cart[0].name : "items", for: count.amount == 0 ? "" : t("for"), price: count?.total == 0 ? "" : count.amount == 0 ? t("price.free") : `**${separate(amount)}${economySymbol}**`, max: count?.stop ? t("stop") : " !" }), true)], components: [], files: [] })
@@ -884,7 +884,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     },
@@ -895,10 +895,10 @@ module.exports = {
         const response = [];
 
         const shops = (await client.db.getShop(interaction.guildId)).sort((a, b) => a.name.localeCompare(b.name))
-        if(interaction.options._subcommand == "retirer" && interaction.options._hoistedOptions.length == 2) {
+        if (interaction.options._subcommand == "retirer" && interaction.options._hoistedOptions.length == 2) {
             const items = (await client.db.getShopItems(interaction.guildId, (shops.find(({ id }) => id == interaction.options._hoistedOptions[0].value.split("&#46;")[2]))?.id)).sort((a, b) => a.name.localeCompare(b.name))
             response.push(...items.map(i => ({ name: i.name, value: `${code}&#46;items&#46;${i.id}&#46;${i.name}&#46;${i.price}` }) ))
-        } else if(interaction.options._subcommand == "créer") {
+        } else if (interaction.options._subcommand == "créer") {
             const companies = (await client.db.getCompanies(interaction.guildId)).sort((a, b) => a.name.localeCompare(b.name))
             response.push(...companies.map(c => ({ name: c.name, value: `${code}&#46;companies&#46;${c.id}&#46;${c.name}` }) ))
         } else {
@@ -906,7 +906,7 @@ module.exports = {
         }
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...response.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

@@ -103,7 +103,7 @@ module.exports = {
 
         try {
         
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
 
         const member = interaction.options.getMember("joueur");
         const amount = interaction.options.getNumber("montant");
@@ -112,7 +112,7 @@ module.exports = {
         const bank = (interaction.options.getString("banque"))?.split("&#46;")?.[1]
         const options = await client.db.getOptions(interaction.guildId, ["roles.moderator", "roles.banquier"]);
 
-        if(interaction.options.getString("banque") && !interaction.options.getString("banque").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "banque" : "bank" }, "errors"))
+        if (interaction.options.getString("banque") && !interaction.options.getString("banque").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "banque" : "bank" }, "errors"))
 
         var roleModerator = options["roles.moderator"];
         var roleBanquier = options["roles.banquier"];
@@ -120,24 +120,24 @@ module.exports = {
         const bankCompany = bank && bank !== "bank" ? await client.db.getSpecifyCompany(interaction.guildId, "bank", bank ?? null, true) : null
         const employees = await client.db.getCompanyEmployees(bankCompany?.id);
         const isMemberBan = await client.db.isFreezeAccount(interaction.guildId, member.id);
-        if(isMemberBan) return errorEmbed(t("freeze_account_member", { member: member.toString() }, "errors"));
+        if (isMemberBan) return errorEmbed(t("freeze_account_member", { member: member.toString() }, "errors"));
 
         // if member is banker, OK | if member is moderator, OK | else : ERROR
-        if((roleBanquier && interaction.member.roles.cache.has(roleBanquier)) || employees.find(({ user_id }) => user_id == interaction.member.id)) member_state = `<@&${roleBanquier}>`;
-        else if(interaction.member.roles.cache.has(roleModerator) || interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) member_state = roleModerator ? `<@&${roleModerator}>` : `${inlineCode(t("mod"))}`;
+        if ((roleBanquier && interaction.member.roles.cache.has(roleBanquier)) || employees.find(({ user_id }) => user_id == interaction.member.id)) member_state = `<@&${roleBanquier}>`;
+        else if (interaction.member.roles.cache.has(roleModerator) || interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) member_state = roleModerator ? `<@&${roleModerator}>` : `${inlineCode(t("mod"))}`;
         else {
             
             var permissionsText, roles = [];
-            if(roleBanquier) roles.push(`<@&${roleBanquier}>`)
-            if(roleModerator) roles.push(`<@&${roleModerator}>`)
-            if(!roles.length) roles.push(inlineCode(t("admin")))
+            if (roleBanquier) roles.push(`<@&${roleBanquier}>`)
+            if (roleModerator) roles.push(`<@&${roleModerator}>`)
+            if (!roles.length) roles.push(inlineCode(t("admin")))
             permissionsText = roles.join(` ${t("and_the")} `);
 
             return errorEmbed(t("no_permission", { member: interaction.member.toString(), admin: permissionsText }));
         };
 
-        if(dateLimit) {
-            if(!/^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(20\d{2}|[3-9]\d{3})$/.test(dateLimit)) return errorEmbed(t("invalid_date", false, "errors"));
+        if (dateLimit) {
+            if (!/^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(20\d{2}|[3-9]\d{3})$/.test(dateLimit)) return errorEmbed(t("invalid_date", false, "errors"));
             else {
 
                 // Vérifier si la date n'est pas déjà passée
@@ -149,12 +149,12 @@ module.exports = {
         }
 
         const account = await client.db.getBankAccount(interaction.guildId, interaction.user.id);
-        if(!account || account.bank_money == null || isNaN(account.bank_money)) return errorEmbed(t("no_bank_account", false, "errors"));
-        if(account.frozen_date || account.frozen_reason) return errorEmbed(t("frozen_member", { member: member.toString() }, "errors"));
-        if(account.bank_money + amount >= 2147483647) return errorEmbed(t("int_passing", { name: lang == "fr" ? "votre compte bancaire" : "your bank account" }, "errors"));
+        if (!account || account.bank_money == null || isNaN(account.bank_money)) return errorEmbed(t("no_bank_account", false, "errors"));
+        if (account.frozen_date || account.frozen_reason) return errorEmbed(t("frozen_member", { member: member.toString() }, "errors"));
+        if (account.bank_money + amount >= 2147483647) return errorEmbed(t("int_passing", { name: lang == "fr" ? "votre compte bancaire" : "your bank account" }, "errors"));
         
-        if(bankCompany && isPremium) {
-            if(bankCompany.money < amount) return errorEmbed(t("bank_not_enough", { name: bankCompany.name, amount: separate(amount), symbol: economySymbol }))
+        if (bankCompany && isPremium) {
+            if (bankCompany.money < amount) return errorEmbed(t("bank_not_enough", { name: bankCompany.name, amount: separate(amount), symbol: economySymbol }))
             else await client.db.addMoneyToCompany(bankCompany.id, -amount);
 
             const idCard = await client.db.getIDCard(interaction.guildId, member.id);
@@ -187,7 +187,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         
@@ -195,7 +195,7 @@ module.exports = {
 
     runAutocomplete: async(client, interaction, { isPremium, lang }) => {
 
-        if(!isPremium) return interaction.respond([{ name: lang == "fr" ? "💰 Banque" : "💰 Bank", value: `${code}&#46;bank` }])
+        if (!isPremium) return interaction.respond([{ name: lang == "fr" ? "💰 Banque" : "💰 Bank", value: `${code}&#46;bank` }])
 
         const focusedOption = interaction.options.getFocused(true);
         const bankCompanies = await client.db.getSpecifyCompany(interaction.guildId, "bank");
@@ -203,11 +203,11 @@ module.exports = {
         const response = [];
         for (const company of bankCompanies) {
             const employees = await client.db.getCompanyEmployees(company.id);
-            if(employees.find(({ user_id }) => user_id == interaction.user.id)) response.push({ name: company.name, value: `${code}&#46;${company.id}` })
+            if (employees.find(({ user_id }) => user_id == interaction.user.id)) response.push({ name: company.name, value: `${code}&#46;${company.id}` })
         }
         
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...response.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

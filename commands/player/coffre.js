@@ -147,8 +147,8 @@ module.exports = {
 
         try {
 
-            if(!(interaction.options.getString("coffre") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: t("words.safe", false, "global").toLowerCase() }, "errors"));
-            if(!(interaction.options.getString("item") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: "item" }, "errors"));
+            if (!(interaction.options.getString("coffre") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: t("words.safe", false, "global").toLowerCase() }, "errors"));
+            if (!(interaction.options.getString("item") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: "item" }, "errors"));
             
             const subcommand = interaction.options.getSubcommand();
             const safe = interaction.options.getString("coffre");
@@ -161,7 +161,7 @@ module.exports = {
             const itemQuantity = item[itemType.includes("money") ? 2 : 4]
             const optionQuantity = interaction.options.getNumber("quantité");
             
-            if(subcommand == "déposer" && safeType == "companies" && !isPremium) return errorEmbed(t("premium", { emoji: client.constants.emojis.premium }, "errors"));
+            if (subcommand == "déposer" && safeType == "companies" && !isPremium) return errorEmbed(t("premium", { emoji: client.constants.emojis.premium }, "errors"));
 
             switch(itemType) {
 
@@ -172,9 +172,9 @@ module.exports = {
                     const place = safeType == "cg" ? await client.db.getMemberCG(interaction.guildId, interaction.member.id, safeId) : safeType == "companies" ? await client.db.getCompany(interaction.guildId, safeId) : await client.db.getProperty(interaction.guildId, safeId);
                     const amount = optionQuantity || itemQuantity;
                     
-                    if(!amount || isNaN(amount) || !itemQuantity) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"))
-                    if(amount > itemQuantity) return errorEmbed(t("not_enough_money", { quantity: separate(itemQuantity), symbol: economySymbol }));
-                    if(amount + (subcommand == "déposer" ? place[itemType == "cash_money" ? safeType == "companies" ? "safe_money" : "money" : "dirty_money"] : newMemberAccount[itemType]) >= 2147483647)
+                    if (!amount || isNaN(amount) || !itemQuantity) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"))
+                    if (amount > itemQuantity) return errorEmbed(t("not_enough_money", { quantity: separate(itemQuantity), symbol: economySymbol }));
+                    if (amount + (subcommand == "déposer" ? place[itemType == "cash_money" ? safeType == "companies" ? "safe_money" : "money" : "dirty_money"] : newMemberAccount[itemType]) >= 2147483647)
                     return errorEmbed(t("int_passing", { name: t(`words.${itemType}`, false, "global") }, "errors"))
 
                     switch(safeType) {
@@ -194,20 +194,20 @@ module.exports = {
                 default: {
 
                     let amount;
-                    if(itemType == "items") {
+                    if (itemType == "items") {
 
                         const memberInventory = await client.db.getMemberItems(interaction.guildId, interaction.member.id);
                         const safeInventory = safeType == "cg" ? await client.db.getSafeVehicle(safeId) : safeType == "companies" ? await client.db.getCompanyInventory(safeId) : await client.db.getSafeProperty(safeId);
                         
                         var findItem = subcommand == "retirer" ? safeInventory.find(i => i.item_id == itemId) : memberInventory.find(i => i.id == itemId);
-                        if(!findItem) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
+                        if (!findItem) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
                         
                         var { name, hidden_quantity, weight, role_add, role_remove } = findItem;
 
                         const shopItem = await client.db.getShopItem(interaction.guildId, itemId);
-                        if(!shopItem) {
+                        if (!shopItem) {
                             
-                            if(subcommand == "déposer") await client.db.removeItem(interaction.guildId, interaction.member.id, itemId, quantity, true)
+                            if (subcommand == "déposer") await client.db.removeItem(interaction.guildId, interaction.member.id, itemId, quantity, true)
                             else await client.db.removeSafeItem(interaction.guildId, safeId, safeType, itemId, quantity, true)
 
                             return errorEmbed(t("item_no_longer_exists", { item: itemName }));
@@ -216,10 +216,10 @@ module.exports = {
                         const maxWeight = await client.db.getOption(interaction.guildId, "inventory.max_weight");
                         const inventoryWeight = memberInventory.reduce((a, b) => a + (b.weight * b.quantity), 0) + (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id)).reduce((a, b) => a + ((b?.untreated ?? 0) + (b?.treated ?? 0)), 0);
 
-                        if(subcommand == "retirer") {
-                            if(maxWeight && inventoryWeight + weight > maxWeight) return errorEmbed(t("inventory_full", { item: name }, "errors")).catch(() => {})
-                            if(role_add && !interaction.member.roles.cache.has(role_add) && isPremium) await interaction.member.roles.add(role_add).catch(() => errorEmbed(t("cant_give_role", { role: role_add.toString() }, "errors")))
-                            if(role_remove) await interaction.member.roles.remove(role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: role_remove.toString() }, "errors")))
+                        if (subcommand == "retirer") {
+                            if (maxWeight && inventoryWeight + weight > maxWeight) return errorEmbed(t("inventory_full", { item: name }, "errors")).catch(() => {})
+                            if (role_add && !interaction.member.roles.cache.has(role_add) && isPremium) await interaction.member.roles.add(role_add).catch(() => errorEmbed(t("cant_give_role", { role: role_add.toString() }, "errors")))
+                            if (role_remove) await interaction.member.roles.remove(role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: role_remove.toString() }, "errors")))
                         } else {
                             if (role_add && itemQuantity === amount && isPremium) await interaction.member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors")))
                         }
@@ -250,8 +250,8 @@ module.exports = {
                         case "companies": await client.db[`${subcommand == "retirer" ? "take" : "put"}CompanyInventory`](interaction.guildId, safeId, itemType, itemType == "items" ? itemId : drug.drug_id, type, amount, itemType == "drugs" ? drugColumn[otherType] == 0 && amount == itemQuantity : amount == itemQuantity); break;
                     }
 
-                    if(safeType == "companies") {
-                        if(itemType == "drugs") await client.db[`${subcommand == "retirer" ? "add" : "remove"}MemberDrug`](interaction.guildId, interaction.member.id, drug.drug_id, type, amount, drug[`hidden_${itemId}`] == 0 && drug[`hidden_${otherType}`] && drugColumn[otherType] == 0 && amount == itemQuantity);
+                    if (safeType == "companies") {
+                        if (itemType == "drugs") await client.db[`${subcommand == "retirer" ? "add" : "remove"}MemberDrug`](interaction.guildId, interaction.member.id, drug.drug_id, type, amount, drug[`hidden_${itemId}`] == 0 && drug[`hidden_${otherType}`] && drugColumn[otherType] == 0 && amount == itemQuantity);
                         else await client.db[`${subcommand == "retirer" ? "add" : "remove"}MemberItem`](interaction.guildId, interaction.member.id, itemId, amount, subcommand == "retirer" ? null : hidden_quantity == 0 && amount == itemQuantity);
                     } 
 
@@ -289,7 +289,7 @@ module.exports = {
         const filtered = [];
         let all = [];
 
-        if(focusedOption.name == "coffre") {
+        if (focusedOption.name == "coffre") {
 
             const properties = (await client.db.getMemberProperties(interaction.guildId, interaction.member.id)).map(p => ({ name: p.name, value: `${code}&#46;properties&#46;${p.id}` }))
             const cg = (await client.db.getMemberCG(interaction.guildId, interaction.member.id)).map(cg => ({ name: cg.vehicule_name, value: `${code}&#46;cg&#46;${cg.id}&#46;${cg.license_plate}&#46;${cg.type}` }))
@@ -299,16 +299,16 @@ module.exports = {
 
         } else {
 
-            if(interaction.options._subcommand == "déposer") {
+            if (interaction.options._subcommand == "déposer") {
         
                 const { cash_money, dirty_money } = await client.db.getMoney(interaction.guildId, interaction.member.id);
-                if(cash_money > 0) all.push({ name: t("cash_money"), value: `${code}&#46;cash_money&#46;${cash_money}&#46;${t("cash_money")}` })
-                if(dirty_money > 0) all.push({ name: t("dirty_money"), value: `${code}&#46;dirty_money&#46;${dirty_money}&#46;${t("dirty_money")}` })
+                if (cash_money > 0) all.push({ name: t("cash_money"), value: `${code}&#46;cash_money&#46;${cash_money}&#46;${t("cash_money")}` })
+                if (dirty_money > 0) all.push({ name: t("dirty_money"), value: `${code}&#46;dirty_money&#46;${dirty_money}&#46;${t("dirty_money")}` })
                 
                 const drugs = (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id)).sort((a, b) => a.name.localeCompare(b.name))
                 for (let drug of drugs) {
-                    if(drug.treated > 0) all.push({ name: t("drugs.treated", { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.drug_id}&#46;treated&#46;${drug.treated}&#46;${drug.name}` })
-                    if(drug.untreated > 0) all.push({ name: t("drugs.untreated", { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.drug_id}&#46;untreated&#46;${drug.untreated}&#46;${drug.name}` })
+                    if (drug.treated > 0) all.push({ name: t("drugs.treated", { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.drug_id}&#46;treated&#46;${drug.treated}&#46;${drug.name}` })
+                    if (drug.untreated > 0) all.push({ name: t("drugs.untreated", { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.drug_id}&#46;untreated&#46;${drug.untreated}&#46;${drug.name}` })
                 }
                 
                 all.push(...(await client.db.getMemberItems(interaction.guildId, interaction.member.id)).sort((a, b) => a.name.localeCompare(b.name)).map(i => ({ name: i.name, value: `${code}&#46;items&#46;${i.id}&#46;${i.name}&#46;${i.quantity}` }) ));
@@ -322,11 +322,11 @@ module.exports = {
                 const items = (await client.db[safeType == "cg" ? "getSafeVehicle" : safeType == "companies" ? "getCompanyInventory" : "getSafeProperty"](safeId)).sort((a, b) => a.name.localeCompare(b.name))
                 const drugs = (await client.db[safeType == "cg" ? "getSafeVehicle" : safeType == "companies" ? "getCompanyInventory" : "getSafeProperty"](safeId, true)).sort((a, b) => a.name.localeCompare(b.name))
 
-                if(safe?.[safeType == "companies" ? "safe_money" : "money"] > 0) all.push({ name: t("cash_money"), value: `${code}&#46;cash_money&#46;${safe?.[safeType == "companies" ? "safe_money" : "money"]}&#46;${t("cash_money")}` })
-                if(safe?.dirty_money > 0) all.push({  name: t("dirty_money"), value: `${code}&#46;dirty_money&#46;${safe.dirty_money}&#46;${t("dirty_money")}`  })
+                if (safe?.[safeType == "companies" ? "safe_money" : "money"] > 0) all.push({ name: t("cash_money"), value: `${code}&#46;cash_money&#46;${safe?.[safeType == "companies" ? "safe_money" : "money"]}&#46;${t("cash_money")}` })
+                if (safe?.dirty_money > 0) all.push({  name: t("dirty_money"), value: `${code}&#46;dirty_money&#46;${safe.dirty_money}&#46;${t("dirty_money")}`  })
                 
                 for (const drug of drugs) {
-                    ["untreated", "treated"].forEach(type => { if(drug[type] > 0) all.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.drug_id}&#46;${type}&#46;${drug[type]}&#46;${drug.name}` }) })
+                    ["untreated", "treated"].forEach(type => { if (drug[type] > 0) all.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.drug_id}&#46;${type}&#46;${drug[type]}&#46;${drug.name}` }) })
                 }
 
                 all.push(...items.map(i => ({ name: i.name, value: `${code}&#46;items&#46;${safeType == "companies" ? i.item_id : i.id}&#46;${i.name}&#46;${i.quantity}` })));
@@ -335,7 +335,7 @@ module.exports = {
 
         }
 
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filteredArray = [];
             filteredArray.push(...all.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filteredArray.push(...all.filter(r => (r.name.toLowerCase()).startsWith(focusedOption.value.toLowerCase())));
@@ -350,7 +350,7 @@ module.exports = {
         return interaction.respond(filtered.slice(0, 25).map(v => {
             const value = v.value.split("&#46;");
             const type = value[1];
-            if(["properties", "companies", "cg"].includes(type)) return { name: `${emoji(value[4] ?? type)} ${v.name}${type == "cg" ? ` (${value[3]})` : ""}`, value: v.value }
+            if (["properties", "companies", "cg"].includes(type)) return { name: `${emoji(value[4] ?? type)} ${v.name}${type == "cg" ? ` (${value[3]})` : ""}`, value: v.value }
             else return { name: `[${value[type.includes("money") ? 2 : 4]}${type == "drugs" ? "g" : type.endsWith("_money") ? economySymbol : ""}] ・ ${v.name}`, value: v.value }
 
         })).catch(() => {});

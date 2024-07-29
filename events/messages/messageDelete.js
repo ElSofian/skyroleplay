@@ -4,10 +4,10 @@ module.exports.run = async(client, message) => {
 
     try {
 
-        if(message?.id) {
+        if (message?.id) {
 
             const session = await client.db.getSessionByMessageId(message.guildId, message.id);
-            if(session) {
+            if (session) {
 
                 await client.db.deleteSession(message.guildId, message.id);
                 

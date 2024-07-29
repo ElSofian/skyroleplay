@@ -36,10 +36,10 @@ module.exports = {
         
         const member = interaction.options.getMember("joueur");
 
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
 
         const state = await client.db.getMemberState(interaction.guildId, member.user.id);
-        if(state.coma !== 1) return errorEmbed(t("not_in_coma", { member: member.toString() }));
+        if (state.coma !== 1) return errorEmbed(t("not_in_coma", { member: member.toString() }));
 
         await client.db.removeComa(interaction.guildId, member.user.id);
         successEmbed(t("revived", { member: member.toString(), author: interaction.member.toString() }))
@@ -61,20 +61,20 @@ module.exports = {
             const channelId = await client.db.getOption(interaction.guildId, "hunger_thirst.channel");
             let channel = interaction.guild.channels.cache.get(channelId)
             let dmMember = false;
-            if(!channel) {
+            if (!channel) {
                 channel = member
                 dmMember = true;
             }
 
             let isHunger = (25 < memberState.hunger && memberState.hunger <= 50)
             let isVeryHunger = (0 < memberState.hunger && memberState.hunger <= 25)
-            if(isHunger || isVeryHunger) {
+            if (isHunger || isVeryHunger) {
                 const embed = new EmbedBuilder()
                 .setColor(isVeryHunger ? "Red" : "Yellow")
                 .setDescription(t(`interactionCreate.${isVeryHunger ? "very_" : ""}hungry`, { hunger: memberState.hunger }))
                 
                 const memberFlag = await client.db.getMemberFlag(interaction.guildId, member.id, isVeryHunger ? "hunger.very.alert" : "hunger.alert");
-                if(memberFlag == 0) {
+                if (memberFlag == 0) {
                     await client.db.updateMemberStateAlert(interaction.guildId, member.id, isVeryHunger ? "hunger.very.alert" : "hunger.alert", 1)
                     channel?.send({ content: dmMember ? null : `||${member.toString()}||`, embeds: [embed] }).catch(() => {
                         interaction.channel.send({ content: `||${member.toString()}||`, embeds: [embed] })
@@ -84,13 +84,13 @@ module.exports = {
             
             let isThirst = (25 < memberState.thirst && memberState.thirst <= 50)
             let isVeryThirst = (0 < memberState.thirst && memberState.thirst <= 25)
-            if(isThirst || isVeryThirst) {
+            if (isThirst || isVeryThirst) {
                 const embed = new EmbedBuilder()
                 .setColor(isVeryThirst ? "Red" : "Yellow")
                 .setDescription(t(`interactionCreate.${isVeryThirst ? "very_" : ""}thirsty`, { hunger: memberState.thirst }))
                 
                 const memberFlag = await client.db.getMemberFlag(interaction.guildId, member.id, isVeryThirst ? "thirst.very.alert" : "thirst.alert");
-                if(memberFlag == 0) {
+                if (memberFlag == 0) {
                     await client.db.updateMemberStateAlert(interaction.guildId, member.id, isVeryThirst ? "thirst.very.alert" : "thirst.alert", 1)   
                     channel?.send({ content: dmMember ? null : `||${member.toString()}||`, embeds: [embed] }).catch(() => {
                         interaction.channel.send({ content: `||${member.toString()}||`, embeds: [embed] })
@@ -98,7 +98,7 @@ module.exports = {
                 }
             }
 
-            if(memberState.hunger <= 0 || memberState.thirst <= 0) {
+            if (memberState.hunger <= 0 || memberState.thirst <= 0) {
                 
                 clearInterval(interval)
                 await client.db.putComa(interaction.guildId, member.id)
@@ -117,7 +117,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

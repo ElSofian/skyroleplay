@@ -54,13 +54,13 @@ module.exports = {
         try {
 
         const realEstateId = (interaction.options.getString("nom"))?.split("&#46;")?.[2]
-        if(interaction.options.getString("nom") && !interaction.options.getString("nom").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "agence-immobilière" : "real-estate-agency" }, "errors"));
+        if (interaction.options.getString("nom") && !interaction.options.getString("nom").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "agence-immobilière" : "real-estate-agency" }, "errors"));
 
         const properties = await client.db.getProperties(interaction.guildId, realEstateId ?? null)
-        if(properties.filter(p => p.owner_id == null).length == 0) return errorEmbed(t("no_property"));
+        if (properties.filter(p => p.owner_id == null).length == 0) return errorEmbed(t("no_property"));
         
         properties.filter(p => p.owner_id !== null).forEach(p => properties.splice(properties.indexOf(p), 1));
-        if(!isPremium) properties.splice(15, properties.length - 15);
+        if (!isPremium) properties.splice(15, properties.length - 15);
 
         const memberMoney = await client.db.getMoney(interaction.guildId, interaction.member.id);
         function render(index) {
@@ -85,7 +85,7 @@ module.exports = {
                 .setDisabled((memberMoney?.bank_money ?? 0) < (property?.price ?? 0))
             )
 
-            if(properties.length > 1) {
+            if (properties.length > 1) {
             
                 rows.addComponents(
                     new ButtonBuilder()
@@ -111,10 +111,10 @@ module.exports = {
         let current = index !== -1 ? index : 0;
 
         const message = await interaction.reply(render(current))
-        if(!message) return;
+        if (!message) return;
 
         const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id == interaction.member.id, time: 240000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         collector.on("collect", async (i) => {
 
@@ -130,21 +130,21 @@ module.exports = {
                 case "buy": {
 
                     const property = await client.db.getProperty(interaction.guildId, properties[current]?.id);
-                    if(!property) return i.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
+                    if (!property) return i.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
                     
                     const freezeAccount = await client.db.isFreezeAccount(interaction.guildId, i.user.id);
-                    if(freezeAccount) return i.reply({ embeds: [errorEmbed(t("freezed_account"), true)], components: [] }).catch(() => {})
+                    if (freezeAccount) return i.reply({ embeds: [errorEmbed(t("freezed_account"), true)], components: [] }).catch(() => {})
                     
                     const bankAccount = await client.db.getBankAccount(interaction.guildId, i.user.id);
-                    if(!bankAccount || bankAccount.bank_money == null || isNaN(bankAccount.bank_money)) return i.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: []}).catch(() => {});
-                    if(bankAccount.frozen_date || bankAccount.frozen_reason) return i.reply({ embeds: [errorEmbed(t("frozen", false, "errors"), true)], components: []}).catch(() => {});
-                    if(bankAccount.bank_money < property.price) return i.reply({ embeds: [errorEmbed(t("not_enough_money", { amount: separate(property.price - bankAccount.bank_money), symbol: economySymbol }), true)], components: [] }).catch(() => {})
+                    if (!bankAccount || bankAccount.bank_money == null || isNaN(bankAccount.bank_money)) return i.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: []}).catch(() => {});
+                    if (bankAccount.frozen_date || bankAccount.frozen_reason) return i.reply({ embeds: [errorEmbed(t("frozen", false, "errors"), true)], components: []}).catch(() => {});
+                    if (bankAccount.bank_money < property.price) return i.reply({ embeds: [errorEmbed(t("not_enough_money", { amount: separate(property.price - bankAccount.bank_money), symbol: economySymbol }), true)], components: [] }).catch(() => {})
                     
                     const realestate = await client.db.getSpecifyCompany(interaction.guildId, "realestate", realEstateId ?? null, true);
                     await client.db.buyProperty(interaction.guildId, property.id, i.user.id, property.price, realestate?.id ?? null);
                     await client.db.addTransactionLog(interaction.guildId, i.user.id, -property.price, `${lang == "fr" ? `Achat de` : `Purchase`} ${property.name}`)
                     
-                    if(realestate.length) {
+                    if (realestate.length) {
                         const idCard = await client.db.getIDCard(interaction.guildId, i.user.id);
                         await client.db.addTransactionLog(interaction.guildId, realestate.id, -property.price, `${lang == "fr" ? `Achat de` : `Purchase`} ${property.name} ${lang == "fr" ? "par" : "by"} ${idCard ? `${idCard.first_name} ${idCard.last_name}` : i.member.displayName}`)
                     }
@@ -163,7 +163,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 
@@ -175,7 +175,7 @@ module.exports = {
         const response = focusedOption.name == "nom" ? await client.db.getSpecifyCompany(interaction.guildId, "realestate") : (await client.db.getProperties(interaction.guildId)).filter(p => !p.owner_id)
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()),);
             filtredArray.push(...response.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

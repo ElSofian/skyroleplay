@@ -41,7 +41,7 @@ module.exports = {
         
         const type = interaction.options.getString("type");
         const companies = (await client.db.getCompaniesWithOwner(interaction.guildId)).filter(c => c.type == (!type || type == "all" ? c.type : type)).sort((a, b) => a.name.localeCompare(b.name))
-        if(!companies.length) return errorEmbed(t("no_companies", false, "errors"));
+        if (!companies.length) return errorEmbed(t("no_companies", false, "errors"));
 
         const companieType = (id) => {
             switch(id) {
@@ -70,10 +70,10 @@ module.exports = {
         }
 
         const message = await interaction.reply(getCompaniesEmbed(0)).catch(() => {});
-        if(!message) return
+        if (!message) return
 
         const collector = await message.createMessageComponentCollector({ filter: i => i.user.id == interaction.member.id, time: 120000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, false, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, false, "editReply");
 
         let current = 0;
         collector.on("collect", async i => {
@@ -93,7 +93,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

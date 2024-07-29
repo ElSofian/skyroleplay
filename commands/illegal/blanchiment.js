@@ -73,9 +73,9 @@ module.exports = {
         const own = member.id === interaction.member.id;
 
         const link = client.functions.illegal.getIllegalLink(client, interaction.guildId, interaction.member.id);
-        if(link) return errorEmbed(t("already_doing", { link: link }, "errors"));
+        if (link) return errorEmbed(t("already_doing", { link: link }, "errors"));
 
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
         
         // Validate bank accounts
         const memberAccount = await client.db.getCashMoney(interaction.guildId, interaction.user.id);
@@ -88,17 +88,17 @@ module.exports = {
         const amount = interaction.options.getNumber("montant");
         const dirty_money = (await client.db.getDirtyMoney(interaction.guildId, member.user.id))?.dirty_money ?? 0
 
-        if((memberAccount?.cash_money ?? 0) + amount >= 2147483647) return errorEmbed(t("int_passing", { name: lang == "fr" ? "votre argent liquide" : "your cash money" }, "errors"));
-        if((userAccount?.cash_money ?? 0) + amount >= 2147483647) return errorEmbed(t("int_passing_member", { name: lang == "fr" ? "d'argent liquide" : "cash money", member: member.toString() }, "errors"));
+        if ((memberAccount?.cash_money ?? 0) + amount >= 2147483647) return errorEmbed(t("int_passing", { name: lang == "fr" ? "votre argent liquide" : "your cash money" }, "errors"));
+        if ((userAccount?.cash_money ?? 0) + amount >= 2147483647) return errorEmbed(t("int_passing_member", { name: lang == "fr" ? "d'argent liquide" : "cash money", member: member.toString() }, "errors"));
 
-        if(amount > dirty_money)
+        if (amount > dirty_money)
         return errorEmbed(own ? t("dirty_money.user", { money: `  ${separate(amount - dirty_money)}${economySymbol}` }) : t("dirty_money.member", { member: member.toString(), money: `${separate(amount - dirty_money)}${economySymbol}` }));
 
         const laundererPercentage = interaction.options.getNumber("votre-pourcentage");
         const laundererPart = Math.floor(amount * (laundererPercentage / 100));
         const clientPart = own ? Math.floor(amount * 0.9) : amount - laundererPart;
 
-        if(own) {
+        if (own) {
             await client.db.addDirtyMoney(interaction.guildId, member.user.id, -amount);
             await client.db.addMoney(interaction.guildId, member.user.id, "cash_money", clientPart);
 
@@ -122,7 +122,7 @@ module.exports = {
 
     } catch (err) {
         console.error(err);
-client.bugsnag.notify(err);
+
         return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
     }
     

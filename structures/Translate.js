@@ -16,7 +16,7 @@ module.exports = class Translate {
 
         translation = translation[lang] ?? key;
     
-        if(params) {
+        if (params) {
             for(const param in params) {
                 translation = translation?.replaceAll(`{{${param}}}`, params[param]);
             }

@@ -23,7 +23,7 @@ module.exports = {
         let lock_picking_time = await client.db.getOption(interaction.guildId, "illegal.lock_picking.time") ?? 120000;
         
         const link = client.functions.illegal.getIllegalLink(client, interaction.guildId, interaction.member.id);
-        if(link) return errorEmbed(t("already_doing", { link: link }, "errors"));
+        if (link) return errorEmbed(t("already_doing", { link: link }, "errors"));
 
         const end = new Date(Date.now() + lock_picking_time);
         const embed = new EmbedBuilder()
@@ -34,7 +34,7 @@ module.exports = {
             .setTimestamp();
         
         const message = await interaction.reply({ embeds: [embed], fetchReply: true }).catch(() => {});
-        if(!message) return;
+        if (!message) return;
 
         client.functions.illegal.setIllegal(client, interaction.guildId, interaction.user.id, message?.url, lock_picking_time);
 
@@ -54,7 +54,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

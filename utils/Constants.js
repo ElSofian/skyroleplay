@@ -31,7 +31,7 @@ module.exports = {
         bankaccount: "<:bankaccount:1103725113981018202>", // https://cdn.discordapp.com/emojis/1103725113981018202.png?v=1
         question: "<:greyquestion:1103725492265300010>", // https://cdn.discordapp.com/emojis/1103725492265300010.png?v=1
         user: "<:user:1104771493075890226>", // https://cdn.discordapp.com/emojis/1104771493075890226.png?v=1
-
+        connexion: "<:connexion:1267588751157231676>", // https://cdn.discordapp.com/emojis/1267588751157231676.png?v=1
 
         // Items
         cash_money: "<:cash_money:1091424347064893614>", // https://cdn.discordapp.com/emojis/1091424347064893614.png?v=1

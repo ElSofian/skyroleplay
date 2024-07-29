@@ -29,7 +29,7 @@ module.exports = class UserInput {
             new ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(this.client.translate.t(lang, "interactionCreate.validation.buttons.cancel", false, "events", interaction)).setCustomId(`cancel-${id}`)
         );
 
-        if(method) await interaction[method]({ embeds: [embed], components: [row], files: [], ephemeral: ephemeral }).catch(() => {});
+        if (method) await interaction[method]({ embeds: [embed], components: [row], files: [], ephemeral: ephemeral }).catch(() => {});
         
         const collector = interaction.channel.createMessageComponentCollector({
             filter: (i) => i.isButton() && i.customId.endsWith(id) && i.user.id === interaction.user.id,
@@ -39,7 +39,7 @@ module.exports = class UserInput {
 
         return new Promise((resolve, reject) => {
             collector.on("collect", async (i) => {
-                if(i.customId === `confirm-${id}`) return resolve(i);
+                if (i.customId === `confirm-${id}`) return resolve(i);
 
                 await i.update({
                     embeds: [new EmbedBuilder().setColor("Red").setDescription(`${this.client.constants.emojis.redEchec} ${this.client.translate.t(lang, "interactionCreate.validation.cancelled", false, "events")}`)],
@@ -51,7 +51,7 @@ module.exports = class UserInput {
             });
 
             collector.on("end", async (collected) => {
-                if(collected.size) return;
+                if (collected.size) return;
 
                 await interaction.editReply({
                     content: null,
@@ -106,10 +106,10 @@ module.exports = class UserInput {
         }
         
         const message = await interactionToRespond.update(await render()).catch(() => {})
-        if(!message) return
+        if (!message) return
 
         const collector = message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.user.id, time: 120000 });
-        if(!collector) return
+        if (!collector) return
 
         let code = "";
         return new Promise((resolve, reject) => {
@@ -117,13 +117,13 @@ module.exports = class UserInput {
             collector.on("collect", async (i) => {
 
                 const newMemberAccount = await this.client.db.getBankAccount(interaction.guildId, i.user.id);
-                if(!newMemberAccount) return collector.stop();
+                if (!newMemberAccount) return collector.stop();
 
                 switch(i.customId) {
                     case "retry": code = ""; i.update(await render(code)).catch(() => {}); break;
                     case "validate": {
 
-                        if(newMemberAccount.card_code == parseInt(code)) {
+                        if (newMemberAccount.card_code == parseInt(code)) {
                             resolve(i)
                             return collector.stop();
                         }
@@ -134,7 +134,7 @@ module.exports = class UserInput {
 
                     default: {
                         i.customId == "delete" ? code = code.slice(0, -1) : code += i.customId;
-                        if(code.length > 4) code = code.slice(0, 4)
+                        if (code.length > 4) code = code.slice(0, 4)
                         
                         i.update(await render(code)).catch(() => {})
                         break;
@@ -159,7 +159,7 @@ module.exports = class UserInput {
             new ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(this.client.translate.t(lang, "interactionCreate.validation.buttons.cancel", false, "events", interaction)).setCustomId(`cancel-${id}`)
         );
 
-        if(method) await interaction[method]({ embeds: [embed], components: [row], files: [], ephemeral: ephemeral }).catch(() => {});
+        if (method) await interaction[method]({ embeds: [embed], components: [row], files: [], ephemeral: ephemeral }).catch(() => {});
         
         const collector = interaction.channel.createMessageComponentCollector({
             filter: (i) => i.isButton() && i.customId.endsWith(id) && i.user.id === interaction.user.id,
@@ -169,7 +169,7 @@ module.exports = class UserInput {
 
         return new Promise((resolve, reject) => {
             collector.on("collect", async (i) => {
-                if(i.customId === `confirm-${id}`) return resolve(i);
+                if (i.customId === `confirm-${id}`) return resolve(i);
 
                 await i.update({
                     embeds: [new EmbedBuilder().setColor("Red").setDescription(`${this.client.constants.emojis.redEchec} ${this.client.translate.t(lang, "interactionCreate.payement_method.cancelled", false, "events")}`)],
@@ -181,7 +181,7 @@ module.exports = class UserInput {
             });
 
             collector.on("end", async (collected) => {
-                if(collected.size) return;
+                if (collected.size) return;
 
                 await interaction.editReply({
                     content: null,
@@ -210,7 +210,7 @@ module.exports = class UserInput {
                 }))
             );
 
-            if(method) await interaction[method]({ embeds: [embed], components: [row], files: [], ephemeral: ephemeral }).catch(console.error);
+            if (method) await interaction[method]({ embeds: [embed], components: [row], files: [], ephemeral: ephemeral }).catch(console.error);
                 
             const collector = interaction.channel.createMessageComponentCollector({
                 filter: (i) => i.isStringSelectMenu() && i.customId.endsWith(id) && i.user.id === interaction.user.id,
@@ -223,7 +223,7 @@ module.exports = class UserInput {
             });
 
             collector.on("end", async (collected) => {
-                if(collected.size) return;
+                if (collected.size) return;
 
                 await interaction.editReply({
                     content: null,

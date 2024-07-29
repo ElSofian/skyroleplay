@@ -398,27 +398,27 @@ module.exports = {
         switch(method) {
 
             case 'créer':
-                if(verify("member", { cantBotInclued: true })) return;
+                if (verify("member", { cantBotInclued: true })) return;
 
                 const dataCreate = await client.db.getIDCard(interaction.guildId, member.user.id);
-                if(!dataCreate) return errorEmbed(member == interaction.member ? t("idcard_user", false, "errors") : t("idcard_member", { member: member.toString() }, "errors"));
+                if (!dataCreate) return errorEmbed(member == interaction.member ? t("idcard_user", false, "errors") : t("idcard_member", { member: member.toString() }, "errors"));
 
                 const cgCreate = await client.db.getMemberCG(interaction.guildId, member.user.id);
-                if(!isPremium && cgCreate.length >= 3) return errorEmbed(t("limit_card", { limit: 3, member: member.toString() }));
+                if (!isPremium && cgCreate.length >= 3) return errorEmbed(t("limit_card", { limit: 3, member: member.toString() }));
 
-                if(plate.length > 30) return errorEmbed(t("not_exceeded_plate"));
+                if (plate.length > 30) return errorEmbed(t("not_exceeded_plate"));
 
                 const name = interaction.options.getString("nom");
-                if(name.length > 30) return errorEmbed(t("name_car_exceeded"));
+                if (name.length > 30) return errorEmbed(t("name_car_exceeded"));
 
                 const existPlate = await client.db.getPlateCG(interaction.guildId, plate);
-                if(existPlate) return errorEmbed(t("already_exist", { plate: plate, name: name }));
+                if (existPlate) return errorEmbed(t("already_exist", { plate: plate, name: name }));
 
                 const type = interaction.options.getString("type");
-                if(!["car", "motorcycle", "truck", "boat", "helicopter"].includes(type)) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
+                if (!["car", "motorcycle", "truck", "boat", "helicopter"].includes(type)) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
 
                 const adress = interaction.options.getString("adresse") || t("not_informed");
-                if(adress.length > 40) return errorEmbed(t("adress_exceeded"));
+                if (adress.length > 40) return errorEmbed(t("adress_exceeded"));
 
                 await client.db.createCG(member.id, interaction.guildId, name, plate, dataCreate.id, type, adress);
 
@@ -427,10 +427,10 @@ module.exports = {
 
             case 'supprimer':
 
-                if(!(await client.functions.permissions.configModerator(interaction, "carte-grise supprimer"))) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "carte-grise supprimer"))) return;
 
                 const existPlateDelete = await client.db.getPlateCG(interaction.guildId, plate);
-                if(!existPlateDelete) return errorEmbed(t("plate_no_existent", { plate: plate }));
+                if (!existPlateDelete) return errorEmbed(t("plate_no_existent", { plate: plate }));
 
                 await client.db.deleteCG(interaction.guildId, plate);
 
@@ -439,13 +439,13 @@ module.exports = {
 
             case 'donner':
 
-                if(verify("member", { cantBotInclued: true, cantSelfInclued: true }, t("not_given_card"))) return;
+                if (verify("member", { cantBotInclued: true, cantSelfInclued: true }, t("not_given_card"))) return;
 
                 const cgGive = await client.db.getMemberCG(interaction.guildId, member.user.id);
-                if(!isPremium && cgGive.length >= 3) return errorEmbed(t("valid_create_card", { limit: 3, member: member.toString() }));
+                if (!isPremium && cgGive.length >= 3) return errorEmbed(t("valid_create_card", { limit: 3, member: member.toString() }));
 
                 const existPlateGive = await client.db.getPlateCG(interaction.guildId, plate);
-                if(!existPlateGive || existPlateGive.user_id != interaction.member.id) return errorEmbed(t("unkown_card", { plate: plate }));
+                if (!existPlateGive || existPlateGive.user_id != interaction.member.id) return errorEmbed(t("unkown_card", { plate: plate }));
 
                 await client.db.giveCG(interaction.guildId, member.user.id, plate);
 
@@ -454,12 +454,12 @@ module.exports = {
 
             case 'confisquer':
 
-                if(!(await client.functions.permissions.configModerator(interaction, "carte-grise confisquer"))) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "carte-grise confisquer"))) return;
 
                 const existPlateConfiscation = await client.db.getPlateCG(interaction.guildId, plate);
                 
-                if(!existPlateConfiscation) return errorEmbed(t("plate_not_exist", { plate: plate }));
-                if(existPlateConfiscation.status == 1) return errorEmbed(t("already_confistated", { plate: plate }));
+                if (!existPlateConfiscation) return errorEmbed(t("plate_not_exist", { plate: plate }));
+                if (existPlateConfiscation.status == 1) return errorEmbed(t("already_confistated", { plate: plate }));
 
                 await client.db.setStatusCG(interaction.guildId, interaction.member.id, plate, 1);
 
@@ -468,12 +468,12 @@ module.exports = {
 
             case 'rendre':
 
-                if(!(await client.functions.permissions.configModerator(interaction, "carte-grise rendre"))) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "carte-grise rendre"))) return;
 
                 const existPlateMake = await client.db.getPlateCG(interaction.guildId, plate);
                 
-                if(!existPlateMake) return errorEmbed(t("card_no_exist", { plate: plate }));
-                if(existPlateMake.status == 0) return errorEmbed(t("not_confiscated", { plate: plate }));
+                if (!existPlateMake) return errorEmbed(t("card_no_exist", { plate: plate }));
+                if (existPlateMake.status == 0) return errorEmbed(t("not_confiscated", { plate: plate }));
 
                 await client.db.setStatusCG(interaction.guildId, interaction.member.id, plate, 0);
 
@@ -485,25 +485,25 @@ module.exports = {
                 const plateEdit = interaction.options.getString("ancienne-plaque");
                 const existPlateEdit = await client.db.getPlateCG(interaction.guildId, plateEdit);
 
-                if(!existPlateEdit) return errorEmbed(t("plate_dexist", { plate: plateEdit }));
+                if (!existPlateEdit) return errorEmbed(t("plate_dexist", { plate: plateEdit }));
 
                 const newPlate = interaction.options.getString("nouvelle-plaque");
                 const newAdress = interaction.options.getString("adresse");
                 const newName = interaction.options.getString("nom");
 
-                if(newPlate && newPlate.length > 30) return errorEmbed(("plate"));
-                if(newPlate && newPlate.includes(".")) return errorEmbed(t("include_dot", { option: lang == "fr" ? "plaque" : "plate" }, "errors"));
-                if(newName && newName.length > 30) return errorEmbed(t("name"))
-                if(newName && newName.includes(".")) return errorEmbed(t("include_dot", { option: lang == "fr" ? "nom" : "name" }, "errors"))
-                if(newAdress && newAdress.length > 40) return errorEmbed(t("adress"))
+                if (newPlate && newPlate.length > 30) return errorEmbed(("plate"));
+                if (newPlate && newPlate.includes(".")) return errorEmbed(t("include_dot", { option: lang == "fr" ? "plaque" : "plate" }, "errors"));
+                if (newName && newName.length > 30) return errorEmbed(t("name"))
+                if (newName && newName.includes(".")) return errorEmbed(t("include_dot", { option: lang == "fr" ? "nom" : "name" }, "errors"))
+                if (newAdress && newAdress.length > 40) return errorEmbed(t("adress"))
 
 
                 // if not your plate
-                if(existPlateEdit.user_id != interaction.member.id && !await client.functions.permissions.isModerator(interaction, interaction.member)) return errorEmbed(t("not_owned"));
+                if (existPlateEdit.user_id != interaction.member.id && !await client.functions.permissions.isModerator(interaction, interaction.member)) return errorEmbed(t("not_owned"));
                 else {
 
-                    if(existPlateEdit.status == 1) return errorEmbed(t("already_confiscated", { name: existPlateEdit.vehicule_name, date: time(existPlateEdit.date_confiscation, "d") }))
-                    if(existPlateEdit.status == 2) return errorEmbed(t("untraceable"));
+                    if (existPlateEdit.status == 1) return errorEmbed(t("already_confiscated", { name: existPlateEdit.vehicule_name, date: time(existPlateEdit.date_confiscation, "d") }))
+                    if (existPlateEdit.status == 2) return errorEmbed(t("untraceable"));
 
                 }
 
@@ -513,7 +513,7 @@ module.exports = {
                     newName: newName ?? existPlateEdit.vehicule_name
                 }
 
-                if(!builder.newPlate && !builder.newAdress && !builder.newName) return errorEmbed(t("error_name"))
+                if (!builder.newPlate && !builder.newAdress && !builder.newName) return errorEmbed(t("error_name"))
 
                 await client.db.editCG(interaction.guildId, existPlateEdit.user_id, plateEdit, builder);
 
@@ -525,7 +525,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     }

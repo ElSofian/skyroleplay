@@ -41,8 +41,8 @@ module.exports = {
 
         try {
 
-        if(!["683269450086219777", "909074665681612800"].includes(interaction.member.id)) return errorEmbed(`La commande \`ordinateur-police\` est actuellement en cours de développement. Vous pouvez suivre toute l'actualité des mises à jours en rejoignant notre [serveur de support](${client.constants.links.support}) !`)
-        if(interaction.options.getString("unité") && !interaction.options.getString("unité").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "unité" : "unit" }, "errors"));
+        if (!["683269450086219777", "909074665681612800"].includes(interaction.member.id)) return errorEmbed(`La commande \`ordinateur-police\` est actuellement en cours de développement. Vous pouvez suivre toute l'actualité des mises à jours en rejoignant notre [serveur de support](${client.constants.links.support}) !`)
+        if (interaction.options.getString("unité") && !interaction.options.getString("unité").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "unité" : "unit" }, "errors"));
 
         await interaction.deferReply().catch(() => {});
 
@@ -52,15 +52,15 @@ module.exports = {
 
         const getName = async(id, withPoliceNumber = false) => {
             const idCards = [await client.db.getIDCard(interaction.guildId, id), await client.db.getIDCard(interaction.guildId, id, true)]
-            if(idCards[0]) return `${withPoliceNumber ? `  [${(employees.find((e) => e.user_id == interaction.member.id))?.police_number ?? "00"}] ` : ""}${idCards[0].first_name} ${idCards[0].last_name}`;
-            else if(idCards[1]) return `${withPoliceNumber ? `  [${(employees.find((e) => e.user_id == interaction.member.id))?.police_number ?? "00"}] ` : ""}${idCards[1].first_name} ${idCards[1].last_name}`;
+            if (idCards[0]) return `${withPoliceNumber ? `  [${(employees.find((e) => e.user_id == interaction.member.id))?.police_number ?? "00"}] ` : ""}${idCards[0].first_name} ${idCards[0].last_name}`;
+            else if (idCards[1]) return `${withPoliceNumber ? `  [${(employees.find((e) => e.user_id == interaction.member.id))?.police_number ?? "00"}] ` : ""}${idCards[1].first_name} ${idCards[1].last_name}`;
             
             await interaction.guild.members.fetch();
             const fetchMember = interaction.guild.members.cache.get(id);
             return fetchMember ? `${withPoliceNumber ? `  [${(employees.find((e) => e.user_id == interaction.member.id))?.police_number ?? "00"}] ${fetchMember?.displayName}` : fetchMember?.displayName}` : t("words.unknown", false, "global");
         }
 
-        const name = await getName(interaction.member.id, true);
+        // const name = await getName(interaction.member.id, true);
         let tries = 0, username = "", password = "";
         async function render(customId, path, secondRows = null, thirdRows = null) {
 
@@ -136,18 +136,18 @@ module.exports = {
         let _render = await render(null, isLogged == 1 ? "home" : "lock", isLogged == 1 ? rows : null)
 
         const message = await interaction.editReply({ embeds: _render.embeds, components: _render.components, files: _render.files, fetchReply: true })
-        if(!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id == interaction.user.id, time: 240000 });
-        if(!collector) return collector.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] })
+        if (!collector) return collector.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] })
         
         let type, currentPound = 0, currentCR = 0, currentFine = 0;
         collector.on("collect", async(i) => {
              
-            if(["retry", "connect", "home", "disconnect"].includes(i.customId)) {
+            if (["retry", "connect", "home", "disconnect"].includes(i.customId)) {
 
                 const isLogged = await client.db.getMemberFlag(interaction.guildId, interaction.member.id, "police_computer.logged");
-                if(isLogged == 0 || i.customId == "retry") {
+                if (isLogged == 0 || i.customId == "retry") {
 
                     const code = Math.floor(Math.random() * 9000000000) + 1000000000
                     const modal = new ModalBuilder()
@@ -160,7 +160,7 @@ module.exports = {
 
                     await i.showModal(modal).catch(() => {})
                     const modalCollector = await i.awaitModalSubmit({ filter: i => i.user.id === interaction.member.id && i.customId == `connect_modal_${code}`, max: 1, time: 60000 })
-                    if(!modalCollector) return;
+                    if (!modalCollector) return;
 
                     const modalIdentifier = modalCollector.fields.getTextInputValue("identifier");
                     const modalPassword = modalCollector.fields.getTextInputValue("password");
@@ -168,7 +168,7 @@ module.exports = {
                     tries++; username = modalIdentifier; password = modalPassword;
                     
                     const session = await client.db.getLogin(interaction.guildId, modalIdentifier, modalPassword);
-                    if(!session) return modalCollector.update(await render(null, `./assets/police_computer/${lang}/lock_error.png`, [retryButton]))
+                    if (!session) return modalCollector.update(await render(null, `./assets/police_computer/${lang}/lock_error.png`, [retryButton]))
                     else {
                         await client.db.setMemberFlag(interaction.guildId, interaction.member.id, "police_computer.logged", 1);
                         return modalCollector.update(await render(null, `./assets/police_computer/${lang}/home.png`, rows))
@@ -176,7 +176,7 @@ module.exports = {
 
                 }
 
-                if(i.customId == "disconnect") {
+                if (i.customId == "disconnect") {
                     await client.db.setMemberFlag(interaction.guildId, interaction.member.id, "police_computer.logged", 0);
                     return collector.stop("end");
                 }
@@ -187,7 +187,7 @@ module.exports = {
             } else {
 
                 // Interaction Is List of
-                if(["interpol", "criminal-records", "pound", "fines", "others-search"].includes(i.customId)) {
+                if (["interpol", "criminal-records", "pound", "fines", "others-search"].includes(i.customId)) {
 
                     type = i.customId;
                     await i.update(await render(type, `./assets/police_computer/${type}.png`, [type == "others-search" ? searchRows : secondRows]))
@@ -221,13 +221,13 @@ module.exports = {
                     switch(type) {
 
                         case "criminal-records":
-                            if(i.customId !== "remove") actionModal.setComponents(new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId("id").setLabel(t("modal.id")).setPlaceholder(t("modal.placeholder_id")).setMinLength(1).setStyle(TextInputStyle.Short).setRequired(true)));
+                            if (i.customId !== "remove") actionModal.setComponents(new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId("id").setLabel(t("modal.id")).setPlaceholder(t("modal.placeholder_id")).setMinLength(1).setStyle(TextInputStyle.Short).setRequired(true)));
                             break;
 
                         case "pound": actionModal.setComponents(...vehicleComponents); break;
                         case "fines": {
-                            if(i.customId == "search") actionModal.addComponents(...nameComponents, fineComponents[0]);
-                            else if(i.customId == "add") actionModal.addComponents(...nameComponents, ...fineComponents.slice(1));
+                            if (i.customId == "search") actionModal.addComponents(...nameComponents, fineComponents[0]);
+                            else if (i.customId == "add") actionModal.addComponents(...nameComponents, ...fineComponents.slice(1));
                             break;
                         }
 
@@ -238,7 +238,7 @@ module.exports = {
                     await i.showModal(actionModal).catch(() => {})
 
                     const modalCollector = await i.awaitModalSubmit({ filter: i => i.user.id === interaction.member.id && i.customId == `modal_action_${code}`, max: 1, time: 60000 })
-                    if(!modalCollector) return;
+                    if (!modalCollector) return;
 
                     switch (type) {
                         case "pound":
@@ -262,7 +262,7 @@ module.exports = {
                             if (i.customId === "add") {
                                 var modalAmount = modalCollector.fields.getTextInputValue("amount").replaceAll(",", ".");
                                 if (isNaN(parseFloat(modalAmount)) || parseFloat(modalAmount) <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_amount", false, "errors"), true)], components: [], files: [] });
-                            } else if(i.customId === "search") var modalFineID = modalCollector.fields.getTextInputValue("fine_id")
+                            } else if (i.customId === "search") var modalFineID = modalCollector.fields.getTextInputValue("fine_id")
 
                           
                             break;
@@ -285,7 +285,7 @@ module.exports = {
 
                                 case "interpol": {
                                     const isWanted = await client.db.isWanted(interaction.guildId, memberId.id);
-                                    if(isWanted) return modalCollector.reply({ embeds: [errorEmbed(t("already_wanted", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
+                                    if (isWanted) return modalCollector.reply({ embeds: [errorEmbed(t("already_wanted", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
 
                                     const modalReason = modalCollector.fields.getTextInputValue("reason");
                                     await client.db.putWanted(interaction.guildId, interaction.member.id, memberId.id, modalReason);
@@ -296,7 +296,7 @@ module.exports = {
                                 case "criminal-records": {
 
                                     const criminalRecords = await client.db.getCriminalRecords(interaction.guildId, memberId.id);
-                                    if(criminalRecords.length >= 50) return modalCollector.reply({ embeds: [errorEmbed(t("max_criminal_records", { emoji: client.constants.emojis.premium }), true)], components: [], files: [] });
+                                    if (criminalRecords.length >= 50) return modalCollector.reply({ embeds: [errorEmbed(t("max_criminal_records", { emoji: client.constants.emojis.premium }), true)], components: [], files: [] });
 
                                     const modalReason = modalCollector.fields.getTextInputValue("reason");
                                     await client.db.insertCriminalRecords(interaction.guildId, memberId.user_id, modalReason, i.user.id);
@@ -306,7 +306,7 @@ module.exports = {
 
                                 case "pound": {
                                     const isPounded = await client.db.isPounded(interaction.guildId, vehicule.id);
-                                    if(isPounded) return modalCollector.reply({ embeds: [errorEmbed(t("already_pounded", { vehicule_name: vehicule.vehicule_name, license_plate: vehicule.license_plate ? `(${vehicule.license_plate})` : "" }), true)], components: [], files: [] });
+                                    if (isPounded) return modalCollector.reply({ embeds: [errorEmbed(t("already_pounded", { vehicule_name: vehicule.vehicule_name, license_plate: vehicule.license_plate ? `(${vehicule.license_plate})` : "" }), true)], components: [], files: [] });
 
                                     await client.db.setStatusCG(interaction.guildId, interaction.member.id, vehicule.license_plate, 1)
                                     
@@ -332,7 +332,7 @@ module.exports = {
 
                                 case "interpol": {
                                     const isWanted = await client.db.isWanted(interaction.guildId, memberId.id);
-                                    if(!isWanted) return modalCollector.reply({ embeds: [errorEmbed(t("not_wanted", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
+                                    if (!isWanted) return modalCollector.reply({ embeds: [errorEmbed(t("not_wanted", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
 
                                     confirmMessage = t("confirm_delete_wanted", { first_name: modalFirstName, last_name: modalLastName });
                                     successMessage = t("remove_wanted", { first_name: modalFirstName, last_name: modalLastName });
@@ -342,7 +342,7 @@ module.exports = {
 
                                 case "criminal-records": {
                                     const criminalRecord = await client.db.getCriminalRecords(interaction.guildId, modalCrId, true)
-                                    if(!criminalRecord) return modalCollector.reply({ embeds: [errorEmbed(t("no_criminal_record_id_found", { id: modalCrId }), true)], components: [], files: [] });
+                                    if (!criminalRecord) return modalCollector.reply({ embeds: [errorEmbed(t("no_criminal_record_id_found", { id: modalCrId }), true)], components: [], files: [] });
                                     
                                     confirmMessage = t("confirm_delete_cr", { first_name: criminalRecord.first_name, last_name: criminalRecord.last_name, id: modalCrId, reason: criminalRecord.reason })
                                     successMessage = t("remove_criminal_records", { first_name: criminalRecord.first_name, last_name: criminalRecord.last_name, id: modalCrId, reason: criminalRecord.reason });
@@ -352,7 +352,7 @@ module.exports = {
 
                                 case "pound": {
                                     const isPounded = await client.db.isPounded(interaction.guildId, vehicule.id);
-                                    if(!isPounded) return modalCollector.reply({ embeds: [errorEmbed(t("not_pounded", { vehicule_name: vehicule.vehicule_name, license_plate: vehicule.license_plate ? `(${vehicule.license_plate})` : "" }), true)], components: [], files: [] });
+                                    if (!isPounded) return modalCollector.reply({ embeds: [errorEmbed(t("not_pounded", { vehicule_name: vehicule.vehicule_name, license_plate: vehicule.license_plate ? `(${vehicule.license_plate})` : "" }), true)], components: [], files: [] });
 
                                     confirmMessage = t("confirm_delete_pounded", { vehicule_name: vehicule.vehicule_name, license_plate: vehicule.license_plate ? `(${vehicule.license_plate})` : "" });
                                     successMessage = t("remove_pounded", { vehicule_name: vehicule.vehicule_name, license_plate: vehicule.license_plate ? `(${vehicule.license_plate})` : "" });
@@ -362,8 +362,8 @@ module.exports = {
 
                                 case "fines": {
                                     const fine = await client.db.getMemberBill(interaction.guildId, modalFineID);
-                                    if(!fine) return modalCollector.reply({ embeds: [errorEmbed(t("no_fine_found", { id: modalFineID }), true)], components: [], files: [] });
-                                    if(fine.fine !== 1) return modalCollector.reply({ embeds: [errorEmbed(t("not_fine", { id: modalFineID }), true)], components: [], files: [] });
+                                    if (!fine) return modalCollector.reply({ embeds: [errorEmbed(t("no_fine_found", { id: modalFineID }), true)], components: [], files: [] });
+                                    if (fine.fine !== 1) return modalCollector.reply({ embeds: [errorEmbed(t("not_fine", { id: modalFineID }), true)], components: [], files: [] });
 
                                     confirmMessage = t("confirm_delete_fine", { id: modalFineID, amount: separate(fine.amount), symbol: economySymbol });
                                     successMessage = t("remove_fine", { id: modalFineID, amount: separate(fine.amount), symbol: economySymbol });
@@ -374,7 +374,7 @@ module.exports = {
                             }
 
                             const confirm = await client.functions.userinput.askValidation(modalCollector, confirmMessage, false)
-                            if(!confirm) return;
+                            if (!confirm) return;
                             
                             switch(type) {
                                 case "interpol": await client.db.deleteWanted(interaction.guildId, memberId.id); break;
@@ -396,30 +396,30 @@ module.exports = {
 
                                 case "criminal-records": {
                                     const criminalRecords = await client.db.getCriminalRecordByName(interaction.guildId, modalFirstName, modalLastName);
-                                    if(!criminalRecords) return modalCollector.reply({ embeds: [errorEmbed(t("no_criminal_records_found", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
+                                    if (!criminalRecords) return modalCollector.reply({ embeds: [errorEmbed(t("no_criminal_records_found", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
 
                                     value = criminalRecords;
-                                    if(i.customId == "next") currentCR++;
-                                    else if(i.customId == "previous") currentCR--;
+                                    if (i.customId == "next") currentCR++;
+                                    else if (i.customId == "previous") currentCR--;
                                 }
 
                                 case "pound": {
                                     const vehicules = await client.db.getPoundeds(interaction.guildId, modalFirstName, modalLastName);
-                                    if(!vehicules) return modalCollector.reply({ embeds: [errorEmbed(t("no_pounded_vehicules_found", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
+                                    if (!vehicules) return modalCollector.reply({ embeds: [errorEmbed(t("no_pounded_vehicules_found", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
                                     
                                     value = vehicules;
-                                    if(i.customId == "next") currentPound++;
-                                    else if(i.customId == "previous") currentPound--;
+                                    if (i.customId == "next") currentPound++;
+                                    else if (i.customId == "previous") currentPound--;
 
                                 }
 
                                 case "fines": {
                                     const fines = await client.db.getMemberBills(interaction.guildId, modalFirstName, modalLastName);
-                                    if(!fines) return modalCollector.reply({ embeds: [errorEmbed(t("no_fines_found", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
+                                    if (!fines) return modalCollector.reply({ embeds: [errorEmbed(t("no_fines_found", { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
 
                                     value = fines;
-                                    if(i.customId == "next") currentFine++;
-                                    else if(i.customId == "previous") currentFine--;
+                                    if (i.customId == "next") currentFine++;
+                                    else if (i.customId == "previous") currentFine--;
 
                                 }
 
@@ -427,7 +427,7 @@ module.exports = {
                             const current = type == "fines" ? currentFine : type == "pound" ? currentPound : currentCR
                             const currentValue = value?.[current]
                             console.log(currentValue)
-                            if(!currentValue) return modalCollector.reply({ embeds: [errorEmbed(t(`no_${type}_found`, { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
+                            if (!currentValue) return modalCollector.reply({ embeds: [errorEmbed(t(`no_${type}_found`, { first_name: modalFirstName, last_name: modalLastName }), true)], components: [], files: [] });
 
                             return modalCollector.update(await search(type, current, currentValue));
 
@@ -441,7 +441,7 @@ module.exports = {
         })
 
         collector.on("end", async(collected) => {
-            if(collected.find(i => i.customId == "disconnect")) return interaction.editReply(await render(null, `./assets/police_computer/${lang}/disconnected.png`, [])).catch(() => {});
+            if (collected.find(i => i.customId == "disconnect")) return interaction.editReply(await render(null, `./assets/police_computer/${lang}/disconnected.png`, [])).catch(() => {});
 
             return interaction.editReply({ components: [] }).catch(() => {});
         })
@@ -449,7 +449,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     },
@@ -457,13 +457,13 @@ module.exports = {
 
     runAutocomplete: async(client, interaction, { isPremium, lang }) => {
 
-        if(!isPremium) return interaction.respond([{ name: "🚔 Police", value: `${code}&#46;police` }])
+        if (!isPremium) return interaction.respond([{ name: "🚔 Police", value: `${code}&#46;police` }])
 
         const focusedOption = interaction.options.getFocused(true);
         const police = await client.db.getSpecifyCompany(interaction.guildId, "police");
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...police.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()),);
             filtredArray.push(...police.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

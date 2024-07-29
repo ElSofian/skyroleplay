@@ -30,7 +30,7 @@ module.exports = {
         try {
 
         const member = interaction.options.getMember("joueur");
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
         
         const durations = ["5m", "10m", "15m", "1h", "3h"];
         const duration = durations[Math.floor(Math.random() * durations.length)];
@@ -60,7 +60,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

@@ -88,7 +88,7 @@ module.exports = {
         const method = interaction.options.getSubcommand();
         const member = interaction.options.getMember("joueur");
 
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
 
         const cityName = (await client.db.getOption(interaction.guildId, "global.city_name")) || interaction.guild.name;
 
@@ -110,10 +110,10 @@ module.exports = {
 
             case "passer": {
 
-                if(!(await client.functions.permissions.configModerator(interaction, "visite-medicale passer"))) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "visite-medicale passer"))) return;
 
                 const memberData = await client.db.getMember(interaction.guildId, member.user.id);
-                if(memberData.last_medical_checkup && client.dayjs().isSame(client.dayjs(memberData.last_medical_checkup), "day"))
+                if (memberData.last_medical_checkup && client.dayjs().isSame(client.dayjs(memberData.last_medical_checkup), "day"))
                     return errorEmbed(t("same_day", { member: member.toString(), time: time(memberData.last_medical_checkup,"D") }));
 
                 await client.db.setLastMedicalCheckup(interaction.guildId, member.user.id);
@@ -145,7 +145,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     }

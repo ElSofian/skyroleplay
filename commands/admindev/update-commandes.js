@@ -45,7 +45,7 @@ module.exports = {
         
         // À enlever quand le admin_users sera ajouté au public
         //if (!client.config.admin_users.includes(interaction.user.id)) return interaction.reply(`${client.constants.emojis.redEchec} Vous n'êtes pas autorisé à utiliser cette commande !`).catch(() => { });
-        if(!["909074665681612800", "683269450086219777", "320611120484188162", "274999371144364033"].includes(interaction.user.id)) return interaction.reply(`${client.constants.emojis.redEchec} Vous n'êtes pas autorisé à utiliser cette commande !`).catch(() => {})
+        if (!["909074665681612800", "683269450086219777", "320611120484188162", "274999371144364033"].includes(interaction.user.id)) return interaction.reply(`${client.constants.emojis.redEchec} Vous n'êtes pas autorisé à utiliser cette commande !`).catch(() => {})
 
         await interaction.reply(client.constants.emojis.load + " Loading...").catch(() => {});
 
@@ -53,7 +53,7 @@ module.exports = {
 
         try {
             
-            if(commandsType == 'public') await client.application.commands.set(client.commands.filter(c => c.category.en !== 'admindev'))
+            if (commandsType == 'public') await client.application.commands.set(client.commands.filter(c => c.category.en !== 'admindev'))
             else await client.application.commands.set(client.commands.filter(c => c.category.en === 'admindev'), client.config.team_server);
 
             return interaction.editReply(`${client.constants.emojis.add} Les commandes ${commandsType == 'public' ? 'publiques' : 'admin'} ont bien été mises à jour !`).catch(() => {});

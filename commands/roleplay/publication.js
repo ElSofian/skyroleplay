@@ -136,7 +136,7 @@ module.exports = {
 
             // Check whether the bot has permissions
             const hasSendPermissions = interaction.channel.permissionsFor(client.user.id).has(["ViewChannel", "SendMessages", "EmbedLinks"]);
-            if(!hasSendPermissions) return errorEmbed(t("interactionCreate.perms_send", { channel: interaction.channel.toString() }, "events"));
+            if (!hasSendPermissions) return errorEmbed(t("interactionCreate.perms_send", { channel: interaction.channel.toString() }, "events"));
 
             const content = interaction.options.getString("contenu");
             const type = interaction.options.getString("type");
@@ -144,10 +144,10 @@ module.exports = {
             let message;
 
             const staffRole = await client.db.getOption(interaction.guildId, "roles.moderator");
-            if(/(https?:\/\/[^\s]+)/gi.test(content) && (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator) && !interaction.member.roles.cache.has(staffRole))) return errorEmbed(t("no_link", { role: staffRole ? t("role", { staffRole: `<@&${staffRole}>` }) : "" }))
+            if (/(https?:\/\/[^\s]+)/gi.test(content) && (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator) && !interaction.member.roles.cache.has(staffRole))) return errorEmbed(t("no_link", { role: staffRole ? t("role", { staffRole: `<@&${staffRole}>` }) : "" }))
 
             // Style type
-            if(type) {
+            if (type) {
 
                 const embed = new EmbedBuilder().setDescription(content);
                 const typeData = publicationTypes.find(t => t.value == type);
@@ -173,7 +173,7 @@ module.exports = {
 
                 await interaction.channel.send({ embeds: [embed], fetchReply: true }).then(msg => {
                     message = msg;
-                    if(type == "twitter" && interaction.channel.permissionsFor(client.user.id).has("AddReactions")) ["❤️", "🔁"].forEach((emoji) => msg.react(emoji).catch(() => {}));
+                    if (type == "twitter" && interaction.channel.permissionsFor(client.user.id).has("AddReactions")) ["❤️", "🔁"].forEach((emoji) => msg.react(emoji).catch(() => {}));
                     successEmbed(t("confirm", { url: msg?.url }), false, true);
                 })
 
@@ -185,7 +185,7 @@ module.exports = {
                 }).catch(() => { });
             }
 
-            if(!message) return;
+            if (!message) return;
 
             // Logs
             client.db.addPublicationLog(interaction.guildId, {
@@ -198,7 +198,7 @@ module.exports = {
             });
 
             let logs_text = t("message");
-            if(type) logs_text = t("publication");
+            if (type) logs_text = t("publication");
 
 
             const logsEmbed = new EmbedBuilder()
@@ -216,7 +216,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     }

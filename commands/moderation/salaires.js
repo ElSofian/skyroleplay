@@ -52,8 +52,8 @@ module.exports = {
         
         const method = interaction.options.getSubcommand();
         const salariesState = await client.db.getOption(interaction.guildId, "economy.salaries_open");
-        if(method == "ouvrir" && salariesState == true) return errorEmbed(t("already_open"));
-        if(method == "fermer" && salariesState == false) return errorEmbed(t("already_close"));
+        if (method == "ouvrir" && salariesState == true) return errorEmbed(t("already_open"));
+        if (method == "fermer" && salariesState == false) return errorEmbed(t("already_close"));
 
         const embed = new EmbedBuilder()
         .setColor(method == "ouvrir" ? "Green" : "Red")
@@ -67,7 +67,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

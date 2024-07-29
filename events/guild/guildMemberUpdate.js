@@ -14,7 +14,7 @@ module.exports.run = async(client, oldMember, newMember) => {
     //     let wasAdmin = oldMember?.permissions?.has(PermissionsBitField.Flags.Administrator) || false;
     //     let isAdmin = newMember?.permissions?.has(PermissionsBitField.Flags.Administrator) || false;
         
-    //     // if((wasAdmin && !isAdmin) || (!wasAdmin && isAdmin)) axios({
+    //     // if ((wasAdmin && !isAdmin) || (!wasAdmin && isAdmin)) axios({
     //     //     method: 'delete',
     //     //     timeout: 5000,
     //     //     url: `${client.config.public_api.url}/users/${oldMember.id}/cache`,

@@ -20,7 +20,7 @@ module.exports = {
 
             
         const hasHighwayCode = await client.db.hasHighwayCode(interaction.guildId, interaction.member.id)
-        if(hasHighwayCode) return errorEmbed(t("already_have_code"))
+        if (hasHighwayCode) return errorEmbed(t("already_have_code"))
         
         await interaction.deferReply()
 
@@ -382,9 +382,9 @@ module.exports = {
             const renderEmbed = EmbedBuilder.from(embed)
             const question = questions[current][lang]
 
-            if(end) {
+            if (end) {
 
-                if(points >= min) {
+                if (points >= min) {
                     renderEmbed.setDescription(t("success", { points: points, total: questions.length }))
                     await client.db.giveHighwayCode(interaction.guildId, interaction.member.id)
                 } else {
@@ -401,10 +401,10 @@ module.exports = {
             for (const r of ["a", "b", "c", "d"]) {
 
                 const response = question?.[r]
-                if(!response) continue;
+                if (!response) continue;
                 
                 responseRows.addComponents(new ButtonBuilder().setCustomId(r).setLabel(r.toUpperCase()).setStyle(ButtonStyle.Secondary))
-                if(!end) renderEmbed.addFields([{ name: `${t("response")} ${r.toUpperCase()}`, value: response }])
+                if (!end) renderEmbed.addFields([{ name: `${t("response")} ${r.toUpperCase()}`, value: response }])
 
             }
             
@@ -417,10 +417,10 @@ module.exports = {
         }
 
         const message = await interaction.editReply({ embeds: [embed], components: [rows], fetchReply: true })
-        if(!message) return;
+        if (!message) return;
 
         const collector = message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.user.id, time: 420000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         let current = 0, points = 0, end = false;
         collector.on("collect", async (i) => {
@@ -430,9 +430,9 @@ module.exports = {
                 case "start": i.update(await render(0)); break;
                 default: {
 
-                    if(current < questions.length) {
-                        if(questions[current][lang].response == i.customId) points++;
-                        if(current+1 !== questions.length) current++;
+                    if (current < questions.length) {
+                        if (questions[current][lang].response == i.customId) points++;
+                        if (current+1 !== questions.length) current++;
                         else end = true
                     }
         
@@ -453,7 +453,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

@@ -229,13 +229,13 @@ module.exports = {
         // a role is mentioned
         if (value instanceof Role) {
 
-            if(!await client.db.isPremium(interaction.guildId)) return errorEmbed(t("premium", { emoji: client.constants.emojis.premium }, "errors"));
+            if (!await client.db.isPremium(interaction.guildId)) return errorEmbed(t("premium", { emoji: client.constants.emojis.premium }, "errors"));
 
             const role = value;
             const getGuildMembers = await client.db.getMembers(interaction.guildId);
             const guildEnsuredMembers = getGuildMembers.map((a) => a.user_id);
 
-            if(!guildEnsuredMembers.length) return errorEmbed(t("no_members", { role: role.toString() }));
+            if (!guildEnsuredMembers.length) return errorEmbed(t("no_members", { role: role.toString() }));
 
             validMembers = (await interaction.guild.members.fetch()).filter((m) => (m.roles.cache).has(role.id) && !m.user.bot && guildEnsuredMembers.includes(m.user.id));
 
@@ -246,21 +246,21 @@ module.exports = {
             const guildWithMoney = getGuild.map((b) => [b.user_id, b.cash_money ? parseFloat(b.cash_money) : null, b.dirty_money ? parseFloat(b.dirty_money) : null, b.bank_money ? parseFloat(b.bank_money) : null]);
 
             validMembers = validMembers.filter(m => members?.includes(m.user.id));
-            if(!members.length || !validMembers?.size) return errorEmbed(t("not_valid_members", { role: role.toString() }));
+            if (!members.length || !validMembers?.size) return errorEmbed(t("not_valid_members", { role: role.toString() }));
 
             if (method === "remove") {
                 let index = type == "cash_money" ? 1 : type == "dirty_money" ? 2 : 3;
                 validMembers = validMembers.filter((m) => guildWithMoney?.some(n => n[index] >= amount && m.user.id === n[0] && n[type] !== null ));
             }
 
-            if(!validMembers?.size) return errorEmbed(t("not_valid_members", { role: role.toString() }));
+            if (!validMembers?.size) return errorEmbed(t("not_valid_members", { role: role.toString() }));
 
             await successEmbed(t("adding", { method: t(interaction.options.getSubcommand()), amount: validMembers.size, s: validMembers.size > 1 ? "s" : "" }))
 
             let membersIdsList = [];
             
             for (const m of validMembers) {
-                if(type == "bank_money" && (await client.db.getBankAccount(interaction.guildId, m[0]))) await client.db.addTransactionLog(interaction.guildId, m[0], method === "add" ? amount : -amount, method == "add" ? lang == "fr" ? "Payement du Gouvernement" : "Government Payment" : lang == "fr" ? "Retrait du Gouvernement" : "Government Withdrawal")
+                if (type == "bank_money" && (await client.db.getBankAccount(interaction.guildId, m[0]))) await client.db.addTransactionLog(interaction.guildId, m[0], method === "add" ? amount : -amount, method == "add" ? lang == "fr" ? "Payement du Gouvernement" : "Government Payment" : lang == "fr" ? "Retrait du Gouvernement" : "Government Withdrawal")
                 membersIdsList.push(m[0]);
             }
             
@@ -282,7 +282,7 @@ module.exports = {
         else {
 
             const member = value;
-            if(verify("member", { cantBotInclued: true })) return;
+            if (verify("member", { cantBotInclued: true })) return;
 
             const own = member.id === interaction.user.id;
             const money = `${separate(amount)}${symbol}`;
@@ -294,9 +294,9 @@ module.exports = {
             if (type === "dirty_money") {
 
                 userAccount = await client.db.getDirtyMoney(interaction.guildId, member.user.id);
-                if(method === "remove" && (userAccount[type] == null || userAccount[type] <= 0 || userAccount[type] < amount)) return errorEmbed(own ? t("no_user_dirty_money", { money: money }) : t("no_member_dirty_money", { member: member.toString(), money: money }) );
+                if (method === "remove" && (userAccount[type] == null || userAccount[type] <= 0 || userAccount[type] < amount)) return errorEmbed(own ? t("no_user_dirty_money", { money: money }) : t("no_member_dirty_money", { member: member.toString(), money: money }) );
 
-                if(userAccount[type] + amount >= 2147483647) return errorEmbed(t("int_passing_member", { name: lang == "fr" ? "d'argent sale" : "dirty money", member: member.toString() }, "errors"));
+                if (userAccount[type] + amount >= 2147483647) return errorEmbed(t("int_passing_member", { name: lang == "fr" ? "d'argent sale" : "dirty money", member: member.toString() }, "errors"));
 
                 await client.db.addDirtyMoney(interaction.guildId, member.user.id, method === "add" ? amount : -amount);
 
@@ -311,7 +311,7 @@ module.exports = {
             }
 
             let sentence, choice;
-            if(own) method == "add" ? choice = "self_add" : choice = "self_remove";
+            if (own) method == "add" ? choice = "self_add" : choice = "self_remove";
             else method == "add" ? choice = "user_add" : choice = "user_remove";
 
             switch (type) {
@@ -350,7 +350,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

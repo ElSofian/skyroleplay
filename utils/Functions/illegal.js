@@ -13,7 +13,7 @@ module.exports = class Illegal {
     
     getIllegalLink = (guildId, userId) => {
         const illegal = this.client._currentIllegal.get(`${guildId}-${userId}`);
-        if(!illegal || illegal.end < Date.now()) return null;
+        if (!illegal || illegal.end < Date.now()) return null;
         else return illegal.link;
     };
 

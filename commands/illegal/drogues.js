@@ -271,11 +271,11 @@ module.exports = {
         const symbol = await client.db.getOption(interaction.guildId, "economy.symbol");
         const method = interaction.options.getSubcommand();
 
-        if(!(interaction.options.getString("drogue") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "drogue" : "drug" }, "errors"), false, true, "editReply");
+        if (!(interaction.options.getString("drogue") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "drogue" : "drug" }, "errors"), false, true, "editReply");
         const drugId = interaction.options.getString("drogue")?.split("&#46;")[1];
 
         const chosenDrug = await client.db.getDrugById(interaction.guildId, drugId);
-        if(method !== "dépister" && !chosenDrug?.id) return errorEmbed(t("wrong_drug", { drug: drugId }), false, true, "editReply");
+        if (method !== "dépister" && !chosenDrug?.id) return errorEmbed(t("wrong_drug", { drug: drugId }), false, true, "editReply");
         
         const memberData = method === "dépister" ? null : await client.db.getMemberDrugs(interaction.guildId, interaction.member.id, chosenDrug.id);
 
@@ -298,7 +298,7 @@ module.exports = {
                 );
                 
                 const message = await interaction.editReply({ embeds: [embed], components: [row], ephemeral: true, fetchReply: true }).catch(() => {});
-                if(!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+                if (!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
                 
                 // Ask method
                 const collector = await client.functions.other.createCollector(message, interaction, 60000, lang);
@@ -306,11 +306,11 @@ module.exports = {
                 if (collector === "end") return;
                 
                 link = client.functions.illegal.getIllegalLink(interaction.guildId, interaction.member.id);
-                if(link) return collector.update({ embeds: [errorEmbed(t("already_doing", { link: link }, "errors"), true)] }).catch(() => {});
+                if (link) return collector.update({ embeds: [errorEmbed(t("already_doing", { link: link }, "errors"), true)] }).catch(() => {});
                 
                 // Validate channel permissions
                 const channel = interaction.guild.channels.cache.get(chosenDrug.channel_id) ?? interaction.channel;
-                if(!channel.permissionsFor(client.user.id).has(["ViewChannel", "SendMessages", "EmbedLinks"])) return collector.update({ embeds: [errorEmbed(t("perms_send", { channels: interaction.channel.toString() }, "errors"), true)], content: null, components: [] }).catch(() => {});
+                if (!channel.permissionsFor(client.user.id).has(["ViewChannel", "SendMessages", "EmbedLinks"])) return collector.update({ embeds: [errorEmbed(t("perms_send", { channels: interaction.channel.toString() }, "errors"), true)], content: null, components: [] }).catch(() => {});
                 
                 switch (collector.customId) {
                     
@@ -318,11 +318,11 @@ module.exports = {
 
                 case "🌿": {
                     
-                    if(suspended.has(interaction.member.id)) return collector.update({ embeds: [errorEmbed(t("already_doing_without_link", false, "errors"), true)] }).catch(() => {});
+                    if (suspended.has(interaction.member.id)) return collector.update({ embeds: [errorEmbed(t("already_doing_without_link", false, "errors"), true)] }).catch(() => {});
 
                     _cooldownDrugs(interaction.member.id);
 
-                    if((memberData?.untreated ?? 0) >= 2147483647) return collector.update({ embeds: [errorEmbed(t("too_much_int", { name: t("drugs.untreated", { drugName: chosenDrug.name }, "global") }, "errors"), true)], content: null, components: [] }).catch(() => {});
+                    if ((memberData?.untreated ?? 0) >= 2147483647) return collector.update({ embeds: [errorEmbed(t("too_much_int", { name: t("drugs.untreated", { drugName: chosenDrug.name }, "global") }, "errors"), true)], content: null, components: [] }).catch(() => {});
 
                     const embed = new EmbedBuilder()
                         .setColor("Default")
@@ -331,7 +331,7 @@ module.exports = {
                         .setTimestamp();
 
                     const sendEmbed = await channel.send({ content: spoiler(interaction.user.toString()), embeds: [embed] }).catch(() => {});
-                    if(!sendEmbed) return collector.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
+                    if (!sendEmbed) return collector.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
 
                     await collector.update({ embeds: [successEmbed(t("harvest_started", { drugName: chosenDrug.name, link: sendEmbed.url }), true)], components: [] }).catch(() => {});
 
@@ -342,7 +342,7 @@ module.exports = {
                     client.functions.illegal.deleteIllegal(interaction.guildId, interaction.member.id);
     
                     let result = client.functions.other.randomBetween(chosenDrug.quantity_min, chosenDrug.quantity_max);
-                    if(memberData && (memberData.untreated + result) >= 2147483647) result = 2147483647 - memberData.untreated;
+                    if (memberData && (memberData.untreated + result) >= 2147483647) result = 2147483647 - memberData.untreated;
 
                     await client.db.addMemberDrug(interaction.guildId, interaction.member.id, chosenDrug.id, "untreated", result);
     
@@ -360,13 +360,13 @@ module.exports = {
 
                 case "⚗️": {
 
-                    if(suspended.has(interaction.member.id))
+                    if (suspended.has(interaction.member.id))
                         return collector.update(new EmbedBuilder().setColor("Red").setDescription(t("already_doing_without_link", false, "errors"))).catch(() => {});
 
                     _cooldownDrugs(interaction.member.id)
 
-                    if(!memberData || memberData.untreated <= 0) return collector.update({  embeds: [errorEmbed(t("no_drug_to_treat", { member: interaction.member.toString(), drugName: chosenDrug.name }), true)], components: [], }).catch(() => {});
-                    if(!memberData || memberData.untreated >= 2147483647) return collector.update({ embeds: [errorEmbed(t("too_much_int", { name: t("drugs.untreated", { drugName: chosenDrug.name }, "global") }, "errors"), true)], content: null, components: [] }).catch(() => {});
+                    if (!memberData || memberData.untreated <= 0) return collector.update({  embeds: [errorEmbed(t("no_drug_to_treat", { member: interaction.member.toString(), drugName: chosenDrug.name }), true)], components: [], }).catch(() => {});
+                    if (!memberData || memberData.untreated >= 2147483647) return collector.update({ embeds: [errorEmbed(t("too_much_int", { name: t("drugs.untreated", { drugName: chosenDrug.name }, "global") }, "errors"), true)], content: null, components: [] }).catch(() => {});
 
                     const code = Math.floor(Math.random() * 9000000000) + 1000000000
                     const modal = new ModalBuilder()
@@ -394,7 +394,7 @@ module.exports = {
                         .setTimestamp();
 
                     const sendEmbed = await channel.send({ content: spoiler(interaction.user.toString()), embeds: [embed] }).catch(() => {});
-                    if(!sendEmbed) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
+                    if (!sendEmbed) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
 
                     await modalCollector.update({ embeds: [successEmbed(t("treatment_started", { drugName: chosenDrug.name, link: sendEmbed.url }), true)], components: [] }).catch(() => {});
 
@@ -407,11 +407,11 @@ module.exports = {
                     // new check to avoid duplicate drug data
                     const _memberData = await client.db.getMemberDrugs(interaction.guildId, interaction.member.id, chosenDrug.id);
 
-                    if(!_memberData || !_memberData.untreated) return sendEmbed.edit({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
-                    if(_memberData.untreated <= 0) return sendEmbed.edit({ content: null, embeds: [errorEmbed(t("no_drug_to_treat", { member: interaction.member.toString(), drugName: chosenDrug.name }), true)] }).catch(() => {});
+                    if (!_memberData || !_memberData.untreated) return sendEmbed.edit({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
+                    if (_memberData.untreated <= 0) return sendEmbed.edit({ content: null, embeds: [errorEmbed(t("no_drug_to_treat", { member: interaction.member.toString(), drugName: chosenDrug.name }), true)] }).catch(() => {});
                     
                     let result = modalQuantity;
-                    if(_memberData.untreated + _memberData.treated >= 2147483647) result = 2147483647 - memberData.treated;
+                    if (_memberData.untreated + _memberData.treated >= 2147483647) result = 2147483647 - memberData.treated;
 
                     await client.db.addMemberDrug(interaction.guildId, interaction.member.id, chosenDrug.id, "untreated", -result);
                     await client.db.addMemberDrug(interaction.guildId, interaction.member.id, chosenDrug.id, "treated", result);
@@ -430,11 +430,11 @@ module.exports = {
 
                 case "💰": {
 
-                    if(suspended.has(interaction.member.id)) return collector.update({ embeds: [errorEmbed(t("already_doing_without_link", false, "errors"), true)] }).catch(() => {});
+                    if (suspended.has(interaction.member.id)) return collector.update({ embeds: [errorEmbed(t("already_doing_without_link", false, "errors"), true)] }).catch(() => {});
 
                     _cooldownDrugs(interaction.member.id);
 
-                    if(!memberData || memberData.treated <= 0) return collector.update({ embeds: [errorEmbed(t("no_drug_to_sell", { member: interaction.member.toString(), drugName: chosenDrug.name }), true)], components: [] }).catch(() => {});
+                    if (!memberData || memberData.treated <= 0) return collector.update({ embeds: [errorEmbed(t("no_drug_to_sell", { member: interaction.member.toString(), drugName: chosenDrug.name }), true)], components: [] }).catch(() => {});
 
                     const code = Math.floor(Math.random() * 9000000000) + 1000000000
                     const modal = new ModalBuilder()
@@ -474,8 +474,8 @@ module.exports = {
 
                     // new check to avoid duplicate drug data
                     const _memberData = await client.db.getMemberDrugs(interaction.guildId, interaction.member.id, chosenDrug.id);
-                    if(!_memberData || !parseInt(_memberData.treated) || isNaN(_memberData.treated)) return sendEmbed.edit({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
-                    if(_memberData.treated <= 0) return sendEmbed.edit({ content: null, embeds: [errorEmbed(t("no_drug_to_sell", { member: interaction.member.toString(), drugName: chosenDrug.name }), true)] }).catch(() => {});
+                    if (!_memberData || !parseInt(_memberData.treated) || isNaN(_memberData.treated)) return sendEmbed.edit({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], content: null, components: [] }).catch(() => {});
+                    if (_memberData.treated <= 0) return sendEmbed.edit({ content: null, embeds: [errorEmbed(t("no_drug_to_sell", { member: interaction.member.toString(), drugName: chosenDrug.name }), true)] }).catch(() => {});
 
                     await client.db.removeMemberDrug(interaction.guildId, interaction.member.id, chosenDrug.id, "treated", modalQuantity, _memberData.untreated <= 0 && modalQuantity == memberData.treated);
 
@@ -504,12 +504,12 @@ module.exports = {
 
             // --- START OF "AJOUTER" & "RETIRER" ---
 
-            case "ajouter": if(!(await client.functions.permissions.configModerator(interaction, "drogues ajouter"))) return;
+            case "ajouter": if (!(await client.functions.permissions.configModerator(interaction, "drogues ajouter"))) return;
             case "retirer": {
 
                 if (method === "retirer" && !(await client.functions.permissions.configModerator(interaction, "drogues retirer"))) return;
 
-                if(verify("member", { cantBotInclued: true })) return;
+                if (verify("member", { cantBotInclued: true })) return;
 
                 const member = interaction.options.getMember("joueur");
                 const own = member.user.id === interaction.user.id;
@@ -540,7 +540,7 @@ module.exports = {
             case "dépister": {
 
                 const member = interaction.options.getMember("joueur");
-                if(verify("member", { cantBotInclued: true })) return;
+                if (verify("member", { cantBotInclued: true })) return;
                 
                 const memberDrugConsumption = await client.db.getMemberDrugsConsumption(interaction.guildId, member.user.id);
                 if (!memberDrugConsumption.length) return errorEmbed(t(`consumption_${member.id === interaction.member.id ? "self" : "other"}_negative`, { member: member.toString() }), false, true, "editReply");
@@ -554,7 +554,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     },
@@ -576,7 +576,7 @@ module.exports = {
         }
         
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...drugs.sort((a, b) => a.name.localeCompare(b.name)).filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...drugs.sort((a, b) => a.name.localeCompare(b.name)).filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

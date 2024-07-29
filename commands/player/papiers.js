@@ -42,7 +42,7 @@ module.exports = {
         try {
         
         const member = interaction.options.getMember("joueur") || interaction.member;
-        if(interaction.options.getMember("joueur") && verify("member", { cantBotInclued: true })) return
+        if (interaction.options.getMember("joueur") && verify("member", { cantBotInclued: true })) return
         
         const [idCards, cg, driverLicenses, weaponLicenses] = await Promise.all([
             [await client.db.getIDCard(interaction.guildId, member.user.id), await client.db.getIDCard(interaction.guildId, member.user.id, true)],
@@ -63,7 +63,7 @@ module.exports = {
             const embed = new EmbedBuilder()
             .setColor("#5865F2")
             
-            if(!type) {
+            if (!type) {
 
                 embed.setThumbnail(member.displayAvatarURL()).setTitle(t("embed.title")).setDescription(t("embed.description"))
                 return { embeds: [embed], components: [rows], files: [], fetchReply: true }
@@ -72,7 +72,7 @@ module.exports = {
                 
                 var secondRows  = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId("wallet").setStyle(ButtonStyle.Primary).setLabel(t("buttons.wallet")))
                 
-                if(values[0] && values[1]) {
+                if (values[0] && values[1]) {
                     
                     secondRows.addComponents(
                         new ButtonBuilder().setCustomId(`previous`).setStyle(ButtonStyle.Secondary).setEmoji("◀").setDisabled(index === 0),
@@ -85,15 +85,15 @@ module.exports = {
 
                     case "id_cards": {
     
-                        if(!values[0] && values[1]) index++
+                        if (!values[0] && values[1]) index++
                         
                         const data = values[index];
-                        if(!data) return { embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] }
+                        if (!data) return { embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] }
                         
                         let theme = await client.db.getOption(interaction.guildId, "id_cards.theme");
                 
-                        if(!isPremium && theme !== "flat") {
-                            if(theme !== "flat") client.db.setOption(interaction.guildId, "id_cards.theme", "flat");
+                        if (!isPremium && theme !== "flat") {
+                            if (theme !== "flat") client.db.setOption(interaction.guildId, "id_cards.theme", "flat");
                             theme = "flat";
                         }
                         
@@ -111,10 +111,10 @@ module.exports = {
                         .printText(data.birthplace, 360, 361)
 
                         
-                        if(theme === "flat") canvas.printCircularImage(await loadImage(member.user.displayAvatarURL({ extension: "png" })), 155, 250, 90);
+                        if (theme === "flat") canvas.printCircularImage(await loadImage(member.user.displayAvatarURL({ extension: "png" })), 155, 250, 90);
                         else canvas.printImage(await loadImage(member.user.displayAvatarURL({ extension: "png" })), 0, 140, 310, 300);
                         
-                        if(data.taken == 1) canvas.printImage(await loadImage("assets/id_cards/taken.png"), 0, 0, 930, 500);
+                        if (data.taken == 1) canvas.printImage(await loadImage("assets/id_cards/taken.png"), 0, 0, 930, 500);
                         
                         const attachment = new AttachmentBuilder(await canvas.pngAsync(), { name: "paper.png" })
                         embed.setImage("attachment://paper.png")
@@ -125,7 +125,7 @@ module.exports = {
                     case "cg": {
 
                         const data = values[index];
-                        if(!data) return { embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] }
+                        if (!data) return { embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] }
 
                         const canvas = new Canvas(930, 500)
                         .printImage(await loadImage(`./assets/member_cg/${data.type}.png`), 0, 0, 930, 500)
@@ -137,8 +137,8 @@ module.exports = {
                         .printText(data.adress ?? t("cg.no_adress"), 65, 215)
                         .printText(`${t("cg.buying_date")} : ${client.dayjs(data.date).format('DD/MM/YYYY')}`, 65, 380)
                         
-                        if(data.status == 1) canvas.printImage(await loadImage(`./assets/member_cg/pound.png`), 0, 0, 930, 500)
-                        if(data.status == 2) canvas.printImage(await loadImage(`./assets/member_cg/theft.png`), 0, 0, 930, 500)
+                        if (data.status == 1) canvas.printImage(await loadImage(`./assets/member_cg/pound.png`), 0, 0, 930, 500)
+                        if (data.status == 2) canvas.printImage(await loadImage(`./assets/member_cg/theft.png`), 0, 0, 930, 500)
                         
                     
                         const attachment = new AttachmentBuilder(await canvas.pngAsync(), { name: "paper.png" })
@@ -150,11 +150,11 @@ module.exports = {
                     case "driver_license": {
                         
                         const data = values[index];
-                        if(!data) return { embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] }
+                        if (!data) return { embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] }
                         let theme = await client.db.getOption(interaction.guildId, "driver_licences.theme");
         
-                        if(!isPremium) {
-                            if(theme !== "flat") await client.db.setOption(interaction.guildId, "driver_licences.theme", "flat");
+                        if (!isPremium) {
+                            if (theme !== "flat") await client.db.setOption(interaction.guildId, "driver_licences.theme", "flat");
                             theme = "flat";
                         }
                         
@@ -223,13 +223,13 @@ module.exports = {
                     case "weapon_license": {
 
                         const data = values[index];
-                        if(!data) return { embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] }
+                        if (!data) return { embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], files: [] }
                         const idData = idCards[0];
         
                         let theme = await client.db.getOption(interaction.guildId, "weapon_licences.theme");
 
-                        if(!isPremium) {
-                            if(theme !== "flat") client.db.setOption(interaction.guildId, "weapon_licences.theme", "flat");
+                        if (!isPremium) {
+                            if (theme !== "flat") client.db.setOption(interaction.guildId, "weapon_licences.theme", "flat");
                             theme = "flat";
                         }
 
@@ -244,7 +244,7 @@ module.exports = {
                                 .printText(t(`weapon_license.types.${data.type}`), 525, 290)
                                 .printText(client.dayjs(data.date).format("DD/MM/YYYY"), 525, 385)
                                 
-                                if(idData) canvas.setTextFont("35px Poppins-B").printText(`${idData.last_name} ${idData.first_name}`, 425, 177.5)
+                                if (idData) canvas.setTextFont("35px Poppins-B").printText(`${idData.last_name} ${idData.first_name}`, 425, 177.5)
                                 break;
 
                             }
@@ -292,7 +292,7 @@ module.exports = {
 
                         }
                         
-                        if(theme === "flat") canvas.printCircularImage(await loadImage(member.user.displayAvatarURL({ extension: "png" })), 170, 300, 110);
+                        if (theme === "flat") canvas.printCircularImage(await loadImage(member.user.displayAvatarURL({ extension: "png" })), 170, 300, 110);
                         
                         const attachment = new AttachmentBuilder(await canvas.pngAsync(), { name: "paper.png" })
                         embed.setImage("attachment://paper.png")
@@ -307,15 +307,15 @@ module.exports = {
         }
 
         const message = await interaction.reply(await render(null, null, 0)).catch(() => {});
-        if(!message) return;
+        if (!message) return;
 
         const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.member.id, time: 90000, components: []});
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         let current = 0, type = null, index = null;
         collector.on("collect", async (i) => {
 
-            if(!["next", "previous"].includes(i.customId) && index !== i.customId) current = 0;
+            if (!["next", "previous"].includes(i.customId) && index !== i.customId) current = 0;
             index = i.customId == "wallet" ? null : ["previous", "next"].includes(i.customId) ? index : i.customId;
 
             switch(i.customId) {
@@ -343,7 +343,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

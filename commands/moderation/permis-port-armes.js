@@ -124,15 +124,15 @@ module.exports = {
         const method = interaction.options.getSubcommand();
         const member = interaction.options.getMember("joueur") || interaction.member;
         const own = member.id === interaction.member.id;
-        if(verify("member", { cantBotInclued: true })) return;
-        if(!(await client.db.hasIDCard(interaction.guildId, member.user.id))) return errorEmbed(own ? t("idcard_user", false, "errors") : t("idcard_member", { member: member.toString() }, "errors"));
+        if (verify("member", { cantBotInclued: true })) return;
+        if (!(await client.db.hasIDCard(interaction.guildId, member.user.id))) return errorEmbed(own ? t("idcard_user", false, "errors") : t("idcard_member", { member: member.toString() }, "errors"));
 
         const licenses = await client.db.getWeaponLicense(interaction.guildId, member.id);
-        if(method === "créer" && ['light', 'heavy', 'cold'].every(type => licenses.some(obj => obj.type === type))) return errorEmbed(own ? t("self_already_all") : t("user_already_all", { member: member.toString() }));
-        if(method === "supprimer" && licenses.length === 0) return errorEmbed(own ? t("self_no_licenses") : t("user_no_licenses", { member: member.toString() }));
+        if (method === "créer" && ['light', 'heavy', 'cold'].every(type => licenses.some(obj => obj.type === type))) return errorEmbed(own ? t("self_already_all") : t("user_already_all", { member: member.toString() }));
+        if (method === "supprimer" && licenses.length === 0) return errorEmbed(own ? t("self_no_licenses") : t("user_no_licenses", { member: member.toString() }));
 
         const type = await client.functions.userinput.askPPAType(interaction, method === "créer" ? weaponTypes.filter(obj => !licenses.some(obj2 => obj2.type === obj.value)) : weaponTypes.filter(obj => licenses.some(obj2 => obj2.type === obj.value)));
-        if(!type) return;
+        if (!type) return;
 
         const weapon = t(`weaponTypes.${type}`);
         
@@ -162,7 +162,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

@@ -36,12 +36,12 @@ module.exports = {
 
         try {
 
-        if(!(interaction.options.getString("nom") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "nom" : "name" }, "errors"));
+        if (!(interaction.options.getString("nom") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "nom" : "name" }, "errors"));
         
         await interaction.deferReply().catch(() => {});
         
         const property = await client.db.getProperty(interaction.guildId, interaction.options.getString("nom").split("&#46;")[1]);
-        if(!property) return errorEmbed(t("error_occurred", { links: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!property) return errorEmbed(t("error_occurred", { links: client.constants.links.support }, "errors"), false, true, "editReply");
 
         const idCards = [await client.db.getIDCard(interaction.guildId, interaction.member.id), await client.db.getIDCard(interaction.guildId, interaction.member.id, true)]
         const idCard = (idCards[0] ?? idCards[1]) ?? null;
@@ -104,7 +104,7 @@ module.exports = {
             const memberInventory = (await client.db.getMemberItems(interaction.guildId, interaction.member.id)).map(i => ({ name: i.name, type: "items", quantity: i.quantity, id: i.id }) )
             const memberDrugs = []
             for (const drug of (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id))) {
-                ["untreated", "treated"].forEach(type => { if(drug[type] > 0) memberDrugs.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], id: drug.drug_id })  })
+                ["untreated", "treated"].forEach(type => { if (drug[type] > 0) memberDrugs.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], id: drug.drug_id })  })
             }
             const { bank_money, hidden_cash_money, hidden_dirty_money, ...memberMoney } = await client.db.getMoney(interaction.guildId, interaction.member.id);
             const memberAll = [...Object.keys(memberMoney).filter(k => memberMoney[k] > 0).map(k => ({ name: t(k), type: k, quantity: memberMoney[k], id: k })), ...memberDrugs, ...memberInventory]
@@ -114,25 +114,25 @@ module.exports = {
 
             const safe = []
             const { money, dirty_money } = await client.db.getProperty(interaction.guildId, property.id);
-            if(money > 0) safe.push({ name: lang == "fr" ? "Argent liquide" : "Cash", type: "cash_money", quantity: money, id: "cash_money" })
-            if(dirty_money > 0) safe.push({ name: lang == "fr" ? "Argent sale" : "Dirty money", type: "dirty_money", quantity: dirty_money, id: "dirty_money" })
+            if (money > 0) safe.push({ name: lang == "fr" ? "Argent liquide" : "Cash", type: "cash_money", quantity: money, id: "cash_money" })
+            if (dirty_money > 0) safe.push({ name: lang == "fr" ? "Argent sale" : "Dirty money", type: "dirty_money", quantity: dirty_money, id: "dirty_money" })
             
             const safeDrugs = await client.db.getSafeProperty(property.id, true)
-            for (const drug of safeDrugs) ["untreated", "treated"].forEach(type => { if(drug[type] > 0) safe.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], id: drug.drug_id })  })
+            for (const drug of safeDrugs) ["untreated", "treated"].forEach(type => { if (drug[type] > 0) safe.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], id: drug.drug_id })  })
 
-            if(propertyInventory.length > 0) safe.push(...(propertyInventory.map(i => ({ name: i.name, type: "items", quantity: i.quantity, id: i.id }) )))
+            if (propertyInventory.length > 0) safe.push(...(propertyInventory.map(i => ({ name: i.name, type: "items", quantity: i.quantity, id: i.id }) )))
 
             const safeChunks = client.functions.other.chunkArray(safe, 7)
             const chunks = client.functions.other.chunkArray(customId.includes("deposit") ? memberAll : safe, customId.includes("deposit") ? 22 : 7)
             
-            if(safeChunks[index]?.length == 7 && customId.includes("deposit")) index++;
+            if (safeChunks[index]?.length == 7 && customId.includes("deposit")) index++;
             
-            if(!chunks || !chunks[0] || !chunks.length) display.splice(0, (customId.includes("deposit") ? memberAll.length : safe.length) + display.length)
+            if (!chunks || !chunks[0] || !chunks.length) display.splice(0, (customId.includes("deposit") ? memberAll.length : safe.length) + display.length)
             else display.push(...chunks[(customId.includes("deposit") ? indexSM : index)])
 
-            if(chunks.length > 1) {
-                if((customId.includes("deposit") ? indexSM : index) !== 0) display.push({ name: `${code}&#46;${t("words.previous", false, "global")}&#46;previous`, quantity: 0, type: "larrow" })
-                if((customId.includes("deposit") ? indexSM : index) + 1 !== chunks.length) display.push({ name: `${code}&#46;${t("words.next", false, "global")}&#46;next`, quantity: 0, type: "rarrow" })
+            if (chunks.length > 1) {
+                if ((customId.includes("deposit") ? indexSM : index) !== 0) display.push({ name: `${code}&#46;${t("words.previous", false, "global")}&#46;previous`, quantity: 0, type: "larrow" })
+                if ((customId.includes("deposit") ? indexSM : index) + 1 !== chunks.length) display.push({ name: `${code}&#46;${t("words.next", false, "global")}&#46;next`, quantity: 0, type: "rarrow" })
             }
 
             const embed = new EmbedBuilder()
@@ -141,9 +141,9 @@ module.exports = {
             .setTitle(t("modal.safe"))
             .setDescription(!safeChunks[index] ? t("no_items") : safeChunks[index].map(i => `[${separate(i.quantity)}${i.type.endsWith("_money") ? economySymbol : i.type.startsWith("drugs") ? "g" : ""}] ・ ${i.name}`).join("\n"))
             
-            if(displaySM) {
+            if (displaySM) {
 
-                if(display.length > 0) {
+                if (display.length > 0) {
 
                     var sm = new ActionRowBuilder().addComponents(
                         new StringSelectMenuBuilder()
@@ -156,7 +156,7 @@ module.exports = {
 
                 } else displaySM = false;
 
-            } else if(safeChunks.length > 1) {
+            } else if (safeChunks.length > 1) {
                 
                 embed.setFooter({ text: `${index + 1}/${safeChunks.length}` });
                 var changeEmbedRow = new ActionRowBuilder().addComponents(
@@ -182,15 +182,15 @@ module.exports = {
         }
         
         const message = await interaction.editReply({ embeds: [embed], components: [rows] }).catch(() => {})
-        if(!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         const collector = message.createMessageComponentCollector({ time: 180000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         let current = 0, currentSM = 0, currentKeys = 0, price;
         collector.on("collect", async i => {
 
-            if(![`confirm-sell`, `cancel-sell`, "selled"].includes(i.customId) && i.user.id !== interaction.member.id) return i.reply({ embeds: [errorEmbed(t("not_your_interaction", { member: i.member.toString() }, "errors"), true)], ephemeral: true });
+            if (![`confirm-sell`, `cancel-sell`, "selled"].includes(i.customId) && i.user.id !== interaction.member.id) return i.reply({ embeds: [errorEmbed(t("not_your_interaction", { member: i.member.toString() }, "errors"), true)], ephemeral: true });
 
             switch(i.customId) {
 
@@ -241,12 +241,12 @@ module.exports = {
                 case "sm_withdraw": {   
 
                     const item = i.values[0].split("&#46;")
-                    if(!item) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] });
+                    if (!item) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] });
 
-                    if(item[2].startsWith(`${code}`)) {
-                        if(item[4].endsWith("safe")) return i.update(await safeEmbed(i.customId, current, currentSM));
-                        if(item[4].endsWith("next")) i.customId == "sm_deposit" ? currentSM++ : current++;
-                        else if(item[4].endsWith("previous")) i.customId == "sm_deposit" ? currentSM-- : current--;
+                    if (item[2].startsWith(`${code}`)) {
+                        if (item[4].endsWith("safe")) return i.update(await safeEmbed(i.customId, current, currentSM));
+                        if (item[4].endsWith("next")) i.customId == "sm_deposit" ? currentSM++ : current++;
+                        else if (item[4].endsWith("previous")) i.customId == "sm_deposit" ? currentSM-- : current--;
                         
                         await i.update(await safeEmbed(i.customId, current, currentSM, true))
                         break;
@@ -258,7 +258,7 @@ module.exports = {
                     const itemQuantity = item[itemType.endsWith("_money") ? 2 : itemType.startsWith("drugs") ? 4 : 3];
 
                     let modalCollector = { fields: { getTextInputValue: () => itemQuantity }, update: (...args) => i.update(...args) };
-                    if(itemQuantity > 1) {
+                    if (itemQuantity > 1) {
 
                         const code = Math.floor(Math.random() * 9000000000) + 1000000000
                         const modal = new ModalBuilder()
@@ -270,7 +270,7 @@ module.exports = {
                         
                         await i.showModal(modal).catch(() => {});
                         modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id === i.user.id && ii.customId == `modal_property_dw_${code}`, time: 60000 })
-                        if(!modalCollector) return;
+                        if (!modalCollector) return;
 
                     }
 
@@ -286,13 +286,13 @@ module.exports = {
                             const newMemberAccount = await client.db.getMoney(interaction.guildId, i.user.id);
                             const newQuantity = (i.customId == "sm_deposit" ? newMemberAccount : newPropertySafeMoney)[i.customId == "sm_deposit" ? itemType : itemType.replace("cash_", "")]
                            
-                            if(!amount || isNaN(amount) || !newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
-                            if(amount > newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_money2", { quantity: separate(itemQuantity), symbol: economySymbol }), true)], components: []}).catch(() => {});
-                            if(amount + newQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: item[1] }, "errors"), true)], components: [] }).catch(() => {})
+                            if (!amount || isNaN(amount) || !newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
+                            if (amount > newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_money2", { quantity: separate(itemQuantity), symbol: economySymbol }), true)], components: []}).catch(() => {});
+                            if (amount + newQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: item[1] }, "errors"), true)], components: [] }).catch(() => {})
 
                             await client.db[`${i.customId == "sm_withdraw" ? "remove" : "add"}PlaceMoney`](interaction.guildId, "estates", property.id, itemType == "cash_money" ? "money" : itemType, amount);
                             
-                            if(itemType == "cash_money") await client.db.addMoney(interaction.guildId, i.user.id, `cash_money`, i.customId == "sm_withdraw" ? amount : -amount);
+                            if (itemType == "cash_money") await client.db.addMoney(interaction.guildId, i.user.id, `cash_money`, i.customId == "sm_withdraw" ? amount : -amount);
                             else await client.db.addDirtyMoney(interaction.guildId, i.user.id, i.customId == "sm_withdraw" ? amount : -amount);
 
                             return modalCollector.update(await safeEmbed(i.customId, current, currentSM, true))
@@ -307,13 +307,13 @@ module.exports = {
                             let amount = null;
 
                             let quantity, type = null;
-                            if(itemType == "items") {
+                            if (itemType == "items") {
                                 
                                 const newMemberInventory = await client.db.getMemberItems(interaction.guildId, i.user.id);
                                 const newPropertyInventory = await client.db.getSafeProperty(property.id);
 
                                 var findItem = i.customId == "sm_withdraw" ? newPropertyInventory.find(i => i.name.toLowerCase() == itemName.toLowerCase()) : newMemberInventory.find(i => i.name.toLowerCase() == itemName.toLowerCase());
-                                if(!findItem) return modalCollector.reply({ embeds: [errorEmbed(t("item_not_found", { item: itemName }), true)], components: [] })
+                                if (!findItem) return modalCollector.reply({ embeds: [errorEmbed(t("item_not_found", { item: itemName }), true)], components: [] })
                                 
                                 var { name, hidden_quantity, weight, role_add, role_remove, role_required } = findItem;
                                 quantity = findItem.quantity
@@ -322,17 +322,17 @@ module.exports = {
                                 const maxWeight = await client.db.getOption(interaction.guildId, "inventory.max_weight");
                                 const inventoryWeight = newMemberInventory.reduce((a, b) => a + (b.weight * b.quantity), 0) + newMemberDrugs.reduce((a, b) => a + ((b?.untreated ?? 0) + (b?.treated ?? 0)), 0);
             
-                                if(i.customId == "sm_withdraw" && maxWeight && inventoryWeight + weight > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", { item: name }, "errors"), true)], components: [] }).catch(() => {})
-                                if(i.customId == "sm_withdraw" && role_add && isPremium) await interaction.member.roles.add(role_add).catch(() => errorEmbed(t("cant_give_role", { role: role_add.toString() }, "errors"), false, false, "update", modalCollector))
-                                if(i.customId == "sm_deposit" && role_add && quantity === amount && isPremium) await interaction.member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors"), false, false, "update", modalCollector))
-                                if(i.customId == "sm_deposit" && role_remove && isPremium) await interaction.member.roles.remove(role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: role_remove.toString() }, "errors"), false, false, "update", modalCollector))
+                                if (i.customId == "sm_withdraw" && maxWeight && inventoryWeight + weight > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", { item: name }, "errors"), true)], components: [] }).catch(() => {})
+                                if (i.customId == "sm_withdraw" && role_add && isPremium) await interaction.member.roles.add(role_add).catch(() => errorEmbed(t("cant_give_role", { role: role_add.toString() }, "errors"), false, false, "update", modalCollector))
+                                if (i.customId == "sm_deposit" && role_add && quantity === amount && isPremium) await interaction.member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors"), false, false, "update", modalCollector))
+                                if (i.customId == "sm_deposit" && role_remove && isPremium) await interaction.member.roles.remove(role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: role_remove.toString() }, "errors"), false, false, "update", modalCollector))
         
                             } else {
 
                                 const newSafeDrugs = await client.db.getSafeProperty(property.id, true);
 
                                 var drug = i.customId == "sm_withdraw" ? newSafeDrugs.find(d => d.drug_id == itemId) : newMemberDrugs.find(d => d.drug_id == itemId);
-                                if(!drug) return modalCollector.reply({ embeds: [errorEmbed(t("drug_not_found", { drug: itemName }), true)], components: [], files: [] })
+                                if (!drug) return modalCollector.reply({ embeds: [errorEmbed(t("drug_not_found", { drug: itemName }), true)], components: [], files: [] })
 
                                 type = item[1];
                                 var otherType = type == "untreated" ? "treated" : "untreated"
@@ -342,9 +342,9 @@ module.exports = {
                             }
 
 
-                            if(!amount || isNaN(amount) || !quantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
-                            if(amount > quantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_item", { quantity: (quantity).toLocaleString(lang), item: itemType == "items" ? name : drug.name }), true)], components: [] }).catch(() => {})
-                            if(amount + quantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: itemType == "items" ? name : drug.name }, "errors"), true)], components: [] }).catch(() => {})
+                            if (!amount || isNaN(amount) || !quantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
+                            if (amount > quantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_item", { quantity: (quantity).toLocaleString(lang), item: itemType == "items" ? name : drug.name }), true)], components: [] }).catch(() => {})
+                            if (amount + quantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: itemType == "items" ? name : drug.name }, "errors"), true)], components: [] }).catch(() => {})
 
                             await client.db[`${i.customId.replace("sm_", "")}Item`](
                                 interaction.guildId,
@@ -391,9 +391,9 @@ module.exports = {
                         const chunks = client.functions.other.chunkArray(authorized_members?.split(",") ?? [], 10);
 
                         const rows = new ActionRowBuilder()
-                        if(chunks?.length > 1) {
-                            if(current !== 0) display.push({ label: t("words.previous", false, "global"), value: `${code}&#46;previous`, emoji: client.constants.emojis.larrow })
-                            if(current + 1 !== chunks.length) display.push({ label: t("words.next", false, "global"), value: `${code}&#46;next`, emoji: client.constants.emojis.rarrow })
+                        if (chunks?.length > 1) {
+                            if (current !== 0) display.push({ label: t("words.previous", false, "global"), value: `${code}&#46;previous`, emoji: client.constants.emojis.larrow })
+                            if (current + 1 !== chunks.length) display.push({ label: t("words.next", false, "global"), value: `${code}&#46;next`, emoji: client.constants.emojis.rarrow })
 
                             rows.addComponents(
                                 new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId(`dk-previous`).setEmoji("◀").setDisabled(current === 0),
@@ -403,8 +403,8 @@ module.exports = {
 
                         const members = (await Promise.all((chunks[current] ?? []).map(async (memberId) => {
                             const id = [await client.db.getIDCard(interaction.guildId, memberId), await client.db.getIDCard(interaction.guildId, memberId, true)];
-                            if(id[0]) return { label: `- ${id[0].first_name} ${id[0].last_name} (<@${memberId}>)`, value: memberId }
-                            if(id[1]) return { label: `- ${id[1].first_name} ${id[1].last_name} (<@${memberId}>)`, value: memberId }
+                            if (id[0]) return { label: `- ${id[0].first_name} ${id[0].last_name} (<@${memberId}>)`, value: memberId }
+                            if (id[1]) return { label: `- ${id[1].first_name} ${id[1].last_name} (<@${memberId}>)`, value: memberId }
                             else return { label: `- <@${memberId}>`, value: memberId }
                         })))
                         display.push(...members)
@@ -413,13 +413,13 @@ module.exports = {
                         .setColor(3092790)
                         .setTitle(t("embed.double_keys"))
                         .setDescription(!members.length ? t("no_authorized_members") : members.map(m => m.label).join("\n\n"))
-                        if(chunks?.length > 1) dkEmbed.setFooter({ text: `${current + 1}/${chunks.length}` })
+                        if (chunks?.length > 1) dkEmbed.setFooter({ text: `${current + 1}/${chunks.length}` })
 
                         const sm = new ActionRowBuilder()
-                        if(["add", "remove", "sm_add", "sm_remove"].includes(customId)) {
-                            if(customId.includes("add")) sm.addComponents(new UserSelectMenuBuilder().setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`).setPlaceholder(t("modal.add")))
+                        if (["add", "remove", "sm_add", "sm_remove"].includes(customId)) {
+                            if (customId.includes("add")) sm.addComponents(new UserSelectMenuBuilder().setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`).setPlaceholder(t("modal.add")))
                             else sm.addComponents(new StringSelectMenuBuilder().setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`).setPlaceholder(t("modal.remove")).setOptions(display.map(m => {
-                                if(m.value.startsWith(`${code}`)) return { label: m.label, value: m.value, emoji: m.emoji ?? client.constants.emojis[m.value.split("&#46;")[1]] }
+                                if (m.value.startsWith(`${code}`)) return { label: m.label, value: m.value, emoji: m.emoji ?? client.constants.emojis[m.value.split("&#46;")[1]] }
                                 else return { label: m.label.match(/- (.+?) \(.+?\)/)?.[1] ?? interaction.guild.members.cache.get(m.value)?.displayName ?? t("unkown"), value: m.value, emoji: "👤" }
                             })))
                         }
@@ -428,18 +428,18 @@ module.exports = {
     
                     }
 
-                    if(i.customId.startsWith("dk")) {
-                        if(i.customId == "dk-next") currentKeys++
-                        if(i.customId == "dk-previous") currentKeys--
+                    if (i.customId.startsWith("dk")) {
+                        if (i.customId == "dk-next") currentKeys++
+                        if (i.customId == "dk-previous") currentKeys--
                         return i.update(await dkEmbed(i.customId, currentKeys, true))
                     }
-                    if(!i.customId.startsWith("sm_")) return i.update(await dkEmbed(i.customId, currentKeys, i.customId == "double_keys"))
+                    if (!i.customId.startsWith("sm_")) return i.update(await dkEmbed(i.customId, currentKeys, i.customId == "double_keys"))
                     
                     const value = i.values[0].split("&#46;")
-                    if(value[0].startsWith(`${code}`)) {
-                        if(value[1].includes("next")) currentKeys++
-                        else if(value[1].includes("previous")) currentKeys--
-                        else if(value[1].includes("keys")) return i.update(await dkEmbed(i.customId, currentKeys, true))
+                    if (value[0].startsWith(`${code}`)) {
+                        if (value[1].includes("next")) currentKeys++
+                        else if (value[1].includes("previous")) currentKeys--
+                        else if (value[1].includes("keys")) return i.update(await dkEmbed(i.customId, currentKeys, true))
 
                         return i.update(await dkEmbed(i.customId, currentKeys))
                     }
@@ -448,12 +448,12 @@ module.exports = {
                     let name = `<@${memberId}>`
 
                     const idCard = [await client.db.getIDCard(interaction.guildId, memberId), await client.db.getIDCard(interaction.guildId, memberId, true)];
-                    if(idCard[1]) name = `${idCard[1].first_name} ${idCard[1].last_name} (<@${memberId}>)`
-                    if(idCard[0]) name = `${idCard[0].first_name} ${idCard[0].last_name} (<@${memberId}>)`
+                    if (idCard[1]) name = `${idCard[1].first_name} ${idCard[1].last_name} (<@${memberId}>)`
+                    if (idCard[0]) name = `${idCard[0].first_name} ${idCard[0].last_name} (<@${memberId}>)`
                     
                     const { authorized_members } = await client.db.getProperty(interaction.guildId, property.id);
-                    if(memberId == i.user.id) return i.update({ embeds: [errorEmbed(t("cant_double_keys_yourself"), true)], components: [] }).catch(() => {})
-                    if(i.customId.includes("add") && authorized_members?.split(",").includes(memberId)) return i.update({ embeds: [errorEmbed(t("already_authorized", { memberName: name }), true)], components: [] }).catch(() => {})
+                    if (memberId == i.user.id) return i.update({ embeds: [errorEmbed(t("cant_double_keys_yourself"), true)], components: [] }).catch(() => {})
+                    if (i.customId.includes("add") && authorized_members?.split(",").includes(memberId)) return i.update({ embeds: [errorEmbed(t("already_authorized", { memberName: name }), true)], components: [] }).catch(() => {})
 
                     await client.db.setDoubleKeys(interaction.guildId, property.id, "estates", i.customId.includes("add") ? `${authorized_members ? `${authorized_members},` : ""}${memberId}` : authorized_members.replace(`,${memberId}`, "").replace(`${memberId},`, "").replace(`${memberId}`, ""));
                     return i.update({ embeds: [successEmbed(t(`double_keys_${i.customId.replace("sm_", "")}ed`, { name: property.name, memberName: name }), true)], components: [] }).catch(() => {})
@@ -472,9 +472,9 @@ module.exports = {
                     
                     const realEstateAgentsLength = ((await interaction.guild.roles.fetch(realEstateAgentRole))?.members)?.size
                     const realEstateAgents = await client.db.getCompanyEmployees(realEstateCompany?.id);
-                    if(realEstateAgentsLength + realEstateAgents.length <= 0) return i.update({ embeds: [errorEmbed(t("no_real_estate_agent", { link: client.constants.links.dashboard }), true)], components: []}).catch(() => {})
+                    if (realEstateAgentsLength + realEstateAgents.length <= 0) return i.update({ embeds: [errorEmbed(t("no_real_estate_agent", { link: client.constants.links.dashboard }), true)], components: []}).catch(() => {})
 
-                    if(i.customId !== 'selled' && property.owner_id !== i.user.id) return i.reply({ embeds: [errorEmbed(t("not_your_property"), true)], components: [], ephemeral: true }).catch(() => {});
+                    if (i.customId !== 'selled' && property.owner_id !== i.user.id) return i.reply({ embeds: [errorEmbed(t("not_your_property"), true)], components: [], ephemeral: true }).catch(() => {});
                 
                     switch(i.customId) {
 
@@ -500,8 +500,8 @@ module.exports = {
                             const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id === i.user.id && ii.customId == `modal_property_sell_${code}`, time: 60000 })
     
                             price = parseInt(modalCollector.fields.getTextInputValue("price"));
-                            if(!price || isNaN(price)) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
-                            if(price >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: property.name }, "errors"), true)], components: [] }).catch(() => {})
+                            if (!price || isNaN(price)) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
+                            if (price >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: property.name }, "errors"), true)], components: [] }).catch(() => {})
     
                             const embed = new EmbedBuilder().setColor("Green").setDescription(`${client.constants.emojis.reussi} ${t("confirm_sell", { name: property.name, price: separate(price), symbol: economySymbol })}`);
                             const rows = new ActionRowBuilder().addComponents(
@@ -535,13 +535,13 @@ module.exports = {
 
                         case `selled`: {
 
-                            if(realEstateCompany && isPremium) {
-                                if(realEstateCompany.money + price >= 2147483647) return i.update({ embeds: [errorEmbed(t("int_passing", { name: property.name }, "errors"), true)], components: [] }).catch(() => {})
-                                if(realEstateCompany.money < price) return i.update({ embeds: [errorEmbed(t("not_enough_money", { money: separate(realEstateCompany.money), symbol: economySymbol }), true)], components: [] }).catch(() => {})
+                            if (realEstateCompany && isPremium) {
+                                if (realEstateCompany.money + price >= 2147483647) return i.update({ embeds: [errorEmbed(t("int_passing", { name: property.name }, "errors"), true)], components: [] }).catch(() => {})
+                                if (realEstateCompany.money < price) return i.update({ embeds: [errorEmbed(t("not_enough_money", { money: separate(realEstateCompany.money), symbol: economySymbol }), true)], components: [] }).catch(() => {})
                             }
                             
                             const employees = await client.db.getCompanyEmployees(realEstateCompany?.id);
-                            if(!employees.find(({ user_id }) => user_id == i.user.id) && !i.member.roles.cache.has(realEstateAgentRole)) return i.reply({ embeds: [errorEmbed(t("eastes_missing_permission", { member: i.member.toString() }, "errors"), true)], ephemeral: true });
+                            if (!employees.find(({ user_id }) => user_id == i.user.id) && !i.member.roles.cache.has(realEstateAgentRole)) return i.reply({ embeds: [errorEmbed(t("eastes_missing_permission", { member: i.member.toString() }, "errors"), true)], ephemeral: true });
                             
                             await client.db.sellProperty(interaction.guildId, property.id, i.user.id, price, realEstateCompany && isPremium ? realEstateCompany.id : null, lang == "fr" ? `Achat de ${property.name}` : `Buy of ${property.name}`, lang == "fr" ? `Vente de ${property.name}` : `Sale of ${property.name}`);
                             return i.update({ embeds: [successEmbed(t("selled", { name: property.name, price: separate(price), symbol: economySymbol }), true)], components: [] }).catch(() => {})
@@ -566,7 +566,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 
@@ -578,7 +578,7 @@ module.exports = {
         const response = (await client.db.getMemberProperties(interaction.guildId, interaction.member.id)).sort((a, b) => a.name.localeCompare(b.name))
         
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...response.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

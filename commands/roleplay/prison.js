@@ -88,7 +88,7 @@ module.exports = {
         const method = interaction.options.getSubcommand();
         const member = interaction.options.getMember("joueur");
 
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
 
         const cityName = (await client.db.getOption(interaction.guildId, "global.city_name")) || interaction.guild.name;
         const embed = new EmbedBuilder().setTitle(t("prison_embed.author", { city: cityName }))
@@ -118,7 +118,7 @@ module.exports = {
         
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

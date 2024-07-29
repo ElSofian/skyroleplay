@@ -39,7 +39,7 @@ module.exports = {
         await interaction?.deferReply().catch(() => {});
 
         const member = interaction.options.getMember("joueur") || interaction.member;
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
         const own = member.id === interaction.user.id;
         
         const [inventory, getID, getFakeID, driverLicence, weaponLicence, licensePlate, cash_money, memberDM, drugs, properties, vehicles, max_weight] = await Promise.all([
@@ -59,28 +59,28 @@ module.exports = {
 
         const items = [];
         const ids = [getID, getFakeID].filter((id) => id && id.hidden == 0).length;
-        if(ids) items.push({ name: t("identity_card", { s: ids > 1 ? "s" : "" }), quantity: `x${ids}`, image: "citizen-card" });
+        if (ids) items.push({ name: t("identity_card", { s: ids > 1 ? "s" : "" }), quantity: `x${ids}`, image: "citizen-card" });
 
         const validDriverLicence = driverLicence.filter((lic) => lic.status === 1);
         const validWeaponLicence = weaponLicence.filter((lic) => lic.status === 1);
         const validLicensePlate = licensePlate.filter((lic) => lic.status === 0);
 
-        if(validDriverLicence.length) items.push({ name: t("driver_licence", { s: validDriverLicence.length > 1 ? "s" : "" }), quantity: `x${validDriverLicence.length}`, image: "bank-card", weight: 0 });
-        if(validWeaponLicence.length) items.push({ name: t("weapon_licence", { s: validWeaponLicence.length > 1 ? "s" : "" }), quantity: `x${validWeaponLicence.length}`, image: "certificate", weight: 0 });
-        if(validLicensePlate.length) items.push({ name: t("license_plate", { s: validLicensePlate.length > 1 ? "s" : "" }), quantity: `x${validLicensePlate.length}`, image: "license-plate", weight: 0 });
+        if (validDriverLicence.length) items.push({ name: t("driver_licence", { s: validDriverLicence.length > 1 ? "s" : "" }), quantity: `x${validDriverLicence.length}`, image: "bank-card", weight: 0 });
+        if (validWeaponLicence.length) items.push({ name: t("weapon_licence", { s: validWeaponLicence.length > 1 ? "s" : "" }), quantity: `x${validWeaponLicence.length}`, image: "certificate", weight: 0 });
+        if (validLicensePlate.length) items.push({ name: t("license_plate", { s: validLicensePlate.length > 1 ? "s" : "" }), quantity: `x${validLicensePlate.length}`, image: "license-plate", weight: 0 });
         
-        for (const drug of drugs) ["untreated", "treated"].forEach(type => { if(drug[type] > 0) items.push({ name: t(type, { drugName: drug.name }), quantity: drug[type] >= 1000 ? `${(drug[type] / 1000).toLocaleString(lang)}kg` : `${(drug[type]).toLocaleString(lang)}g`, image: drug.image, weight: 0 }) })
+        for (const drug of drugs) ["untreated", "treated"].forEach(type => { if (drug[type] > 0) items.push({ name: t(type, { drugName: drug.name }), quantity: drug[type] >= 1000 ? `${(drug[type] / 1000).toLocaleString(lang)}kg` : `${(drug[type]).toLocaleString(lang)}g`, image: drug.image, weight: 0 }) })
         
         for(const property of properties) items.push({ name: `${t("words.key", false, "global")} ${property.name}`, quantity: `x1`, image: "key", weight: 0 });
         for(const vehicle of vehicles) items.push({ name: `${t("words.key", false, "global")} ${vehicle.vehicule_name}`, quantity: `x1`, image: "key", weight: 0 })
 
-        for (let { name, quantity, weight, image } of inventory.sort((a, b) => a.name.localeCompare(b.name))) if(quantity > 0) items.push({ name: name, quantity: `x${quantity.toLocaleString(lang)}`, image: image, weight: weight });
+        for (let { name, quantity, weight, image } of inventory.sort((a, b) => a.name.localeCompare(b.name))) if (quantity > 0) items.push({ name: name, quantity: `x${quantity.toLocaleString(lang)}`, image: image, weight: weight });
         const weight = inventory.reduce((acc, val) => acc + (val.weight * val.quantity), 0) + drugs.reduce((acc, val) => acc + ((val?.untreated ?? 0) + (val?.treated ?? 0)), 0);
 
         const embed = new EmbedBuilder()
         .setColor(member.displayColor ?? "#ffffff")
         
-        if(!own) embed.setAuthor({ name: t("main_embed.title", { name: getID ? `${getID.first_name} ${getID.last_name}` : member.displayName }), iconURL: member.displayAvatarURL({ dynamic: true }) })
+        if (!own) embed.setAuthor({ name: t("main_embed.title", { name: getID ? `${getID.first_name} ${getID.last_name}` : member.displayName }), iconURL: member.displayAvatarURL({ dynamic: true }) })
 
         let pages = items.reduce((acc, val, i) => {
             if (i % 16 === 0) acc.push([val]);
@@ -114,7 +114,7 @@ module.exports = {
             .printText(!isNaN(max_weight) ? `/ ${max_weight / 1000 >= 1 ? `${max_weight / 1000}kg` : `${max_weight}g`}` : "", 587.5, 75)
             .printText(`item${chunkItems?.length > 1 ? "s" : ""}`, `${chunkItems?.length ?? 0}`.length > 2 ? 835 : 815, 75)
 
-            if(chunkItems?.length > 0) {
+            if (chunkItems?.length > 0) {
             
                 for(let itemData of chunkItems) {
                     let { x, y, val: item } = itemData;
@@ -123,8 +123,8 @@ module.exports = {
                     .printWrappedText(item.name, x+5, y+25, 240)
                     .setColor("#ffffff")
                     .printText(item.quantity, x+5, y+95)
-                    if(item.weight > 0) canvas.setColor("#929399").printText(`${item.weight / 1000 >= 1 ? `${item.weight / 1000}kg` : `${item.weight}g`}`, x+5, y+70)
-                    if(item?.image && item?.image !== "empty") canvas.printImage(await loadImage(`assets/inventory/items_icones/${item.image}.png`), x+145, y+22.5, 80, 80)
+                    if (item.weight > 0) canvas.setColor("#929399").printText(`${item.weight / 1000 >= 1 ? `${item.weight / 1000}kg` : `${item.weight}g`}`, x+5, y+70)
+                    if (item?.image && item?.image !== "empty") canvas.printImage(await loadImage(`assets/inventory/items_icones/${item.image}.png`), x+145, y+22.5, 80, 80)
                 }
 
             }
@@ -132,7 +132,7 @@ module.exports = {
             const attachment = new AttachmentBuilder(await canvas.pngAsync(), { name: "inventory.png" })
             embed.setImage("attachment://inventory.png")
 
-            if(total > 1) {
+            if (total > 1) {
                 
                 embed.setFooter({ text: `${index + 1}/${total}` });
                 var changeEmbedRow = new ActionRowBuilder().addComponents(
@@ -162,10 +162,10 @@ module.exports = {
         const _render = await render(pages[0], 0, total);
 
         const message = await interaction.editReply({ embeds: _render.embeds, components: _render.components, files: _render.files, fetchReply: true }).catch(() => {});
-        if(!message || total == 1) return; // interaction isn't edited && only one page to display
+        if (!message || total == 1) return; // interaction isn't edited && only one page to display
 
         const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.member.id, time: 120000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
 
         let current = 0;
         collector.on("collect", async (i) => {
@@ -193,7 +193,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

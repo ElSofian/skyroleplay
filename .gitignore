@@ -3,9 +3,8 @@ node_modules/
 # Tokens are in this file, `config.example.js` has the same structure
 config.js
 
+.env
 .rest
-
-commands/roleplay/tuserraispascurieux.js
 
 .vscode
 dist

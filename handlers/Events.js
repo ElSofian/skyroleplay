@@ -6,7 +6,7 @@ module.exports = (client) => {
         let i = 0;
         readdirSync(`./events`).forEach(subdir => {
             readdirSync(`./events/${subdir}`).forEach(fileName => {
-                if(!fileName.endsWith(".js")) return;
+                if (!fileName.endsWith(".js")) return;
                 i++;
                 const evt = require(`../events/${subdir}/${fileName}`);
                 client.on(fileName.split(".")[0], (...args) => {
@@ -17,6 +17,7 @@ module.exports = (client) => {
 
         client.logger.success(`${i} events loaded.`);
     } catch (err) {
+		console.log(err);
         client.logger.error(err);
     }
 

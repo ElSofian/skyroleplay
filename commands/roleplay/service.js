@@ -83,7 +83,7 @@ module.exports = {
             case "prendre": {
 
                 const currentLink = getServiceLink(interaction);
-                if(currentLink) return errorEmbed(t("already_in_service", { link: currentLink }));
+                if (currentLink) return errorEmbed(t("already_in_service", { link: currentLink }));
 
                 const job = interaction.options.getString("métier");
 
@@ -93,7 +93,7 @@ module.exports = {
                     .setDescription(t("take_service_embed.description", { user: interaction.user.toString(), job: job, time: time(new Date(), "t") }))
 
                 const response = await interaction.reply({ embeds: [embed], fetchReply: true }).catch(() => {})
-                if(response) addServiceLink(interaction, response.url);
+                if (response) addServiceLink(interaction, response.url);
 
                 break;
             }
@@ -102,7 +102,7 @@ module.exports = {
             case "finir": {
 
                 const currentLink = getServiceLink(interaction);
-                if(!currentLink) return errorEmbed(t("not_in_service"));
+                if (!currentLink) return errorEmbed(t("not_in_service"));
 
                 const embed = new EmbedBuilder()
                     .setColor("Red")
@@ -121,7 +121,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     }

@@ -30,7 +30,7 @@ module.exports = {
         try {
 
         const member = interaction.options.getMember("membre");
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
 
         const shard = ShardClientUtil.shardIdForGuildId('712409878949527673', client.cluster.count);
         var role = await client.cluster.broadcastEval(
@@ -40,12 +40,12 @@ module.exports = {
                 try {
 
                     await client.guilds.fetch('712409878949527673').then(guild => fetchGuild = guild);
-                    if(!fetchGuild) return 2;
+                    if (!fetchGuild) return 2;
 
                     await fetchGuild.members.fetch(IDMember).then(member => fetchMember = member);
-                    if(!fetchMember) return false;
+                    if (!fetchMember) return false;
                         
-                    if(!fetchMember.roles.cache.get('824998785691287562')) return false; //NiTeam
+                    if (!fetchMember.roles.cache.get('824998785691287562')) return false; //NiTeam
                     else return fetchMember.roles.cache.sort((r1, r2) => r2.rawPosition - r1.rawPosition).first();  
 
                 } catch (e) {};
@@ -76,7 +76,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     }

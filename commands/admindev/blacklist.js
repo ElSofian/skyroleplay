@@ -130,21 +130,21 @@ module.exports = {
     run: async(client, interaction, { errorEmbed }) => {
 
         // Blacklist channel on the NiTeam guild
-        if(interaction.channelId != '926100677720166461') return errorEmbed("You must use this command in the <#926100677720166461> channel!");
+        if (interaction.channelId != '926100677720166461') return errorEmbed("You must use this command in the <#926100677720166461> channel!");
 
         const method = interaction.options.getSubcommand();
         const user = interaction.options.getString("joueur");
         const reason = interaction.options.getString("raison");
 
-        if(!user.match(/^[0-9]{17,19}$/gm)) return errorEmbed("Please provide a valid user ID...");
+        if (!user.match(/^[0-9]{17,19}$/gm)) return errorEmbed("Please provide a valid user ID...");
         
-        if(await client.db.getStaff(user)) return errorEmbed("It is impossible to sanction a member of the NiTeam...");
+        if (await client.db.getStaff(user)) return errorEmbed("It is impossible to sanction a member of the NiTeam...");
 
         var blacklist = await client.db.getBlacklist(user);
 
         switch (method) {
             case 'ajouter':
-                if(blacklist) return errorEmbed(`<@${user}> is already blacklisted!`);
+                if (blacklist) return errorEmbed(`<@${user}> is already blacklisted!`);
 
                 await client.db.addBlacklist(user, reason, interaction.user.id);
 
@@ -161,7 +161,7 @@ module.exports = {
                 return interaction.reply({ embeds: [embedAdd] }).catch(() => {});
 
             case 'retirer':
-                if(!blacklist) return errorEmbed(`<@${user}> is not blacklisted!`);
+                if (!blacklist) return errorEmbed(`<@${user}> is not blacklisted!`);
 
                 await client.db.removeBlacklist(user);
 
@@ -180,7 +180,7 @@ module.exports = {
                 return interaction.reply({ embeds: [embedRemove] }).catch(() => {});
 
             case 'vérifier':
-                if(!blacklist) return errorEmbed(`<@${user}> is not blacklisted!`);
+                if (!blacklist) return errorEmbed(`<@${user}> is not blacklisted!`);
 
                 const embed = new EmbedBuilder()
                     .setTitle(`${client.constants.emojis.reussi}  Verifying a blacklisted user`)

@@ -198,7 +198,7 @@ module.exports = {
 
                 const selfBankAccount = await client.db.getBankAccount(interaction.guildId, interaction.user.id); 
                 if (!selfBankAccount || selfBankAccount.bank_money == null || isNaN(selfBankAccount.bank_money)) return errorEmbed(t("no_bank_account", false, "errors"))
-                if(selfBankAccount.frozen_date || selfBankAccount.frozen_reason) return errorEmbed(t("frozen", false, "errors"))
+                if (selfBankAccount.frozen_date || selfBankAccount.frozen_reason) return errorEmbed(t("frozen", false, "errors"))
 
                 const name = interaction.options.getString("nom");
                 const description = interaction.options.getString("description");
@@ -206,14 +206,14 @@ module.exports = {
                 const image = interaction.options.getAttachment("image");
                 const thumbnail = interaction.options.getAttachment("vignette");
 
-                if(name.length > 255) return errorEmbed(t("name_too_long"))
-                if(description.length > 500) return errorEmbed(t("description_too_long"))
+                if (name.length > 255) return errorEmbed(t("name_too_long"))
+                if (description.length > 500) return errorEmbed(t("description_too_long"))
 
-                if(image || thumbnail) interaction.reply({ content: t("uploading", { emoji: client.constants.emojis.load }) }).catch(() => {});
+                if (image || thumbnail) interaction.reply({ content: t("uploading", { emoji: client.constants.emojis.load }) }).catch(() => {});
                 
                 let imageUrl, thumbnailUrl;
-                if(image) await imgurUploader(image.url, { title: image.name }).then(data => { imageUrl = data.link });
-                if(thumbnail) await imgurUploader(thumbnail.url, { title: thumbnail.name }).then(data => { thumbnailUrl = data.link });
+                if (image) await imgurUploader(image.url, { title: image.name }).then(data => { imageUrl = data.link });
+                if (thumbnail) await imgurUploader(thumbnail.url, { title: thumbnail.name }).then(data => { thumbnailUrl = data.link });
                 
                 await client.db.addSale(interaction.guildId, interaction.member.id, name, description, price, imageUrl, thumbnailUrl)
 
@@ -262,8 +262,8 @@ module.exports = {
                                 { name: "Description", value: sale.description ? sale.description.length >= 1024 ? `${sale.description.substr(0, 1021)}...` : sale.description : t("no_description") },
                                 { name: t("sell_embed.fields.price"), value: `${separate(sale.price)}${economySymbol}` }
                             ]);
-                            if(sale.image) embed.setImage(sale.image);
-                            if(sale.thumbnail) embed.setThumbnail(sale.thumbnail);
+                            if (sale.image) embed.setImage(sale.image);
+                            if (sale.thumbnail) embed.setThumbnail(sale.thumbnail);
                             break;
                         }
 
@@ -312,7 +312,7 @@ module.exports = {
                         .setStyle(ButtonStyle.Secondary)
                     )
 
-                    if(total > 1) {
+                    if (total > 1) {
 
                         const row = secondRows ? type == "sales" ? salesRows : likesRows : rows
                         row.addComponents(
@@ -338,17 +338,17 @@ module.exports = {
                 }
             
                 const message = await interaction.reply(await render("default", false, 0, 0)).catch(() => {});
-                if(!message) return;
+                if (!message) return;
 
                 const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.member.id, time: 120000 });
-                if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
+                if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
 
                 let current = 0, length = 0, index = null, _render = null;
                 collector.on("collect", async(i) => {
 
                     const sales = await client.db.getMemberSales(interaction.guildId, interaction.member.id);
                     const likes = await client.db.getMemberLikes(interaction.guildId, interaction.member.id);
-                    if(index !== null) index == "sales" ? length = sales.length : length = likes.length
+                    if (index !== null) index == "sales" ? length = sales.length : length = likes.length
                     const sale = index == "sales" ? sales[current] : likes[current];
 
                     switch(i.customId) {
@@ -374,7 +374,7 @@ module.exports = {
                         case "unlike": {
                             await client.db.unlikeSale(interaction.guildId, i.user.id, sale.id);
 
-                            if(length - 1 >= current + 1) _render = await render("likes", true, current, length-1);
+                            if (length - 1 >= current + 1) _render = await render("likes", true, current, length-1);
                             else _render = await render("default", false, 0, 0);
 
                             await i.update(_render);
@@ -395,13 +395,13 @@ module.exports = {
 
                             await i.showModal(modal).catch(() => {})
                             const modalCollector = await i.awaitModalSubmit({ filter: (ii) => ii.user.id === i.user.id && ii.customId == `modal.edit_sale_${code}`, time: 90000 });
-                            if(!modalCollector) return;
+                            if (!modalCollector) return;
 
                             const name = modalCollector.fields.getTextInputValue("modal_name");
                             const price = parseInt(modalCollector.fields.getTextInputValue("modal_price"));
                             const description = modalCollector.fields.getTextInputValue("modal_description");
 
-                            if(price >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: sale.name }, "errors"), true)], components: [] }).catch(() => {});
+                            if (price >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: sale.name }, "errors"), true)], components: [] }).catch(() => {});
 
                             await client.db.editSale(interaction.guildId, sale.id, name || sale.name, isNaN(price) ? sale.price : price, description || sale.description);
 
@@ -413,7 +413,7 @@ module.exports = {
                         case "delete": {
 
                             const confirm = await client.functions.userinput.askValidation(i, t("confirm_delete"), false, "update");
-                            if(!confirm) return
+                            if (!confirm) return
 
                             await client.db.deleteSale(interaction.guildId, sale.id);
                             return confirm.update({ embeds: [successEmbed(t("deleted", { name: sale.name }), true)], components: [] }).catch(() => {})
@@ -438,7 +438,7 @@ module.exports = {
             case "afficher": {
 
                 let sales = await client.db.getSales(interaction.guildId);
-                if(!sales.length) return errorEmbed(t("no_sales"));
+                if (!sales.length) return errorEmbed(t("no_sales"));
 
                 switch(interaction.options.getString("trier-par")) {
 
@@ -480,7 +480,7 @@ module.exports = {
                         .setStyle(ButtonStyle.Secondary)
                     )
 
-                    if(total > 1) {
+                    if (total > 1) {
 
                         rows.addComponents(
                             new ButtonBuilder()
@@ -505,10 +505,10 @@ module.exports = {
                 }
 
                 const message = await interaction.reply(await render(sales[0], 0, sales.length)).catch(() => {})
-                if(!message) return;
+                if (!message) return;
 
                 const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.member.id, time: 120000 });
-                if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
+                if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
 
                 let current = 0;
                 collector.on("collect", async(i) => {
@@ -522,14 +522,14 @@ module.exports = {
                             if (i.user.id === sale.seller_id) return i.update({ embeds: [errorEmbed(t("cant_buy_yourself"), true)], components: [] }).catch(() => {});
                             
                             const newMemberAccount = await client.db.getMoney(interaction.guildId, interaction.member.id);
-                            if((newMemberAccount?.bank_money ?? 0) + sale.price >= 2147483647) return i.update({ embeds: [errorEmbed(t("int_passing_member", { name: lang == "fr" ? "votre compte bancaire" : "your bank account", member: `<@${sale.seller_id}>` }, "errors"), true)], components: [] }).catch(() => {})
+                            if ((newMemberAccount?.bank_money ?? 0) + sale.price >= 2147483647) return i.update({ embeds: [errorEmbed(t("int_passing_member", { name: lang == "fr" ? "votre compte bancaire" : "your bank account", member: `<@${sale.seller_id}>` }, "errors"), true)], components: [] }).catch(() => {})
 
                             let method = "bank_money", reply = i
-                            if((newMemberAccount?.bank_money ?? 0) - overdraftLimit < sale.price || newMemberAccount?.blocked == 1 || (newMemberAccount?.frozen_date || newMemberAccount?.frozen_reason)) {
+                            if ((newMemberAccount?.bank_money ?? 0) - overdraftLimit < sale.price || newMemberAccount?.blocked == 1 || (newMemberAccount?.frozen_date || newMemberAccount?.frozen_reason)) {
 
-                                if(newMemberAccount.cash_money >= sale.price) {
+                                if (newMemberAccount.cash_money >= sale.price) {
                                     var askPayementMethod = await client.functions.userinput.askPayementMethod(i, "bank", false, "update")
-                                    if(!askPayementMethod) return;
+                                    if (!askPayementMethod) return;
                                     
                                     method = "cash_money", reply = askPayementMethod
                                     return
@@ -566,7 +566,7 @@ module.exports = {
                             const likes = await client.db.getMemberLikes(interaction.guildId, interaction.member.id);
                             const like = likes.find(s => s.sale_id == sale.id)
                             
-                            if(like) await client.db.unlikeSale(interaction.guildId, i.user.id, sale.id);
+                            if (like) await client.db.unlikeSale(interaction.guildId, i.user.id, sale.id);
                             else await client.db.likeSale(interaction.guildId, i.user.id, sale.id);
 
                             await i.update(await render(sales[current], current, sales.length));
@@ -601,7 +601,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

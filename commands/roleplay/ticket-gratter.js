@@ -28,10 +28,10 @@ module.exports = {
         ]);
 
         const result = await client.functions.userinput.askValidation(interaction, t("ask", { money: `${options["scratch.price"]}${economySymbol}` }), false, "editReply");
-        if(!result) return;
+        if (!result) return;
 
         const memberAccount = await client.db.getMoney(interaction.guildId, interaction.member.id);
-        if((memberAccount?.cash_money ?? 0) < options["scratch.price"]) return errorEmbed(t("no_money"), false, true, "editReply");
+        if ((memberAccount?.cash_money ?? 0) < options["scratch.price"]) return errorEmbed(t("no_money"), false, true, "editReply");
 
         var boxes = ["⬛", "⬛", "⬛"]
         var items = [options["scratch.first.emoji"], options["scratch.second.emoji"], options["scratch.third.emoji"]]
@@ -47,7 +47,7 @@ module.exports = {
         const row = new ActionRowBuilder().addComponents( new ButtonBuilder().setCustomId(`scratch`).setEmoji("🎰").setStyle(ButtonStyle.Secondary));
 
         const sendEmbed = await interaction.followUp({ embeds: [embed], components: [row], fetchReply: true }).catch(() => { });
-        if(!sendEmbed) return result.update({ content: null, embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
+        if (!sendEmbed) return result.update({ content: null, embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
      
         let amount = 0
         let last_date = Date.now();
@@ -62,7 +62,7 @@ module.exports = {
         };
 
         const collector = sendEmbed.createMessageComponentCollector({ filter: (i) => i.isButton() && i.customId == `scratch` && i.user.id === interaction.member.id, time: 60000 });
-        if(!collector) return result.update({ content: null, embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
+        if (!collector) return result.update({ content: null, embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
 
         result.update({ embeds: [successEmbed(t("confirm"), true)], components: [] }).catch(() => {});
 
@@ -70,7 +70,7 @@ module.exports = {
 
             setTimeout(() => i.update().catch(() => {}), 2000)
     
-            if((Date.now() - last_date >= 2000 || amount == 0) && amount < 3) {
+            if ((Date.now() - last_date >= 2000 || amount == 0) && amount < 3) {
 
                 amount++;
                 boxes[amount - 1] = items[client.functions.other.randomBetween(0, 2)];
@@ -79,12 +79,12 @@ module.exports = {
                 \n\n ${boxes[0]}  ${boxes[1]}  ${boxes[2]} \n\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n${options["scratch.first.emoji"]} ${options["scratch.first"]}${economySymbol}・${options["scratch.second.emoji"]} ${options["scratch.second"]}${economySymbol}・${options["scratch.third.emoji"]} ${options["scratch.third"]}${economySymbol}`)
 
                 let components = sendEmbed.components;
-                if(amount == 3) components = [];
+                if (amount == 3) components = [];
 
                 sendEmbed.edit({ embeds: [embed], components }).catch(() => {});
                 last_date = Date.now()
 
-                if(amount == 3 || (boxes[0] !== boxes[1] && boxes[1] !== "⬛")) {
+                if (amount == 3 || (boxes[0] !== boxes[1] && boxes[1] !== "⬛")) {
 
                     let result = boxes.every((val, i, arr) => val === arr[0])
 
@@ -99,7 +99,7 @@ module.exports = {
                     sendEmbed.edit({ embeds: [embed], components: [] }).catch(() => {});
 
                     const newMemberAmount = await client.db.getMoney(interaction.guildId, i.user.id);
-                    if(newMemberAmount?.cash_money + money >= 2147483647) return sendEmbed.edit({ content: null, embeds: [errorEmbed(t("int_passing", { name: lang == "fr" ? "votre argent liquide" : "your cash money" }, "errors"), true)], components: [] }).catch(() => {})
+                    if (newMemberAmount?.cash_money + money >= 2147483647) return sendEmbed.edit({ content: null, embeds: [errorEmbed(t("int_passing", { name: lang == "fr" ? "votre argent liquide" : "your cash money" }, "errors"), true)], components: [] }).catch(() => {})
                     await client.db.addMoney(interaction.guildId, interaction.user.id, "cash_money", result == "win" ? money - options["scratch.price"] : -options["scratch.price"]);
                     
                     end = true;
@@ -110,14 +110,14 @@ module.exports = {
         });
 
         collector.on("end", (collected) => {
-            if(collected.size >= 3 || end) return;
+            if (collected.size >= 3 || end) return;
             sendEmbed.edit({ content: null, embeds: [errorEmbed(t("time", false, "errors"), true)], components: [] }).catch(() => {});
         });
 
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

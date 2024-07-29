@@ -135,11 +135,11 @@ module.exports = {
 
         try {
 
-        //if(interaction.guild.ownerId !== interaction.user.id) return errorEmbed(t("owner", { id: interaction.guild.ownerId }));
+        //if (interaction.guild.ownerId !== interaction.user.id) return errorEmbed(t("owner", { id: interaction.guild.ownerId }));
 
         const data_to_reset = interaction.options.getString("données");
         const serverName = interaction.options.getString("nom-du-serveur");
-        if(serverName !== interaction.guild.name) return errorEmbed(t("srv_name"))
+        if (serverName !== interaction.guild.name) return errorEmbed(t("srv_name"))
 
         await interaction?.deferReply().catch(() => {});
 
@@ -254,7 +254,7 @@ module.exports = {
         );
 
         const message = await interaction.editReply({ embeds: [embed], components: [row], fetchReply: true })
-        if(!message) return; // interaction isn't edited
+        if (!message) return; // interaction isn't edited
 
         // This timeout is used to make the user sure of their decision
         setTimeout(() => {
@@ -265,7 +265,7 @@ module.exports = {
         }, 5000);
 
         const collector = message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.user.id, time: 60000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         collector.on("collect", async (i) => {
             switch (i.customId) {
@@ -298,7 +298,7 @@ module.exports = {
         });
 
         collector.on("end", async (collected) => {
-            if(collected.size) return;
+            if (collected.size) return;
 
             return errorEmbed(t("time", false, "errors"), false, true, "editReply")
         });
@@ -306,7 +306,7 @@ module.exports = {
 
     } catch (err) {
         console.error(err);
-        client.bugsnag.notify(err);
+        
         return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
     }
 

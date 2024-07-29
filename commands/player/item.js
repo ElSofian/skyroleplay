@@ -37,7 +37,7 @@ module.exports = {
 
         await interaction.deferReply().catch(() => {});
 
-        if(!interaction.options.getString("nom").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "nom" : "name" }, "errors"), false, true, "editReply");
+        if (!interaction.options.getString("nom").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "nom" : "name" }, "errors"), false, true, "editReply");
 
         const embed = new EmbedBuilder()
         .setColor(interaction.member.displayColor ?? "White")
@@ -83,7 +83,7 @@ module.exports = {
             case "items": {
 
                 const findItem = await client.db.getMemberItem(interaction.guildId, interaction.member.id, parseInt(item[3]));
-                if(!findItem) return errorEmbed(t("item_not_found", { name: item[4] }), false, true, "editReply");
+                if (!findItem) return errorEmbed(t("item_not_found", { name: item[4] }), false, true, "editReply");
 
                 name = findItem.name,
                 type = findItem.type,
@@ -104,7 +104,7 @@ module.exports = {
 
                 drugId = item[3];
                 const drug = await client.db.getMemberDrugs(interaction.guildId, interaction.member.id, drugId);
-                if(!drug) return errorEmbed(t("drug_not_found", { name: item[5] }), false, true, "editReply");
+                if (!drug) return errorEmbed(t("drug_not_found", { name: item[5] }), false, true, "editReply");
                 
                 type = "consume"
                 drugType = item[4];
@@ -128,7 +128,7 @@ module.exports = {
         .printText((name ?? "").length > 17 ? `${name.substring(0, 17)}...` : name, 80, 130)
         .setTextFont("34px Poppins-R")
         .printText(t("canvas_quantity", { quantity: separate(quantity), items: itemType.endsWith("_money") ? economySymbol : itemType == "drugs" ? "g" : ` item${quantity > 1 ? "s" : ""}` }), 80, 210)
-        if(hidden_quantity > 0) {
+        if (hidden_quantity > 0) {
             canvas.setTextFont("30px Poppins-R").setColor("#929399")
             .printImage(await loadImage("assets/inventory/eyeslash.png"), 80, 230, 35, 30)
             .printText(t("canvas_hidden_quantity", { quantity: separate(hidden_quantity), items: itemType.endsWith("_money") ? economySymbol : itemType == "drugs" ? "g" : ` item${hidden_quantity > 1 ? "s" : ""}`, s: hidden_quantity > 1 ? "s" : "" }), 130, 255)
@@ -145,25 +145,25 @@ module.exports = {
         ];
 
         let rows = [new ActionRowBuilder()]
-        for (const option of options) if((option?.min ?? 0) > 0) rows[0].addComponents(new ButtonBuilder().setCustomId(option.name).setLabel(t(`buttons.${option.name}`)).setStyle(option.style))
-        if(rows[0].components.length == 6) {
+        for (const option of options) if ((option?.min ?? 0) > 0) rows[0].addComponents(new ButtonBuilder().setCustomId(option.name).setLabel(t(`buttons.${option.name}`)).setStyle(option.style))
+        if (rows[0].components.length == 6) {
             const firstArray = rows[0].components.slice(0, 5);
             const secondArray = rows[0].components[5];
             rows = [new ActionRowBuilder().addComponents(firstArray), new ActionRowBuilder().addComponents(secondArray)]
         }
         
         const message = await interaction.editReply({ embeds: [embed], components: rows, files: [attachment] })
-        if(!message) return
+        if (!message) return
 
         const collector = await message.createMessageComponentCollector({ filter: i => i.user.id == interaction.user.id, time: 90000 });
         if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         collector.on("collect", async (i) => {
 
-            if(i.customId !== "give") {
+            if (i.customId !== "give") {
 
                 var modalCollector = i, memberQuantity = i.customId == "retrieve" ? hidden_quantity : quantity
-                if(quantity > 1) {
+                if (quantity > 1) {
 
                     const code = Math.floor(Math.random() * 9000000000) + 1000000000
                     const modal = new ModalBuilder()
@@ -186,15 +186,15 @@ module.exports = {
 
                 }
                 
-                if(i.customId !== "rename") {
+                if (i.customId !== "rename") {
 
                     const collectedValue = modalCollector?.fields?.getTextInputValue("quantity") ?? memberQuantity;
                     var modalQuantity = ["tout", "all"].includes(`${collectedValue}`.toLowerCase()) || collectedValue == "" ? memberQuantity : collectedValue;
                     modalQuantity = itemType.includes("money") ? parseFloat(modalQuantity) : parseInt(modalQuantity);
 
-                    if(!modalQuantity || modalQuantity <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: modalQuantity }, "errors"), true)], components: [], files: [] })
-                    if(modalQuantity > memberQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough", { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${separate(modalQuantity)}${itemType.endsWith("_money") ? economySymbol : itemType == "drugs" ? "g" : ""}`, name: name, quantity: `${separate(memberQuantity)}${itemType.endsWith("_money") ? economySymbol : itemType == "drugs" ? "g" : ""}` }), true)], components: [], files: [] })
-                    if(modalQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: name }, "errors"), true)], components: [], files: [] })
+                    if (!modalQuantity || modalQuantity <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: modalQuantity }, "errors"), true)], components: [], files: [] })
+                    if (modalQuantity > memberQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough", { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${separate(modalQuantity)}${itemType.endsWith("_money") ? economySymbol : itemType == "drugs" ? "g" : ""}`, name: name, quantity: `${separate(memberQuantity)}${itemType.endsWith("_money") ? economySymbol : itemType == "drugs" ? "g" : ""}` }), true)], components: [], files: [] })
+                    if (modalQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: name }, "errors"), true)], components: [], files: [] })
                 
                 }
 
@@ -207,10 +207,10 @@ module.exports = {
                     let newName = modalCollector.fields.getTextInputValue("name");
 
                     const searchItem = await client.db.getShopItem(interaction.guildId, parseInt(item[3]));
-                    if(searchItem.name == newName) newName = null;
+                    if (searchItem.name == newName) newName = null;
                     else {
                         const quantityItemWithNewName = await client.db.getQuantityMemberItemWithSameNickname(interaction.guildId, interaction.member.id, newName);
-                        if(quantityItemWithNewName && quantityItemWithNewName > 0) newName = `${newName} (${quantityItemWithNewName+1})`
+                        if (quantityItemWithNewName && quantityItemWithNewName > 0) newName = `${newName} (${quantityItemWithNewName+1})`
                     }
 
                     await client.db.setNicknameItem(interaction.guildId, interaction.member.id, item[3], newName);
@@ -231,7 +231,7 @@ module.exports = {
                         case "cash_money":
                         case "dirty_money": {
                             const newMemberAccount = await client.db.getMoney(interaction.guildId, interaction.member.id);
-                            if(newMemberAccount[itemType] < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}`, { amount: `${separate(newMemberAccount[itemType])}${economySymbol}`, symbol: economySymbol }, "errors"), true)], components: [], files: [] })
+                            if (newMemberAccount[itemType] < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}`, { amount: `${separate(newMemberAccount[itemType])}${economySymbol}`, symbol: economySymbol }, "errors"), true)], components: [], files: [] })
                             
                             await client.db.addMoney(interaction.guildId, interaction.member.id, itemType, -modalQuantity);
                             await client.db.addMoney(interaction.guildId, memberId, itemType, modalQuantity);
@@ -244,9 +244,9 @@ module.exports = {
 
                             const isProperty = itemType == "property-key";
                             const place = await client.db[`getMember${isProperty ? "Property" : "CG"}`](interaction.guildId, interaction.member.id, item[3]);
-                            if(!place) return modalCollector.reply({ embeds: [errorEmbed(t("no_place", { place: t(isProperty ? "properties" : "cg", false, "global") }, "errors"), true)], components: [], files: [] })
+                            if (!place) return modalCollector.reply({ embeds: [errorEmbed(t("no_place", { place: t(isProperty ? "properties" : "cg", false, "global") }, "errors"), true)], components: [], files: [] })
 
-                            if(place[isProperty ? "owner_id" : "user_id"] == interaction.member.id) await client.db[`set${isProperty ? "Property" : "CG"}Owner`](interaction.guildId, place.id, memberId);
+                            if (place[isProperty ? "owner_id" : "user_id"] == interaction.member.id) await client.db[`set${isProperty ? "Property" : "CG"}Owner`](interaction.guildId, place.id, memberId);
                             else await client.db.setDoubleKeys(interaction.guildId, place.id, isProperty ? "estates" : "member_cg", place.authorized_members.replace(interaction.member.id, memberId));
 
                             break;
@@ -256,13 +256,13 @@ module.exports = {
                         case "items": {
                             const newMemberItems = await client.db.getMemberItems(interaction.guildId, interaction.member.id);
                             const findItem = newMemberItems.find(i => i.id == item[3]);
-                            if(!findItem || (findItem?.quantity ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)} item${modalQuantity > 1 ? "s" : ""}`, name: name, quantity: findItem?.quantity?.toLocaleString(lang) ?? 0 }), true)], components: [], files: [] })
+                            if (!findItem || (findItem?.quantity ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)} item${modalQuantity > 1 ? "s" : ""}`, name: name, quantity: findItem?.quantity?.toLocaleString(lang) ?? 0 }), true)], components: [], files: [] })
                             
                             const memberItems = await client.db.getMemberItems(interaction.guildId, memberId);
                             const findMemberItem = memberItems.find(i => i.id == item[3]);
 
-                            if(findItem?.max_items && (findItem?.quantity + findItem?.hidden_quantity) > findItem?.max_items) return modalCollector.reply({ embeds: [errorEmbed(t("max_item", { max: findMemberItem?.max_items, name: findMemberItem?.name }, "errors"), true)], components: [], files: [] })
-                            if(findMemberItem?.max_items && ((findMemberItem?.quantity ?? 0) + (findMemberItem?.hidden_quantity ?? 0) > findMemberItem?.max_items)) return modalCollector.reply({ embeds: [errorEmbed(t("max_item_member", { member: `<@${memberId}>`, max: findMemberItem?.max_items, name: findMemberItem?.name }, "errors"), true)], components: [], files: [] })
+                            if (findItem?.max_items && (findItem?.quantity + findItem?.hidden_quantity) > findItem?.max_items) return modalCollector.reply({ embeds: [errorEmbed(t("max_item", { max: findMemberItem?.max_items, name: findMemberItem?.name }, "errors"), true)], components: [], files: [] })
+                            if (findMemberItem?.max_items && ((findMemberItem?.quantity ?? 0) + (findMemberItem?.hidden_quantity ?? 0) > findMemberItem?.max_items)) return modalCollector.reply({ embeds: [errorEmbed(t("max_item_member", { member: `<@${memberId}>`, max: findMemberItem?.max_items, name: findMemberItem?.name }, "errors"), true)], components: [], files: [] })
 
                             await client.db.removeMemberItem(interaction.guildId, interaction.member.id, item[3], modalQuantity, modalQuantity >= findItem.quantity && findItem.hidden_quantity <= 0);
                             await client.db.addMemberItem(interaction.guildId, memberId, item[3], modalQuantity, findItem.name);
@@ -270,9 +270,9 @@ module.exports = {
                             await interaction.guild.members.fetch();
                             const member = interaction.guild.members.cache.get(memberId);
 
-                            if(findItem?.role_add && modalQuantity == findItem?.quantity && findItem?.hidden_quantity == 0 && isPremium) await interaction.member.roles.remove(findItem?.role_add)
-                            if(findItem?.role_add && member && isPremium) await member.roles.add(findItem?.role_add)
-                            if(findItem?.role_remove && member && isPremium) await member.roles.remove(findItem?.role_remove)
+                            if (findItem?.role_add && modalQuantity == findItem?.quantity && findItem?.hidden_quantity == 0 && isPremium) await interaction.member.roles.remove(findItem?.role_add)
+                            if (findItem?.role_add && member && isPremium) await member.roles.add(findItem?.role_add)
+                            if (findItem?.role_remove && member && isPremium) await member.roles.remove(findItem?.role_remove)
 
                             break;
                         }
@@ -280,7 +280,7 @@ module.exports = {
                         case "drugs": {
                             const newMemberDrugs = await client.db.getMemberDrugs(interaction.guildId, interaction.member.id);
                             const findDrug = newMemberDrugs.find(d => d.drug_id == drugId);
-                            if(!findDrug || (findDrug?.[drugType] ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)}g`, name: name, quantity: findDrug?.quantity?.toLocaleString(lang) ?? 0 }), true)], components: [], files: [] })
+                            if (!findDrug || (findDrug?.[drugType] ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)}g`, name: name, quantity: findDrug?.quantity?.toLocaleString(lang) ?? 0 }), true)], components: [], files: [] })
                         
                             await client.db.removeMemberDrug(interaction.guildId, interaction.member.id, drugId, drugType, modalQuantity, modalQuantity >= findDrug[drugType] && findDrug[otherType] <= 0 && findDrug[`hidden_${drugType}`] <= 0 && findDrug[`hidden_${otherType}`] <= 0);
                             await client.db.addMemberDrug(interaction.guildId, memberId, drugId, drugType, modalQuantity);
@@ -305,9 +305,9 @@ module.exports = {
 
                             const isProperty = itemType == "property-key";
                             const place = await client.db[`getMember${isProperty ? "Property" : "CG"}`](interaction.guildId, interaction.member.id, item[3]);
-                            if(!place) return modalCollector.reply({ embeds: [errorEmbed(t("no_place", { place: t(isProperty ? "properties" : "cg", false, "global") }, "errors"), true)], components: [], files: [] })
+                            if (!place) return modalCollector.reply({ embeds: [errorEmbed(t("no_place", { place: t(isProperty ? "properties" : "cg", false, "global") }, "errors"), true)], components: [], files: [] })
 
-                            if(place[isProperty ? "owner_id" : "user_id"] == interaction.member.id) await client.db[`delete${isProperty ? "Property" : "CG"}`](interaction.guildId, place[isProperty ? "id" : "license_plate"]);
+                            if (place[isProperty ? "owner_id" : "user_id"] == interaction.member.id) await client.db[`delete${isProperty ? "Property" : "CG"}`](interaction.guildId, place[isProperty ? "id" : "license_plate"]);
                             else await client.db.setDoubleKeys(interaction.guildId, place.id, isProperty ? "estates" : "member_cg", place.authorized_members.replace(`${interaction.member.id},`, "").replace(`,${interaction.member.id}`, "").replace(interaction.member.id, ""));
 
                             break;
@@ -318,7 +318,7 @@ module.exports = {
                         case "dirty_money": {
 
                             const newMemberAccount = await client.db.getMoney(interaction.guildId, interaction.member.id);
-                            if(newMemberAccount[itemType] < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}`, { amount: `${separate(newMemberAccount[itemType])}${economySymbol}`, symbol: economySymbol }, "errors"), true)], components: [], files: [] })
+                            if (newMemberAccount[itemType] < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}`, { amount: `${separate(newMemberAccount[itemType])}${economySymbol}`, symbol: economySymbol }, "errors"), true)], components: [], files: [] })
 
                             await client.db.addMoney(interaction.guildId, interaction.member.id, itemType, -modalQuantity);
                             break;
@@ -328,25 +328,25 @@ module.exports = {
 
                             const newMemberItems = await client.db.getMemberItems(interaction.guildId, interaction.member.id);
                             const findItem = newMemberItems.find(i => i.id == item[3]);
-                            if(!findItem || (findItem?.quantity ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)} item${modalQuantity > 1 ? "s" : ""}`, name: name, quantity: findItem?.quantity?.toLocaleString(lang) ?? 0 }), true)], components: [], files: [] })
+                            if (!findItem || (findItem?.quantity ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)} item${modalQuantity > 1 ? "s" : ""}`, name: name, quantity: findItem?.quantity?.toLocaleString(lang) ?? 0 }), true)], components: [], files: [] })
 
                             await client.db.removeMemberItem(interaction.guildId, interaction.member.id, item[3], modalQuantity, modalQuantity == quantity && hidden_quantity == 0);
-                            if(role_add && modalQuantity == quantity && hidden_quantity == 0 && isPremium) (await interaction.member.roles.remove(role_add))
+                            if (role_add && modalQuantity == quantity && hidden_quantity == 0 && isPremium) (await interaction.member.roles.remove(role_add))
                             
                             const state = await client.db.getMemberState(interaction.guildId, interaction.member.id);
-                            if(["food", "drink"].includes(i.customId) && state[`${i.customId == "food" ? "hunger" : "thirst"}`] < 100) {
+                            if (["food", "drink"].includes(i.customId) && state[`${i.customId == "food" ? "hunger" : "thirst"}`] < 100) {
                                 
                                 let hungerQuantity = state.hunger + ((findItem[`hunger_add`] ?? 0) * modalQuantity)
                                 let thirstQuantity = state.thirst + ((findItem[`thirst_add`] ?? 0) * modalQuantity)
 
-                                if(hungerQuantity > 100) hungerQuantity = 100
-                                if(thirstQuantity > 100) thirstQuantity = 100
+                                if (hungerQuantity > 100) hungerQuantity = 100
+                                if (thirstQuantity > 100) thirstQuantity = 100
 
                                 await client.db.setState(interaction.guildId, interaction.member.id, hungerQuantity, thirstQuantity);
                                 
                                 const newState = await client.db.getMemberState(interaction.guildId, interaction.member.id);
-                                if(newState[i.customId == "food" ? "hunger" : "drink"] > 25) {
-                                   if(newState[i.customId == "food" ? "hunger" : "drink"] > 50) await client.db.updateMemberStateAlert(interaction.guildId, interaction.member.id, `${i.customId == "food" ? `hunger` : "thirst"}.very.alert`, 0);
+                                if (newState[i.customId == "food" ? "hunger" : "drink"] > 25) {
+                                   if (newState[i.customId == "food" ? "hunger" : "drink"] > 50) await client.db.updateMemberStateAlert(interaction.guildId, interaction.member.id, `${i.customId == "food" ? `hunger` : "thirst"}.very.alert`, 0);
                                    await client.db.updateMemberStateAlert(interaction.guildId, interaction.member.id, `${i.customId == "food" ? `hunger` : "thirst"}.alert`, 0);
                                 }
                             }
@@ -358,12 +358,12 @@ module.exports = {
 
                             const newMemberDrugs = await client.db.getMemberDrugs(interaction.guildId, interaction.member.id);
                             const drug = newMemberDrugs.find(i => i.drug_id == drugId);
-                            if(!drug || (drug?.[drugType] ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)}g`, name: name, quantity: `${drug?.quantity?.toLocaleString(lang) ?? 0}g` }), true)], components: [], files: [] })
+                            if (!drug || (drug?.[drugType] ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)}g`, name: name, quantity: `${drug?.quantity?.toLocaleString(lang) ?? 0}g` }), true)], components: [], files: [] })
 
                             const deleteDrug = modalQuantity == quantity && otherQuantity == 0 && drug[`hidden_${drugType}`] == 0 && drug[`hidden_${otherType}`] == 0;
                             await client.db.removeMemberDrug(interaction.guildId, interaction.member.id, drugId, drugType, modalQuantity, deleteDrug)
 
-                            if(i.customId == "consume") {
+                            if (i.customId == "consume") {
 
                                 const effectTime = await client.db.getDrugEffectTime(interaction.guildId, drugId) ?? 2400000; // 2400000 milliseconds = 40 min
                                 const endDate = client.dayjs().add(effectTime, "milliseconds").toDate();
@@ -388,8 +388,8 @@ module.exports = {
                         case "cash_money": {
 
                             const memberAccount = await client.db.getMoney(interaction.guildId, interaction.member.id);
-                            if(memberAccount[`${i.customId == "retrieve" ? "hidden_" : ""}${itemType}`] < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}`, { amount: separate(memberAccount[`${collector.customId == "retrieve" ? "hidden_" : ""}${itemType}`]), symbol: economySymbol }, "errors"), true)], components: [], files: [] })
-                            if(memberAccount[`${i.customId == "retrieve" ? "hidden_" : ""}${itemType}`] + modalQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: name }, "errors"), true)], components: [], files: [] })
+                            if (memberAccount[`${i.customId == "retrieve" ? "hidden_" : ""}${itemType}`] < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}`, { amount: separate(memberAccount[`${collector.customId == "retrieve" ? "hidden_" : ""}${itemType}`]), symbol: economySymbol }, "errors"), true)], components: [], files: [] })
+                            if (memberAccount[`${i.customId == "retrieve" ? "hidden_" : ""}${itemType}`] + modalQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: name }, "errors"), true)], components: [], files: [] })
                             
                             await client.db.addMoney(interaction.guildId, interaction.member.id, itemType, i.customId == "hide" ? -modalQuantity : modalQuantity)
                             await client.db.addMoney(interaction.guildId, interaction.member.id, `hidden_${itemType}`, i.customId == "hide" ? modalQuantity : -modalQuantity)
@@ -401,10 +401,10 @@ module.exports = {
 
                             const newMemberItems = await client.db.getMemberItems(interaction.guildId, interaction.member.id);
                             const findItem = newMemberItems.find(i => i.id == item[3]);
-                            if(!findItem || (findItem?.[i.customId == "retrieve" ? "hidden_quantity" : "quantity"] ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)} item${modalQuantity > 1 ? "s" : ""}`, name: name, quantity: findItem?.quantity?.toLocaleString(lang) ?? 0 }), true)], components: [], files: [] })
+                            if (!findItem || (findItem?.[i.customId == "retrieve" ? "hidden_quantity" : "quantity"] ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)} item${modalQuantity > 1 ? "s" : ""}`, name: name, quantity: findItem?.quantity?.toLocaleString(lang) ?? 0 }), true)], components: [], files: [] })
 
                             let inventoryWeight = newMemberItems.reduce((a, b) => a + (b.weight * b.quantity), 0) + (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id)).reduce((a, b) => a + ((b?.untreated ?? 0) + (b?.treated ?? 0)), 0);
-                            if(i.customId == "retrieve" && maxWeight && weight + inventoryWeight > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", { item: name }, "errors"), true)], components: [], files: [] })
+                            if (i.customId == "retrieve" && maxWeight && weight + inventoryWeight > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", { item: name }, "errors"), true)], components: [], files: [] })
                             
                             await client.db[`${i.customId}MemberItem`](interaction.guildId, interaction.member.id, parseInt(item[3]), modalQuantity);
                             
@@ -415,7 +415,7 @@ module.exports = {
                             
                             const newMemberDrugs = await client.db.getMemberDrugs(interaction.guildId, interaction.member.id);
                             const drug = newMemberDrugs.find(i => i.drug_id == drugId);
-                            if(!drug || (drug[`${i.customId == "retrieve" ? "hidden_" : ""}${drugType}`] ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)}g`, name: name, quantity: `${drug?.[drugType]?.toLocaleString(lang) ?? 0}g` }), true)], components: [], files: [] })
+                            if (!drug || (drug[`${i.customId == "retrieve" ? "hidden_" : ""}${drugType}`] ?? 0) < modalQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough`, { place: i.customId == "retrieve" ? t("words.hide", false, "global") : t("words.inventory", false, "global"), modalQuantity: `${modalQuantity.toLocaleString(lang)}g`, name: name, quantity: `${drug?.[drugType]?.toLocaleString(lang) ?? 0}g` }), true)], components: [], files: [] })
 
                             await client.db[`${i.customId}MemberDrug`](interaction.guildId, interaction.member.id, drugId, drugType, modalQuantity);
                             break;
@@ -440,7 +440,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
     },
@@ -456,8 +456,8 @@ module.exports = {
         
         const drugs = (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id)).sort((a, b) => a.name.localeCompare(b.name))
         for (let drug of drugs) {
-            if(drug?.treated > 0 || drug?.hidden_treated > 0) response.push(({ name: t("drugs.treated", { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.treated}&#46;${drug.drug_id}&#46;treated&#46;${drug.name}`, quantity: (drug?.treated ?? 0) + (drug?.hidden_treated ?? 0) }) )
-            if(drug?.untreated > 0 || drug?.hidden_untreated > 0) response.push(({ name: t("drugs.untreated", { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.untreated}&#46;${drug.drug_id}&#46;untreated&#46;${drug.name}`, quantity: (drug?.untreated ?? 0) + (drug?.hidden_untreated ?? 0) }) )
+            if (drug?.treated > 0 || drug?.hidden_treated > 0) response.push(({ name: t("drugs.treated", { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.treated}&#46;${drug.drug_id}&#46;treated&#46;${drug.name}`, quantity: (drug?.treated ?? 0) + (drug?.hidden_treated ?? 0) }) )
+            if (drug?.untreated > 0 || drug?.hidden_untreated > 0) response.push(({ name: t("drugs.untreated", { drugName: drug.name }, "global"), value: `${code}&#46;drugs&#46;${drug.untreated}&#46;${drug.drug_id}&#46;untreated&#46;${drug.name}`, quantity: (drug?.untreated ?? 0) + (drug?.hidden_untreated ?? 0) }) )
         }
 
         const properties = await client.db.getMemberProperties(interaction.guildId, interaction.member.id)
@@ -469,7 +469,7 @@ module.exports = {
         response.push(...((await client.db.getMemberItems(interaction.guildId, interaction.member.id)).sort((a, b) => a.name.localeCompare(b.name)).map(i => ({ name: i.name, value: `${code}&#46;items&#46;${i.quantity}&#46;${i.id}&#46;${i.name}`, quantity: (i?.quantity ?? 0) + (i?.hidden_quantity ?? 0) }))))
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...response.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

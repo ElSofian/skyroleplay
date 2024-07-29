@@ -167,17 +167,17 @@ module.exports = class Other {
         amount_to_add = parseInt(amount_to_add);
         unit2 = unit2.toLowerCase();
 
-        if(unit === unit2) {
+        if (unit === unit2) {
             final_unit = unit;
             total_amount = premium_amount + amount_to_add;
         }
-        else if(unit === "j" && ["m","a"].includes(unit2)) {
+        else if (unit === "j" && ["m","a"].includes(unit2)) {
             final_unit = "j";
             calcul = unit2 === "m" ? 30.4167 : 365;
             calcul2 = Math.ceil(amount_to_add*calcul);
             total_amount = premium_amount + calcul2;
         }
-        else if(unit === "m" && ["j","a"].includes(unit2)) {
+        else if (unit === "m" && ["j","a"].includes(unit2)) {
             final_unit = "j";
             calcul = unit2 === "j" ? 1 : 365;
             calcul2 = Math.ceil(premium_amount*30.4167)
@@ -200,11 +200,11 @@ module.exports = class Other {
      * @returns {string} The duration as a string
      */
     durationToText = async (duration, interaction, lang = null) => {
-        if(!lang) lang = await this.client.db.getOption(interaction.guildId, "guild.lang");
+        if (!lang) lang = await this.client.db.getOption(interaction.guildId, "guild.lang");
 
-        if(["m"].includes(duration))
+        if (["m"].includes(duration))
             return duration.replace("m", ' ' + this.client.translate.t(lang, "duration_to_text.month", false, "global"));
-        else if(["a"].includes(duration))
+        else if (["a"].includes(duration))
             return duration.replace("a", ' ' + this.client.translate.t(lang, "duration_to_text.year", false, "global"));
         else
             return duration.replace("j", ' ' + this.client.translate.t(lang, "duration_to_text.day", false, "global"));
@@ -234,12 +234,12 @@ module.exports = class Other {
 
     // capitalize first letter
     cfl = (string) => {
-        if(typeof string !== 'string') throw new Error("Argument in the function 'capitalizeFirstLetter()' must be a string.");
+        if (typeof string !== 'string') throw new Error("Argument in the function 'capitalizeFirstLetter()' must be a string.");
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
 
     separate = (number, separator = " ", decimalSeparator = ".") => {
-        if(!number) number = 0;
+        if (!number) number = 0;
         switch(typeof number) {
             case "string": number = parseFloat(number); break;
             case "number": break;
@@ -253,7 +253,7 @@ module.exports = class Other {
     }
 
     async total(client, key) {
-        if(!["guilds", "channels", "users"].includes(key)) throw new Error("The key parameter in the function 'total()' must be 'guilds', 'channels' or 'users'.");
+        if (!["guilds", "channels", "users"].includes(key)) throw new Error("The key parameter in the function 'total()' must be 'guilds', 'channels' or 'users'.");
         let counts;
         switch(key) {
             case "guilds": counts = await client.cluster.fetchClientValues(`guilds.cache.size`).catch(() => []); break;

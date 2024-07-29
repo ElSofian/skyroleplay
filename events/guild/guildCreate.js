@@ -1,12 +1,10 @@
 const { EmbedBuilder, WebhookClient, time } = require("discord.js");
 const { serversLogsURL } = require("../../config");
 
-const serverLog = new WebhookClient({ url: serversLogsURL });
-
 module.exports.run = async(client, guild) => {
 
-        if(!guild.available) return;
-        if(["727930269998383226"].includes(guild.id)) return guild.leave(); // Blacklisted server
+        if (!guild.available) return;
+        if (["727930269998383226"].includes(guild.id)) return guild.leave(); // Blacklisted server
 
         const embed = new EmbedBuilder()
             .setColor("Green")
@@ -22,6 +20,6 @@ module.exports.run = async(client, guild) => {
             .setFooter({ text: `© SkyRoleplay`, iconURL: client.user.displayAvatarURL() })
             .setTimestamp()
             
-        serverLog.send({ embeds: [embed] });
+        // serverLog.send({ embeds: [embed] });
 
 }

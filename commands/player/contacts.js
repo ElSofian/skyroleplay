@@ -13,7 +13,7 @@ module.exports = {
 
         try {
 
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
 
         const numbers = await client.db.getMemberContacts(interaction.guildId, interaction.member.id);
         const chunks = client.functions.other.chunkArray(numbers, 10);
@@ -24,14 +24,14 @@ module.exports = {
             .setColor("Green")
             .setTitle("Contacts")
             .setDescription(numbers ? numbers.map(n => `${n.name} : ${n.number}`).join("\n\n") : t("no_contacts"))
-            if(index > 1) embed.setFooter({ text: `${index + 1}/${chunks.length}` })
+            if (index > 1) embed.setFooter({ text: `${index + 1}/${chunks.length}` })
 
             const rows = new ActionRowBuilder().addComponents(
                 new ButtonBuilder().setCustomId("add").setLabel(t("add")).setStyle(ButtonStyle.Success),
                 new ButtonBuilder().setCustomId("remove").setLabel(t("remove")).setStyle(ButtonStyle.Danger).setDisabled(!numbers)
             )
 
-            if(chunks.length > 1) {
+            if (chunks.length > 1) {
 
                 rows.addComponents(
                     new ButtonBuilder()
@@ -55,10 +55,10 @@ module.exports = {
         }
 
         const message = await interaction.reply(render(chunks[0], 0)).catch(() => {});
-        if(!message) return
+        if (!message) return
 
         const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.member.id, time: 120000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
 
         let current = 0;
         collector.on("collect", async (i) => {
@@ -82,13 +82,13 @@ module.exports = {
                     await i.showModal(modal).catch(() => {})
 
                     const modalCollector = await i.awaitModalSubmit({ filter: i => i.user.id === interaction.user.id && i.customId == `modal_contacts_${code}`, time: 60000 })
-                    if(!modalCollector) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
+                    if (!modalCollector) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
                     
                     const modalName = modalCollector.fields.getTextInputValue("name");
                     const modalNumber = i.customId == "add" ? modalCollector.fields.getTextInputValue("number"): null;
 
                     const hasContact = await client.db.hasContact(interaction.guildId, interaction.member.id, modalName)
-                    if(i.customId == "add" ? hasContact : !hasContact) return modalCollector.reply({ embeds: [errorEmbed(t(i.customId == "add" ? "already_have_contact" : "not_in_contacts", { number: modalNumber, name: modalName }), true)], components: [] }).catch(() => {})
+                    if (i.customId == "add" ? hasContact : !hasContact) return modalCollector.reply({ embeds: [errorEmbed(t(i.customId == "add" ? "already_have_contact" : "not_in_contacts", { number: modalNumber, name: modalName }), true)], components: [] }).catch(() => {})
 
                     await client.db[`${i.customId}MemberContact`](interaction.guildId, interaction.member.id, modalName, modalNumber)
 
@@ -109,7 +109,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

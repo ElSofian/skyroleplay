@@ -36,7 +36,7 @@ module.exports = {
         try {
 
             const member = interaction.options.getMember("joueur"); 
-            if(verify("member", { cantBotInclued: true })) return;
+            if (verify("member", { cantBotInclued: true })) return;
             
             let [rolesToAdd, rolesToRemove, idCard] = [
                 (await client.db.getOption(interaction.guildId, "roles.dead_add_roles") ?? "").split(","),
@@ -60,7 +60,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

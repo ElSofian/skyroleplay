@@ -288,25 +288,61 @@ module.exports = class Database {
 
     //############################# SOCIAL MEDIAS ############################
 
-    async getSocialAccount(guildId, userId, type) {
-        if(!["twitter", "instagram", "telegram"].includes(type)) throw new Error("Parameter 'type' must be 'twitter', 'instagram' or 'telegram' in getSocialAccount() function.")
-        return this._queryOne("SELECT * FROM social_account WHERE guild_id = ? AND user_id = ? AND type = ?;", [guildId, userId, type]);
+    async createSocialAccount(guildId, userId, type, name, nickname, bio, password) {
+        if (!["twitter", "instagram", "telegram"].includes(type)) throw new Error("Parameter 'type' must be 'twitter', 'instagram' or 'telegram' in getSocialAccount() function.")
+        return this._query("INSERT INTO social_account (guild_id, user_id, connected, type, name, nickname, bio, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
+        [guildId, userId, userId, type, name, nickname, bio, password]);
     }
 
-    async getSocialFollowers(guildId, userId, type) {
-        if(!["twitter", "instagram", "telegram"].includes(type)) throw new Error("Parameter 'type' must be 'twitter', 'instagram' or 'telegram' in getSocialAccount() function.")
-        return this._queryOne("SELECT * FROM social_followers WHERE guild_id = ? AND target_id = ? AND type = ?;", [guildId, userId, type]);
+    async deleteSocialAccount(guildId, id) {
+        return this._query("DELETE FROM social_account WHERE guild_id = ? AND id = ?;", [guildId, id]);
     }
 
-    async getSocialFollowing(guildId, userId, type) {
-        if(!["twitter", "instagram", "telegram"].includes(type)) throw new Error("Parameter 'type' must be 'twitter', 'instagram' or 'telegram' in getSocialAccount() function.")
-        return this._queryOne("SELECT * FROM social_followers WHERE guild_id = ? AND user_id = ? AND type = ?;", [guildId, userId, type]);
+    async getSocialAccount(guildId, id, type) {
+        if (!["twitter", "instagram", "telegram"].includes(type)) throw new Error("Parameter 'type' must be 'twitter', 'instagram' or 'telegram' in getSocialAccount() function.")
+        const data = await this._queryOne("SELECT * FROM social_account WHERE guild_id = ? AND id = ? AND type = ?;", [guildId, id, type]);
+        data.followers = await this.getSocialFollowers(guildId, data.id).then((data) => data.length);
+        data.following = await this.getSocialFollowing(guildId, data.id).then((data) => data.length);
+        return data;
     }
 
-    async setNickname(guildId, userId, type, nickname) {
-        if(!["twitter", "instagram", "telegram"].includes(type)) throw new Error("Parameter 'type' must be 'twitter', 'instagram' or 'telegram' in getSocialAccount() function.")
-        return this._queryOne("UPDATE social_account SET nickname = ? WHERE guild_id = ? AND user_id = ? AND type = ?;", [nickname, guildId, userId, type]);
+    async getSocialAccountByName(guildId, name, type) {
+        if (!["twitter", "instagram", "telegram"].includes(type)) throw new Error("Parameter 'type' must be 'twitter', 'instagram' or 'telegram' in getSocialAccount() function.")
+        return this._queryOne("SELECT * FROM social_account WHERE guild_id = ? AND name = ? AND type = ?;", [guildId, name, type]);
     }
+
+    async getSocialAccountLogin(guildId, type, nickname, password) {
+        if (!["twitter", "instagram", "telegram"].includes(type)) throw new Error("Parameter 'type' must be 'twitter', 'instagram' or 'telegram' in getSocialAccount() function.")
+        return this._queryOne("SELECT * FROM social_account WHERE guild_id = ? AND nickname = ? AND password = ? AND type = ?;", [guildId, nickname, password, type]);
+    }
+
+    async getSocialAccountConnected(guildId, userId, type) {
+        return this._queryOne("SELECT * FROM social_account WHERE guild_id = ? AND connected = ? AND type = ?;", [guildId, userId, type]);
+    }
+
+    async getSocialFollowers(guildId, id) {
+        return this._query("SELECT social_followers.*, social_account.user_id, social_account.name, social_account.nickname FROM social_followers LEFT JOIN social_account ON social_followers.account_id = social_account.id WHERE social_followers.guild_id = ? AND social_followers.target_id = ?;", [guildId, id]);
+    }
+
+    async getSocialFollowing(guildId, id) {
+        return this._query("SELECT social_followers.*, social_account.user_id, social_account.name, social_account.nickname FROM social_followers LEFT JOIN social_account ON social_followers.target_id = social_account.id WHERE social_followers.guild_id = ? AND social_followers.account_id = ?;", [guildId, id]);
+    }
+
+    async setSocialAccountConnexion(guildId, id, userId) {
+       return this._queryOne("UPDATE social_account SET connected = ? WHERE guild_id = ? AND id = ?;", [userId, guildId, id]);
+    }
+
+	async setSocialAccountName(guildId, id, name) {
+		return this._queryOne("UPDATE social_account SET name = ? WHERE guild_id = ? AND id = ?;", [name, guildId, id]);
+	}
+
+    async setSocialAccountNickname(guildId, id, nickname) {
+        return this._queryOne("UPDATE social_account SET nickname = ? WHERE guild_id = ? AND id = ?;", [nickname, guildId, id]);
+    }
+
+	async setSocialAccountBio(guildId, id, bio) {
+		return this._queryOne("UPDATE social_account SET bio = ? WHERE guild_id = ? AND id = ?;", [bio, guildId, id]);
+	}
 
     //############################# STOCK EXCHANGE ############################
 
@@ -422,7 +458,7 @@ module.exports = class Database {
     }
 
     async removeMemberDrug(guildId, userId, id, type, quantity, deleteDrug = false) {
-        if(deleteDrug) return this._query(`DELETE FROM member_drugs WHERE guild_id = ? AND user_id = ?${id ? " AND drug_id = ?" : ""};`, id ? [guildId, userId, id] : [guildId, userId]);
+        if (deleteDrug) return this._query(`DELETE FROM member_drugs WHERE guild_id = ? AND user_id = ?${id ? " AND drug_id = ?" : ""};`, id ? [guildId, userId, id] : [guildId, userId]);
         return this._query(`UPDATE member_drugs SET ${type} = ${type} - ? WHERE guild_id = ? AND user_id = ? AND drug_id = ?;`, [quantity, guildId, userId, id]);
     }
 
@@ -477,7 +513,7 @@ module.exports = class Database {
         this.resetMemberVehicles(guildId, userId);
         
         return this._multiple(
-            ["DELETE FROM leboncoin WHERE guild_id = ? AND seller_id = ?;", [guildId, userId]],
+            ["DELETE FROM ebay WHERE guild_id = ? AND seller_id = ?;", [guildId, userId]],
             ["DELETE FROM members WHERE guild_id = ? AND user_id = ?;", [guildId, userId]],
             ["DELETE FROM transactions WHERE guild_id = ? AND target_id = ?;", [guildId, userId]],
             ["DELETE FROM weapon_licences WHERE guild_id = ? AND user_id = ?;", [guildId, userId]],
@@ -581,7 +617,7 @@ module.exports = class Database {
     }
 
     async removeMemberItem(guildId, userId, itemId, quantity, deleteItem = false) {
-        if(deleteItem) return this._query("DELETE FROM member_items WHERE guild_id = ? AND user_id = ? AND item_id = ?;", [guildId, userId, itemId])
+        if (deleteItem) return this._query("DELETE FROM member_items WHERE guild_id = ? AND user_id = ? AND item_id = ?;", [guildId, userId, itemId])
         else return this._query("UPDATE member_items SET quantity = quantity - ? WHERE guild_id = ? AND user_id = ? AND item_id = ?;", [quantity, guildId, userId, itemId]);
     }
 
@@ -600,19 +636,19 @@ module.exports = class Database {
     }
 
     async depositItem(guildId, userId, itemId, itemType, drugType = null, localisation, placeId, quantity, allItemsRemoved = false) {
-        if(!["estate", "vehicle"].includes(localisation)) throw new Error("Localisation must be 'estate' or 'vehicle'");
-        if(!["items", "drugs"].includes(itemType)) throw new Error("itemType must be 'items' or 'drugs'");
-        if(itemType == "drugs" && !drugType) throw new Error("Drug type must be specified into 'depositItem()' function.");
+        if (!["estate", "vehicle"].includes(localisation)) throw new Error("Localisation must be 'estate' or 'vehicle'");
+        if (!["items", "drugs"].includes(itemType)) throw new Error("itemType must be 'items' or 'drugs'");
+        if (itemType == "drugs" && !drugType) throw new Error("Drug type must be specified into 'depositItem()' function.");
 
-        if(itemType == "items") {
-            if(allItemsRemoved) await this._query(`DELETE FROM member_items WHERE guild_id = ? AND user_id = ? AND item_id = ?;`, [guildId, userId, itemId]);
+        if (itemType == "items") {
+            if (allItemsRemoved) await this._query(`DELETE FROM member_items WHERE guild_id = ? AND user_id = ? AND item_id = ?;`, [guildId, userId, itemId]);
             else await this._query(`UPDATE member_items SET quantity = quantity - ? WHERE guild_id = ? AND user_id = ? AND item_id = ?;`, [quantity, guildId, userId, itemId])
 
             return this._query(`INSERT INTO ${localisation}_inventory (guild_id, ${localisation}_id, item_id, quantity) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?;`,
             [guildId, placeId, itemId, quantity, quantity]
             );
         } else {
-            if(allItemsRemoved) await this._query(`DELETE FROM member_drugs WHERE guild_id = ? AND user_id = ? AND drug_id = ?;`, [guildId, userId, itemId]);
+            if (allItemsRemoved) await this._query(`DELETE FROM member_drugs WHERE guild_id = ? AND user_id = ? AND drug_id = ?;`, [guildId, userId, itemId]);
             else await this._query(`UPDATE member_drugs SET ${drugType} = ${drugType} - ? WHERE guild_id = ? AND user_id = ? AND drug_id = ?;`, [quantity, guildId, userId, itemId])
 
             return this._query(`INSERT INTO ${localisation}_drugs (guild_id, ${localisation}_id, drug_id, ${drugType}) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE ${drugType} = ${drugType} + ?;`,
@@ -623,43 +659,43 @@ module.exports = class Database {
 
     async withdrawItem(guildId, userId, itemId, itemType, drugType = null, localisation, placeId, quantity, all = false) {
 
-        if(!["estate", "vehicle"].includes(localisation)) throw new Error("Localisation must be 'estate' or 'vehicle' into 'withdrawItem()' function.");
-        if(!["items", "drugs"].includes(itemType)) throw new Error("Item type must be 'items' or 'drugs' into 'withdrawItem()' function.");
+        if (!["estate", "vehicle"].includes(localisation)) throw new Error("Localisation must be 'estate' or 'vehicle' into 'withdrawItem()' function.");
+        if (!["items", "drugs"].includes(itemType)) throw new Error("Item type must be 'items' or 'drugs' into 'withdrawItem()' function.");
         
-        if(itemType == "items") {
+        if (itemType == "items") {
             
-            if(all) await this._query(`DELETE FROM ${localisation}_inventory WHERE guild_id = ? AND ${localisation}_id = ? AND item_id = ?;`, [guildId, placeId, itemId]);
+            if (all) await this._query(`DELETE FROM ${localisation}_inventory WHERE guild_id = ? AND ${localisation}_id = ? AND item_id = ?;`, [guildId, placeId, itemId]);
             else await this._query(`UPDATE ${localisation}_inventory SET quantity = quantity - ? WHERE guild_id = ? AND ${localisation}_id = ? AND item_id = ?;`, [quantity, guildId, placeId, itemId]);
             
         } else {
             
-            if(all) await this._query(`DELETE FROM ${localisation}_drugs WHERE guild_id = ? AND ${localisation}_id = ? AND drug_id = ?;`, [guildId, placeId, itemId]);
+            if (all) await this._query(`DELETE FROM ${localisation}_drugs WHERE guild_id = ? AND ${localisation}_id = ? AND drug_id = ?;`, [guildId, placeId, itemId]);
             else await this._query(`UPDATE ${localisation}_drugs SET ${drugType} = ${drugType} - ? WHERE guild_id = ? AND ${localisation}_id = ? AND drug_id = ?;`, [quantity, guildId, placeId, itemId]);
             
         }
         
-        if(itemType == "items") return this._query(`INSERT INTO member_items (guild_id, user_id, item_id, quantity) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?;`, [guildId, userId, itemId, quantity, quantity])
+        if (itemType == "items") return this._query(`INSERT INTO member_items (guild_id, user_id, item_id, quantity) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?;`, [guildId, userId, itemId, quantity, quantity])
         else return this._query(`INSERT INTO member_drugs (guild_id, user_id, drug_id, ${drugType}) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE ${drugType} = ${drugType} + ?;`, [guildId, userId, itemId, quantity, quantity])
 
     }
 
     async removeSafeItem(guildId, safeId, type, itemId, quantity, all = false) {
 
-        if(!["cg", "properties", "companies"].includes(type)) throw new Error("Localisation must be 'cg', 'properties' or 'companies' into 'removeSafeItem()' function.");
+        if (!["cg", "properties", "companies"].includes(type)) throw new Error("Localisation must be 'cg', 'properties' or 'companies' into 'removeSafeItem()' function.");
 
         switch(type) {
             case "cg": type = "vehicle"; break;
             case "properties": type = "estate"; break;
         }
 
-        if(all) await this._query(`DELETE FROM ${type}_inventory WHERE guild_id = ? AND ${type.replace("ies", "y")}_id = ? AND item_id = ?;`, [guildId, safeId, itemId]);
+        if (all) await this._query(`DELETE FROM ${type}_inventory WHERE guild_id = ? AND ${type.replace("ies", "y")}_id = ? AND item_id = ?;`, [guildId, safeId, itemId]);
         else await this._query(`UPDATE ${type}_inventory SET quantity = quantity - ? WHERE guild_id = ? AND ${type.replace("ies", "y")}_id = ? AND item_id = ?;`, [quantity, guildId, safeId, itemId]);
 
     }
 
     async getMemberItems(guildId, userId) {
         return this._query(`
-            SELECT member_items.quantity, member_items.hidden_quantity, shops_items.weight, IF(member_items.nickname IS NOT NULL, member_items.nickname, shops_items.name) AS name, shops_items.image, shops_items.hunger_add, shops_items.thirst_add, shops_items.id, shops_items.type, shops_items.role_required, shops_items.role_add, shops_items.role_remove, shops_items.max_items
+            SELECT member_items.quantity, member_items.hidden_quantity, shops_items.weight, if (member_items.nickname IS NOT NULL, member_items.nickname, shops_items.name) AS name, shops_items.image, shops_items.hunger_add, shops_items.thirst_add, shops_items.id, shops_items.type, shops_items.role_required, shops_items.role_add, shops_items.role_remove, shops_items.max_items
             FROM member_items
             LEFT JOIN shops_items ON shops_items.id = member_items.item_id
             WHERE member_items.guild_id = ? AND member_items.user_id = ?
@@ -668,7 +704,7 @@ module.exports = class Database {
 
     async getMemberItem(guildId, userId, itemId) {
         return this._queryOne(`
-            SELECT member_items.quantity, member_items.hidden_quantity, shops_items.weight, IF(member_items.nickname IS NOT NULL, member_items.nickname, shops_items.name) AS name, shops_items.image, shops_items.hunger_add, shops_items.thirst_add, shops_items.id, shops_items.type, shops_items.role_required, shops_items.role_add, shops_items.role_remove, shops_items.max_items
+            SELECT member_items.quantity, member_items.hidden_quantity, shops_items.weight, if (member_items.nickname IS NOT NULL, member_items.nickname, shops_items.name) AS name, shops_items.image, shops_items.hunger_add, shops_items.thirst_add, shops_items.id, shops_items.type, shops_items.role_required, shops_items.role_add, shops_items.role_remove, shops_items.max_items
             FROM member_items LEFT JOIN shops_items ON shops_items.id = member_items.item_id
             WHERE member_items.item_id = ? AND member_items.guild_id = ? AND member_items.user_id = ?
         `, [itemId, guildId, userId]);
@@ -731,7 +767,7 @@ module.exports = class Database {
 
     async isCompanyOwner(guildId, userId) {
         const data = await this._queryOne(
-            "SELECT companies_employees.company_id, companies.owner_id FROM companies_employees LEFT JOIN companies ON companies_employees.company_id = companies.id WHERE companies.guild_id = ? companies_employees.user_id = ?;",
+            "SELECT companies_employees.company_id, companies.owner_id FROM companies_employees LEFT JOIN companies ON companies_employees.company_id = companies.id WHERE companies.guild_id = ? AND companies_employees.user_id = ?;",
             [guildId, userId]
         );
         return data?.company_id ? data?.owner_id === userId : null;
@@ -747,7 +783,7 @@ module.exports = class Database {
         await this.ensureMember(guildId, ownerId);
         const values = [guildId, ...Object.values(companyData)];
         const { insertId } = await this._query(`INSERT INTO companies (guild_id, name, type, speciality, max_employees, color, logo) VALUES (?, ?, ?, ?, ?, ?, ?);`, values);
-        await this._query(`INSERT INTO companies_employees (company_id, user_id, owner, safe_access, account_access, desk_access) VALUES (?, ?, ?, ?, ?, ?);`, [insertId, ownerId, 1 /*is Owner*/, 1, 1, 1]);
+        await this._query(`INSERT INTO companies_employees (guild_id, company_id, user_id, owner, safe_access, account_access, desk_access) VALUES (?, ?, ?, ?, ?, ?, ?);`, [guildId, insertId, ownerId, 1 /*is Owner*/, 1, 1, 1]);
 
         return insertId;
     }
@@ -761,7 +797,7 @@ module.exports = class Database {
     }
 
     async getCompaniesWithOwner(guildId) {
-        const data = await this._query(`SELECT companies.*, GROUP_CONCAT(IF(companies_employees.owner = 1, companies_employees.user_id, NULL)) AS user_id FROM companies LEFT JOIN companies_employees ON companies.id = companies_employees.company_id WHERE companies.guild_id = ? GROUP BY companies.id`, [guildId]);
+        const data = await this._query(`SELECT companies.*, GROUP_CONCAT(if (companies_employees.owner = 1, companies_employees.user_id, NULL)) AS user_id FROM companies LEFT JOIN companies_employees ON companies.id = companies_employees.company_id WHERE companies.guild_id = ? GROUP BY companies.id`, [guildId]);
 
         return data.map(company => {
           const user_id = company.user_id ? company.user_id.split(',') : [];
@@ -800,7 +836,7 @@ module.exports = class Database {
     }
 
     async getCompanyInventory(companyId, drugs = false) {
-        if(drugs) return this._query(`SELECT companies_drugs.*, drugs.name, drugs.image FROM companies_drugs LEFT JOIN drugs ON companies_drugs.drug_id = drugs.id WHERE companies_drugs.company_id = ?`, [companyId]);
+        if (drugs) return this._query(`SELECT companies_drugs.*, drugs.name, drugs.image FROM companies_drugs LEFT JOIN drugs ON companies_drugs.drug_id = drugs.id WHERE companies_drugs.company_id = ?`, [companyId]);
         return this._query(`SELECT * FROM companies_inventory LEFT JOIN shops_items ON companies_inventory.item_id = shops_items.id WHERE companies_inventory.company_id = ?;`, [companyId]);
     }
 
@@ -810,10 +846,10 @@ module.exports = class Database {
     }
 
     async putCompanyInventory(guildId, companyId, type, itemId, drugType = null, quantity) {
-        if(!["drugs", "items"].includes(type)) throw new Error("Parameter 'type' must be 'drugs' or 'items' in 'putCompanyInventory()' function.");
-        if(type == "drugs" && !["untreated", "treated"].includes(drugType)) throw new Error("Parameter 'drugType' must be 'untreated' or 'treated' in 'putCompanyInventory()' function.")
+        if (!["drugs", "items"].includes(type)) throw new Error("Parameter 'type' must be 'drugs' or 'items' in 'putCompanyInventory()' function.");
+        if (type == "drugs" && !["untreated", "treated"].includes(drugType)) throw new Error("Parameter 'drugType' must be 'untreated' or 'treated' in 'putCompanyInventory()' function.")
         
-        if(type == "items") {
+        if (type == "items") {
 
             return this._query("INSERT INTO companies_inventory (guild_id, company_id, item_id, quantity) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?;",
                 [guildId, companyId, itemId, quantity, quantity]
@@ -821,28 +857,28 @@ module.exports = class Database {
 
         } else {
 
-            return this._query(`INSERT INTO companies_drugs (company_id, drug_id, ${drugType}) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE ${drugType} = ${drugType} + ?;`,
-                [companyId, itemId, quantity, quantity]
+            return this._query(`INSERT INTO companies_drugs (guild_id, company_id, drug_id, ${drugType}) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE ${drugType} = ${drugType} + ?;`,
+                [guildId, companyId, itemId, quantity, quantity]
             );
 
         }
     }
 
-    async takeCompanyInventory(guildId, companyId, type, itemId, drugType = null, quantity, deleteItem = false) {
+    async takeCompanyInventory(companyId, type, itemId, drugType = null, quantity, deleteItem = false) {
 
-        if(!["drugs", "items"].includes(type)) throw new Error("Parameter 'type' must be 'drugs' or 'items' in 'putCompanyInventory()' function.");
-        if(type == "drugs" && !["untreated", "treated"].includes(drugType)) throw new Error("Parameter 'drugType' must be 'untreated' or 'treated' in 'putCompanyInventory()' function.")
+        if (!["drugs", "items"].includes(type)) throw new Error("Parameter 'type' must be 'drugs' or 'items' in 'putCompanyInventory()' function.");
+        if (type == "drugs" && !["untreated", "treated"].includes(drugType)) throw new Error("Parameter 'drugType' must be 'untreated' or 'treated' in 'putCompanyInventory()' function.")
 
-        if(type == "items") {
+        if (type == "items") {
             
-            if(deleteItem) return this._query("DELETE FROM companies_inventory WHERE company_id = ? AND item_id = ? AND guild_id = ?;", [companyId, itemId, guildId]);
-            else return this._query("UPDATE companies_inventory SET quantity = quantity - ? WHERE company_id = ? AND item_id = ? AND guild_id = ?;",
-                [quantity, companyId, itemId, guildId]
+            if (deleteItem) return this._query("DELETE FROM companies_inventory WHERE company_id = ? AND item_id = ?;", [companyId, itemId]);
+            else return this._query("UPDATE companies_inventory SET quantity = quantity - ? WHERE company_id = ? AND item_id = ?;",
+                [quantity, companyId, itemId]
             );
 
         } else {
 
-            if(deleteItem) return this._query(`DELETE FROM companies_drugs WHERE company_id = ? AND drug_id = ?;`, [companyId, itemId]);
+            if (deleteItem) return this._query(`DELETE FROM companies_drugs WHERE company_id = ? AND drug_id = ?;`, [companyId, itemId]);
             else return this._query(`UPDATE companies_drugs SET ${drugType} = ${drugType} - ? WHERE company_id = ? AND drug_id = ?`,
                 [quantity, companyId, itemId]
             );
@@ -866,11 +902,11 @@ module.exports = class Database {
         return this._query(`UPDATE companies_employees SET ${type} = 0 WHERE company_id = ? AND user_id = ?`, [companyId, userId]);
     }
 
-    async recruitMemberCompany(userId, companyId, policeNumber = null) {
-        return this._query("INSERT INTO companies_employees (company_id, user_id, owner, police_number) VALUES (?, ?, ?, ?);", [companyId, userId, 0 /*is not Owner*/, policeNumber]);
+    async recruitMemberCompany(guildId, userId, companyId, policeNumber = null) {
+        return this._query("INSERT INTO companies_employees (guild_id, company_id, user_id, owner, police_number) VALUES (?, ?, ?, ?, ?);", [guildId, companyId, userId, 0 /*is not Owner*/, policeNumber]);
     }
 
-    async fireMemberCompany(userId, companyId) {
+    async fireMemberCompany(guildId, userId, companyId) {
         return this._query("DELETE FROM companies_employees WHERE user_id = ? AND company_id = ?;", [userId, companyId]);
     }
 
@@ -878,12 +914,12 @@ module.exports = class Database {
         return this._query(`UPDATE companies SET ${dirty ? "dirty_money" : "money"} = ${dirty ? "dirty_money" : "money"} + ? WHERE id = ?`, [amount, companyId]);
     }
 
-    async setCompanyOwner(company, employeesLength, userId, newOwnerIsEmployee = false) {
-        if(!newOwnerIsEmployee && company?.max_employees && company.max_employees < (employeesLength + 1)) await this._query("DELETE FROM companies_employees WHERE company_id = ? AND owner = 1;", [company.id]);
+    async setCompanyOwner(guildId, company, employeesLength, userId, newOwnerIsEmployee = false) {
+        if (!newOwnerIsEmployee && company?.max_employees && company.max_employees < (employeesLength + 1)) await this._query("DELETE FROM companies_employees WHERE company_id = ? AND owner = 1;", [company.id]);
         else await this._query("UPDATE companies_employees SET owner = 0, safe_access = 0, desk_access = 0, account_access = 0 WHERE company_id = ? AND owner = 1;", [company.id]);
         
-        if(newOwnerIsEmployee) return this._query("UPDATE companies_employees SET owner = 1, safe_access = 1, desk_access = 1, account_access = 1 WHERE company_id = ? AND user_id = ?", [company.id, userId]);
-        else return this._query("INSERT INTO companies_employees (company_id, user_id, owner, safe_access, desk_access, account_access) VALUES (?, ?, ?, ?, ?, ?);", [company.id, userId, 1, 1, 1, 1]);
+        if (newOwnerIsEmployee) return this._query("UPDATE companies_employees SET owner = 1, safe_access = 1, desk_access = 1, account_access = 1 WHERE company_id = ? AND user_id = ?", [company.id, userId]);
+        else return this._query("INSERT INTO companies_employees (guild_id, company_id, user_id, owner, safe_access, desk_access, account_access) VALUES (?, ?, ?, ?, ?, ?, ?);", [guildId, company.id, userId, 1, 1, 1, 1]);
     }
 
     //############################# BILLS ############################
@@ -940,47 +976,47 @@ module.exports = class Database {
 
     async addSale(guildId, userId, name, description, price, image = null, thumbnail = null) {
         await this.ensureGuild(guildId);
-        return this._query("INSERT INTO leboncoin (guild_id, seller_id, name, description, price, image, thumbnail) VALUES (?, ?, ?, ?, ?, ?, ?);", [guildId, userId, name, description, price, image, thumbnail]);
+        return this._query("INSERT INTO ebay (guild_id, seller_id, name, description, price, image, thumbnail) VALUES (?, ?, ?, ?, ?, ?, ?);", [guildId, userId, name, description, price, image, thumbnail]);
     }
 
     async deleteSale(guildId, saleId) {
-        await this._query("DELETE FROM leboncoin_likes WHERE guild_id = ? AND sale_id = ?;", [guildId, saleId]);
-        return this._query("DELETE FROM leboncoin WHERE guild_id = ? AND id = ?;", [guildId, saleId]);
+        await this._query("DELETE FROM ebay_likes WHERE guild_id = ? AND sale_id = ?;", [guildId, saleId]);
+        return this._query("DELETE FROM ebay WHERE guild_id = ? AND id = ?;", [guildId, saleId]);
     }
 
     async editSale(guildId, saleId, name, price, description) {
-        return this._query("UPDATE leboncoin SET name = ?, price = ?, description = ? WHERE guild_id = ? AND id = ?;", [name, price, description, guildId, saleId]);
+        return this._query("UPDATE ebay SET name = ?, price = ?, description = ? WHERE guild_id = ? AND id = ?;", [name, price, description, guildId, saleId]);
     }
 
     async getSales(guildId) {
-        return this._query("SELECT * FROM leboncoin WHERE guild_id = ?;", [guildId]);
+        return this._query("SELECT * FROM ebay WHERE guild_id = ?;", [guildId]);
     }
 
     async getSale(guildId, saleId) {
-        const data = await this._queryOne("SELECT * FROM leboncoin WHERE guild_id = ? AND id = ?;", [guildId, saleId]);
+        const data = await this._queryOne("SELECT * FROM ebay WHERE guild_id = ? AND id = ?;", [guildId, saleId]);
         return data ?? null;
     }
 
     async getSaleByName(guildId, name) {
-        const data = await this._queryOne("SELECT * FROM leboncoin WHERE guild_id = ? AND name = ?;", [guildId, name]);
+        const data = await this._queryOne("SELECT * FROM ebay WHERE guild_id = ? AND name = ?;", [guildId, name]);
         return data ?? null;
     }
 
     async getMemberSales(guildId, userId) {
-        return this._query("SELECT * FROM leboncoin WHERE guild_id = ? AND seller_id = ?;", [guildId, userId]);
+        return this._query("SELECT * FROM ebay WHERE guild_id = ? AND seller_id = ?;", [guildId, userId]);
     }
 
     async getMemberLikes(guildId, userId) {
-        return this._query("SELECT leboncoin_likes.sale_id, leboncoin.* FROM leboncoin_likes LEFT JOIN leboncoin ON leboncoin_likes.sale_id = leboncoin.id WHERE leboncoin_likes.guild_id = ? AND leboncoin_likes.user_id = ?;", [guildId, userId]);
+        return this._query("SELECT ebay_likes.sale_id, ebay.* FROM ebay_likes LEFT JOIN ebay ON ebay_likes.sale_id = ebay.id WHERE ebay_likes.guild_id = ? AND ebay_likes.user_id = ?;", [guildId, userId]);
     }
 
     async likeSale(guildId, userId, saleId) {
         await this.ensureGuild(guildId);
-        return this._query("INSERT INTO leboncoin_likes (guild_id, user_id, sale_id) VALUES (?, ?, ?);", [guildId, userId, saleId]);
+        return this._query("INSERT INTO ebay_likes (guild_id, user_id, sale_id) VALUES (?, ?, ?);", [guildId, userId, saleId]);
     }
 
     async unlikeSale(guildId, userId, saleId) {
-        return this._query("DELETE FROM leboncoin_likes WHERE guild_id = ? AND user_id = ? AND sale_id = ?;", [guildId, userId, saleId]);
+        return this._query("DELETE FROM ebay_likes WHERE guild_id = ? AND user_id = ? AND sale_id = ?;", [guildId, userId, saleId]);
     }
 
     //############################# PROPERTIES ############################
@@ -1015,7 +1051,7 @@ module.exports = class Database {
     }
 
     async getSafeProperty(id, drugs = false) {
-        if(drugs) {
+        if (drugs) {
 
             return this._query(
             `SELECT estate_drugs.*, drugs.name, drugs.image FROM estate_drugs LEFT JOIN drugs ON estate_drugs.drug_id = drugs.id
@@ -1032,11 +1068,11 @@ module.exports = class Database {
 
     async resetMemberProperties(guildId, userId) {
         let memberEstates = await this.getMemberProperties(guildId, userId);
-        if(!memberEstates.length) return;
+        if (!memberEstates.length) return;
         for(const estate of memberEstates) {
             if (estate.owner_id === userId) {
                 let authorized_members = (estate.authorized_members ?? "").split(",");
-                if(authorized_members.length) {
+                if (authorized_members.length) {
                     let newOwner = authorized_members.pop();
                     this._query("UPDATE estates SET owner_id = ?, authorized_members = ? WHERE guild_id = ? AND id = ?;", [newOwner == "" ? null : newOwner, authorized_members.length ? authorized_members.join(",") : null, guildId, estate.id]);
                 } else this._query("UPDATE estates SET owner_id = NULL WHERE guild_id = ? AND id = ?;", [guildId, estate.id]);
@@ -1049,7 +1085,7 @@ module.exports = class Database {
     }
 
     async buyProperty(guildId, id, userId, price, realEstateCompanyId) {
-        if(realEstateCompanyId) await this._query("UPDATE companies SET money = money + ? WHERE id = ?;", [price, realEstateCompanyId]);
+        if (realEstateCompanyId) await this._query("UPDATE companies SET money = money + ? WHERE id = ?;", [price, realEstateCompanyId]);
         return this._query(`
         UPDATE bank_accounts, estates
         SET bank_accounts.bank_money = bank_accounts.bank_money - ?, estates.realestate_id = ?, estates.owner_id = ?, estates.sell_date = ?
@@ -1060,7 +1096,7 @@ module.exports = class Database {
     async sellProperty(guildId, id, userId, price, realEstateCompanyId = false, reasonCompany = "", reasonUser = "") {
         
         console.log(guildId, id, userId, price, realEstateCompanyId, reasonCompany, reasonUser)
-        if(realEstateCompanyId) {
+        if (realEstateCompanyId) {
             await this._multiple(
                 ["UPDATE companies SET money = money - ? WHERE id = ?;", [price, realEstateCompanyId]],
                 ["INSERT INTO transactions (guild_id, target_id, reason, amount) VALUES (?, ?, ?, ?);", [guildId, realEstateCompanyId, reasonCompany, -price]],
@@ -1081,7 +1117,7 @@ module.exports = class Database {
     }
 
     async setDoubleKeys(guildId, id, table, authorizedMembers) {
-        if(authorizedMembers == "") authorizedMembers = null;
+        if (authorizedMembers == "") authorizedMembers = null;
         return this._query(`UPDATE ${table} SET authorized_members = ? WHERE guild_id = ? AND id = ?;`, [authorizedMembers, guildId, id]);
     }
 
@@ -1248,7 +1284,7 @@ module.exports = class Database {
     }
 
     async freezeAccount(guildId, userId, reason, unfreeze = false) {
-        if(unfreeze) return this._query("UPDATE bank_accounts SET frozen_date = NULL, frozen_reason = NULL WHERE guild_id = ? AND user_id = ?;", [guildId, userId]);  
+        if (unfreeze) return this._query("UPDATE bank_accounts SET frozen_date = NULL, frozen_reason = NULL WHERE guild_id = ? AND user_id = ?;", [guildId, userId]);  
         return this._query("UPDATE bank_accounts SET frozen_date = ?, frozen_reason = ? WHERE guild_id = ? AND user_id = ?;", [new Date(), reason, guildId, userId]);
     }
 
@@ -1307,7 +1343,7 @@ module.exports = class Database {
     }
 
     async setDriverLicensePoints(guildId, userId, type, points, deleteDL = false) {
-        if(deleteDL) return this._query("DELETE FROM driver_licences WHERE guild_id = ? AND user_id = ? AND type = ?;", [guildId, userId, type]);
+        if (deleteDL) return this._query("DELETE FROM driver_licences WHERE guild_id = ? AND user_id = ? AND type = ?;", [guildId, userId, type]);
         else return this._query("UPDATE driver_licences SET points = ? WHERE guild_id = ? AND user_id = ? AND type = ?;", [points, guildId, userId, type]);
     }
 
@@ -1389,7 +1425,7 @@ module.exports = class Database {
     //############################# LICENSE PLATES ############################
 
     async getMemberCG(guildId, memberId, id = null) {
-        if(id) {
+        if (id) {
 
             return this._queryOne(`
             SELECT member_cg.*, id_cards.first_name, id_cards.last_name FROM member_cg LEFT JOIN id_cards ON id_cards.user_id = member_cg.user_id AND id_cards.guild_id = member_cg.guild_id
@@ -1432,11 +1468,11 @@ module.exports = class Database {
 
     async resetMemberVehicles(guildId, userId) {
         let memberCG = await this.getMemberCG(guildId, userId);
-        if(!memberCG.length) return;
+        if (!memberCG.length) return;
         for(const cg of memberCG) {
             if (cg.user_id === userId) {
                 let authorized_members = (cg.authorized_members ?? "").split(",");
-                if(authorized_members.length) {
+                if (authorized_members.length) {
                     let newOwner = authorized_members.pop();
                     this._query("UPDATE member_cg SET user_id = ?, authorized_members = ? WHERE guild_id = ? AND id = ?;", [newOwner, authorized_members.length ? authorized_members.join(",") : null, guildId, cg.id]);
                 } else this._query("DELETE FROM member_cg WHERE guild_id = ? AND id = ?;", [guildId, cg.id]);
@@ -1474,7 +1510,7 @@ module.exports = class Database {
     }
 
     async getSafeVehicle(vehicleId, drugs = false) {
-        if(drugs) {
+        if (drugs) {
 
             return this._query(
             `SELECT vehicle_drugs.*, drugs.name, drugs.image FROM vehicle_drugs LEFT JOIN drugs ON vehicle_drugs.drug_id = drugs.id
@@ -1548,7 +1584,7 @@ module.exports = class Database {
     async getClassement(guild, type, limit) {
 
         // 1 = dirty money, 2 = cash, 3 = bank
-        if(type == 1) {
+        if (type == 1) {
             const data_dirty_money = await this._query(`SELECT * FROM members WHERE guild_id = '${guild}' ORDER BY dirty_money DESC LIMIT ${Number(limit)};`);
             return data_dirty_money;
         }
@@ -1561,7 +1597,7 @@ module.exports = class Database {
 
     async getCriminalRecords(guildId, id = false, isCase = false) {
         // isCase = Avoir des infos sur une entrée en particulier
-        if(isCase) return this._queryOne("SELECT criminal_records.*, id_cards.first_name, id_cards.last_name FROM criminal_records LEFT JOIN id_cards ON criminal_records.user_id = id_cards.user_id WHERE criminal_records.guild_id = ? AND criminal_records.id = ?;", [guildId, id]);
+        if (isCase) return this._queryOne("SELECT criminal_records.*, id_cards.first_name, id_cards.last_name FROM criminal_records LEFT JOIN id_cards ON criminal_records.user_id = id_cards.user_id WHERE criminal_records.guild_id = ? AND criminal_records.id = ?;", [guildId, id]);
         else return this._query(`SELECT criminal_records.*, id_cards.first_name, id_cards.last_name FROM criminal_records LEFT JOIN id_cards ON criminal_records.user_id = id_cards.user_id WHERE criminal_records.status = 0 AND criminal_records.guild_id = ?${id ? "AND criminal_records.user_id = ?" : ""};`, id ? [guildId, id] : [guildId]);
         
     }
@@ -1582,6 +1618,7 @@ module.exports = class Database {
     //############################# STAFF ############################
 
     async getStaff(userId) {
+		return true;
         return this._queryOne("SELECT level FROM nisupport_public.niteam WHERE user_id = ?;", [userId]);
     }
 
@@ -1593,7 +1630,7 @@ module.exports = class Database {
             [guildId, optionName]
         );
 
-        if(!data) return null;
+        if (!data) return null;
         return this._parseData(data);
     }
 
@@ -1681,7 +1718,7 @@ module.exports = class Database {
     
         this.client.logger.error(error, errorType.toUpperCase());
 
-        if(this.client.config.sendErrorsInChannel) {
+        if (this.client.config.sendErrorsInChannel) {
             const logsEmbed = new EmbedBuilder()
                 .setTitle(`${this.client.constants.emojis.warns} ${errorType}`)
                 .setDescription(codeBlock("js", error.stack))

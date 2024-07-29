@@ -39,7 +39,7 @@ module.exports = {
         try {
 
             const member = interaction.options.getMember("joueur") || interaction.member;
-            if(interaction.options.getMember("joueur") && verify("member", { cantBotInclued: true })) return;
+            if (interaction.options.getMember("joueur") && verify("member", { cantBotInclued: true })) return;
 
             const state = await client.db.getMemberState(interaction.guildId, member.user.id);
             const inSession = await client.db.isInSession(interaction.guildId, member.user.id);
@@ -77,7 +77,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

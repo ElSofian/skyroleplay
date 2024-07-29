@@ -36,7 +36,7 @@ module.exports = {
         try {
 
         let link = client.functions.illegal.getIllegalLink(client, interaction.guildId, interaction.user.id);
-        if(link) return errorEmbed(t("already_doing", { link: link }, "errors"));
+        if (link) return errorEmbed(t("already_doing", { link: link }, "errors"));
 
         const location = interaction.options.getString("lieu");
         const embed = new EmbedBuilder()
@@ -65,11 +65,11 @@ module.exports = {
                 interaction.editReply({ embeds: [embed], components: [row] }).catch(() => {});
             });
 
-        if(!button) return;
+        if (!button) return;
         const buttonCustomId = button.customId;
 
         link = client.functions.illegal.getIllegalLink(client, interaction.guildId, interaction.user.id);
-        if(link) button.reply(errorEmbed(t("already_doing", { link: link }, "errors"), true));
+        if (link) button.reply(errorEmbed(t("already_doing", { link: link }, "errors"), true));
 
         const options = await client.db.getOptions(interaction.guildId, [
             `illegal.robbery.${buttonCustomId}.min`,
@@ -92,7 +92,7 @@ module.exports = {
         // Validate channel permissions
         const channel = interaction.guild.channels.cache.get(options["illegal.robbery.channel"]) ?? interaction.channel;
 
-        if(!channel.permissionsFor(client.user.id).has(["ViewChannel", "SendMessages", "EmbedLinks"]))
+        if (!channel.permissionsFor(client.user.id).has(["ViewChannel", "SendMessages", "EmbedLinks"]))
             return button.update({
                 embeds: [errorEmbed(t("perms_send", { channel: interaction.channel.toString() }, "errors"), true)],
                 content: null,
@@ -109,7 +109,7 @@ module.exports = {
             case "bank": thumbnail = "https://cdn.dribbble.com/users/533798/screenshots/2210893/safe.gif"; break;
         }
 
-        if(!["atm", "burglary", "minimarket", "jewelery", "bank"].includes(buttonCustomId)) console.log(`-- ERREUR Commande braquages utilisée --\n>> Id du boutton : ${buttonCustomId} <<`); // à supprimer une fois l'erreur fix : Cannot read property 'fr' of undefined
+        if (!["atm", "burglary", "minimarket", "jewelery", "bank"].includes(buttonCustomId)) console.log(`-- ERREUR Commande braquages utilisée --\n>> Id du boutton : ${buttonCustomId} <<`); // à supprimer une fois l'erreur fix : Cannot read property 'fr' of undefined
         robberyType = t(`main_buttons.${buttonCustomId}`)
 
         const claimed = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId("claimed").setEmoji("✅").setDisabled().setLabel(t(`buttons.claim`)).setStyle(ButtonStyle.Secondary))
@@ -150,11 +150,11 @@ module.exports = {
                 client.functions.illegal.deleteIllegal(client, interaction.guildId, interaction.user.id);
                 itemsList.forEach(i => itemsQuantity += i.quantity);
 
-                if(((await client.db.getDirtyMoney(interaction.guildId, interaction.user.id))?.dirty_money ?? 0) + amount >= 2147483647) amount = 2147483646
+                if (((await client.db.getDirtyMoney(interaction.guildId, interaction.user.id))?.dirty_money ?? 0) + amount >= 2147483647) amount = 2147483646
 
                 await client.db.addDirtyMoney(interaction.guildId, interaction.user.id, amount);
                 const finalEmbed = new EmbedBuilder();
-                if(successful){
+                if (successful){
                     finalEmbed
                     .setColor("Green")
                     .setTitle(t(buttonCustomId == "burglary" ? "end_embed.title_burglary.success" : `end_embed.title.success`, { robbery: robberyType }))
@@ -176,7 +176,7 @@ module.exports = {
 
             async function claim_buttons() {
 
-                if(claims >= maxclaim) return end(true)
+                if (claims >= maxclaim) return end(true)
     
                 setTimeout(async () => {
     
@@ -189,13 +189,13 @@ module.exports = {
                         let itemIsMoney;
                         const items = await client.db.getBurglaryItems(interaction.guildId)
 
-                        if(buttonCustomId == "burglary" && items) {
+                        if (buttonCustomId == "burglary" && items) {
                             
                             const possibilites = ["money", "items", "money", "items", "money", "items", "money", "items", "money", "items"]
                             const choice = possibilites[Math.floor(Math.random() * possibilites.length)]
                             choice == "items" && items.length !== alreadyHave.length ? itemIsMoney = false : itemIsMoney = true;
                             
-                            if(!itemIsMoney && items.length !== alreadyHave.length) {
+                            if (!itemIsMoney && items.length !== alreadyHave.length) {
                                 
                                 const memberInventory = await client.db.getMemberItems(interaction.guildId, interaction.member.id)
                                 const memberInventoryWeight = memberInventory.reduce((a, b) => a + (b.weight * b.quantity), 0) + (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id)).reduce((a, b) => a + ((b?.untreated ?? 0) + (b?.treated ?? 0)), 0);
@@ -209,7 +209,7 @@ module.exports = {
                                 alreadyHave.push(item.id);
                                 const amountItems = client.functions.other.randomBetween(item.min, item.max)
 
-                                if(item.max_items && (amountItems + (((memberInventory.find(i => i.id == item.id))?.quantity ?? 0) + (memberInventory.find(i => i.id == item.id))?.hidden_quantity) < item.max_items)) {
+                                if (item.max_items && (amountItems + (((memberInventory.find(i => i.id == item.id))?.quantity ?? 0) + (memberInventory.find(i => i.id == item.id))?.hidden_quantity) < item.max_items)) {
                                     await client.db.addMemberItem(interaction.guildId, interaction.member.id, item.id, amountItems);
                                     itemsList.push({ name: `${amountItems} ${item.name}`, quantity: amountItems });
                                 }
@@ -227,7 +227,7 @@ module.exports = {
                         
                         await message.edit({ embeds: [getEmbed(amount, itemsList)], components: [newRow] }).then(() => {
                             
-                            if(claims+1 < maxclaim) setTimeout(async() => await message.edit({ components: [claimed] }).catch(() => {}), 1500)
+                            if (claims+1 < maxclaim) setTimeout(async() => await message.edit({ components: [claimed] }).catch(() => {}), 1500)
                             
                         }).catch(() => {})
                         
@@ -251,7 +251,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

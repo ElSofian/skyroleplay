@@ -66,7 +66,7 @@ module.exports = {
         const content = interaction.options.getString("contenu");
         const cityName = (await client.db.getOption(interaction.guildId, "global.city_name")) || interaction.guild.name;
 
-        if(verify("member", { cantBotInclued: true })) return;
+        if (verify("member", { cantBotInclued: true })) return;
 
         const embed = new EmbedBuilder()
             .setColor("White")
@@ -78,7 +78,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

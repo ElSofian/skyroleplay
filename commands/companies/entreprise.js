@@ -268,14 +268,14 @@ module.exports = {
 
             case "créer": {
 
-                if(!(await client.functions.permissions.configModerator(interaction, "entreprise créer"))) return;
+                if (!(await client.functions.permissions.configModerator(interaction, "entreprise créer"))) return;
                 
                 const findCompany = await client.db.findCompany(interaction.guildId, interaction.options.getString("nom"))
-                if(findCompany) return errorEmbed(t("company_already_exists", { name: interaction.options.getString("nom") }))
+                if (findCompany) return errorEmbed(t("company_already_exists", { name: interaction.options.getString("nom") }))
 
                 const logo = interaction.options.getAttachment("logo");
                 let logoURL = null;
-                //if(logo) await imgurUploader(logo.url, { title: logo.name }).then(data => { logoURL = data?.link });
+                //if (logo) await imgurUploader(logo.url, { title: logo.name }).then(data => { logoURL = data?.link });
                 
                 const companyData = {
                     name: interaction.options.getString("nom"),
@@ -287,17 +287,17 @@ module.exports = {
                 };
 
                 
-                if(companyData.name.length > 50) return errorEmbed(t("name_limit")); // Valide company name
-                if(companyData?.max_employees <= 0) return errorEmbed(t("no_zero_employees")); // Validate max employees
+                if (companyData.name.length > 50) return errorEmbed(t("name_limit")); // Valide company name
+                if (companyData?.max_employees <= 0) return errorEmbed(t("no_zero_employees")); // Validate max employees
 
                 // Validate color
-                if(interaction.options.getString("couleur")) {
+                if (interaction.options.getString("couleur")) {
                     const resolvedColor = client.functions.other.isHexColor(companyData.color.toLowerCase());
-                    if(!resolvedColor) return errorEmbed(t("color_undefined", { color: interaction.options.getString("couleur"), link: client.constants.links.colorPicker }, "errors"));
+                    if (!resolvedColor) return errorEmbed(t("color_undefined", { color: interaction.options.getString("couleur"), link: client.constants.links.colorPicker }, "errors"));
                     else companyData.color = resolvedColor;
                 }
 
-                if(interaction.options.getAttachment("logo") && !isWebUri(companyData.logo)) companyData.logo = null;
+                if (interaction.options.getAttachment("logo") && !isWebUri(companyData.logo)) companyData.logo = null;
             
                 await client.db.createCompany(interaction.guildId, interaction.user.id, companyData);
 
@@ -335,13 +335,13 @@ module.exports = {
 
             case "supprimer": {
 
-                if(!(await client.functions.permissions.configModerator(interaction, "entreprise supprimer"))) return;
-                if(!(interaction.options.getString("nom-entreprise") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "nom-entreprise" : "company-name" }, "errors"));
+                if (!(await client.functions.permissions.configModerator(interaction, "entreprise supprimer"))) return;
+                if (!(interaction.options.getString("nom-entreprise") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "nom-entreprise" : "company-name" }, "errors"));
 
                 const companyId = interaction.options.getString("nom-entreprise").split("&#46;")[1]
                 const company = await client.db.getCompany(interaction.guildId, companyId)
                 const validation = await client.functions.userinput.askValidation(interaction, t("question_delete_company", { name: company.name }));
-                if(!validation) return;
+                if (!validation) return;
                 
                 await client.db.deleteCompany(company.id);
                 await validation.update({ embeds: [successEmbed(t("validation_delete", { name: company.name }), true)], components: [] }).catch(() => {});
@@ -359,7 +359,7 @@ module.exports = {
             //! AFFICHER (pannel ou coffre)
             case "afficher": {
 
-                if(!(interaction.options.getString("nom-entreprise") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "nom-entreprise" : "company-name" }, "errors"));
+                if (!(interaction.options.getString("nom-entreprise") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "nom-entreprise" : "company-name" }, "errors"));
                 
                 await interaction.deferReply().catch(() => {});
                 
@@ -375,10 +375,10 @@ module.exports = {
                 let charEmployees = "", displayEmployees = 0, limitDisplayEmployees = false;
 
                 for(const employee of employees) {
-                    if(employee.owner == 1) continue;
+                    if (employee.owner == 1) continue;
                     
                     const newChar = `${employee?.police_number ? `**[${`${employee.police_number}`.length == 1 ? "0" : ""}${employee.police_number}]** ` : ""}<@${employee.user_id}>\n`
-                    if(charEmployees.length + newChar.length >= 1008) {
+                    if (charEmployees.length + newChar.length >= 1008) {
                         limitDisplayEmployees = true;
                         break;
                     };
@@ -390,7 +390,7 @@ module.exports = {
                 const companyType = companyTypes.find(({ value }) => value == type)?.name ?? t("unknown");
 
                 const rows = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId("out").setLabel(t("buttons.out")).setStyle(ButtonStyle.Primary))
-                if(![t("company_type.organization"), t("company_type.gang")].includes(companyType)) rows.addComponents(new ButtonBuilder().setCustomId("account").setLabel(t("buttons.account")).setStyle(ButtonStyle.Secondary))
+                if (![t("company_type.organization"), t("company_type.gang")].includes(companyType)) rows.addComponents(new ButtonBuilder().setCustomId("account").setLabel(t("buttons.account")).setStyle(ButtonStyle.Secondary))
                 rows.addComponents(
                     new ButtonBuilder().setCustomId("safe").setLabel(t("buttons.safe")).setStyle(ButtonStyle.Secondary),
                     new ButtonBuilder().setCustomId("desk").setLabel(t("buttons.desk")).setStyle(ButtonStyle.Secondary)
@@ -434,7 +434,7 @@ module.exports = {
                                 .setDisabled(index.endsWith("second") ? (employees.filter(e => e[`${customId.replace("_access", "")}_access`] == 1)).length - 1 <= 0 : employees.length - 1 <= 0),
                             )
 
-                            if(index == "access") rows.addComponents(
+                            if (index == "access") rows.addComponents(
                                 new ButtonBuilder().setCustomId("desk_access").setLabel(t("buttons.desk")).setStyle(ButtonStyle.Secondary).setDisabled(index.endsWith("second") ? ((employees.filter(e => e[`${customId.replace("_access", "")}_access`] == 0)).length - 1) <= 0 : employees.length - 1 <= 0),
                             )
 
@@ -457,10 +457,13 @@ module.exports = {
                                 .setLabel(t("buttons.fire"))
                                 .setStyle(ButtonStyle.Secondary)
                                 .setDisabled((employees.length - 1) <= 0),
-                            )
+                            	new ButtonBuilder()
+								.setCustomId("access")
+								.setLabel(t("buttons.access"))
+								.setStyle(ButtonStyle.Secondary)
+								.setDisabled(!employees.find(({ user_id, owner }) => user_id == interaction.user.id && owner == 1) || (employees.length - 1) <= 0)
+							)
 
-                            if(isBeta) deskRows.addComponents(new ButtonBuilder().setCustomId("access").setLabel(t("buttons.access")).setStyle(ButtonStyle.Secondary).setDisabled(!employees.find(({ user_id, owner }) => user_id == interaction.user.id && owner == 1) || (employees.length - 1) <= 0))
-                        
                             return deskRows
                         }
 
@@ -512,7 +515,7 @@ module.exports = {
                     const memberDrugs = []
                     const { bank_money, hidden_cash_money, hidden_dirty_money, ...memberMoney } = await client.db.getMoney(interaction.guildId, interaction.member.id)
                     for (const drug of (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id))) {
-                        ["untreated", "treated"].forEach(type => { if(drug[type] > 0) memberDrugs.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], hidden_quantity: drug[`hidden_${type}`], id: drug.drug_id })  })
+                        ["untreated", "treated"].forEach(type => { if (drug[type] > 0) memberDrugs.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], hidden_quantity: drug[`hidden_${type}`], id: drug.drug_id })  })
                     }
                     
                     const memberAll = [...Object.keys(memberMoney).filter(k => memberMoney?.[k] > 0).map(k => ({ name: t(k), type: k, quantity: memberMoney[k], id: k })), ...memberDrugs, ...memberInventory, ]
@@ -521,26 +524,26 @@ module.exports = {
                     const { safe_money, dirty_money } = await client.db.getCompany(interaction.guildId, id)
                     const companyInventory = (await client.db.getCompanyInventory(id)).filter(i => i.id);
                     const companyDrugs = await client.db.getCompanyInventory(id, true)
-                    for (const drug of companyDrugs) ["untreated", "treated"].forEach(type => { if(drug[type] > 0) safe.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], id: drug.drug_id })  })
+                    for (const drug of companyDrugs) ["untreated", "treated"].forEach(type => { if (drug[type] > 0) safe.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], id: drug.drug_id })  })
                     
-                    if(safe_money > 0) safe.push({ name: t("cash_money"), type: "cash_money", quantity: safe_money, id: "cash_money" })
-                    if(dirty_money > 0) safe.push({ name: t("dirty_money"), type: "dirty_money", quantity: dirty_money, id: "dirty_money" })
-                    if(companyInventory.length > 0) safe.push(...(companyInventory.map(i => ({ name: i.name, type: "items", quantity: i.quantity, id: i.item_id }) )))
+                    if (safe_money > 0) safe.push({ name: t("cash_money"), type: "cash_money", quantity: safe_money, id: "cash_money" })
+                    if (dirty_money > 0) safe.push({ name: t("dirty_money"), type: "dirty_money", quantity: dirty_money, id: "dirty_money" })
+                    if (companyInventory.length > 0) safe.push(...(companyInventory.map(i => ({ name: i.name, type: "items", quantity: i.quantity, id: i.item_id }) )))
 
                     const safeChunks = client.functions.other.chunkArray(safe, 7)
                     let chunks = client.functions.other.chunkArray(customId.includes("deposit") ? memberAll : safe, customId.includes("deposit") ? 22 : 7)
                     let currentPage = customId.includes("deposit") ? pageSM : page
 
-                    if(!chunks?.[currentPage] && chunks?.[currentPage - 1]) {
+                    if (!chunks?.[currentPage] && chunks?.[currentPage - 1]) {
                         currentPage--; pageSM--; page--;
                     }
 
-                    if(chunks.length > 1) {
-                        if(currentPage !== 0) display.push({ name: `nidev&#46;${t("words.previous", false, "global")}&#46;previous`, quantity: 0, type: "larrow" })
-                        if(currentPage + 1 !== chunks.length) display.push({ name: `nidev&#46;${t("words.next", false, "global")}&#46;next`, quantity: 0, type: "rarrow" })
+                    if (chunks.length > 1) {
+                        if (currentPage !== 0) display.push({ name: `nidev&#46;${t("words.previous", false, "global")}&#46;previous`, quantity: 0, type: "larrow" })
+                        if (currentPage + 1 !== chunks.length) display.push({ name: `nidev&#46;${t("words.next", false, "global")}&#46;next`, quantity: 0, type: "rarrow" })
                     }
 
-                    if(!chunks || !chunks[0] || !chunks.length) display.splice(0, (customId.includes("deposit") ? memberAll.length : safe.length) + display.length)
+                    if (!chunks || !chunks[0] || !chunks.length) display.splice(0, (customId.includes("deposit") ? memberAll.length : safe.length) + display.length)
                     else display.push(...(chunks?.[currentPage] ?? chunks?.[0]).map(i => ({ name: i.name, type: i.type, quantity: i.quantity, id: i.id })))
 
                     const embed = new EmbedBuilder()
@@ -549,8 +552,8 @@ module.exports = {
                     .setTitle(t("safe_modal.title", { company: name }))
                     .setDescription(!safeChunks[safeChunks.length == 1 ? 0 : page] ? t("no_item_company") : safeChunks[safeChunks.length == 1 ? 0 : page].map(i => `[${i.quantity}${i.type.endsWith("_money") ? economySymbol : i.type.startsWith("drugs") ? "g" : ""}] ・ ${i.name}`).join("\n"))
 
-                    if(displaySM) {
-                        if(display.length > 0) {
+                    if (displaySM) {
+                        if (display.length > 0) {
                             var sm = new ActionRowBuilder().addComponents(
                                 new StringSelectMenuBuilder()
                                 .setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`)
@@ -563,7 +566,7 @@ module.exports = {
                         
                     }
                     
-                    if(safeChunks.length > 1) {
+                    if (safeChunks.length > 1) {
                     
                         embed.setFooter({ text: `${page + 1}/${safeChunks.length}` });
                         var changeEmbedRow = new ActionRowBuilder().addComponents(
@@ -596,21 +599,21 @@ module.exports = {
                     .setDescription(t(`embed_desk.${goDesk ? "description" : customId.replace("sm_", "")}`, { amount: employees.length }))
                     
                     const sm = new ActionRowBuilder()
-                    if(customId.includes("recruit")) sm.addComponents(new UserSelectMenuBuilder().setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`).setPlaceholder(t("recruit_placeholder")))
-                    else if(customId.includes("fire") || customId.includes("give")) {
+                    if (customId.includes("recruit")) sm.addComponents(new UserSelectMenuBuilder().setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`).setPlaceholder(t("recruit_placeholder")))
+                    else if (customId.includes("fire") || customId.includes("give")) {
 
                         const options = [{ label: t("buttons.desk"), value: "nidev&#46;desk", emoji: client.constants.emojis.desk }]
                         const chunks = client.functions.other.chunkArray(employees, 22);
-                        if(!chunks[0] || !chunks || !chunks.length) return { embeds: [embed], components: [await secondRows("desk")] }
+                        if (!chunks[0] || !chunks || !chunks.length) return { embeds: [embed], components: [await secondRows("desk")] }
 
-                        if(chunks.length > 1) {
-                            if(current !== 0) options.push({ label: t("words.previous", false, "global"), value: `nidev&#46;previous`, emoji: client.constants.emojis.larrow })
-                            if(current + 1 !== chunks.length) options.push({ label: t("words.next", false, "global"), value: `nidev&#46;next`, emoji: client.constants.emojis.rarrow })
+                        if (chunks.length > 1) {
+                            if (current !== 0) options.push({ label: t("words.previous", false, "global"), value: `nidev&#46;previous`, emoji: client.constants.emojis.larrow })
+                            if (current + 1 !== chunks.length) options.push({ label: t("words.next", false, "global"), value: `nidev&#46;next`, emoji: client.constants.emojis.rarrow })
                         }
                         
                         options.push(...(await Promise.all(chunks[current].map(async e => {
                             const idCards = [await client.db.getIDCard(interaction.guildId, e.user_id), await client.db.getIDCard(interaction.guildId, e.user_id, true)]
-                            const name = idCards[0] ? `${idCards[0].first_name} ${idCards[0].last_name}` : idCards[1] ? `${idCards[1].first_name} ${idCards[1].last_name}` : (await interaction.guild.members.cache.get(e.user_id))?.displayName ?? t("unkown")
+                            const name = idCards[0] ? `${idCards[0].first_name} ${idCards[0].last_name}` : idCards[1] ? `${idCards[1].first_name} ${idCards[1].last_name}` : (await interaction.guild.members.fetch(e.user_id))?.displayName ?? t("unkown")
                             return { label: name, value: `${e.user_id}.${name}`, emoji: "👤" }
                         }
                         ))))
@@ -635,11 +638,11 @@ module.exports = {
                     .setTitle(t("buttons.access"))
                     let rows;
                     
-                    if(customId.includes("back") || customId == "access") embed.setDescription(t(`embed_access.description`, { amount: employees.length }))
+                    if (customId.includes("back") || customId == "access") embed.setDescription(t(`embed_access.description`, { amount: employees.length }))
                     else {
                         const chunksAccessEmployees = client.functions.other.chunkArray(employees.sort((a, b) => a.owner == 1 ? -1 : b.owner == 1 ? 1 : 0).filter(e => e[index] == 1), 5);
                         embed.addFields([{ name: t(`buttons.${index.replace("_access", "")}`), value: chunksAccessEmployees?.[current]?.length > 0 ? `${chunksAccessEmployees[current].map(e => `- <@${e.user_id}>`).join("\n")}`.substring(0, 1024) : t("no_one", { place: t(`buttons.${index.replace("_access", "")}`).toLowerCase() }) }])
-                        if(chunksAccessEmployees?.length > 1) {
+                        if (chunksAccessEmployees?.length > 1) {
                             rows = new ActionRowBuilder().addComponents(
                                 new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId(`previous-access`).setEmoji("◀").setDisabled(current == 0),
                                 new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId(`next-access`).setEmoji("▶").setDisabled(current + 1 == chunksAccessEmployees.length)
@@ -648,15 +651,15 @@ module.exports = {
                     }
 
                     const sm = new ActionRowBuilder()
-                    if(["add", "remove"].includes(customId) || customId.includes("sm_")) {
+                    if (["add", "remove"].includes(customId) || customId.includes("sm_")) {
 
                         const options = [{ label: t("buttons.access"), value: "nidev&#46;access", emoji: client.constants.emojis.access }]
                         const chunks = client.functions.other.chunkArray(employees.filter(e => e.owner == 0 && e[index] == (customId.includes("add") ? 0 : 1)), 5);
-                        if(!chunks[0] || !chunks || !chunks.length) return { embeds: [embed], components: [await secondRows("access_second", null, company, customId)] }
+                        if (!chunks[0] || !chunks || !chunks.length) return { embeds: [embed], components: [await secondRows("access_second", null, company, customId)] }
 
-                        if(chunks.length > 1) {
-                            if(current !== 0) options.push({ label: t("words.previous", false, "global"), value: `nidev&#46;previous`, emoji: client.constants.emojis.larrow })
-                            if(current + 1 !== chunks.length) options.push({ label: t("words.next", false, "global"), value: `nidev&#46;next`, emoji: client.constants.emojis.rarrow })
+                        if (chunks.length > 1) {
+                            if (current !== 0) options.push({ label: t("words.previous", false, "global"), value: `nidev&#46;previous`, emoji: client.constants.emojis.larrow })
+                            if (current + 1 !== chunks.length) options.push({ label: t("words.next", false, "global"), value: `nidev&#46;next`, emoji: client.constants.emojis.rarrow })
                         }
 
                         options.push(...(await Promise.all(chunks[current].map(async e => {
@@ -682,7 +685,7 @@ module.exports = {
                 if (!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
                 const collector = await message.createMessageComponentCollector({ filter: (i) => i.user.id == interaction.user.id, time: 240000 });
-                if(!collector) return;
+                if (!collector) return;
 
                 let current = 0, currentSM = 0, currentDesk = 0, currentAccess = 0, currentSMAccess = 0, index;
                 collector.on("collect", async (i) => {
@@ -704,7 +707,7 @@ module.exports = {
 
                             index = "account";
                             const newEmployees = await client.db.getCompanyEmployees(id);
-                            if(newEmployees.filter(({ user_id, account_access, owner }) => user_id == i.user.id && (account_access == 1 || owner == 1))?.length <= 0 && !i.member.permissions.has(PermissionsBitField.Flags.Administrator)) return i.reply({ embeds: [errorEmbed(t("no_access"), true)], components: [], ephemeral: true }).catch(() => {});
+                            if (newEmployees.filter(({ user_id, account_access, owner }) => user_id == i.user.id && (account_access == 1 || owner == 1))?.length <= 0 && !i.member.permissions.has(PermissionsBitField.Flags.Administrator)) return i.reply({ embeds: [errorEmbed(t("no_access"), true)], components: [], ephemeral: true }).catch(() => {});
 
                             await i.update(await accountEmbed()).catch(() => {});
                             break;
@@ -720,7 +723,7 @@ module.exports = {
                             index = i.customId == "access" ? "access" : "desk";
 
                             const newEmployees = await client.db.getCompanyEmployees(id);
-                            if((newEmployees.filter(({ user_id, desk_access, owner }) => user_id == i.user.id && (desk_access == 1 || owner == 1)))?.length <= 0 && !i.member.permissions.has(PermissionsBitField.Flags.Administrator)) return i.reply({ embeds: [errorEmbed(t(i.customId == "access" ? "not_owner" : "no_access"), true)], components: [], ephemeral: true }).catch(() => {});
+                            if ((newEmployees.filter(({ user_id, desk_access, owner }) => user_id == i.user.id && (desk_access == 1 || owner == 1)))?.length <= 0 && !i.member.permissions.has(PermissionsBitField.Flags.Administrator)) return i.reply({ embeds: [errorEmbed(t(i.customId == "access" ? "not_owner" : "no_access"), true)], components: [], ephemeral: true }).catch(() => {});
                             
                             switch(i.customId) {
                                 case "access": return i.update(await accessEmbed(i.customId, currentAccess, newEmployees, true)).catch(() => {});
@@ -743,19 +746,19 @@ module.exports = {
 
                             const currentEmployees = await client.db.getCompanyEmployees(id);
                             
-                            if(i.customId.endsWith("_access")) index = i.customId;
-                            else if(i.customId.startsWith("sm_")) {
+                            if (i.customId.endsWith("_access")) index = i.customId;
+                            else if (i.customId.startsWith("sm_")) {
                                 const value = i.values[0].split("&#46;")
-                                if(value[0].startsWith("nidev")) {
-                                    if(value[1].includes("next")) currentSMAccess++;
-                                    if(value[1].includes("previous")) currentSMAccess--;
-                                    else if(value[1] == "access") return i.update(await accessEmbed(index, currentSMAccess, currentEmployees))
+                                if (value[0].startsWith("nidev")) {
+                                    if (value[1].includes("next")) currentSMAccess++;
+                                    if (value[1].includes("previous")) currentSMAccess--;
+                                    else if (value[1] == "access") return i.update(await accessEmbed(index, currentSMAccess, currentEmployees))
                                     
                                     await i.update(await accessEmbed(i.customId, currentSMAccess, currentEmployees))
                                     break;
                                 }
 
-                                if(currentEmployees.find(({ user_id, owner }) => user_id == value[0] && owner == 1)) return i.reply({ embeds: [errorEmbed(t("cant_remove_access_for_boss"), true)], components: [], ephemeral: true }).catch(() => {});
+                                if (currentEmployees.find(({ user_id, owner }) => user_id == value[0] && owner == 1)) return i.reply({ embeds: [errorEmbed(t("cant_remove_access_for_boss"), true)], components: [], ephemeral: true }).catch(() => {});
                                 await client.db[i.customId.includes("add") ? "giveAccess" : "removeAccess"](id, value[0], index);
                             }
                             
@@ -770,26 +773,26 @@ module.exports = {
 
                             const newEmployees = await client.db.getCompanyEmployees(id);
                             const value = i.values[0].split("&#46;")
-                            if(value[0].startsWith("nidev")) {
-                                if(value[1].includes("next")) currentDesk++;
-                                if(value[1].includes("previous")) currentDesk--;
-                                else if(value[1] == "desk") return i.update(await deskEmbed(i.customId, currentDesk, newEmployees, true))
+                            if (value[0].startsWith("nidev")) {
+                                if (value[1].includes("next")) currentDesk++;
+                                if (value[1].includes("previous")) currentDesk--;
+                                else if (value[1] == "desk") return i.update(await deskEmbed(i.customId, currentDesk, newEmployees, true))
                                 
                                 await i.update(await deskEmbed(i.customId, currentDesk, newEmployees.filter(c => c.owner == 0)))
                                 break;
                             }
 
-                            const memberId = value[0]
+                            const memberId = value[0].split(".")[0];
                             let name = `<@${memberId}>`
                             
                             const idCards = [await client.db.getIDCard(interaction.guildId, memberId), await client.db.getIDCard(interaction.guildId, memberId, true)]
-                            if(idCards[1]) name = `**${idCards[1].first_name} ${idCards[1].last_name}** *(<@${memberId}>)*`
-                            if(idCards[0]) name = `**${idCards[0].first_name} ${idCards[0].last_name}** *(<@${memberId}>)*`
+                            if (idCards[0]) name = `**${idCards[0].first_name} ${idCards[0].last_name}** *(<@${memberId}>)*`
+                            if (idCards[1]) name = `**${idCards[1].first_name} ${idCards[1].last_name}** *(<@${memberId}>)*`
                             
-                            // if(memberId == i.user.id) return i.reply({ embeds: [errorEmbed(t(`cant_${i.customId.replace("sm_", "")}_yourself`), true)], components: [], ephemeral: true })
-                            if(i.customId == "sm_recruit" && newEmployees.find(e => e.user_id == memberId)) return i.reply({ embeds: [errorEmbed(t("already_in_company_member", { member: name }), true)], components: [], ephemeral: true }).catch(() => {})
+                            // if (memberId == i.user.id) return i.reply({ embeds: [errorEmbed(t(`cant_${i.customId.replace("sm_", "")}_yourself`), true)], components: [], ephemeral: true })
+                            if (i.customId == "sm_recruit" && newEmployees.find(e => e.user_id == memberId)) return i.reply({ embeds: [errorEmbed(t("already_in_company_member", { member: name }), true)], components: [], ephemeral: true }).catch(() => {})
                             
-                            if(company.speciality == "police" && i.customId == "sm_recruit") {
+                            if (company.speciality == "police" && i.customId == "sm_recruit") {
 
                                 const code = Math.floor(Math.random() * 9000000000) + 1000000000
                                 const modal = new ModalBuilder()
@@ -799,18 +802,18 @@ module.exports = {
 
                                 await i.showModal(modal).catch(() => {})
                                 const modalCollector = await i.awaitModalSubmit({ filter: (i) => i.user.id == interaction.user.id && i.customId == `sm_recruit_police_${code}`, time: 30000 });
-                                if(!modalCollector) return;
+                                if (!modalCollector) return;
 
                                 const policeNumber = modalCollector.fields.getTextInputValue("police_number");
                                 const parsedPoliceNumber = parseInt(policeNumber);
-                                if(isNaN(parsedPoliceNumber) || parsedPoliceNumber <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_police_number"), true)], components: [] }).catch(() => {});
+                                if (isNaN(parsedPoliceNumber) || parsedPoliceNumber <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("invalid_police_number"), true)], components: [] }).catch(() => {});
 
-                                await client.db.recruitMemberCompany(memberId, id, policeNumber);
+                                await client.db.recruitMemberCompany(interaction.guildId, memberId, id, policeNumber);
                                 return modalCollector.update({ embeds: [successEmbed(t("recruit", { member: name }), true)], components: [] })
 
                             }
 
-                            await client.db[`${i.customId.replace("sm_", "")}MemberCompany`](memberId, id);
+                            await client.db[`${i.customId.replace("sm_", "")}MemberCompany`](interaction.guildId, memberId, id);
                             await i.update({ embeds: [successEmbed(t(i.customId.replace("sm_", ""), { member: name }), true)], components: [] }).catch(() => {});
                             
                             break;
@@ -825,7 +828,7 @@ module.exports = {
 
                             index = "safe";
                             const newEmployees = await client.db.getCompanyEmployees(id);
-                            if((newEmployees.filter(({ user_id, safe_access, owner }) => user_id == i.user.id && (safe_access == 1 || owner == 1)))?.length <= 0 && !i.member.permissions.has(PermissionsBitField.Flags.Administrator)) return i.reply({ embeds: [errorEmbed(t("no_access"), true)], components: [], ephemeral: true }).catch(() => {});
+                            if ((newEmployees.filter(({ user_id, safe_access, owner }) => user_id == i.user.id && (safe_access == 1 || owner == 1)))?.length <= 0 && !i.member.permissions.has(PermissionsBitField.Flags.Administrator)) return i.reply({ embeds: [errorEmbed(t("no_access"), true)], components: [], ephemeral: true }).catch(() => {});
 
                             const _render = await safeEmbed(i.customId, 0, 0);
 
@@ -833,7 +836,7 @@ module.exports = {
 
                                 case "safe": {
                                     const message = await i.update({ embeds: _render.embeds, components: _render.components, fetchReply: true }).catch(() => {});
-                                    if(!message) return; // interaction isn't edited && only one page to display
+                                    if (!message) return; // interaction isn't edited && only one page to display
                                     break;
                                 }
 
@@ -860,7 +863,7 @@ module.exports = {
                         case "deposit":
                         case "withdraw": {
 
-                            if(index == "safe") return i.update(await safeEmbed(i.customId, current, currentSM, true)).catch(() => {});
+                            if (index == "safe") return i.update(await safeEmbed(i.customId, current, currentSM, true)).catch(() => {});
                             else {
 
                                 const code = Math.floor(Math.random() * 9000000000) + 1000000000
@@ -871,24 +874,24 @@ module.exports = {
                                 
                                 await i.showModal(modal).catch(() => {});
                                 const modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id === i.user.id && ii.customId == `modal_companies_${code}`, time: 60000 })
-                                if(!modalCollector) return;
+                                if (!modalCollector) return;
 
                                 const company = await client.db.getCompany(interaction.guildId, companyId);
-                                if(!company) return modalCollector.reply({ embeds: [errorEmbed(t("no_company", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                if (!company) return modalCollector.reply({ embeds: [errorEmbed(t("no_company", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
 
                                 const userAccount = await client.db.getBankAccount(interaction.guildId, i.user.id);
-                                if(userAccount?.blocked == 1) return modalCollector.reply({ embeds: [errorEmbed(t("blocked", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
-                                if(userAccount?.frozen_date || userAccount?.frozen_reason) return modalCollector.reply({ embeds: [errorEmbed(t("frozen", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
-                                if(!userAccount || userAccount.bank_money == null || isNaN(userAccount.bank_money)) return modalCollector.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
+                                if (userAccount?.blocked == 1) return modalCollector.reply({ embeds: [errorEmbed(t("blocked", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
+                                if (userAccount?.frozen_date || userAccount?.frozen_reason) return modalCollector.reply({ embeds: [errorEmbed(t("frozen", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
+                                if (!userAccount || userAccount.bank_money == null || isNaN(userAccount.bank_money)) return modalCollector.reply({ embeds: [errorEmbed(t("no_bank_account", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
                                 
                                 const quantity = i.customId == "withdraw" ? company.money : userAccount.bank_money;
                                 const getModalAmount = modalCollector.fields.getTextInputValue("amount");
 
                                 const amount = ["tout", "all"].includes(getModalAmount.toLowerCase()) || !getModalAmount ? quantity : parseFloat(getModalAmount.replaceAll(",", "."));
-                                if(!amount || isNaN(amount) || amount <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: getModalAmount }, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
+                                if (!amount || isNaN(amount) || amount <= 0) return modalCollector.reply({ embeds: [errorEmbed(t("not_number", { number: getModalAmount }, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
 
-                                if(quantity - amount < (i.customId == "withdraw" ? 0 : overdraftLimit)) return modalCollector.reply({ embeds: [errorEmbed(t(i.customId == "withdraw" ? "money_lower" : "money_account", { money: separate(quantity), symbol: economySymbol, company: company.name }), true)], components: [], ephemeral: true }).catch(() => {});
-                                if(i.customId == "withdraw" && userAccount.bank_money + amount >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: lang == "fr" ? "votre compte" : "your account" }, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
+                                if (quantity - amount < (i.customId == "withdraw" ? 0 : overdraftLimit)) return modalCollector.reply({ embeds: [errorEmbed(t(i.customId == "withdraw" ? "money_lower" : "money_account", { money: separate(quantity), symbol: economySymbol, company: company.name }), true)], components: [], ephemeral: true }).catch(() => {});
+                                if (i.customId == "withdraw" && userAccount.bank_money + amount >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: lang == "fr" ? "votre compte" : "your account" }, "errors"), true)], components: [], ephemeral: true }).catch(() => {});
 
                                 await client.db.addMoney(interaction.guildId, interaction.member.id, "bank_money", i.customId == "withdraw" ? amount : -amount);
                                 await client.db.addMoneyToCompany(company.id, i.customId == "withdraw" ? -amount : amount);
@@ -907,12 +910,12 @@ module.exports = {
                         case "sm_withdraw": {
                             
                             const item = i.values[0].split("&#46;")
-                            if(!item) return i.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], ephemeral: true });
+                            if (!item) return i.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], ephemeral: true });
                             
-                            if(item[2].startsWith("nidev")) {
-                                if(item[4].endsWith("safe")) return i.update(await safeEmbed(i.customId, current, currentSM));
-                                if(item[4].endsWith("next")) i.customId == "sm_deposit" ? currentSM++ : current++;
-                                else if(item[4].endsWith("previous")) i.customId == "sm_deposit" ? currentSM-- : current--;
+                            if (item[2].startsWith("nidev")) {
+                                if (item[4].endsWith("safe")) return i.update(await safeEmbed(i.customId, current, currentSM));
+                                if (item[4].endsWith("next")) i.customId == "sm_deposit" ? currentSM++ : current++;
+                                else if (item[4].endsWith("previous")) i.customId == "sm_deposit" ? currentSM-- : current--;
                                 
                                 await i.update(await safeEmbed(i.customId, current, currentSM, true))
                                 break;
@@ -924,7 +927,7 @@ module.exports = {
                             const itemQuantity = item[itemType.endsWith("_money") ? 2 : itemType.startsWith("drugs") ? 4 : 3];
 
                             let modalCollector = { fields: { getTextInputValue: () => itemQuantity }, update: (...args) => i.update(...args), reply: (...args) => i.reply(...args) };
-                            if(itemQuantity > 1) {
+                            if (itemQuantity > 1) {
 
                                 const code = Math.floor(Math.random() * 9000000000) + 1000000000
                                 const modal = new ModalBuilder()
@@ -934,7 +937,7 @@ module.exports = {
                                 
                                 await i.showModal(modal).catch(() => {});
                                 modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id === i.user.id && ii.customId == `modal_companies_${code}`, time: 60000 })
-                                if(!modalCollector) return;
+                                if (!modalCollector) return;
 
                             }
 
@@ -950,9 +953,9 @@ module.exports = {
 
                                     const amount = ["tout", "all"].includes((modalCollector.fields.getTextInputValue("quantity")).toLowerCase()) || !modalCollector.fields.getTextInputValue("quantity") ? newQuantity : parseInt(modalCollector.fields.getTextInputValue("quantity"));
         
-                                    if(!amount || isNaN(amount) || !newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
-                                    if(amount > newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}`, { amount: separate(newQuantity), symbol: economySymbol }), true)], components: [], ephemeral: true }).catch(() => {});
-                                    if(amount + newQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: t(`words.${itemType}`, false, "global") }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                    if (!amount || isNaN(amount) || !newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                    if (amount > newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}`, { amount: separate(newQuantity), symbol: economySymbol }), true)], components: [], ephemeral: true }).catch(() => {});
+                                    if (amount + newQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: t(`words.${itemType}`, false, "global") }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
         
                                     await client.db[`${i.customId == "sm_withdraw" ? "remove" : "add"}CompanySafeMoney`](id, amount, itemType == "dirty_money");
                                     await client.db.addMoney(interaction.guildId, i.user.id, itemType, i.customId == "sm_withdraw" ? amount : -amount);
@@ -972,47 +975,47 @@ module.exports = {
                                     const inventoryWeight = newMemberInventory.reduce((a, b) => a + (b.weight * b.quantity), 0) + newMemberDrugs.reduce((a, b) => a + ((b?.untreated ?? 0) + (b?.treated ?? 0)), 0);
                                     
                                     let quantity, type = null;
-                                    if(itemType == "items") {
+                                    if (itemType == "items") {
 
                                         const newCompanyInventory = await client.db.getCompanyInventory(company.id);
                                         
                                         var findItem = i.customId == "sm_withdraw" ? newCompanyInventory.find(i => i.name.toLowerCase() == itemName.toLowerCase()) : newMemberInventory.find(i => i.name.toLowerCase() == itemName.toLowerCase());
-                                        if(!findItem) return modalCollector.reply({ embeds: [errorEmbed(t("item_not_found", { item: itemName }), true)], components: [], ephemeral: true }).catch(() => {});
+                                        if (!findItem) return modalCollector.reply({ embeds: [errorEmbed(t("item_not_found", { item: itemName }), true)], components: [], ephemeral: true }).catch(() => {});
                                         
                                         var { hidden_quantity, weight, role_add, role_remove, role_required } = findItem;
                                         quantity = findItem.quantity
                                         
-                                        if(i.customId == "sm_withdraw" && maxWeight && inventoryWeight + weight > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
-                                        if(i.customId == "sm_withdraw" && role_required && !interaction.member.roles.cache.has(role_required) && isPremium) return modalCollector.reply({ embeds: [errorEmbed(t("role_required", { role: `<@&${role_required}>`, item: findItem.name }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
-                                        if(i.customId == "sm_withdraw" && role_add && isPremium) await interaction.member.roles.add(role_add).catch(() => errorEmbed(t("cant_give_role", { role: role_add.toString() }, "errors"), false, false, "reply", modalCollector))
-                                        if(i.customId == "sm_withdraw" && role_add && quantity === amount && isPremium) await interaction.member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors"), false, false, "reply", modalCollector))
-                                        if(i.customId == "sm_deposit" && role_remove && isPremium) await interaction.member.roles.remove(role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: role_remove.toString() }, "errors"), false, false, "reply", modalCollector))
+                                        if (i.customId == "sm_withdraw" && maxWeight && inventoryWeight + weight > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                        if (i.customId == "sm_withdraw" && role_required && !interaction.member.roles.cache.has(role_required) && isPremium) return modalCollector.reply({ embeds: [errorEmbed(t("role_required", { role: `<@&${role_required}>`, item: findItem.name }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                        if (i.customId == "sm_withdraw" && role_add && isPremium) await interaction.member.roles.add(role_add).catch(() => errorEmbed(t("cant_give_role", { role: role_add.toString() }, "errors"), false, false, "reply", modalCollector))
+                                        if (i.customId == "sm_withdraw" && role_add && quantity === amount && isPremium) await interaction.member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors"), false, false, "reply", modalCollector))
+                                        if (i.customId == "sm_deposit" && role_remove && isPremium) await interaction.member.roles.remove(role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: role_remove.toString() }, "errors"), false, false, "reply", modalCollector))
                                         
                                     } else {
 
                                         const newSafeDrugs = await client.db.getCompanyInventory(company.id, true);
 
                                         var drug = i.customId == "sm_withdraw" ? newSafeDrugs.find(d => d.drug_id == parseInt(itemId)) : newMemberDrugs.find(d => d.drug_id == parseInt(itemId));
-                                        if(!drug) return modalCollector.reply({ embeds: [errorEmbed(t("drug_not_found", { drug: itemName }), true)], components: [], ephemeral: true }).catch(() => {});
+                                        if (!drug) return modalCollector.reply({ embeds: [errorEmbed(t("drug_not_found", { drug: itemName }), true)], components: [], ephemeral: true }).catch(() => {});
                                         
                                         type = item[1]
                                         var otherType = type == "untreated" ? "treated" : "untreated"
                                         quantity = drug[type]
 
-                                        if(i.customId == "sm_withdraw" && maxWeight && inventoryWeight + quantity > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                        if (i.customId == "sm_withdraw" && maxWeight && inventoryWeight + quantity > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
                                     
                                     }
         
                                     const amount = ["tout", "all"].includes((modalCollector.fields.getTextInputValue("quantity")).toLowerCase()) || !modalCollector.fields.getTextInputValue("quantity") ? quantity : parseInt(modalCollector.fields.getTextInputValue("quantity"));
         
-                                    if(itemType == "items" && i.customId == "sm_withdraw" && maxWeight && inventoryWeight + (weight * amount) > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
-                                    if(!amount || isNaN(amount) || !quantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
-                                    if(amount > quantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_item", { quantity: (quantity).toLocaleString(lang), item: itemType == "items" ? name : drug.name }), true)], components: [], ephemeral: true }).catch(() => {})
-                                    if(amount + quantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: itemType == "items" ? name : drug.name }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                    if (itemType == "items" && i.customId == "sm_withdraw" && maxWeight && inventoryWeight + (weight * amount) > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", false, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                    if (!amount || isNaN(amount) || !quantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
+                                    if (amount > quantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_item", { quantity: (quantity).toLocaleString(lang), item: itemType == "items" ? name : drug.name }), true)], components: [], ephemeral: true }).catch(() => {})
+                                    if (amount + quantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: itemType == "items" ? name : drug.name }, "errors"), true)], components: [], ephemeral: true }).catch(() => {})
         
                                     await client.db[`${i.customId == "sm_withdraw" ? "take" : "put"}CompanyInventory`](interaction.guildId, id, itemType, itemId, type, amount, itemType == "drugs" ? drug[otherType] == 0 && amount == quantity : amount == quantity)
                                     
-                                    if(itemType == "drugs") await client.db[`${i.customId == "sm_withdraw" ? "add" : "remove"}MemberDrug`](interaction.guildId, i.user.id, itemId, type, amount, drug.untreated == 0 && drug.treated && drug[otherType] == 0 && amount == quantity);
+                                    if (itemType == "drugs") await client.db[`${i.customId == "sm_withdraw" ? "add" : "remove"}MemberDrug`](interaction.guildId, i.user.id, itemId, type, amount, drug.untreated == 0 && drug.treated && drug[otherType] == 0 && amount == quantity);
                                     else await client.db[`${i.customId == "sm_withdraw" ? "add" : "remove"}MemberItem`](interaction.guildId, i.user.id, itemId, amount, i.customId == "sm_withdraw" ? null : hidden_quantity == 0 && amount == quantity);
                                     
                                     return modalCollector.update(await safeEmbed(i.customId, current, currentSM, true)).catch(() => {})
@@ -1038,7 +1041,6 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 
@@ -1046,7 +1048,7 @@ module.exports = {
 
     runAutocomplete: async(client, interaction, { isPremium }) => {
 
-        if(!isPremium) return interaction.respond([]).catch(() => {});
+        if (!isPremium) return interaction.respond([]).catch(() => {});
         const focusedOption = interaction.options.getFocused(true);
         const response = [];
 
@@ -1069,7 +1071,7 @@ module.exports = {
         }
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.name.toLowerCase() == focusedOption.value.toLowerCase()),);
             filtredArray.push(...response.filter(r => r.name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

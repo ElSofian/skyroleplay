@@ -300,12 +300,12 @@ module.exports = {
 
             case "créer": {
 
-                if(verify("member", { cantBotInclued: true })) return;
+                if (verify("member", { cantBotInclued: true })) return;
 
                 // Validate birthdate data
                 const dateMatch = interaction.options.getString("date-de-naissance").match(/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/);
                 const birthdate = new Date(`${dateMatch?.[3]}/${dateMatch?.[2]}/${dateMatch?.[1]}`);
-                if(!birthdate.getTime() || birthdate.getFullYear() < 1000 || birthdate.getFullYear() > 3000) return interaction.reply({ embeds: [errorEmbed(t("date_of_birth"), true)] }).catch(() => {});
+                if (!birthdate.getTime() || birthdate.getFullYear() < 1000 || birthdate.getFullYear() > 3000) return interaction.reply({ embeds: [errorEmbed(t("date_of_birth"), true)] }).catch(() => {});
                 
                 const hasCard = await client.db.getIDCard(interaction.guildId, member.user.id, interaction.options.getString("fausse") == "yes");
                 const idCard = {
@@ -320,7 +320,7 @@ module.exports = {
                 };
 
                 const roleStaff = await client.db.getOption(interaction.guildId, "roles.moderator");
-                if(own && (roleStaff && !interaction.member.roles.cache.has(roleStaff)) && !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+                if (own && (roleStaff && !interaction.member.roles.cache.has(roleStaff)) && !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
                 
                     for (const key in hasCard) {
                         if (hasCard.hasOwnProperty(key) && idCard.hasOwnProperty(key)) {
@@ -350,7 +350,7 @@ module.exports = {
 
                 } else {
 
-                    if(!hasCard) {
+                    if (!hasCard) {
 
                         await client.db.createIDCard(interaction.guildId, member.user.id, idCard);
 
@@ -384,13 +384,13 @@ module.exports = {
 
             case "supprimer": {
 
-                if(verify("member", { cantBotInclued: true })) return;
-                if(!own && !(await client.functions.permissions.configModerator(interaction, "carte-identite supprimer"))) return;
+                if (verify("member", { cantBotInclued: true })) return;
+                if (!own && !(await client.functions.permissions.configModerator(interaction, "carte-identite supprimer"))) return;
                 
-                if(!interaction.options.getString("carte").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "carte" : "card" }, "errors"))
+                if (!interaction.options.getString("carte").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == "fr" ? "carte" : "card" }, "errors"))
 
                 const packet = await client.db.deleteIDCard(interaction.guildId, member.user.id, interaction.options.getString("carte").split("&#46;")[1] == "fake");
-                if(packet.affectedRows > 0) {
+                if (packet.affectedRows > 0) {
                     await successEmbed(own ? t("card_deleted.yourself") : t("card_deleted.member", { member: member.toString() }));
 
                     const logsEmbed = new EmbedBuilder()
@@ -408,16 +408,16 @@ module.exports = {
 
             case "rendre": {
 
-                if(verify("member", { cantBotInclued: true })) return;
+                if (verify("member", { cantBotInclued: true })) return;
 
                 const policeRole = await client.db.getOption(interaction.guildId, "roles.police")
-                if((policeRole ? !interaction.member.roles.cache.has(policeRole) : true) && !own && !(await client.functions.permissions.configModerator(interaction, "carte-identite rendre"))) return;
+                if ((policeRole ? !interaction.member.roles.cache.has(policeRole) : true) && !own && !(await client.functions.permissions.configModerator(interaction, "carte-identite rendre"))) return;
 
-                if(!interaction.options.getString("carte-identite").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "carte-identite" : "identity-card" }, "errors"));
+                if (!interaction.options.getString("carte-identite").startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "carte-identite" : "identity-card" }, "errors"));
                 const ci = parseInt(interaction.options.getString("carte-identite").split("&#46;")[2]);
 
                 const idCard = await client.db.getIDCardById(ci);
-                if(!idCard) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
+                if (!idCard) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
 
                 await client.db.returnIDCard(ci);
                 return successEmbed(t(own ? "card_returned.yourself" : "card_returned.member", { member: member.toString() }));
@@ -429,7 +429,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         

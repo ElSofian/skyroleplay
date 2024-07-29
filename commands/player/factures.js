@@ -43,10 +43,10 @@ module.exports = {
         .setThumbnail(interaction.member.displayAvatarURL())
         .setTitle(t("embed.title"))
         
-        if(!bills.length) return interaction.reply({ embeds: [embed.setDescription(t("no_bills"))] })
+        if (!bills.length) return interaction.reply({ embeds: [embed.setDescription(t("no_bills"))] })
 
         const memberAccount = await client.db.getBankAccount(interaction.guildId, interaction.member.id);
-        if(isNaN(memberAccount?.bank_money)) return errorEmbed(t("no_bank_account", false, "errors"));
+        if (isNaN(memberAccount?.bank_money)) return errorEmbed(t("no_bank_account", false, "errors"));
 
         async function render(bill, index, total) {
 
@@ -59,7 +59,7 @@ module.exports = {
                 { name: t("embed.fields.reason"), value: bill.reason }
             ])
 
-            if(bill.fine == 1) embed.addFields([{ name: t("embed.fields.fine_id"), value: `👮 \`\`${bill.id}\`\`` }])
+            if (bill.fine == 1) embed.addFields([{ name: t("embed.fields.fine_id"), value: `👮 \`\`${bill.id}\`\`` }])
 
             const rows = new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
@@ -69,7 +69,7 @@ module.exports = {
                 .setDisabled(memberAccount.bank_money < bill.amount && memberAccount.cash_money < bill.amount)
             )
 
-            if(total > 1) {
+            if (total > 1) {
 
                 embed.setFooter({ text: `${index + 1}/${total}` });
                 rows.addComponents(
@@ -102,10 +102,10 @@ module.exports = {
         const _render = await render(bills[current], current, total);
 
         const message = await interaction.reply({ embeds: _render.embeds, components: _render.components }).catch(() => {});
-        if(!message) return;
+        if (!message) return;
 
         const collector = message.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.member.id, time: 120000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply")
 
         collector.on("collect", async(i) => {
 
@@ -125,19 +125,19 @@ module.exports = {
                 case "pay": {
 
                     const bill = bills[current];
-                    if(!bill) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
+                    if (!bill) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {});
 
                     const newMemberAccount = await client.db.getMoney(interaction.guildId, interaction.member.id);
                     const isBan = await client.db.isFreezeAccount(interaction.guildId, interaction.member.id); 
-                    if(isBan) return errorEmbed(t("freeze_account", false, "errors"));
+                    if (isBan) return errorEmbed(t("freeze_account", false, "errors"));
             
 
                     let method = "bank_money", reply = i;
-                    if(newMemberAccount.bank_money - overdraftLimit < bill.amount) {
+                    if (newMemberAccount.bank_money - overdraftLimit < bill.amount) {
 
-                        if(newMemberAccount.cash_money >= bill.amount) {
+                        if (newMemberAccount.cash_money >= bill.amount) {
                             var askPayementMethod = await client.functions.userinput.askPayementMethod(i, "bank", true, "update")
-                            if(!askPayementMethod) return;
+                            if (!askPayementMethod) return;
 
                             method = "cash_money", reply = askPayementMethod;
 
@@ -152,7 +152,7 @@ module.exports = {
                     await client.db.payBill(bill, method)
                     await client.db.addTransactionLog(interaction.guildId, interaction.member.id, -bill.amount, `${bill.fine == 1 ? t("fine", { name: idCard ? `${idCard.first_name} ${idCard.last_name}` : "" }) : t("bill")} : ${bill.reason}`)
                     
-                    if(bill.company_id) await client.db.addTransactionLog(interaction.guildId, bill.company_id, bill.amount,  `${bill.fine == 1 ? lang == 'fr' ? "Amende" : "Fine" : lang == "fr" ? "Facture" : "Bill"} ${idCard ? `${lang == 'fr' ? "de " : "from "}${idCard.first_name} ${idCard.last_name}` : ""} ${bill.reason}`)
+                    if (bill.company_id) await client.db.addTransactionLog(interaction.guildId, bill.company_id, bill.amount,  `${bill.fine == 1 ? lang == 'fr' ? "Amende" : "Fine" : lang == "fr" ? "Facture" : "Bill"} ${idCard ? `${lang == 'fr' ? "de " : "from "}${idCard.first_name} ${idCard.last_name}` : ""} ${bill.reason}`)
                     const company = await client.db.getCompany(interaction.guildId, bill.company_id);
                     
                     return reply?.update({ embeds: [successEmbed(t("bill_payed", { amount: bill.amount, symbol: economySymbol, company: company ? ` ${t("words.at", false, "global")} ${company.name ?? "Police"}` : "" }), true)], components: [] }).catch(() => {});
@@ -169,7 +169,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
         
@@ -179,10 +179,10 @@ module.exports = {
 
         const focusedOption = interaction.options.getFocused(true);
         const bills = await client.db.getMemberBills(interaction.guildId, interaction.member.id);
-        if(!bills.length) return;
+        if (!bills.length) return;
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...bills.filter(r => r.reason.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...bills.filter(r => r.reason.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

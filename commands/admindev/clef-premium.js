@@ -455,24 +455,24 @@ module.exports = {
 
                 const embed = new EmbedBuilder()
                 .setDescription(`**Key**\n${inlineCode(data.premium_key) || "*?*"}`);
-                if(data.user_id) embed.addFields([{ name: "Owner", value: `<@${data.user_id}> (${data.user_id})`, inline: true }]);
+                if (data.user_id) embed.addFields([{ name: "Owner", value: `<@${data.user_id}> (${data.user_id})`, inline: true }]);
                 embed.addFields([{ name: "Duration", value: await client.functions.other.durationToText(data.duration) || "*?*", inline: true }]);
-                if(data.transaction_id) embed.addFields([{ name: "Transaction number", value: inlineCode(data.transaction_id) || "*?*", inline: true }]);
+                if (data.transaction_id) embed.addFields([{ name: "Transaction number", value: inlineCode(data.transaction_id) || "*?*", inline: true }]);
                 embed.addFields([{ name: "Status", value: await client.functions.other.statusToText(data) || "*?*", inline: true }]).setColor(_colorByStatus(data.status));
 
-                if(data.status !== 0) {
-                    if(data.guild_id) embed.addFields([{ name: "Guild", value: data.guild_id || "*?*", inline: true }]);
-                    if(data.activator_id) embed.addFields([{ name: "Activator", value: data.activator_id ? `<@${data.activator_id}> (${data.activator_id})` : "*?*", inline: true }]);
-                    if(data.start_date) embed.addFields([{ name: "Start date", value: time(data.start_date, "d") || "*?*", inline: true }]);
-                    if(data.status !== 3) embed.addFields([{ name: "End date", value: time(data.end_date, "d") || "*?*", inline: true }]);
+                if (data.status !== 0) {
+                    if (data.guild_id) embed.addFields([{ name: "Guild", value: data.guild_id || "*?*", inline: true }]);
+                    if (data.activator_id) embed.addFields([{ name: "Activator", value: data.activator_id ? `<@${data.activator_id}> (${data.activator_id})` : "*?*", inline: true }]);
+                    if (data.start_date) embed.addFields([{ name: "Start date", value: time(data.start_date, "d") || "*?*", inline: true }]);
+                    if (data.status !== 3) embed.addFields([{ name: "End date", value: time(data.end_date, "d") || "*?*", inline: true }]);
                 };
-                if(data.status === 3) {
+                if (data.status === 3) {
                     embed.addFields([
                         { name: "Estimated end date", value: time(client.dayjs().add(data.remaining_time_after_pause, 'seconds').toDate(), "d") || "*?*", inline: true },
                         { name: "Time remaining after the pause", value: `${Math.ceil(data.remaining_time_after_pause / 86400)} day(s)` || "*?*", inline: true }
                     ]);
                 };
-                if(data.comment) embed.addFields([{ name: "Comment", value: data.comment || "*?*", inline: true }]);
+                if (data.comment) embed.addFields([{ name: "Comment", value: data.comment || "*?*", inline: true }]);
 
                 return embed;
             }
@@ -490,8 +490,8 @@ module.exports = {
                         const comment = interaction.options.getString("commentaire", false);
 
                         // Validate options
-                        if(owner && !owner.match(/^[0-9]{17,19}$/)) return errorEmbed(`Buyer's Discord ID (${owner}) is invalid`);
-                        if(!duration.match(/^(-?[0-9]+)([jma])$/i)) return errorEmbed(`The duration (${duration}) is invalid`);
+                        if (owner && !owner.match(/^[0-9]{17,19}$/)) return errorEmbed(`Buyer's Discord ID (${owner}) is invalid`);
+                        if (!duration.match(/^(-?[0-9]+)([jma])$/i)) return errorEmbed(`The duration (${duration}) is invalid`);
 
                         const premiumCreated = await client.db.createPremium(duration, number, owner, comment); // array object
                         let embeds = [];
@@ -525,7 +525,7 @@ module.exports = {
                             embeds.push(await _embed(premium));
                         };
 
-                        if(!embeds?.length) return errorEmbed(`No results were found`);
+                        if (!embeds?.length) return errorEmbed(`No results were found`);
 
                         // Function used to render a chunk (embed, select menu, and pages buttons)
                         async function render(embeds, index, total) {
@@ -549,7 +549,7 @@ module.exports = {
                         // Create pages
                         const chunks = client.functions.other.chunkArray(embeds, 10);
 
-                        if(!chunks || !chunks[0] || chunks[0].length <= 0)
+                        if (!chunks || !chunks[0] || chunks[0].length <= 0)
                             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"));
 
                         const total = chunks.length;
@@ -562,14 +562,14 @@ module.exports = {
                             fetchReply: true
                         }).catch(() => {});
 
-                        if(!message || total == 1) return; // interaction isn't edited && only one page to display
+                        if (!message || total == 1) return; // interaction isn't edited && only one page to display
 
                         const collector = message.createMessageComponentCollector({
                             filter: (i) => i.user.id === interaction.user.id,
                             time: 120000,
                         });
 
-                        if(!collector) return errorEmbed(t("error_occurred", false, "errors"), false, true, "editReply");
+                        if (!collector) return errorEmbed(t("error_occurred", false, "errors"), false, true, "editReply");
 
                         let current = 0;
 
@@ -602,7 +602,7 @@ module.exports = {
                         let type = old.match(/^[0-9]{17,19}$/) ? "guild_id" : "premium_key";
 
                         const premium = await client.db.searchPremiums(type, old).then(premiums => premiums[0]);
-                        if(!premium) return errorEmbed(type === "premium_key" ? `${inlineCode(old)} premium key  does not exist` : `The server whose ID is ${inlineCode(old)} is not currently Premium`);
+                        if (!premium) return errorEmbed(type === "premium_key" ? `${inlineCode(old)} premium key  does not exist` : `The server whose ID is ${inlineCode(old)} is not currently Premium`);
 
                         switch (premium.status) {
                             case 0: return errorEmbed(`${inlineCode(old)} premium key has not been activated yet`);
@@ -628,8 +628,8 @@ module.exports = {
                         const duration = interaction.options.getString("durée");
 
                         const premium = await client.db.searchPremiums("premium_key", key).then(premiums => premiums[0]);
-                        if(!premium) return errorEmbed(`${inlineCode(key)} premium key does not exist`);
-                        if(!duration.match(/^(-?[0-9]+)([jma])$/i)) return errorEmbed(`The duration ${inlineCode(duration)} is invalid.\nExamples of valid durations: 15j (for 15 days), 1m (for 1 month), 1a (for 1 year)`);
+                        if (!premium) return errorEmbed(`${inlineCode(key)} premium key does not exist`);
+                        if (!duration.match(/^(-?[0-9]+)([jma])$/i)) return errorEmbed(`The duration ${inlineCode(duration)} is invalid.\nExamples of valid durations: 15j (for 15 days), 1m (for 1 month), 1a (for 1 year)`);
 
                         switch (premium.status) {
                             case 0:
@@ -676,7 +676,7 @@ module.exports = {
                             ])
                             .setFooter({ text: "Extended by " + interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
 
-                        if(premium.status === 3) embed.addFields([
+                        if (premium.status === 3) embed.addFields([
                             { name: "Previous remaining time", value: `${Math.ceil(remaining_time / 86400)} day(s)` || "*?*", inline: true }, 
                             { name: "Current remaining time", value: `${Math.ceil(newEnd / 86400)} day(s)` || "*?*", inline: true }
                         ]);
@@ -691,9 +691,9 @@ module.exports = {
                         const reason = interaction.options.getString("raison");
 
                         const premium = await client.db.searchPremiums("premium_key", key).then(premiums => premiums[0]);
-                        if(!premium) return errorEmbed(`${inlineCode(key)} premium key  does not exist`);
+                        if (!premium) return errorEmbed(`${inlineCode(key)} premium key  does not exist`);
 
-                        if(premium.status === 2) return errorEmbed(`${inlineCode(key)} premium key is already expired`);
+                        if (premium.status === 2) return errorEmbed(`${inlineCode(key)} premium key is already expired`);
 
                         await client.db.setPremiumStatus(key, 2);
 
@@ -714,7 +714,7 @@ module.exports = {
                         const comment = interaction.options.getString("commentaire").trim() || null;
 
                         const premium = await client.db.searchPremiums("premium_key", key).then(premiums => premiums[0]);
-                        if(!premium) return errorEmbed(`${inlineCode(key)} premium key  does not exist`);
+                        if (!premium) return errorEmbed(`${inlineCode(key)} premium key  does not exist`);
 
                         await client.db.setPremiumComment(key, comment);
 
@@ -725,7 +725,7 @@ module.exports = {
                         const key = interaction.options.getString("clé-premium");
 
                         const premium = await client.db.searchPremiums("premium_key", key).then(premiums => premiums[0]);
-                        if(!premium) return errorEmbed(`${inlineCode(key)} premium key  does not exist`);
+                        if (!premium) return errorEmbed(`${inlineCode(key)} premium key  does not exist`);
 
                         switch (premium.status) {
                             case 1: {

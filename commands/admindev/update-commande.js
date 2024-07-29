@@ -33,14 +33,14 @@ module.exports = {
     staff_level: 3,
     run: async(client, interaction) => {
 
-        if(client.config.team_server !== interaction.guildId) return interaction.reply(`${client.constants.emojis.redEchec} Cette commande est désactivée sur ce serveur !`).catch(() => {});
-        if(!client.config.admin_users.includes(interaction.user.id)) return interaction.reply(`${client.constants.emojis.redEchec} Vous n'êtes pas autorisé à utiliser cette commande !`).catch(() => {});
+        if (client.config.team_server !== interaction.guildId) return interaction.reply(`${client.constants.emojis.redEchec} Cette commande est désactivée sur ce serveur !`).catch(() => {});
+        if (!client.config.admin_users.includes(interaction.user.id)) return interaction.reply(`${client.constants.emojis.redEchec} Vous n'êtes pas autorisé à utiliser cette commande !`).catch(() => {});
         
         const commandName = interaction.options.getString("commande");
         const command = client.commands.get(commandName);
 
         const fetchCommand = (await client.application.commands.fetch()).filter(c => c.name === command.name);
-        if(!fetchCommand.size || !command) return interaction.reply(`${client.constants.emojis.redEchec} Cette commande n'existe pas !`).catch(() => {});
+        if (!fetchCommand.size || !command) return interaction.reply(`${client.constants.emojis.redEchec} Cette commande n'existe pas !`).catch(() => {});
 
         await interaction.reply(client.constants.emojis.load + " Loading...").catch(() => {});
 

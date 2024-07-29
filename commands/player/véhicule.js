@@ -38,16 +38,16 @@ module.exports = {
 
         try {
 
-        if(!(interaction.options.getString("nom") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "nom" : "name" }, "errors"));
+        if (!(interaction.options.getString("nom") ?? `${code}`).startsWith(`${code}`)) return errorEmbed(t("pass_autocomplete", { option: lang == 'fr' ? "nom" : "name" }, "errors"));
         
         await interaction.deferReply().catch(() => {});
 
         const vehicle = await client.db.getPlateCG(interaction.guildId, interaction.options.getString("nom").split("&#46;")[1]);
-        if(!vehicle?.id_card && interaction.options.getString("nom").split("&#46;")[1]) {
+        if (!vehicle?.id_card && interaction.options.getString("nom").split("&#46;")[1]) {
 
             const idCards = [(await client.db.getIDCard(interaction.guildId, interaction.member.id)), (await client.db.getIDCard(interaction.guildId, interaction.member.id, true))].filter(i => i);
             
-            if(!idCards[0] && !idCards[1]) return errorEmbed("Les cartes grises sont maintenant reliées à une carte d'identité. Créez en une pour pouvoir la relier à votre carte grise.", false, true, "editReply");
+            if (!idCards[0] && !idCards[1]) return errorEmbed("Les cartes grises sont maintenant reliées à une carte d'identité. Créez en une pour pouvoir la relier à votre carte grise.", false, true, "editReply");
 
             else {
 
@@ -57,15 +57,15 @@ module.exports = {
                 .setDescription("Maintenant les cartes grises seront reliées à une carte d'identité (pour que vous puissiez avoir une carte grise reliée à une fausse carte si vous le souhaitez).\n\nChoisissez donc ci-dessous avec quelle carte d'identité vous souhaitez relier cette carte grise.")
 
                 const row = new ActionRowBuilder()
-                if(idCards[0]) row.addComponents(new ButtonBuilder().setCustomId("real_idcard").setStyle(ButtonStyle.Secondary).setLabel(`${idCards[0].first_name} ${idCards[0].last_name}`))
-                if(idCards[1]) row.addComponents(new ButtonBuilder().setCustomId("fake_idcard").setStyle(ButtonStyle.Secondary).setLabel(`${idCards[1].first_name} ${idCards[1].last_name}`))
+                if (idCards[0]) row.addComponents(new ButtonBuilder().setCustomId("real_idcard").setStyle(ButtonStyle.Secondary).setLabel(`${idCards[0].first_name} ${idCards[0].last_name}`))
+                if (idCards[1]) row.addComponents(new ButtonBuilder().setCustomId("fake_idcard").setStyle(ButtonStyle.Secondary).setLabel(`${idCards[1].first_name} ${idCards[1].last_name}`))
 
                 const message = await interaction.reply({ embeds: [embed], components: [row], ephemeral: true, fetchReply: true }).catch(() => {});
-                if(!message) return
+                if (!message) return
 
                 const collector = await client.functions.other.createCollector(message, interaction, 60000, lang);
-                if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
-                if(collector == "end") return;
+                if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+                if (collector == "end") return;
 
                 const isReal = collector.customId == "real_idcard";
                 await client.db.setIDCardtoCG(interaction.guildId, idCards[isReal ? 0 : 1].id, interaction.options.getString("nom").split("&#46;")[1]);
@@ -80,7 +80,7 @@ module.exports = {
         const embed = new EmbedBuilder()
         .setColor(3092790)
 
-        if(!vehicle.image) {
+        if (!vehicle.image) {
 
             const canvas = new Canvas(930, 500)
             .printImage(await loadImage(`./assets/member_cg/${vehicle.type}.png`), 0, 0, 930, 500)
@@ -92,8 +92,8 @@ module.exports = {
             .printText(vehicle.adress ?? t("no_adress"), 65, 215)
             .printText(`${t("buying_date")} : ${client.dayjs(vehicle.date).format('DD/MM/YYYY')}`, 65, 380)
             
-            if(vehicle.status == 1) canvas.printImage(await loadImage(`./assets/member_cg/pound.png`), 0, 0, 930, 500)
-            if(vehicle.status == 2) canvas.printImage(await loadImage(`./assets/member_cg/theft.png`), 0, 0, 930, 500)
+            if (vehicle.status == 1) canvas.printImage(await loadImage(`./assets/member_cg/pound.png`), 0, 0, 930, 500)
+            if (vehicle.status == 2) canvas.printImage(await loadImage(`./assets/member_cg/theft.png`), 0, 0, 930, 500)
 
             var attachment = new AttachmentBuilder(await canvas.pngAsync(), { name: "vehicle.png" });
             embed.setImage("attachment://vehicle.png")
@@ -154,7 +154,7 @@ module.exports = {
             const memberInventory = (await client.db.getMemberItems(interaction.guildId, interaction.member.id)).map(i => ({ name: i.name, type: "items", quantity: i.quantity, hidden_quantity: i.hidden_quantity, id: i.id }) )
             const memberDrugs = []
             for (const drug of (await client.db.getMemberDrugs(interaction.guildId, interaction.member.id))) {
-                ["untreated", "treated"].forEach(type => { if(drug[type] > 0) memberDrugs.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], hidden_quantity: drug[`hidden_${type}`], id: drug.drug_id })  })
+                ["untreated", "treated"].forEach(type => { if (drug[type] > 0) memberDrugs.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], hidden_quantity: drug[`hidden_${type}`], id: drug.drug_id })  })
             }
             const { bank_money, hidden_cash_money, hidden_dirty_money, ...memberMoney } = await client.db.getMoney(interaction.guildId, interaction.member.id);
             const memberAll = [...Object.keys(memberMoney).filter(k => memberMoney[k] > 0).map(k => ({ name: t(k), type: k, quantity: memberMoney[k], id: k })), ...memberDrugs, ...memberInventory]
@@ -164,25 +164,25 @@ module.exports = {
 
             const safe = []
             const { money, dirty_money } = await client.db.getPlateCG(interaction.guildId, vehicle.license_plate);
-            if(money > 0) safe.push({ name: lang == "fr" ? "Argent liquide" : "Cash", type: "cash_money", quantity: money, id: "cash_money" })
-            if(dirty_money > 0) safe.push({ name: lang == "fr" ? "Argent sale" : "Dirty money", type: "dirty_money", quantity: dirty_money, id: "dirty_money" })
+            if (money > 0) safe.push({ name: lang == "fr" ? "Argent liquide" : "Cash", type: "cash_money", quantity: money, id: "cash_money" })
+            if (dirty_money > 0) safe.push({ name: lang == "fr" ? "Argent sale" : "Dirty money", type: "dirty_money", quantity: dirty_money, id: "dirty_money" })
 
             const safeDrugs = await client.db.getSafeVehicle(vehicle.id, true)
-            for (const drug of safeDrugs) ["untreated", "treated"].forEach(type => { if(drug[type] > 0) safe.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], id: drug.drug_id })  })
+            for (const drug of safeDrugs) ["untreated", "treated"].forEach(type => { if (drug[type] > 0) safe.push({ name: t(`drugs.${type}`, { drugName: drug.name }, "global"), type: `drugs&#46;${type}`, quantity: drug[type], id: drug.drug_id })  })
 
-            if(vehicleInventory.length > 0) safe.push(...(vehicleInventory.map(i => ({ name: i.name, type: "items", quantity: i.quantity, id: i.id }) )))
+            if (vehicleInventory.length > 0) safe.push(...(vehicleInventory.map(i => ({ name: i.name, type: "items", quantity: i.quantity, id: i.id }) )))
                        
             const safeChunks = client.functions.other.chunkArray(safe, 7)
             const chunks = client.functions.other.chunkArray(customId.includes("deposit") ? memberAll : safe, customId.includes("deposit") ? 22 : 7)
 
-            if(safeChunks[index]?.length == 7 && customId.includes("deposit")) index++;
+            if (safeChunks[index]?.length == 7 && customId.includes("deposit")) index++;
 
-            if(chunks.length > 1) {
-                if((customId.includes("deposit") ? indexSM : index) !== 0) display.push({ name: `${code}&#46;${lang == "fr" ? "Page précédente" : "Previous page"}&#46;previous`, quantity: 0, type: "larrow" })
-                if((customId.includes("deposit") ? indexSM : index) + 1 !== chunks.length) display.push({ name: `${code}&#46;${lang == "fr" ? "Page suivante" : "Next page"}&#46;next`, quantity: 0, type: "rarrow" })
+            if (chunks.length > 1) {
+                if ((customId.includes("deposit") ? indexSM : index) !== 0) display.push({ name: `${code}&#46;${lang == "fr" ? "Page précédente" : "Previous page"}&#46;previous`, quantity: 0, type: "larrow" })
+                if ((customId.includes("deposit") ? indexSM : index) + 1 !== chunks.length) display.push({ name: `${code}&#46;${lang == "fr" ? "Page suivante" : "Next page"}&#46;next`, quantity: 0, type: "rarrow" })
             }
             
-            if(!chunks || !chunks[0] || !chunks.length) display.splice(0, (customId.includes("deposit") ? memberAll.length : safe.length) + display.length)
+            if (!chunks || !chunks[0] || !chunks.length) display.splice(0, (customId.includes("deposit") ? memberAll.length : safe.length) + display.length)
             else display.push(...chunks[(customId.includes("deposit") ? indexSM : index)])
 
             const embed = new EmbedBuilder()
@@ -191,9 +191,9 @@ module.exports = {
             .setTitle(t("modal.safe"))
             .setDescription(!safeChunks[index] ? t("no_items") : safeChunks[index].map(i => `[${separate(i.quantity)}${i.type.endsWith("_money") ? economySymbol : i.type.startsWith("drugs") ? "g" : ""}] ・ ${i.name}`).join("\n"))
 
-            if(displaySM) {
+            if (displaySM) {
 
-                if(display.length > 0) {
+                if (display.length > 0) {
 
                     var sm = new ActionRowBuilder().addComponents(
                         new StringSelectMenuBuilder()
@@ -206,7 +206,7 @@ module.exports = {
 
                 } else displaySM = false
 
-            } else if(safeChunks.length > 1) {
+            } else if (safeChunks.length > 1) {
                 
                 embed.setFooter({ text: `${index + 1}/${safeChunks.length}` });
                 var changeEmbedRow = new ActionRowBuilder().addComponents(
@@ -232,15 +232,15 @@ module.exports = {
         }
 
         const message = await interaction.editReply({ embeds: [embed], components: [rows], files: !vehicle.image ? [attachment] : [] }).catch(() => {});
-        if(!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!message) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         const collector = message.createMessageComponentCollector({ time: 180000 });
-        if(!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
+        if (!collector) return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
 
         let current = 0, currentSM = 0, currentKeys = 0;
         collector.on("collect", async i => {
 
-            if(i.user.id !== interaction.member.id) return i.reply({ embeds: [errorEmbed(t("not_your_interaction", { member: i.member.toString() }, "errors"), true)], ephemeral: true });
+            if (i.user.id !== interaction.member.id) return i.reply({ embeds: [errorEmbed(t("not_your_interaction", { member: i.member.toString() }, "errors"), true)], ephemeral: true });
 
             switch(i.customId) {
 
@@ -299,13 +299,13 @@ module.exports = {
                 case "sm_withdraw": {
                     
                     const item = i.values[0].split("&#46;")
-                    if(!item) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] });
+                    if (!item) return i.update({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] });
 
                     
-                    if(item[2].startsWith(`${code}`)) {
-                        if(item[4].endsWith("safe")) return i.update(await safeEmbed(i.customId, current, currentSM));
-                        if(item[4].endsWith("next")) i.customId == "sm_deposit" ? currentSM++ : current++;
-                        else if(item[4].endsWith("previous")) i.customId == "sm_deposit" ? currentSM-- : current--;
+                    if (item[2].startsWith(`${code}`)) {
+                        if (item[4].endsWith("safe")) return i.update(await safeEmbed(i.customId, current, currentSM));
+                        if (item[4].endsWith("next")) i.customId == "sm_deposit" ? currentSM++ : current++;
+                        else if (item[4].endsWith("previous")) i.customId == "sm_deposit" ? currentSM-- : current--;
                         
                         await i.update(await safeEmbed(i.customId, current, currentSM, true))
                         break;
@@ -317,7 +317,7 @@ module.exports = {
                     const itemQuantity = item[itemType.endsWith("_money") ? 2 : itemType.startsWith("drugs") ? 4 : 3];
 
                     let modalCollector = { fields: { getTextInputValue: () => itemQuantity }, update: (...args) => i.update(...args) };
-                    if(itemQuantity > 1) {
+                    if (itemQuantity > 1) {
 
                         const code = Math.floor(Math.random() * 9000000000) + 1000000000
                         const modal = new ModalBuilder()
@@ -329,7 +329,7 @@ module.exports = {
                     
                         await i.showModal(modal).catch(() => {});
                         modalCollector = await i.awaitModalSubmit({ filter: ii => ii.user.id === i.user.id && ii.customId == `modal_vehicle_dw_${code}`, time: 60000 })
-                        if(!modalCollector) return;
+                        if (!modalCollector) return;
 
                     }
 
@@ -345,12 +345,12 @@ module.exports = {
                             const newMemberAccount = await client.db.getMoney(interaction.guildId, i.user.id);
                             const newQuantity = (i.customId == "sm_deposit" ? newMemberAccount : newVehicleSafeMoney)[i.customId == "sm_deposit" ? itemType : itemType.replace("cash_", "")]
                             
-                            if(!amount || isNaN(amount) || !newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
-                            if(newQuantity < amount) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}${i.customId == "sm_deposit" ? "_safe" : ""}`, { amount: separate(newQuantity), symbol: economySymbol }, "errors"), true)], components: [], files: [] }).catch(() => {});
-                            if(amount + newQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: item[1] }, "errors"), true)], components: [] }).catch(() => {})
+                            if (!amount || isNaN(amount) || !newQuantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
+                            if (newQuantity < amount) return modalCollector.reply({ embeds: [errorEmbed(t(`not_enough_${itemType}${i.customId == "sm_deposit" ? "_safe" : ""}`, { amount: separate(newQuantity), symbol: economySymbol }, "errors"), true)], components: [], files: [] }).catch(() => {});
+                            if (amount + newQuantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: item[1] }, "errors"), true)], components: [] }).catch(() => {})
 
                             await client.db[`${i.customId == "sm_withdraw" ? "remove" : "add"}PlaceMoney`](interaction.guildId, "member_cg", vehicle.id, itemType == "cash_money" ? "money" : itemType, amount);
-                            if(itemType == "cash_money") await client.db.addMoney(interaction.guildId, i.user.id, `cash_money`, i.customId == "sm_withdraw" ? amount : -amount);
+                            if (itemType == "cash_money") await client.db.addMoney(interaction.guildId, i.user.id, `cash_money`, i.customId == "sm_withdraw" ? amount : -amount);
                             else await client.db.addDirtyMoney(interaction.guildId, i.user.id, i.customId == "sm_withdraw" ? amount : -amount);
 
                             return modalCollector.update(await safeEmbed(i.customId, current, currentSM, true)).catch(() => {})
@@ -364,13 +364,13 @@ module.exports = {
                             const newMemberDrugs = await client.db.getMemberDrugs(interaction.guildId, i.user.id);
                             let quantity, amount, type = null;
                             
-                            if(itemType == "items") {
+                            if (itemType == "items") {
 
                                 const newMemberInventory = await client.db.getMemberItems(interaction.guildId, i.user.id);
                                 const newVehicleInventory = await client.db.getSafeVehicle(vehicle.id);
 
                                 var findItem = i.customId == "sm_withdraw" ? newVehicleInventory.find(i => i.name.toLowerCase() == itemName.toLowerCase()) : newMemberInventory.find(i => i.name.toLowerCase() == itemName.toLowerCase());
-                                if(!findItem) return modalCollector.reply({ embeds: [errorEmbed(t("item_not_found", { item: itemName }), true)], components: [], files: [] }).catch(() => {});
+                                if (!findItem) return modalCollector.reply({ embeds: [errorEmbed(t("item_not_found", { item: itemName }), true)], components: [], files: [] }).catch(() => {});
                                 
                                 var { name, hidden_quantity, weight, role_add, role_remove, role_required } = findItem;
                                 quantity = findItem.quantity
@@ -379,17 +379,17 @@ module.exports = {
                                 const maxWeight = await client.db.getOption(interaction.guildId, "inventory.max_weight");
                                 const inventoryWeight = newMemberInventory.reduce((a, b) => a + (b.weight * b.quantity), 0) + newMemberDrugs.reduce((a, b) => a + ((b?.untreated ?? 0) + (b?.treated ?? 0)), 0);
             
-                                if(i.customId == "sm_withdraw" && maxWeight && inventoryWeight + weight > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", { item: name }, "errors"), true)], components: [] }).catch(() => {})
-                                if(i.customId == "sm_withdraw" && role_add  && isPremium) await interaction.member.roles.add(role_add).catch(() => errorEmbed(t("cant_give_role", { role: role_add.toString() }, "errors"), false, false, "update", modalCollector))
-                                if(i.customId == "sm_withdraw" && role_add && quantity === amount && isPremium) await interaction.member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors"), false, false, "update", modalCollector))
-                                if(i.customId == "sm_deposit" && role_remove && isPremium) await interaction.member.roles.remove(role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: role_remove.toString() }, "errors"), false, false, "update", modalCollector))
+                                if (i.customId == "sm_withdraw" && maxWeight && inventoryWeight + weight > maxWeight) return modalCollector.reply({ embeds: [errorEmbed(t("inventory_full", { item: name }, "errors"), true)], components: [] }).catch(() => {})
+                                if (i.customId == "sm_withdraw" && role_add  && isPremium) await interaction.member.roles.add(role_add).catch(() => errorEmbed(t("cant_give_role", { role: role_add.toString() }, "errors"), false, false, "update", modalCollector))
+                                if (i.customId == "sm_withdraw" && role_add && quantity === amount && isPremium) await interaction.member.roles.remove(role_add).catch(() => errorEmbed(t("cant_remove_role", { role: role_add.toString() }, "errors"), false, false, "update", modalCollector))
+                                if (i.customId == "sm_deposit" && role_remove && isPremium) await interaction.member.roles.remove(role_remove).catch(() => errorEmbed(t("cant_remove_role", { role: role_remove.toString() }, "errors"), false, false, "update", modalCollector))
         
                             } else {
 
                                 const newSafeDrugs = await client.db.getSafeVehicle(vehicle.id, true);
 
                                 var drug = i.customId == "sm_withdraw" ? newSafeDrugs.find(d => d.drug_id == itemId) : newMemberDrugs.find(d => d.drug_id == itemId);
-                                if(!drug) return modalCollector.reply({ embeds: [errorEmbed(t("drug_not_found", { drug: itemName }), true)], components: [], files: [] }).catch(() => {});
+                                if (!drug) return modalCollector.reply({ embeds: [errorEmbed(t("drug_not_found", { drug: itemName }), true)], components: [], files: [] }).catch(() => {});
 
                                 type = item[1];
                                 var otherType = type == "untreated" ? "treated" : "untreated"
@@ -398,9 +398,9 @@ module.exports = {
                                 
                             }
 
-                            if(!amount || isNaN(amount) || !quantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
-                            if(amount > quantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_item", { quantity: (quantity).toLocaleString(lang), item: itemType == "items" ? name : drug.name }), true)], components: [] }).catch(() => {})
-                            if(amount + quantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: itemType == "items" ? name : drug.name }, "errors"), true)], components: [] }).catch(() => {})
+                            if (!amount || isNaN(amount) || !quantity) return modalCollector.reply({ embeds: [errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), true)], components: [] }).catch(() => {})
+                            if (amount > quantity) return modalCollector.reply({ embeds: [errorEmbed(t("not_enough_item", { quantity: (quantity).toLocaleString(lang), item: itemType == "items" ? name : drug.name }), true)], components: [] }).catch(() => {})
+                            if (amount + quantity >= 2147483647) return modalCollector.reply({ embeds: [errorEmbed(t("int_passing", { name: itemType == "items" ? name : drug.name }, "errors"), true)], components: [] }).catch(() => {})
 
                             await client.db[`${i.customId.replace("sm_", "")}Item`](
                                 interaction.guildId,
@@ -449,9 +449,9 @@ module.exports = {
                         const chunks = client.functions.other.chunkArray(authorized_members?.split(",") ?? [], 10);
 
                         const rows = new ActionRowBuilder()
-                        if(chunks?.length > 1) {
-                            if(current !== 0) display.push({ label: t("words.previous", false, "global"), value: `${code}&#46;previous`, emoji: client.constants.emojis.larrow })
-                            if(current + 1 !== chunks.length) display.push({ label: t("words.next", false, "global"), value: `${code}&#46;next`, emoji: client.constants.emojis.rarrow })
+                        if (chunks?.length > 1) {
+                            if (current !== 0) display.push({ label: t("words.previous", false, "global"), value: `${code}&#46;previous`, emoji: client.constants.emojis.larrow })
+                            if (current + 1 !== chunks.length) display.push({ label: t("words.next", false, "global"), value: `${code}&#46;next`, emoji: client.constants.emojis.rarrow })
 
                             rows.addComponents(
                                 new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId(`dk-previous`).setEmoji("◀").setDisabled(current === 0),
@@ -461,8 +461,8 @@ module.exports = {
 
                         const members = (await Promise.all((chunks[current] ?? []).map(async (memberId) => {
                             const id = [await client.db.getIDCard(interaction.guildId, memberId), await client.db.getIDCard(interaction.guildId, memberId, true)];
-                            if(id[0]) return { label: `- ${id[0].first_name} ${id[0].last_name} (<@${memberId}>)`, value: memberId }
-                            if(id[1]) return { label: `- ${id[1].first_name} ${id[1].last_name} (<@${memberId}>)`, value: memberId }
+                            if (id[0]) return { label: `- ${id[0].first_name} ${id[0].last_name} (<@${memberId}>)`, value: memberId }
+                            if (id[1]) return { label: `- ${id[1].first_name} ${id[1].last_name} (<@${memberId}>)`, value: memberId }
                             else return { label: `- <@${memberId}>`, value: memberId }
                         })))
                         display.push(...members)
@@ -471,13 +471,13 @@ module.exports = {
                         .setColor(3092790)
                         .setTitle(t("embed.double_keys"))
                         .setDescription(!members.length ? t("no_authorized_members") : members.map(m => m.label).join("\n\n"))
-                        if(chunks?.length > 1) dkEmbed.setFooter({ text: `${current + 1}/${chunks.length}` })
+                        if (chunks?.length > 1) dkEmbed.setFooter({ text: `${current + 1}/${chunks.length}` })
 
                         const sm = new ActionRowBuilder()
-                        if(["add", "remove", "sm_add", "sm_remove"].includes(customId)) {
-                            if(customId.includes("add")) sm.addComponents(new UserSelectMenuBuilder().setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`).setPlaceholder(t("modal.add")))
+                        if (["add", "remove", "sm_add", "sm_remove"].includes(customId)) {
+                            if (customId.includes("add")) sm.addComponents(new UserSelectMenuBuilder().setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`).setPlaceholder(t("modal.add")))
                             else sm.addComponents(new StringSelectMenuBuilder().setCustomId(customId.includes("sm_") ? customId : `sm_${customId}`).setPlaceholder(t("modal.remove")).setOptions(display.map(m => {
-                                if(m.value.startsWith(`${code}`)) return { label: m.label, value: m.value, emoji: m.emoji ?? client.constants.emojis[m.value.split("&#46;")[1]] }
+                                if (m.value.startsWith(`${code}`)) return { label: m.label, value: m.value, emoji: m.emoji ?? client.constants.emojis[m.value.split("&#46;")[1]] }
                                 else return { label: m.label.match(/- (.+?) \(.+?\)/)?.[1] ?? interaction.guild.members.cache.get(m.value)?.displayName ?? t("unkown"), value: m.value, emoji: "👤" }
                             })))
                         }
@@ -486,18 +486,18 @@ module.exports = {
     
                     }
 
-                    if(i.customId.startsWith("dk")) {
-                        if(i.customId == "dk-next") currentKeys++
-                        if(i.customId == "dk-previous") currentKeys--
+                    if (i.customId.startsWith("dk")) {
+                        if (i.customId == "dk-next") currentKeys++
+                        if (i.customId == "dk-previous") currentKeys--
                         return i.update(await dkEmbed(i.customId, currentKeys, true))
                     }
-                    if(!i.customId.startsWith("sm_")) return i.update(await dkEmbed(i.customId, currentKeys, i.customId == "double_keys"))
+                    if (!i.customId.startsWith("sm_")) return i.update(await dkEmbed(i.customId, currentKeys, i.customId == "double_keys"))
                     
                     const value = i.values[0].split("&#46;")
-                    if(value[0].startsWith(`${code}`)) {
-                        if(value[1].includes("next")) currentKeys++
-                        else if(value[1].includes("previous")) currentKeys--
-                        else if(value[1].includes("keys")) return i.update(await dkEmbed(i.customId, currentKeys, true))
+                    if (value[0].startsWith(`${code}`)) {
+                        if (value[1].includes("next")) currentKeys++
+                        else if (value[1].includes("previous")) currentKeys--
+                        else if (value[1].includes("keys")) return i.update(await dkEmbed(i.customId, currentKeys, true))
 
                         return i.update(await dkEmbed(i.customId, currentKeys))
                     }
@@ -507,14 +507,14 @@ module.exports = {
                     let name = `<@${memberId}>`
               
                     const idCards = [await client.db.getIDCard(interaction.guildId, memberId), await client.db.getIDCard(interaction.guildId, memberId, true)];
-                    if(idCards[1]) name = `${idCards[1].first_name} ${idCards[1].last_name} (<@${memberId}>)`
-                    if(idCards[0]) name = `${idCards[0].first_name} ${idCards[0].last_name} (<@${memberId}>)`
+                    if (idCards[1]) name = `${idCards[1].first_name} ${idCards[1].last_name} (<@${memberId}>)`
+                    if (idCards[0]) name = `${idCards[0].first_name} ${idCards[0].last_name} (<@${memberId}>)`
                     
-                    if(!idCards?.length) return i.update({ embeds: [errorEmbed(t("no_id_card", { memberName: `<@${memberId}>` }), true)], components: [] }).catch(() => {})
+                    if (!idCards?.length) return i.update({ embeds: [errorEmbed(t("no_id_card", { memberName: `<@${memberId}>` }), true)], components: [] }).catch(() => {})
 
                     const { authorized_members } = await client.db.getPlateCG(interaction.guildId, vehicle.license_plate);
-                    if(memberId == i.user.id) return i.update({ embeds: [errorEmbed(t("cant_double_keys_yourself"), true)], components: [] }).catch(() => {})
-                    if(i.customId.includes("add") && authorized_members?.split(",").includes(memberId)) return i.update({ embeds: [errorEmbed(t("already_authorized", { memberName: name }), true)], components: [] }).catch(() => {})
+                    if (memberId == i.user.id) return i.update({ embeds: [errorEmbed(t("cant_double_keys_yourself"), true)], components: [] }).catch(() => {})
+                    if (i.customId.includes("add") && authorized_members?.split(",").includes(memberId)) return i.update({ embeds: [errorEmbed(t("already_authorized", { memberName: name }), true)], components: [] }).catch(() => {})
 
                     await client.db.setDoubleKeys(interaction.guildId, vehicle.id, "member_cg", i.customId.includes("add") ? `${authorized_members ? `${authorized_members},` : ""}${memberId}` : authorized_members.replace(`,${memberId}`, "").replace(`${memberId},`, "").replace(`${memberId}`, ""));
                     return i.update(await dkEmbed(i.customId, currentKeys, true)).catch(() => {})
@@ -532,7 +532,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            client.bugsnag.notify(err);
+            
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 
@@ -556,7 +556,7 @@ module.exports = {
         const response = (await client.db.getMemberCG(interaction.guildId, interaction.member.id)).filter(v => v && v.status !== 1).sort((a, b) => a.vehicule_name.localeCompare(b.vehicule_name))
 
         const filtered = [];
-        if(focusedOption.value !== "") {
+        if (focusedOption.value !== "") {
             const filtredArray = [];
             filtredArray.push(...response.filter(r => r.vehicule_name.toLowerCase() == focusedOption.value.toLowerCase()));
             filtredArray.push(...response.filter(r => r.vehicule_name.toLowerCase().startsWith(focusedOption.value.toLowerCase())));

@@ -1,11 +1,9 @@
 const { EmbedBuilder, WebhookClient, time } = require("discord.js");
 const { serversLogsURL } = require("../../config");
 
-const serverLog = new WebhookClient({ url: serversLogsURL });
-
 module.exports.run = async(client, guild) => {
 
-        if(!guild.available) return;
+        if (!guild.available) return;
 
         const embed = new EmbedBuilder()
             .setColor("Red")
@@ -21,7 +19,7 @@ module.exports.run = async(client, guild) => {
             .setFooter({ text: `© SkyRoleplay`, iconURL: client.user.displayAvatarURL() })
             .setTimestamp()
         
-        serverLog.send({ embeds: [embed] });
+        // serverLog.send({ embeds: [embed] });
 
 }
 

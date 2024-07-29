@@ -22,21 +22,21 @@ module.exports = class Permissions {
     
     hasPermissions = async (interaction, command, { advanced = false, authorizedRoles } = {}) => {
         // If the user has ADMINISTRATOR permissions within the server
-        if(interaction.member.permissions.has("Administrator")) return true;
+        if (interaction.member.permissions.has("Administrator")) return true;
 
         const commandAuthorizedRoles = (
             authorizedRoles ?? (await this.client.db.getPermissionsOfCommand(interaction.guildId, command))
         ).filter((role) => interaction.guild.roles.cache.has(role));
 
         // If there are no authorized roles (so @everyone can run the command)
-        if(!commandAuthorizedRoles.length) return true;
+        if (!commandAuthorizedRoles.length) return true;
 
         // If the user has any of the authorized roles
-        if(commandAuthorizedRoles.some((role) => interaction.member.roles.cache.has(role))) return true;
+        if (commandAuthorizedRoles.some((role) => interaction.member.roles.cache.has(role))) return true;
 
         // If the user is a moderator
         const moderatorRole = await this.client.db.getOption(interaction.guildId, "roles.moderator");
-        if(interaction.member.roles.cache.has(moderatorRole)) return true;
+        if (interaction.member.roles.cache.has(moderatorRole)) return true;
 
         return advanced ? { result: false, commandAuthorizedRoles } : false;
     };
@@ -51,8 +51,8 @@ module.exports = class Permissions {
         const lang = await this.client.db.getOption(interaction.guildId, "guild.lang");
         const hasPermissions = await this.hasPermissions(interaction, command, { advanced: true });
         
-        if(!interaction.isCommand()) return hasPermissions;
-        if(hasPermissions !== true) {
+        if (!interaction.isCommand()) return hasPermissions;
+        if (hasPermissions !== true) {
             // At this point, the user is missing permissions
             await interaction.reply({ embeds: [new EmbedBuilder().setColor("Red").setDescription(
                 `${this.client.translate.t(lang, "interactionCreate.permissions.role", false, "events", interaction)} ${this.client.functions.other.stringifyList(
@@ -67,10 +67,10 @@ module.exports = class Permissions {
 
     configModerator = async (interaction, commandName, moderation = false, reply = true, replyType = "reply") => {
 
-        if(interaction.type !== InteractionType.ApplicationCommand) return true;
+        if (interaction.type !== InteractionType.ApplicationCommand) return true;
 
         var role = await this.client.db.getPermissionsOfCommand(interaction.guildId, commandName);
-        if(!role.length && !moderation) return true;
+        if (!role.length && !moderation) return true;
         
         const lang = await this.client.db.getOption(interaction.guildId, "guild.lang");
         const modRole = await this.client.db.getOption(interaction.guildId, "roles.moderator");
@@ -115,11 +115,11 @@ module.exports = class Permissions {
         // configuration of moderator role
         var role = ((await this.client.db.getOption(interaction.guildId, "roles.moderator")) ?? "no_role").split(",");
         // member is administrator
-        if(member.permissions.has("Administrator")) return advanced ? { result: true, existing_role: role ?? false } : true;
+        if (member.permissions.has("Administrator")) return advanced ? { result: true, existing_role: role ?? false } : true;
         // configured moderator role and member has role
-        if(role.length > 0 && role[0] !== "no_role") {
+        if (role.length > 0 && role[0] !== "no_role") {
             for (const r of role) {
-                if(member.roles.cache.has(r)) return advanced ? { result: true, existing_role: role ?? false } : true;
+                if (member.roles.cache.has(r)) return advanced ? { result: true, existing_role: role ?? false } : true;
             }
         }
         // else

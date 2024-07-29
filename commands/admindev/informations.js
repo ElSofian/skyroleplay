@@ -259,7 +259,7 @@ module.exports = {
                     async (client, { guildId }) => {
                         try {
                             let fetchGuild = await client.guilds.fetch(guildId).catch(e => null)
-                            if(!fetchGuild) return null;
+                            if (!fetchGuild) return null;
 
                             return {
                                 name: fetchGuild.name,
@@ -284,19 +284,19 @@ module.exports = {
                     }
                 ))[0];
     
-                if(!guildCheck) return interaction.reply(errorEmbed(`I did not find a guild corresponding to the ${inlineCode(guildId)} ID !`)).catch(() => {});
+                if (!guildCheck) return interaction.reply(errorEmbed(`I did not find a guild corresponding to the ${inlineCode(guildId)} ID !`)).catch(() => {});
 
                 const guildEmbed = new EmbedBuilder().setTitle(`${guildCheck.name} *(${guildCheck.id})*`)
                     .setURL(guildCheck.vanityURLCode ? `https://discord.gg/${guildCheck.vanityURLCode}` : null).setColor('White').setThumbnail(guildCheck.icon ?? null)
                     .setDescription(guildCheck.available ? guildCheck.description ? `**Description**\n${guildCheck.description}` : `${client.constants.emojis.reussi} Available` : `${client.constants.emojis.echec} Unavailable`);
                 
-                if(guildCheck.banner) guildEmbed.setImage(guildCheck.banner ?? null);
-                if(guildCheck.owner) guildEmbed.addFields([{ name: "Owner", value: `<@${guildCheck.owner}> *(${guildCheck.owner})*` }]);
-                if(guildCheck.shard) guildEmbed.addFields([{ name: "Shard", value: `#${guildCheck.shard}/${client.cluster.count-1}`, inline: true }]);
-                if(guildCheck.memberCount) guildEmbed.addFields([{ name: "Member count", value: guildCheck.memberCount.toLocaleString("en"), inline: true }]);
-                if(guildCheck.rolesSize) guildEmbed.addFields([{ name: "Number of roles", value: guildCheck.rolesSize.toLocaleString("en"), inline: true }]);
-                if(guildCheck.channelsSize) guildEmbed.addFields([{ name: "Number of channels", value: guildCheck.channelsSize.toLocaleString("en"), inline: true }]);
-                if(guildCheck.createdTimestamp) guildEmbed.addFields([{ name: "Server creation", value: `${time(new Date(guildCheck.createdTimestamp), "F")} (${time(new Date(guildCheck.createdTimestamp), "R")})` }])
+                if (guildCheck.banner) guildEmbed.setImage(guildCheck.banner ?? null);
+                if (guildCheck.owner) guildEmbed.addFields([{ name: "Owner", value: `<@${guildCheck.owner}> *(${guildCheck.owner})*` }]);
+                if (guildCheck.shard) guildEmbed.addFields([{ name: "Shard", value: `#${guildCheck.shard}/${client.cluster.count-1}`, inline: true }]);
+                if (guildCheck.memberCount) guildEmbed.addFields([{ name: "Member count", value: guildCheck.memberCount.toLocaleString("en"), inline: true }]);
+                if (guildCheck.rolesSize) guildEmbed.addFields([{ name: "Number of roles", value: guildCheck.rolesSize.toLocaleString("en"), inline: true }]);
+                if (guildCheck.channelsSize) guildEmbed.addFields([{ name: "Number of channels", value: guildCheck.channelsSize.toLocaleString("en"), inline: true }]);
+                if (guildCheck.createdTimestamp) guildEmbed.addFields([{ name: "Server creation", value: `${time(new Date(guildCheck.createdTimestamp), "F")} (${time(new Date(guildCheck.createdTimestamp), "R")})` }])
                 
                 return interaction.reply({
                     embeds: [guildEmbed]
@@ -317,7 +317,7 @@ module.exports = {
                                     fetchGuild = guild
                             );
 
-                            if(!fetchGuild) return null;
+                            if (!fetchGuild) return null;
                         } catch (e) { return null };
 
                         try {
@@ -326,7 +326,7 @@ module.exports = {
                                     fetchChannel = channel
                             );
 
-                            if(!fetchChannel) return 0;
+                            if (!fetchChannel) return 0;
 
                             return {
                                 permissions: fetchGuild.members.me.permissionsIn(channelId).toArray(),
@@ -340,9 +340,9 @@ module.exports = {
                     }
                 ))[shardId];
 
-                if(guildChannel == null) return interaction.reply(errorEmbed(`I did not find a guild corresponding to the ${inlineCode(guildId)} ID !`)).catch(() => {});
+                if (guildChannel == null) return interaction.reply(errorEmbed(`I did not find a guild corresponding to the ${inlineCode(guildId)} ID !`)).catch(() => {});
 
-                if(guildChannel == 0) return interaction.reply(errorEmbed(`I did not find a channel corresponding to the ${inlineCode(channelId)} ID !`)).catch(() => {});
+                if (guildChannel == 0) return interaction.reply(errorEmbed(`I did not find a channel corresponding to the ${inlineCode(channelId)} ID !`)).catch(() => {});
 
                 return successEmbed(`Here is the list of permissions for <@${interaction.client.user.id}> in the <#${channelId}> channel of the **${guildChannel.guildName}** *(${guildId})* guild :\n${guildChannel.permissions.map(r => `\n${inlineCode(r)}`)}`).catch(() => {});
             }
@@ -359,7 +359,7 @@ module.exports = {
                                     fetchGuild = guild
                             );
 
-                            if(!fetchGuild) return null;
+                            if (!fetchGuild) return null;
                         
                             return {
                                 permissions: fetchGuild.members.me.permissions.toArray(),
@@ -392,7 +392,7 @@ module.exports = {
                                     fetchGuild = guild
                             );
 
-                            if(!fetchGuild) return null;
+                            if (!fetchGuild) return null;
                         } catch (e) { return null };
 
                         try {
@@ -401,7 +401,7 @@ module.exports = {
                                     fetchRole = role
                             );
 
-                            if(!fetchRole) return 0;
+                            if (!fetchRole) return 0;
     
                             return {
                                 roleName: fetchRole.name,
@@ -416,9 +416,9 @@ module.exports = {
                     }
                 ))[shardId];
 
-                if(guildRole == null) return interaction.reply(errorEmbed(`I did not find a guild corresponding to the ${inlineCode(guildId)} ID !`)).catch(() => {});
+                if (guildRole == null) return interaction.reply(errorEmbed(`I did not find a guild corresponding to the ${inlineCode(guildId)} ID !`)).catch(() => {});
 
-                if(guildRole == 0) return interaction.reply(errorEmbed(`I did not find a role corresponding to the ${inlineCode(roleId)} ID !`)).catch(() => {});
+                if (guildRole == 0) return interaction.reply(errorEmbed(`I did not find a role corresponding to the ${inlineCode(roleId)} ID !`)).catch(() => {});
 
                 return successEmbed(`Here is the list of **${guildRole.roleName}** role permissions in the **${guildRole.guildName}** *(${guildId})* guild :\n${guildRole.permissions.map(r => `\n${inlineCode(r)}`)}`).catch(() => {});
             }
@@ -435,7 +435,7 @@ module.exports = {
                                     fetchGuild = guild
                             );
 
-                            if(!fetchGuild) return null;
+                            if (!fetchGuild) return null;
                         
                             return {
                                 roles: fetchGuild.members.me.roles.cache,

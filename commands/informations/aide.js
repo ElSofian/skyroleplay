@@ -40,21 +40,21 @@ module.exports = {
 
         for (let command of client.commands) {
             let type = "";
-            if(command[1].options) {
+            if (command[1].options) {
                 for (let i = 0; i < command[1].options.length; i++) {
                     const sOp = command[1].options[i];
                     type = sOp.type;
                 }
 
-                if(type == "SUB_COMMAND" || type == "SUB_COMMAND_GROUP") {
+                if (type == "SUB_COMMAND" || type == "SUB_COMMAND_GROUP") {
                     let lth = 0;
                     command[1].options.forEach(() => lth++);
 
                     let subCmd = []
-                    if(lth)
+                    if (lth)
                         for (let i = 0; i < lth; i++) {
                             const subsOptions = command[1].options[i];
-                            if(subsOptions.type == "SUB_COMMAND_GROUP") {
+                            if (subsOptions.type == "SUB_COMMAND_GROUP") {
                                 for (let index = 0; index < subsOptions.options.length; index++) {
                                     subCmd.push(`${subsOptions.nameLocalizations !== undefined ? subsOptions.nameLocalizations[lang !== "fr" ? "en-US" : "fr"] : subsOptions.name} ` + (subsOptions.options[index].nameLocalizations !== undefined ? subsOptions.options[index].nameLocalizations[lang !== "fr" ? "en-US" : "fr"] : subsOptions.options[index].name))
                                 }
@@ -67,10 +67,10 @@ module.exports = {
             }
         }
 
-        if(commandName) {
+        if (commandName) {
 
             const command = client.commands.get(commandName);
-            if(!command) return errorEmbed(t("unkown_command", { command: inlineCode(commandName) }, "errors"));
+            if (!command) return errorEmbed(t("unkown_command", { command: inlineCode(commandName) }, "errors"));
 
             let subCmds = subCommands.get(commandName);
             const embed = new EmbedBuilder()
@@ -80,8 +80,8 @@ module.exports = {
                 .setFooter({ text: interaction.member.displayName, iconURL: interaction.user.displayAvatarURL() })
                 .setTimestamp();
 
-            if(command.options?.cooldown) embed.addFields([{ name: (t("time_recuperation")), value: command.options.cooldown > 0 ? t("time_sec", { time: command.options.cooldown }) : t("instant") }]);
-            if(command.options?.premium) embed.addFields([{ name: (t("cmd_premium.key", { prememoji: client.constants.emojis.premium })), value: (t("cmd_premium.value", { linkpremium: client.constants.links.premium })) }]);
+            if (command.options?.cooldown) embed.addFields([{ name: (t("time_recuperation")), value: command.options.cooldown > 0 ? t("time_sec", { time: command.options.cooldown }) : t("instant") }]);
+            if (command.options?.premium) embed.addFields([{ name: (t("cmd_premium.key", { prememoji: client.constants.emojis.premium })), value: (t("cmd_premium.value", { linkpremium: client.constants.links.premium })) }]);
 
             interaction.reply({ embeds: [embed] }).catch(() => {})
 
@@ -96,7 +96,7 @@ module.exports = {
 
             const categoriesFolders = readdirSync("./commands/")
             for (let category of categoriesFolders) {
-                if(category === "admindev") continue;
+                if (category === "admindev") continue;
                 let str = "";
 
                 for (let a of client.commands) a[1].category.en == category ? str += `${a[1].nameLocalizations !== undefined ? a[1].nameLocalizations[lang !== "fr" ? "en-US" : "fr"] : a[0]}, ` : "";
@@ -143,7 +143,7 @@ module.exports = {
                 .setTimestamp();
 
             const message = await interaction.reply({ embeds: [embed], components: [row], fetchReply: true }).catch(() => {});
-            if(!message) return; // interaction isn't edited
+            if (!message) return; // interaction isn't edited
 
             const collector = message.createMessageComponentCollector({
                 filter: (i) => i.user.id === interaction.user.id,
@@ -151,13 +151,13 @@ module.exports = {
             });
 
 
-            if(!collector) return;
+            if (!collector) return;
             collector.on("collect", async (collected) => {
                 
                 const category = collected.values[0];
                 let editEmbed;
 
-                if(category == "home") editEmbed = embed
+                if (category == "home") editEmbed = embed
                 else {
 
                     const commandsCategory = client.commands.filter((c) => c.category.en == category)
@@ -206,7 +206,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-client.bugsnag.notify(err);
+
             return errorEmbed(t("error_occurred", { link: client.constants.links.support }, "errors"), false, true, "editReply");
         }
 

@@ -1,6 +1,7 @@
 # SkyRolePlay – Discord Bot GTA V RP Console
 
-![SkyRolePlay](https://img.shields.io/badge/Discord-Bot_skyroleplay-blue)
+![Javascript](https://img.shields.io/badge/Javascript-yellow.svg?style=for-the-badge&logo=javascript&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
 ## 📖 Description
 

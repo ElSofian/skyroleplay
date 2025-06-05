@@ -56,7 +56,7 @@ Avant d’héberger SkyRolePlay :
 1. **Un serveur Discord** où vous disposez des droits d’administration (pour inviter et configurer le bot).  
 2. **Un compte Discord Developer** avec un BotToken valide (voir [Discord Developer Portal](https://discord.com/developers/applications)).  
 3. **Node.js (>= 16.x)** et **npm** (ou **Yarn**) installés si vous souhaitez héberger votre propre instance du bot.  
-4. **Base de données MySQL** accessible (voir [Xampp](https://www.apachefriends.org/fr/index.html) si vous voulez host en local).
+4. **Base de données MySQL** accessible (voir [Xampp](https://www.apachefriends.org/fr/index.html) si vous souhaitez le host en local).
 
 ---
 
